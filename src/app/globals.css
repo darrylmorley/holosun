@@ -2,32 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+h1 {
+  @apply text-4xl font-extrabold dark:text-white;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+h2 {
+  @apply text-3xl font-bold dark:text-white;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+h3 {
+  @apply text-2xl font-bold dark:text-white;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+h4 {
+  @apply text-xl font-bold dark:text-white;
+}
+
+h5 {
+  @apply text-lg font-bold dark:text-white;
+}
+
+/* Keen Slide CSS */
+[class^="number-slide"],
+[class*=" number-slide"] {
+  background: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  color: #fff;
+  font-weight: 500;
+  height: 400px;
+  width: 100vw;
+}
+
+.number-slide1 {
+  background: rgb(64, 175, 255);
+  background: linear-gradient(128deg, rgba(64, 175, 255, 1) 0%, rgba(63, 97, 255, 1) 100%);
+}
+
+.number-slide2 {
+  background: rgb(255, 75, 64);
+  background: linear-gradient(128deg, rgba(255, 154, 63, 1) 0%, rgba(255, 75, 64, 1) 100%);
+}
+
+.number-slide3 {
+  background: rgb(182, 255, 64);
+  background: linear-gradient(128deg, rgba(182, 255, 64, 1) 0%, rgba(63, 255, 71, 1) 100%);
+  background: linear-gradient(128deg, rgba(189, 255, 83, 1) 0%, rgba(43, 250, 82, 1) 100%);
+}
+
+.number-slide4 {
+  background: rgb(64, 255, 242);
+  background: linear-gradient(128deg, rgba(64, 255, 242, 1) 0%, rgba(63, 188, 255, 1) 100%);
 }
