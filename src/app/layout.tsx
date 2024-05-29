@@ -1,7 +1,7 @@
 import Header from "./components/header";
 import Footer from "./components/footer";
 
-import { Montserrat, Inter } from "next/font/google"
+import { Montserrat } from "next/font/google"
 
 import "./globals.css";
 
@@ -12,8 +12,8 @@ const montserrat = Montserrat({
 })
 
 export const metadata = {
-  title: "Next.js Authentication",
-  description: "Example using NextAuth.js",
+  title: "Holusun Optics",
+  description: "Holsun Optics UK",
 };
 
 export default function RootLayout({

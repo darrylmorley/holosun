@@ -4,5 +4,6 @@
   "semi": true,
   "trailingComma": "es5",
   "jsxSingleQuote": false,
+  "singleAttributePerLine": true,
   "tailwindConfig": "./tailwind.config.ts"
 }

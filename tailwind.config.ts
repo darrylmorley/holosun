@@ -14,7 +14,7 @@ const config: Config = {
       holosun: {
         "primary": "#f9f9f9",
         "secondary": "#0e1d31",
-        "accent": "#9f2e22",
+        "accent": "#ff3131",
         "neutral": "#3d4451",
         "base-100": "#ffffff",
 

@@ -41,7 +41,7 @@ export default function HeroCarousel() {
     // ]
   )
 
-  const common = { alt: 'AEMS Red Dot Sight', sizes: '100vw' }
+  const common = { alt: 'AEMS Red Dot Sight', sizes: '100vw', priority: true }
   const {
     props: { srcSet: desktop },
   } = getImageProps({

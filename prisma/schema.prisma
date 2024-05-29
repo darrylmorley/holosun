@@ -1,79 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model Category {
+  id           Int     @id @unique
+  name         String
+  fullPathName String
+  parentID     Int?
+  nodeDepth    Int?
+  leftNode     Int?
+  rightNode    Int?
+  description  String?
+  image        String?
+  slug         String
 }
 
-model User {
-  id            String          @id @default(cuid())
-  externalId    String?         @unique
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Gun {
+  id              String  @id
+  itemID          String
+  archived        Boolean
+  description     String?
+  customSku       String
+  manufacturerSku String?
+  categoryID      Int
+  itemMatrixID    Int
+  manufacturerID  Int
+  Category        Json?
+  ItemAttributes  Json?
+  Manufacturer    Json?
+  ItemShops       Json?
+  Images          Json?
+  ItemECommerce   Json?
+  Prices          Json
 }
 
-model Account {
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([provider, providerAccountId])
+model Image {
+  id          Int     @id @unique
+  itemID      Int
+  description String?
+  url         String
+  isDefault   Boolean @default(false)
+  sortOrder   Int
 }
 
-model Session {
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Manufacturer {
+  id          Int     @id @unique
+  name        String
+  description String?
+  image       String?
+  slug        String  @unique
 }
 
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
-
-  @@id([identifier, token])
+model Product {
+  id                Int      @id @unique
+  matrixID          Int
+  sku               String
+  manufacturerSku   String
+  gtin              String?
+  name              String
+  qoh               Int
+  price             Float
+  salePrice         Float
+  onSale            Boolean? @default(false)
+  reorderLevel      Int?
+  reorderPoint      Int?
+  isOnBackorder     Boolean? @default(false)
+  backorderQty      Int?
+  shortDescription  String?
+  longDescription   String?
+  categoryID        Int?
+  Category          Json?
+  manufacturerID    Int?
+  Manufacturer      Json?
+  colour            String?
+  size              String?
+  width             String?
+  height            String?
+  length            String?
+  weight            String?
+  listOnWebsite     Boolean? @default(true)
+  metaTitle         String?
+  metaDescription   String?
+  isPreorder        Boolean? @default(false)
+  preOrderQty       Int?
+  slug              String   @unique
+  Images            Json?
+  ItemAttributes    Json?
+  CustomFieldValues Json?
+  ItemECommerce     Json?
+  ItemShops         Json?
+  Review            Review[]
 }
 
-// Optional for WebAuthn support
-model Authenticator {
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
+model Review {
+  id        String  @id
+  itemID    Int
+  user      String
+  userEmail String
+  rating    Int
+  Product   Product @relation(fields: [itemID], references: [id])
+}
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([userId, credentialID])
+model matrixProduct {
+  id               Int     @id @unique
+  name             String
+  categoryID       Int
+  Category         Json?
+  manufacturerID   Int
+  Manufacturer     Json?
+  ItemAttributeSet Json?
+  Items            Json?
+  Images           Json?
+  price            Float
+  salePrice        Float
+  shortDescription String?
+  longDescription  String?
+  slug             String  @unique
 }
