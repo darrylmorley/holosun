@@ -3,6 +3,12 @@ import type { Config } from 'tailwindcss';
 const config: Config = {
   darkMode: 'class',
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  extend: {
+    fontFamily: {
+      sans: ["Montserrat"],
+      serif: ["Merriweather", "serif"],
+    }
+  },
   daisyui: {
     themes: [{
       holosun: {
