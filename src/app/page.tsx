@@ -1,9 +1,9 @@
 import prisma from "@/lib/db/prisma";
 
-import Categories from "./components/categories";
-import HeroCarousel from "./components/hero-carousel";
-import Featured from "./components/featured";
-import Features from "./components/features";
+import Categories from "@/components/categories";
+import HeroCarousel from "@/components/hero-carousel";
+import Featured from "@/components/featured";
+import Features from "@/components/features";
 
 async function getFeaturedItems() {
   const featuredItems = await prisma.product.findMany({

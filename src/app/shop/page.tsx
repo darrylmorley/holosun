@@ -1,6 +1,7 @@
 import prisma from "@/lib/db/prisma";
 
 import ProductCard from "@/components/product-card";
+import ShopFilters from "@/components/shop-filters";
 
 async function getItems() {
   return await prisma.product.findMany({
@@ -24,22 +25,7 @@ export default async function Page() {
       </div>
       <div>
         <div className="px-4 xl:px-12 h-48 flex items-center justify-between">
-          <div>
-            <select name="category" id="category" className="border-stone-100 focus:border-stone-300 focus:ring-stone-300">
-              <option value="category" disabled selected>Category</option>
-              <option value="lasers">Lasers</option>
-              <option value="magnifiers">Magnifiers</option>
-              <option value="red-dots">Red Dots</option>
-              <option value="mounts">Mounts</option>
-            </select>
-          </div>
-          <div>
-            <select name="sort" id="sort" className="border-stone-100 focus:border-stone-300 focus:ring-stone-300">
-              <option value="sort" disabled selected>Sort</option>
-              <option value="price">Price</option>
-              <option value="name">Name</option>
-            </select>
-          </div>
+          <ShopFilters />
         </div>
         <div className="flex justify-center xl:px-8">
           <div className="px-4 mb-12 grid grid-cols-2 gap-4 xl:grid-cols-4 xl:gap-8">
