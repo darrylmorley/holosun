@@ -1,7 +1,6 @@
 import prisma from "@/lib/db/prisma";
 
-import CategoriesDesktop from "./components/categories-desktop";
-import CategoryCarousel from "./components/category-carousel";
+import Categories from "./components/categories";
 import HeroCarousel from "./components/hero-carousel";
 import Featured from "./components/featured";
 import Features from "./components/features";
@@ -36,38 +35,24 @@ export default async function Page() {
         <HeroCarousel />
       </section>
 
-      <div className="divider md:hidden"></div>
-
       {/* Cateogries Section */}
-      <section className="py-2 px-4 space-y-4 md:hidden">
-        <h2 className="md:mt-8 text-center">Shop by Category</h2>
-        <CategoryCarousel />
+      <section className="px-2 flex flex-col items-center my-8 lg:my-12 lg:px-12">
+        <h2 className="text-center text-2xl lg:text-3xl mb-8">Shop by Category</h2>
+        <Categories />
       </section>
-      <section className="hidden md:mt-16 md:px-24 md:block">
-        <h2 className="text-center">Shop by Category</h2>
-        <div className="pt-8">
-          <CategoriesDesktop />
-        </div>
-      </section>
-
-      <div className="divider px-2 md:hidden"></div>
 
       {/* Featured Items Section */}
-      <section className="md:mt-12 md:px-24">
-        <h2 className="text-center">Featured Items</h2>
-        <div className="pt-8">
-          <Featured featuredItems={featuredItems} />
-        </div>
+      <section className="px-2 my-8 lg:my-12 lg:px-12">
+        <h2 className="text-center text-2xl lg:text-3xl mb-8">Featured Items</h2>
+        <Featured featuredItems={featuredItems} />
       </section>
 
-      <div className="divider px-2 md:mt-24 md:px-28"></div>
+      <div className="divider px-2 lg:px-12 lg:my-12"></div>
 
       {/* Features Section */}
-      <section className="md:mt-24 md:mb-24 md:px-24">
+      <section className="px-2 my-8 lg:my-12 lg:px-12">
         <Features />
       </section>
-
-      {/* <div className="divider px-2 md:mt-24 md:px-28"></div> */}
     </>
   );
 }

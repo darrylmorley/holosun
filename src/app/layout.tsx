@@ -1,9 +1,13 @@
-import Header from "./components/header";
-import Footer from "./components/footer";
+import prisma from "@/lib/db/prisma";
+
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 import { Montserrat } from "next/font/google"
 
 import "./globals.css";
+
+
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -16,15 +20,44 @@ export const metadata = {
   description: "Holsun Optics UK",
 };
 
-export default function RootLayout({
+
+async function getFeaturedItems() {
+  const productsCount = await prisma.product.count({
+    where: {
+      Manufacturer: {
+        path: ["name"],
+        equals: "HOLOSUN",
+      }
+    },
+  });
+
+  const skip = Math.floor(Math.random() * productsCount);
+
+  return await prisma.product.findMany({
+    take: 4,
+    skip: skip,
+    where: {
+      AND: {
+        Manufacturer: {
+          path: ["name"],
+          equals: "HOLOSUN",
+        },
+      }
+    }
+  })
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const featuredItems = await getFeaturedItems();
+
   return (
     <html lang="en" className={`${montserrat.variable}`}>
       <body className="flex flex-col h-screen">
-        <Header />
+        <Header featuredItems={featuredItems} />
         <main className="flex-grow">
           {children}
         </main>

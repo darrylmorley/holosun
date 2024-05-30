@@ -12,14 +12,15 @@
     "@prisma/client": "5.14.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
-    "keen-slider": "^6.8.6",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
     "nextjs-toploader": "^1.6.12",
     "nodemailer": "^6.9.13",
     "react": "^18",
     "react-dom": "^18",
-    "react-toastify": "^10.0.5"
+    "react-slick": "^0.30.2",
+    "react-toastify": "^10.0.5",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
