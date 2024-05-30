@@ -42,7 +42,7 @@ export default async function Page(request: NextRequest) {
           <ShopFilters />
         </div>
         <div className="flex justify-center xl:px-8">
-          <div className="px-4 mb-12 grid grid-cols-2 gap-4 xl:grid-cols-4 xl:gap-8">
+          <div className="px-4 mb-12 grid grid-cols-2 gap-4 xl:grid-cols-4 xl:gap-8 w-full">
             {items.map((item) => {
               return (
                 <ProductCard key={item.id} item={item} />
