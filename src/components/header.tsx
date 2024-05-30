@@ -41,10 +41,10 @@ export default function Header({ featuredItems }) {
         <div className="drawer-side">
           <label htmlFor="menu-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
           <ul className="menu px-4 py-20 w-80 min-h-full bg-white text-base-content">
-            <li className="py-3 border-b"><Link href="/">Home</Link></li>
-            <li className="py-3 border-b"><Link href="/shop">Shop</Link></li>
-            <li className="py-3 border-b"><Link href="/blog">Blog</Link></li>
-            <li className="py-3 border-b"><Link href="/about">About</Link></li>
+            <li className="py-3 border-b"><a href="/">Home</a></li>
+            <li className="py-3 border-b"><a href="/shop">Shop</a></li>
+            {/* <li className="py-3 border-b"><Link href="/blog">Blog</Link></li> */}
+            <li className="py-3 border-b"><a href="/about">About</a></li>
             <div className="mt-12">
               <p className="font-bold underline">Need help?</p>
               <p className="mt-3">Email: <a href="mailto:info@holosun-optics.co.uk" className="font-bold">info@holosun-optics.co.uk</a></p>
