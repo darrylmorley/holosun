@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Categories() {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
       <div className="flex flex-col items-center w-full">
         <Image
           src="/images/category/magnifiers-1080x1350.jpg"

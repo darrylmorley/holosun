@@ -69,7 +69,9 @@ export default function ProductCard({ item: product }) {
 
         <div className="flex items-end gap-2">
           <span className="text-gray-600">
-            £{new Intl.NumberFormat("en-GB").format(product.price)}
+            {new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
+              product.price
+            )}
           </span>
         </div>
       </div>

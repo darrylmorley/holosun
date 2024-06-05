@@ -21,12 +21,12 @@ export default async function Page(request: NextRequest) {
 
   return (
     <>
-      <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-gray-100 space-y-4">
+      <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-gray-900 text-white space-y-4">
         <h1>Shop</h1>
         <p className="text-center">Shop our Lasers, Magnifiers, Red Dots & Mounts</p>
       </div>
       <div>
-        <div className="px-4 xl:px-12 h-48 flex items-center justify-between">
+        <div className="px-4 xl:px-12 h-32 flex items-center justify-between">
           <ShopFilters />
         </div>
         <div className="flex justify-center xl:px-8">
