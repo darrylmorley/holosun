@@ -4,21 +4,65 @@ export default function Categories() {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
       <div className="flex flex-col items-center w-full">
-        <Image src="/images/category/magnifiers-1080x1350.jpg" alt="Manifiers" width={1080} height={1350} className="h-auto max-w-full" />
-        <a href="#" className="relative bottom-24 btn bg-white">MAGNIFIERS</a>
+        <Image
+          src="/images/category/magnifiers-1080x1350.jpg"
+          alt="Manifiers"
+          width={1080}
+          height={1350}
+          className="h-auto max-w-full"
+        />
+        <a
+          href="/shop/category/magnifiers"
+          className="relative bottom-24 btn bg-white"
+        >
+          MAGNIFIERS
+        </a>
       </div>
       <div className="flex flex-col items-center w-full">
-        <Image src="/images/category/mounts-1080x1350.jpg" alt="Mounts & Rails" width={1080} height={1350} className="h-auto max-w-full" />
-        <a href="#" className="relative bottom-24 btn bg-white">MOUNTS</a>
+        <Image
+          src="/images/category/mounts-1080x1350.jpg"
+          alt="Mounts & Rails"
+          width={1080}
+          height={1350}
+          className="h-auto max-w-full"
+        />
+        <a
+          href="/shop/category/mounts-and-rails"
+          className="relative bottom-24 btn bg-white"
+        >
+          MOUNTS
+        </a>
       </div>
       <div className="flex flex-col items-center w-full">
-        <Image src="/images/category/lasers-1080x1350.jpg" alt="Lasers" width={1080} height={1350} className="h-auto max-w-full" />
-        <a href="#" className="relative bottom-24 btn bg-white">LASERS</a>
+        <Image
+          src="/images/category/lasers-1080x1350.jpg"
+          alt="Lasers"
+          width={1080}
+          height={1350}
+          className="h-auto max-w-full"
+        />
+        <a
+          href="/shop/category/lasers"
+          className="relative bottom-24 btn bg-white"
+        >
+          LASERS
+        </a>
       </div>
       <div className="flex flex-col items-center w-full">
-        <Image src="/images/category/red-dot-1080x1350.jpg" alt="Red Dots" width={1080} height={1350} className="h-auto max-w-full" />
-        <a href="#" className="relative bottom-24 btn bg-white">RED DOTS</a>
+        <Image
+          src="/images/category/red-dot-1080x1350.jpg"
+          alt="Red Dots"
+          width={1080}
+          height={1350}
+          className="h-auto max-w-full"
+        />
+        <a
+          href="/shop/category/red-dot-and-holo-point"
+          className="relative bottom-24 btn bg-white"
+        >
+          RED DOTS
+        </a>
       </div>
     </div>
-  )
+  );
 }
