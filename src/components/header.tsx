@@ -65,14 +65,29 @@ export default function Header({ featuredItems }) {
           ></label>
           <ul className="menu px-4 py-20 w-80 min-h-full bg-white text-base-content">
             <li className="py-3 border-b">
-              <a href="/">Home</a>
+              <Link
+                href="/"
+                className="hover:bg-accent hover:text-white"
+              >
+                Home
+              </Link>
             </li>
             <li className="py-3 border-b">
-              <a href="/shop">Shop</a>
+              <Link
+                href="/shop"
+                className="hover:bg-accent hover:text-white"
+              >
+                Shop
+              </Link>
             </li>
             {/* <li className="py-3 border-b"><Link href="/blog">Blog</Link></li> */}
             <li className="py-3 border-b">
-              <a href="/about">About</a>
+              <Link
+                href="/about"
+                className="hover:bg-accent hover:text-white"
+              >
+                About
+              </Link>
             </li>
             <div className="mt-12">
               <p className="font-bold underline">Need help?</p>
@@ -80,7 +95,7 @@ export default function Header({ featuredItems }) {
                 Email:{" "}
                 <a
                   href="mailto:info@holosun-optics.co.uk"
-                  className="font-bold"
+                  className="font-bold hover:text-accent"
                 >
                   info@holosun-optics.co.uk
                 </a>
@@ -89,7 +104,7 @@ export default function Header({ featuredItems }) {
                 Phone:{" "}
                 <a
                   href="tel:+441234567890"
-                  className="font-bold"
+                  className="font-bold hover:text-accent"
                 >
                   01527831261
                 </a>
@@ -158,16 +173,44 @@ export default function Header({ featuredItems }) {
             </label>
             <div className="divider"></div>
             <div>
-              <h4>Quick Links</h4>
+              <h4 className="text-lg">Quick Links</h4>
               <ul className="mt-4 space-y-2">
-                <li>Magnifiers</li>
-                <li>Mounts & Rails</li>
-                <li>Red Dots</li>
-                <li>Lasers</li>
+                <li>
+                  <Link
+                    href="/shop/category/magnifiers"
+                    className="hover:bg-accent hover:text-white"
+                  >
+                    Magnifiers
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/shop/category/mounts-and-rails"
+                    className="hover:bg-accent hover:text-white"
+                  >
+                    Mounts & Rails
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/shop/category/red-dots"
+                    className="hover:bg-accent hover:text-white"
+                  >
+                    Red Dots
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/shop/category/lasers"
+                    className="hover:bg-accent hover:text-white"
+                  >
+                    Lasers
+                  </Link>
+                </li>
               </ul>
             </div>
             <div className="mt-8">
-              <h4>Need some insipration?</h4>
+              <h4 className="text-lg">Need some insipration?</h4>
               <ul className="mt-2 flex flex-col">
                 {featuredItems.map((item) => {
                   const image = item.Images.Image[0]
