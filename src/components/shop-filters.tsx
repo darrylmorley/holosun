@@ -21,7 +21,7 @@ export default function ShopFilters() {
           name="category"
           id="category"
           defaultValue="category"
-          className="border-stone-100 focus:border-stone-300 focus:ring-stone-300"
+          className="border-stone-300 focus:border-stone-300 focus:ring-stone-300"
           onChange={(e) => handleCategorySelect(e)}
         >
           <option
@@ -41,7 +41,7 @@ export default function ShopFilters() {
           name="sort"
           id="sort"
           defaultValue="sort"
-          className="border-stone-100 focus:border-stone-300 focus:ring-stone-300"
+          className="border-stone-300 focus:border-stone-300 focus:ring-stone-300"
           onChange={(e) => handleFilterSelect(e)}
         >
           <option
