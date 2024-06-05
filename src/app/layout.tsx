@@ -1,12 +1,14 @@
+import { Montserrat } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
+
 import prisma from "@/lib/db/prisma";
 
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 
-import { Montserrat } from "next/font/google";
+import { Providers } from "./providers";
 
 import "./globals.css";
-import NextTopLoader from "nextjs-toploader";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -60,9 +62,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           color="#ff3131"
           showSpinner={false}
         />
-        <Header featuredItems={featuredItems} />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+        <Providers>
+          <Header featuredItems={featuredItems} />
+          <main className="flex-grow">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
