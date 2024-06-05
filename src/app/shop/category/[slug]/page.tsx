@@ -30,8 +30,6 @@ async function getItems(request) {
 export default async function Page(request: NextRequest) {
   const { items, id } = await getItems(request);
   const { sort } = request.searchParams;
-  console.log(request);
-  console.log(sort);
 
   return (
     <>
