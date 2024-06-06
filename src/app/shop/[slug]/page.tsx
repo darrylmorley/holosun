@@ -8,6 +8,7 @@ import QuestionModal from "@/components/question-modal";
 import DeliveryModal from "@/components/delivery-modal";
 import ShareButton from "@/components/share-button";
 import { ShieldCheck } from "lucide-react";
+import AddToCartButton from "@/components/add-to-cart-button";
 
 async function getItem(request) {
   const slug = request.params.slug;
@@ -47,9 +48,7 @@ export default async function Page(request: NextRequest) {
             dangerouslySetInnerHTML={{ __html: item.shortDescription }}
             className="prose text-base leading-relaxed flex flex-grow"
           />
-          <div>
-            <button className="btn w-full rounded-sm bg-accent text-white">Add to Cart</button>
-          </div>
+          <AddToCartButton item={item} />
           <div className="mt-4">
             <ul className="flex flex-wrap gap-8">
               <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base">

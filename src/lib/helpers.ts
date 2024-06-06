@@ -30,3 +30,20 @@ export function getDescriptionFromId(id: number): string | undefined {
 export function getNameFromId(id: number): string | undefined {
   return idToName[id];
 }
+
+export function formatCartItem(item) {
+  const isOnSale = item.onSale;
+
+  const cartImage = Array.isArray(item.Images?.Image)
+    ? `${item.Images?.Image[0].baseImageURL}/w_100/${item.Images?.Image[0].publicID}.webp`
+    : `${item.Images?.Image.baseImageURL}/w_100/${item.Images?.Image.publicID}.webp`;
+
+  return {
+    id: item.id,
+    name: item.name,
+    brand: item.Manufacturer?.name,
+    sku: item.sku,
+    price: isOnSale === "false" ? item.salePrice : item.price,
+    image: cartImage,
+  };
+}
