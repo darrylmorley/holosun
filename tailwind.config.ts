@@ -38,7 +38,6 @@ const config: Config = {
     require("@tailwindcss/typography"),
     require("@tailwindcss/forms"),
     require("daisyui"),
-    require("preline/plugin"),
   ],
 };
 
