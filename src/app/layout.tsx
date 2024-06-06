@@ -1,6 +1,7 @@
 import { Montserrat } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 
+import PrelineScript from "@/lib/preline/preline";
 import prisma from "@/lib/db/prisma";
 
 import Header from "@/components/header";
@@ -68,6 +69,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer />
         </Providers>
       </body>
+      <PrelineScript />
     </html>
   );
 }
