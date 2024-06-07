@@ -63,3 +63,7 @@ export function getFormattedPrice(price: number) {
     currency: "gbp",
   }).format(price);
 }
+
+export function toggleDrawer(drawName: string) {
+  document.getElementById(`${drawName}-drawer`)?.click();
+}

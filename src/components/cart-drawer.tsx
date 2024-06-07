@@ -35,14 +35,15 @@ export default function CartDrawer() {
             <div className="divider"></div>
             <h4 className="mt-4">Your cart is empty</h4>
             <li className="mt-8">Head over to the shop page to browse our products</li>
-            <button className="btn btn-secondary mt-8">Shop</button>
+            <button className="btn btn-accent text-white mt-8">Shop</button>
           </ul>
         ) : (
           <ul
             className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open"
             suppressHydrationWarning
           >
-            <h4 className="mb-8 text-xl text-gray-800">Shopping Cart</h4>
+            <h4 className="text-xl text-gray-800 text-center">Shopping Cart</h4>
+            <div className="divider" />
             <CartDrawerProducts
               products={products}
               updateItemQuantity={updateItemQuantity}

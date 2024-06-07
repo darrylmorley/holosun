@@ -14,7 +14,7 @@ export default function MenuDrawer() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu px-4 py-20 w-80 min-h-full bg-white text-base-content">
+        <ul className="menu px-4 py-20 w-96 min-h-full bg-white text-base-content">
           <li className="py-3 border-b">
             <Link
               href="/"
