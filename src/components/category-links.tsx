@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { toggleDrawer } from "@/lib/helpers";
 
 export default function CategoryLinks() {
   return (
@@ -7,6 +9,7 @@ export default function CategoryLinks() {
         <Link
           href="/shop/category/magnifiers"
           className="hover:bg-accent hover:text-white"
+          onClick={() => toggleDrawer("search-drawer")}
         >
           Magnifiers
         </Link>
@@ -15,6 +18,7 @@ export default function CategoryLinks() {
         <Link
           href="/shop/category/mounts-and-rails"
           className="hover:bg-accent hover:text-white"
+          onClick={() => toggleDrawer("search-drawer")}
         >
           Mounts & Rails
         </Link>
@@ -23,6 +27,7 @@ export default function CategoryLinks() {
         <Link
           href="/shop/category/red-dots"
           className="hover:bg-accent hover:text-white"
+          onClick={() => toggleDrawer("search-drawer")}
         >
           Red Dots
         </Link>
@@ -31,6 +36,7 @@ export default function CategoryLinks() {
         <Link
           href="/shop/category/lasers"
           className="hover:bg-accent hover:text-white"
+          onClick={() => toggleDrawer("search-drawer")}
         >
           Lasers
         </Link>
