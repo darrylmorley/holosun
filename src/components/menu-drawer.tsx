@@ -1,3 +1,5 @@
+"use client";
+import { toggleDrawer } from "@/lib/helpers";
 import Link from "next/link";
 
 export default function MenuDrawer() {
@@ -19,6 +21,7 @@ export default function MenuDrawer() {
             <Link
               href="/"
               className="hover:bg-accent hover:text-white"
+              onClick={() => toggleDrawer("menu-drawer")}
             >
               Home
             </Link>
@@ -27,6 +30,7 @@ export default function MenuDrawer() {
             <Link
               href="/shop"
               className="hover:bg-accent hover:text-white"
+              onClick={() => toggleDrawer("menu-drawer")}
             >
               Shop
             </Link>
@@ -36,6 +40,7 @@ export default function MenuDrawer() {
             <Link
               href="/about"
               className="hover:bg-accent hover:text-white"
+              onClick={() => toggleDrawer("menu-drawer")}
             >
               About
             </Link>

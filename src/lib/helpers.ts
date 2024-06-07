@@ -65,5 +65,5 @@ export function getFormattedPrice(price: number) {
 }
 
 export function toggleDrawer(drawName: string) {
-  document.getElementById(`${drawName}-drawer`)?.click();
+  document.getElementById(`${drawName}`)?.click();
 }
