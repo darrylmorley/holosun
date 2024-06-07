@@ -1,9 +1,14 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
 
 export default function CartDrawer() {
+  const [products, setProducts] = useState([]);
   const { items, removeItem, isEmpty } = useCart();
-  console.log(items);
+
+  useEffect(() => {
+    setProducts(items);
+  });
 
   return (
     <div className="drawer drawer-end z-10">
@@ -18,7 +23,7 @@ export default function CartDrawer() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        {isEmpty ? (
+        {isEmpty || !products.length ? (
           <ul className="menu min-h-full w-80 bg-white p-4 text-base-content text-center">
             <h4>Shopping Cart</h4>
             <div className="divider"></div>
@@ -27,18 +32,23 @@ export default function CartDrawer() {
             <button className="btn btn-secondary mt-8">Shop</button>
           </ul>
         ) : (
-          <ul className="menu min-h-full w-80 bg-white p-4 text-base-content text-center">
+          <ul
+            className="menu min-h-full w-80 bg-white p-4 text-base-content text-center"
+            suppressHydrationWarning
+          >
             <h4>Shopping Cart</h4>
-            <div className="mt-12">
-              {items.map((item) => (
-                <div
-                  key={item.id}
-                  className="flex flex-col items-start text-left"
-                >
-                  <h4 className="text-sm font-bold">{item.name}</h4>
-                </div>
-              ))}
-            </div>
+            <li className="mt-12">
+              {products
+                ? products.map((item) => (
+                    <div
+                      key={item.id}
+                      className="flex flex-col items-start text-left"
+                    >
+                      <h4 className="text-sm font-bold">{item.name}</h4>
+                    </div>
+                  ))
+                : null}
+            </li>
           </ul>
         )}
       </div>

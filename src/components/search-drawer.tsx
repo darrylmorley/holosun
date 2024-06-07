@@ -31,6 +31,7 @@ export default function SearchDrawer({ featuredItems }) {
               />
             </svg>
             <input
+              id="search-box"
               type="text"
               className="grow ml-2"
               placeholder="Search"

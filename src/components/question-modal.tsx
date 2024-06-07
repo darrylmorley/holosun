@@ -23,51 +23,38 @@ export default function QuestionModal() {
             action=""
             className="flex flex-col gap-4 mt-6"
           >
-            <div
-              id="name"
-              className="flex flex-col"
-            >
+            <div className="flex flex-col">
               <label htmlFor="name">Name</label>
               <input
-                type="text"
-                name="name"
                 id="name"
+                type="text"
                 required
+                autoComplete="name"
                 className="rounded-sm"
               />
             </div>
-            <div
-              id="email"
-              className="flex flex-col"
-            >
-              <label htmlFor="name">Email</label>
+            <div className="flex flex-col">
+              <label htmlFor="email">Email</label>
               <input
-                type="email"
-                name="email"
                 id="email"
+                type="email"
                 required
+                autoComplete="email"
                 className="rounded-sm"
               />
             </div>
-            <div
-              id="phone"
-              className="flex flex-col"
-            >
-              <label htmlFor="name">Phone</label>
+            <div className="flex flex-col">
+              <label htmlFor="phone">Phone</label>
               <input
-                type="tel"
-                name="phone"
                 id="phone"
+                type="tel"
+                autoComplete="tel"
                 className="rounded-sm"
               />
             </div>
-            <div
-              id="message"
-              className="flex flex-col"
-            >
-              <label htmlFor="name">Message</label>
+            <div className="flex flex-col">
+              <label htmlFor="message">Message</label>
               <textarea
-                name="message"
                 id="message"
                 className="rounded-sm"
               />
