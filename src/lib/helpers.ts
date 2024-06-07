@@ -43,7 +43,23 @@ export function formatCartItem(item) {
     name: item.name,
     brand: item.Manufacturer?.name,
     sku: item.sku,
-    price: isOnSale === "false" ? item.salePrice : item.price,
+    price: isOnSale === "true" ? item.salePrice : item.price,
     image: cartImage,
+    qoh: item.qoh,
   };
+}
+
+export function getMainImage(item, width: number = 300) {
+  const image = Array.isArray(item.Images.Image)
+    ? `${item.Images.Image[0].baseImageURL}/w_${width}/${item.Images.Image[0].publicID}.webp`
+    : `${item.Images.Image.baseImageURL}/w_${width}/${item.Images.Image.publicID}.webp`;
+
+  return image;
+}
+
+export function getFormattedPrice(price: number) {
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "gbp",
+  }).format(price);
 }

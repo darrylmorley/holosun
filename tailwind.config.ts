@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+// prettier-ignore
 
 const config: Config = {
   darkMode: "class",
@@ -17,7 +18,7 @@ const config: Config = {
           primary: "#f9f9f9",
           secondary: "#161616",
           accent: "#ff3131",
-          "accent-dark": "#980000",
+          'accent-content': '#e40000',
           neutral: "#3d4451",
           "base-100": "#ffffff",
 
@@ -37,6 +38,7 @@ const config: Config = {
   plugins: [
     require("tailwindcss-animate"),
     require("@tailwindcss/typography"),
+    require('@tailwindcss/aspect-ratio'),
     require("@tailwindcss/forms"),
     require("daisyui"),
   ],

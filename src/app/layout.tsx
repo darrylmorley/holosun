@@ -34,7 +34,7 @@ async function getFeaturedItems() {
   const skip = Math.floor(Math.random() * productsCount);
 
   return await prisma.product.findMany({
-    take: 4,
+    take: 3,
     skip: skip,
     where: {
       AND: {

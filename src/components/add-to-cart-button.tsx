@@ -9,7 +9,7 @@ export default function AddToCartButton({ item }) {
   return (
     <div>
       <button
-        className="btn w-full bg-accent hover:bg-accent-dark text-white"
+        className="btn w-full bg-accent hover:bg-accent-content text-white"
         onClick={() => addItem(formatCartItem(item))}
       >
         Add to Cart

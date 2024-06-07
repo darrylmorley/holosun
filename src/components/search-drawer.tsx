@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import SearchDrawerFeatured from "./search-drawer-featured";
+import CategoryLinks from "./category-links";
 
 export default function SearchDrawer({ featuredItems }) {
   return (
@@ -15,7 +15,7 @@ export default function SearchDrawer({ featuredItems }) {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu min-h-full py-8 w-80 bg-white p-4 text-base-content">
+        <ul className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open">
           <h4>Search our items</h4>
           <label className="mt-2 input input-bordered flex items-center">
             <svg
@@ -33,80 +33,25 @@ export default function SearchDrawer({ featuredItems }) {
             <input
               id="search-box"
               type="text"
-              className="grow ml-2"
+              className="grow ml-2 border-none outline-none ring-0 focus:ring-0 focus:border-0 focus:outline-none active:ring-0 active:border-0 active:outline-none"
               placeholder="Search"
             />
           </label>
-          <div className="divider"></div>
+          <div className="divider" />
           <div>
             <h4 className="text-lg">Quick Links</h4>
-            <ul className="mt-4 space-y-2">
-              <li>
-                <Link
-                  href="/shop/category/magnifiers"
-                  className="hover:bg-accent hover:text-white"
-                >
-                  Magnifiers
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/shop/category/mounts-and-rails"
-                  className="hover:bg-accent hover:text-white"
-                >
-                  Mounts & Rails
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/shop/category/red-dots"
-                  className="hover:bg-accent hover:text-white"
-                >
-                  Red Dots
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/shop/category/lasers"
-                  className="hover:bg-accent hover:text-white"
-                >
-                  Lasers
-                </Link>
-              </li>
-            </ul>
+            <CategoryLinks />
           </div>
-          <div className="mt-8">
+          <div className="divider" />
+          <div>
             <h4 className="text-lg">Need some insipration?</h4>
-            <ul className="mt-2 flex flex-col">
-              {featuredItems.map((item) => {
-                const image = item.Images.Image[0]
-                  ? `${item.Images.Image[0].baseImageURL}/w_70/${item.Images.Image[0].publicID}.webp`
-                  : `${item.Images.Image.baseImageURL}/w_70/${item.Images.Image.publicID}.webp`;
-
-                return (
-                  <li
-                    key={item.id}
-                    className="flex border-b border-gray-300"
-                  >
-                    <div className="flex">
-                      <div className="p-2 bg-gray-200 min-w-20 h-20 flex justify-center items-center">
-                        <Image
-                          src={image}
-                          alt={item.name}
-                          width={100}
-                          height={100}
-                        />
-                      </div>
-                      <h3 className="text-xs self-start">{item.name}</h3>
-                      <span className="text-xs self-start">
-                        {Intl.NumberFormat("gb", { style: "currency", currency: "GBP" }).format(
-                          item.price
-                        )}
-                      </span>
-                    </div>
-                  </li>
-                );
-              })}
+            <ul className="mt-4 flex flex-col">
+              {featuredItems.map((item) => (
+                <SearchDrawerFeatured
+                  key={item.id}
+                  item={item}
+                />
+              ))}
             </ul>
           </div>
         </ul>
