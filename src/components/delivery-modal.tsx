@@ -16,7 +16,7 @@ export default function DeliveryModal() {
         id="delivery-modal"
         className="modal"
       >
-        <div className="modal-box rounded-sm p-12 text-gray-900">
+        <div className="modal-box p-12 text-gray-900">
           <h3 className="font-bold text-2xl">Delivery & Returns</h3>
 
           <div className="mt-6 flex flex-col gap-4">
@@ -54,12 +54,12 @@ export default function DeliveryModal() {
               <p className="mt-2 space-y-1">
                 Get in touch if you have any other questions and/or concerns.{" "}
               </p>
-              <ul className="mt-2 flex flex-col gap-2">
+              <ul className="mt-4 flex flex-col gap-2">
                 <li className="flex items-center gap-2">
-                  <Mail /> info@shootingsuppliesltd.co.uk
+                  <Mail size={16} /> info@shootingsuppliesltd.co.uk
                 </li>
                 <li className="flex items-center gap-2">
-                  <Phone /> 01527831261
+                  <Phone size={16} /> 01527831261
                 </li>
               </ul>
             </div>
