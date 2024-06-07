@@ -52,24 +52,20 @@ export default async function Page(request: NextRequest) {
           <AddToCartButton item={item} />
           <div className="mt-4">
             <ul className="flex flex-wrap gap-8">
-              <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base">
+              <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base cursor-pointer">
                 <QuestionModal />
               </li>
 
-              <Link href="#">
-                <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base">
-                  <DeliveryModal />
-                </li>
-              </Link>
-              <Link href="#">
-                <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base">
-                  <ShareButton
-                    title={item.name}
-                    text={`Check out this ${item.name} @ holosun.co.uk!`}
-                    url={request.url}
-                  />
-                </li>
-              </Link>
+              <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base cursor-pointer">
+                <DeliveryModal />
+              </li>
+              <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base cursor-pointer">
+                <ShareButton
+                  title={item.name}
+                  text={`Check out this ${item.name} @ holosun.co.uk!`}
+                  url={request.url}
+                />
+              </li>
             </ul>
           </div>
           <div className="mt-4 lg:mt-0 flex items-center gap-4 text-xs lg:text-base">
