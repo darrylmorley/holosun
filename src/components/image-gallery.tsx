@@ -17,7 +17,10 @@ export default function ImageGallery({ images, name }) {
     <div className="flex flex-col lg:flex-row gap-2 lg:gap-4">
       <div className="flex flex-row lg:flex-col items-center gap-2 order-2 lg:order-first">
         {images.map((image) => (
-          <div className="bg-stone-100 hover:bg-stone-400 cursor-pointer">
+          <div
+            key={image}
+            className="bg-stone-100 hover:bg-stone-400 cursor-pointer"
+          >
             <Image
               width={100}
               height={100}

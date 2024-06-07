@@ -1,14 +1,15 @@
+import { ShieldCheck } from "lucide-react";
 import { NextRequest } from "next/server";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import prisma from "@/lib/db/prisma";
 
-import ImageGallery from "@/components/image-gallery";
-import QuestionModal from "@/components/question-modal";
+const AddToCartButton = dynamic(() => import("@/components/add-to-cart-button"));
 import DeliveryModal from "@/components/delivery-modal";
+import QuestionModal from "@/components/question-modal";
+import ImageGallery from "@/components/image-gallery";
 import ShareButton from "@/components/share-button";
-import { ShieldCheck } from "lucide-react";
-import AddToCartButton from "@/components/add-to-cart-button";
 
 async function getItem(request) {
   const slug = request.params.slug;
@@ -44,7 +45,7 @@ export default async function Page(request: NextRequest) {
               item.price
             )}
           </p>
-          <p
+          <div
             dangerouslySetInnerHTML={{ __html: item.shortDescription }}
             className="prose text-base leading-relaxed flex flex-grow"
           />
