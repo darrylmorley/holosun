@@ -19,7 +19,7 @@ export default function ImageGallery({ images, name }) {
         {images.map((image) => (
           <div
             key={image}
-            className="bg-stone-100 hover:bg-stone-400 cursor-pointer"
+            className="bg-stone-100 hover:bg-stone-300 cursor-pointer"
           >
             <Image
               width={100}
@@ -33,7 +33,7 @@ export default function ImageGallery({ images, name }) {
           </div>
         ))}
       </div>
-      <div className="flex flex-col justify-center items-center bg-slate-400">
+      <div className="flex flex-col justify-center items-center bg-stone-100">
         <Image
           src={mainImg}
           alt={`Product Image of ${name}`}

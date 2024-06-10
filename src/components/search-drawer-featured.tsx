@@ -13,11 +13,11 @@ export default function SearchDrawerFeatured({ item }) {
         className="flex"
       >
         <div className="flex">
-          <picture className="relative min-w-20 min-h-20 mr-2 bg-stone-300">
+          <picture className="relative flex justify-center items-center min-w-20 min-h-20 mr-2 bg-stone-300">
             <Image
               src={image}
-              layout="fill"
-              objectFit="contain"
+              width={80}
+              height={80}
               alt={item.name}
               className="p-2"
             />

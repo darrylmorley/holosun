@@ -18,16 +18,13 @@ export default function CartDrawerProducts({ products, updateItemQuantity, remov
         ? products.map((item) => {
             console.log(item);
             return (
-              <>
-                <li
-                  key={item.id}
-                  className="flex"
-                >
-                  <picture className="relative min-w-20 min-h-20 mr-2 bg-stone-300">
+              <div key={item.id}>
+                <li className="flex">
+                  <picture className="relative flex items-center justify-center min-w-20 min-h-20 mr-2 bg-stone-300">
                     <Image
                       src={item.image}
-                      layout="fill"
-                      objectFit="contain"
+                      width={80}
+                      height={80}
                       alt={item.name}
                     />
                   </picture>
@@ -74,7 +71,7 @@ export default function CartDrawerProducts({ products, updateItemQuantity, remov
                   </div>
                 </li>
                 <div className="divider" />
-              </>
+              </div>
             );
           })
         : null}
