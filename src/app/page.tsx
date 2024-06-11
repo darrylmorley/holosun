@@ -19,9 +19,7 @@ export default async function Page() {
       <div>
         <Parallax
           imageSrc={"/images/parallax/Holosun-AEMS-Spikes-AR.webp"}
-          altText={
-            "Discover high quality red dot optics from HOLOSUN® CLASSIC and ELITE and order your favorite model today."
-          }
+          altText={"Discover High Quality Red dot Optics from HOLOSUN® Classic & Elite."}
         />
         <section className="px-2 my-8 lg:my-12 lg:px-12">
           <Features />
