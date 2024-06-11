@@ -14,8 +14,6 @@ export default function Featured({ featuredItems }) {
               ? `${item.Images.Image[0].baseImageURL}/w_400/${item.Images.Image[0].publicID}.webp`
               : `${item.Images.Image.baseImageURL}/w_400/${item.Images.Image.publicID}.webp`;
 
-            const image2 = `${item.Images.Image[1].baseImageURL}/w_400/${item.Images.Image[1].publicID}.webp`;
-
             return (
               <li
                 key={item.id}
