@@ -35,6 +35,9 @@ importers:
       nodemailer:
         specifier: ^6.9.13
         version: 6.9.13
+      postcode:
+        specifier: ^5.1.0
+        version: 5.1.0
       react:
         specifier: ^18
         version: 18.3.1
@@ -1580,6 +1583,10 @@ packages:
   possible-typed-array-names@1.0.0:
     resolution: {integrity: sha512-d7Uw+eZoloe0EHDIYoe+bQ5WXnGMOpmiZFTuMWCwpjzzkL2nTjcKiAk4hh8TjnGye2TwWOk3UXucZ+3rbmBa8Q==}
     engines: {node: '>= 0.4'}
+
+  postcode@5.1.0:
+    resolution: {integrity: sha512-rjwIdlQ8UvdOnUVZRCZQA54PmQJeoMBDQb4RsW5z3MVp/u7Gcet1vsjVy/p0+YX+R7cmgU9DEJf0zSx5mWqxAA==}
+    engines: {node: '>= 10.0.0'}
 
   postcss-import@15.1.0:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
@@ -3739,6 +3746,8 @@ snapshots:
   pirates@4.0.6: {}
 
   possible-typed-array-names@1.0.0: {}
+
+  postcode@5.1.0: {}
 
   postcss-import@15.1.0(postcss@8.4.38):
     dependencies:

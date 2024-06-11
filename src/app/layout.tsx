@@ -22,7 +22,7 @@ export const metadata = {
 };
 
 async function getFeaturedItems() {
-  const productsCount = await prisma.product.count({
+  const itemsCount = await prisma.product.count({
     where: {
       Manufacturer: {
         path: ["name"],
@@ -31,7 +31,7 @@ async function getFeaturedItems() {
     },
   });
 
-  const skip = Math.floor(Math.random() * productsCount);
+  const skip = Math.floor(Math.random() * itemsCount);
 
   return await prisma.product.findMany({
     take: 3,

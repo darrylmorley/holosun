@@ -1,20 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
-import CartDrawerProducts from "./cart-drawer-products";
+import Link from "next/link";
+
 import { getFormattedPrice } from "@/lib/helpers";
 
+import CartDrawerItems from "./cart-drawer-items";
+
 export default function CartDrawer() {
-  const [products, setProducts] = useState([]);
   const { items, removeItem, isEmpty, updateItemQuantity, cartTotal } = useCart();
-
-  useEffect(() => {
-    setProducts(items);
-  }, [items]);
-
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
 
   return (
     <div className="drawer drawer-end z-10">
@@ -29,7 +22,7 @@ export default function CartDrawer() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        {isEmpty || !products.length ? (
+        {isEmpty ? (
           <ul className="menu min-h-full w-96 bg-white p-4 text-base-content text-center">
             <h4>Shopping Cart</h4>
             <div className="divider"></div>
@@ -44,8 +37,8 @@ export default function CartDrawer() {
           >
             <h4 className="text-xl text-gray-800 text-center">Shopping Cart</h4>
             <div className="divider" />
-            <CartDrawerProducts
-              products={products}
+            <CartDrawerItems
+              items={items}
               updateItemQuantity={updateItemQuantity}
               removeItem={removeItem}
             />
@@ -59,8 +52,18 @@ export default function CartDrawer() {
               </div>
               <div className="divider px-4" />
               <div className="p-4 mb-4 grid grid-cols-2 gap-2">
-                <button className="btn btn-outline bg-white">View Cart</button>
-                <button className="btn btn-accent text-white">Checkout</button>
+                <Link
+                  href="/shop/cart"
+                  passHref
+                >
+                  <button className="btn btn-outline bg-white w-full">View Cart</button>
+                </Link>
+                <Link
+                  href="/shop/checkout"
+                  passHref
+                >
+                  <button className="btn btn-accent text-white w-full">Checkout</button>
+                </Link>
               </div>
             </div>
           </ul>
