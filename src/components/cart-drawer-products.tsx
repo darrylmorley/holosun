@@ -47,6 +47,7 @@ export default function CartDrawerProducts({ products, updateItemQuantity, remov
                           -
                         </button>
                         <input
+                          id="quantity"
                           type="number"
                           className="text-xs flex w-12 text-left h-6 items-center border-stone-100 bg-white text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none"
                           value={item.quantity}
