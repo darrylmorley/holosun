@@ -2,7 +2,6 @@ import Image from "next/image";
 import { getFormattedPrice, getMainImage } from "@/lib/helpers";
 
 export default function CategoryCarousel({ items }) {
-  console.log(items);
   return (
     <>
       {items.map((item) => {

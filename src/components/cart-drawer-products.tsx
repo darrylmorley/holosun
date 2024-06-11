@@ -2,7 +2,6 @@ import Image from "next/image";
 
 export default function CartDrawerProducts({ products, updateItemQuantity, removeItem }) {
   const handleAddItem = (e, item) => {
-    console.log(item);
     e.preventDefault();
     if (item.quantity < item.qoh) updateItemQuantity(item.id, item.quantity + 1);
   };
@@ -16,7 +15,6 @@ export default function CartDrawerProducts({ products, updateItemQuantity, remov
     <>
       {products
         ? products.map((item) => {
-            console.log(item);
             return (
               <div key={item.id}>
                 <li className="flex">

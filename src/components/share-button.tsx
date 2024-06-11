@@ -11,7 +11,6 @@ const ShareButton = ({ title, text, url }) => {
           text: text,
           url: url,
         });
-        console.log("Content shared successfully");
       } catch (error) {
         console.error("Error sharing content:", error);
       }
