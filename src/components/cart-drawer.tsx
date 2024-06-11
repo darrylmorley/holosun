@@ -1,13 +1,17 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
+import CartDrawerItems from "./cart-drawer-items";
+import { getFormattedPrice } from "@/lib/helpers";
 import Link from "next/link";
 
-import { getFormattedPrice } from "@/lib/helpers";
-
-import CartDrawerItems from "./cart-drawer-items";
-
 export default function CartDrawer() {
+  const [products, setProducts] = useState([]);
   const { items, removeItem, isEmpty, updateItemQuantity, cartTotal } = useCart();
+
+  useEffect(() => {
+    setProducts(items);
+  }, [items]);
 
   return (
     <div className="drawer drawer-end z-10">
@@ -22,7 +26,7 @@ export default function CartDrawer() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        {isEmpty ? (
+        {isEmpty || !products.length ? (
           <ul className="menu min-h-full w-96 bg-white p-4 text-base-content text-center">
             <h4>Shopping Cart</h4>
             <div className="divider"></div>
@@ -38,7 +42,7 @@ export default function CartDrawer() {
             <h4 className="text-xl text-gray-800 text-center">Shopping Cart</h4>
             <div className="divider" />
             <CartDrawerItems
-              items={items}
+              items={products}
               updateItemQuantity={updateItemQuantity}
               removeItem={removeItem}
             />

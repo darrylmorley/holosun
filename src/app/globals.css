@@ -25,3 +25,58 @@ h4 {
 h5 {
   @apply text-lg font-bold dark:text-white;
 }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+  .table,
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td,
+  .table tr {
+    display: block;
+  }
+
+  .table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .table tr {
+    margin: 0 0 1rem 0;
+  }
+
+  .table td {
+    border: bottom 1px solid #ddd;
+    position: relative;
+    padding-left: 40%;
+    text-align: left;
+  }
+
+  .table td::before {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    content: attr(data-label);
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .table td img {
+    background-color: rgb(245 245 244);
+    width: 50%;
+  }
+}

@@ -1,12 +1,14 @@
 "use client";
-import { getFormattedPrice } from "@/lib/helpers";
-import Image from "next/image";
 import { useCart } from "react-use-cart";
+import Image from "next/image";
+
+import { getFormattedPrice } from "@/lib/helpers";
 
 export default function CartItems() {
-  const { items, removeItem, isEmpty, updateItemQuantity, cartTotal } = useCart();
+  const { items, removeItem, updateItemQuantity } = useCart();
 
   const handleAddItem = (e, item) => {
+    console.log(e);
     e.preventDefault();
     if (item.quantity < item.qoh) updateItemQuantity(item.id, item.quantity + 1);
   };
@@ -29,10 +31,15 @@ export default function CartItems() {
           </tr>
         </thead>
         <tbody>
-          {/* rows */}
           {items.map((item) => (
-            <tr key={item.id}>
-              <td className="flex items-center">
+            <tr
+              key={item.id}
+              className="responsive-row"
+            >
+              <td
+                className="flex items-center"
+                data-label="Item"
+              >
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -49,8 +56,8 @@ export default function CartItems() {
                   </button>
                 </div>
               </td>
-              <td>{getFormattedPrice(item.price)}</td>
-              <td>
+              <td data-label="Price">{getFormattedPrice(item.price)}</td>
+              <td data-label="Quantity">
                 <form className="join">
                   <button
                     className="w-8 h-8 bg-stone-100 join-item"
@@ -67,16 +74,18 @@ export default function CartItems() {
                     max={item.qoh}
                     disabled
                   />
-                  <button
-                    className="w-8 h-8 bg-stone-100 join-item"
-                    onClick={(e) => handleAddItem(e, item)}
-                    disabled={item.quantity >= item.qoh}
-                  >
-                    +
-                  </button>
+                  <div id="increment-container">
+                    <button
+                      className="w-8 h-8 bg-stone-100 join-item"
+                      onClick={(e) => handleAddItem(e, item)}
+                      disabled={item.quantity >= item.qoh}
+                    >
+                      +
+                    </button>
+                  </div>
                 </form>
               </td>
-              <td>{getFormattedPrice(item.price * item.quantity)}</td>
+              <td data-label="Total">{getFormattedPrice(item.price * item.quantity)}</td>
             </tr>
           ))}
         </tbody>
