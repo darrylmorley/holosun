@@ -37,8 +37,8 @@ export default function ImageGallery({ images, name }) {
         <Image
           src={mainImg}
           alt={`Product Image of ${name}`}
-          width={600}
-          height={600}
+          width={800}
+          height={800}
           priority
           onMouseDown={() => handleMainImageClick(mainImg)}
           className="cursor-pointer"

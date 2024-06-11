@@ -32,7 +32,7 @@ export default async function Page(request: NextRequest) {
 
   return (
     <div className="px-4 xl:px-12 mb-4 lg:my-12">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <ImageGallery
           images={images}
           name={item.name}
