@@ -7,7 +7,7 @@ const config: Config = {
   // purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   extend: {
     fontFamily: {
-      sans: ["Montserrat"],
+      sans: ["Archivo", "sans-serif"],
       serif: ["Merriweather", "serif"],
     },
   },

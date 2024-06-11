@@ -1,4 +1,4 @@
-import { Montserrat } from "next/font/google";
+import { Archivo } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 
 import prisma from "@/lib/db/prisma";
@@ -10,10 +10,10 @@ import { Providers } from "./providers";
 
 import "./globals.css";
 
-const montserrat = Montserrat({
+const archivo = Archivo({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-montserrat",
+  variable: "--font-archivo",
 });
 
 export const metadata = {
@@ -53,7 +53,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html
       lang="en"
-      className={`${montserrat.variable}`}
+      className={`${archivo.variable}`}
     >
       <body className="flex flex-col h-screen">
         <NextTopLoader

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  font-family: var(--font-montserrat);
+  font-family: var(--font-archivo);
 }
 
 h1 {
