@@ -62,13 +62,13 @@ export default function ProductCard({ item: product }) {
       <div>
         <Link
           href={`/shop/${product.slug}`}
-          className="hover:gray-800 mb-1 text-gray-600 transition duration-100"
+          className="hover:gray-800 mb-1 font-black transition duration-100"
         >
           {product.name}
         </Link>
 
         <div className="flex items-end gap-2">
-          <span className="text-gray-600">
+          <span>
             {new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
               product.price
             )}

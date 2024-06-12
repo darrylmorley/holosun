@@ -28,7 +28,7 @@ export default function Featured({ featuredItems }) {
                       height={300}
                     />
                   </picture>
-                  <h3 className="text-sm lg:text-xl font-semibold text-center">{item.name}</h3>
+                  <h3 className="text-sm lg:text-xl font-black text-center">{item.name}</h3>
                   <p className="text-lg text-center">{getFormattedPrice(item.price)}</p>
                   <Link
                     href={`/shop/${item.slug}`}

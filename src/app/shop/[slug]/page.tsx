@@ -39,7 +39,7 @@ export default async function Page(request: NextRequest) {
         />
 
         <div className="flex flex-col gap-8">
-          <h1 className="text-3xl">{item.name}</h1>
+          <h1 className="text-3xl font-black">{item.name}</h1>
           <p className="text-xl font-semibold">
             {new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(
               item.price
