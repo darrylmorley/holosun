@@ -1,37 +1,16 @@
-"use client";
-import { useEffect, useRef } from "react";
-
-export default function Parallax({ imageSrc, altText }) {
-  const parallaxRef = useRef(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (parallaxRef.current) {
-        const offset = window.scrollY;
-        parallaxRef.current.style.backgroundPositionY = `${offset * 0.64}px`;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
+export default function Parallax({ imageSrc, text }) {
   return (
     <div className="relative overflow-hidden h-[70dvh]">
       <div
-        ref={parallaxRef}
-        className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
+        className="absolute -top-0 left-0 w-full h-full bg-center bg-fixed bg-no-repeat"
         style={{
           backgroundImage: `url(${imageSrc})`,
-          backgroundAttachment: "scroll", // Ensure it scrolls smoothly
+          backgroundAttachment: "fixed",
           backgroundSize: "cover",
         }}
       />
-      <div className="relative z-10 flex items-center justify-center h-full bg-black bg-opacity-50">
-        <h2 className="px-28 text-3xl font-bold text-white">{altText}</h2>
+      <div className="relative z-10 flex items-center justify-center h-full w-full bg-black bg-opacity-50 ">
+        <h2 className="px-8 lg:px-28 text-3xl lg:text-4xl font-black text-white">{text}</h2>
       </div>
     </div>
   );

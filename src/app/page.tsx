@@ -1,9 +1,9 @@
 import Categories from "@/components/categories";
 import HeroCarousel from "@/components/hero-carousel";
 import Features from "@/components/features";
-import Parallax from "@/components/parallax";
 import Featured from "@/components/featured";
 import prisma from "@/lib/db/prisma";
+import Parallax from "@/components/parallax";
 
 async function getFeaturedItems() {
   return await prisma.product.findMany({
@@ -32,12 +32,14 @@ export default async function Page() {
 
       <section>
         <Parallax
-          imageSrc={"/images/parallax/Holosun-AEMS-Spikes-AR.webp"}
-          altText={"DICOVER HIGH QUALITY RED DOT OPTICS FROM HOLOSUN®"}
+          imageSrc="/images/parallax/holosun_reddot_magnifier_rifle.png"
+          text="DICOVER HIGH QUALITY RED DOT OPTICS FROM HOLOSUN®"
         />
-        <section className="px-2 my-8 lg:my-24 lg:px-12">
-          <Features />
-        </section>
+        {/* Credit to https://www.facebook.com/instinct.tactique for image  */}
+      </section>
+
+      <section className="px-2 my-8 lg:my-24 lg:px-12">
+        <Features />
       </section>
 
       <section>
