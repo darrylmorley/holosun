@@ -4,7 +4,7 @@ import { isValid } from "postcode";
 import { useCart } from "react-use-cart";
 
 import { getFormattedPrice } from "@/lib/helpers";
-import { ChevronDown } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 
 export default function CartSummary() {
   const [shippingPrice, setShippingPrice] = useState(0);
@@ -31,9 +31,6 @@ export default function CartSummary() {
       <details className="w-full">
         <summary className="flex justify-between items-center w-full list-none text-xl font-bold">
           Estimate Shipping{" "}
-          <span>
-            <ChevronDown />
-          </span>
         </summary>
         <div className="mt-4">
           <label htmlFor="postcode">Enter your UK postcode</label>

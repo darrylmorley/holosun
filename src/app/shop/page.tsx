@@ -3,6 +3,7 @@ import prisma from "@/lib/db/prisma";
 import ProductCard from "@/components/product-card";
 import ShopFilters from "@/components/shop-filters";
 import { NextRequest } from "next/server";
+import Link from "next/link";
 
 async function getItems() {
   return await prisma.product.findMany({
@@ -26,7 +27,17 @@ export default async function Page(request: NextRequest) {
         <p className="text-center">Shop our Lasers, Magnifiers, Red Dots & Mounts</p>
       </div>
       <div>
-        <div className="px-4 xl:px-12 h-32 flex items-center justify-between">
+        <div className="px-12 my-4 text-sm breadcrumbs">
+          <ul>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/shop">Shop</Link>
+            </li>
+          </ul>
+        </div>
+        <div className="px-4 xl:px-12 my-6 flex items-center justify-between">
           <ShopFilters />
         </div>
         <div className="flex justify-center xl:px-8">

@@ -1,5 +1,8 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+
+import { toggleDrawer } from "@/lib/helpers";
 
 export default function SearchDrawerFeatured({ item }) {
   const image = item.Images.Image[0]
@@ -7,7 +10,10 @@ export default function SearchDrawerFeatured({ item }) {
     : `${item.Images.Image.baseImageURL}/w_70/${item.Images.Image.publicID}.webp`;
 
   return (
-    <Link href={`/shop/${item.slug}`}>
+    <Link
+      href={`/shop/${item.slug}`}
+      onClick={() => toggleDrawer("search-drawer")}
+    >
       <li
         key={item.id}
         className="flex"

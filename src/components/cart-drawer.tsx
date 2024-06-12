@@ -1,9 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
-import CartDrawerItems from "./cart-drawer-items";
-import { getFormattedPrice } from "@/lib/helpers";
 import Link from "next/link";
+
+import { getFormattedPrice, toggleDrawer } from "@/lib/helpers";
+
+import CartDrawerItems from "./cart-drawer-items";
 
 export default function CartDrawer() {
   const [products, setProducts] = useState([]);
@@ -32,7 +34,13 @@ export default function CartDrawer() {
             <div className="divider"></div>
             <h4 className="mt-4">Your cart is empty</h4>
             <li className="mt-8">Head over to the shop page to browse our products</li>
-            <button className="btn btn-accent text-white mt-8">Shop</button>
+            <Link
+              href="/shop"
+              passHref
+              className="btn btn-accent text-white mt-8"
+            >
+              <button>Shop</button>
+            </Link>
           </ul>
         ) : (
           <ul
@@ -59,12 +67,14 @@ export default function CartDrawer() {
                 <Link
                   href="/shop/cart"
                   passHref
+                  onClick={() => toggleDrawer("cart-drawer")}
                 >
                   <button className="btn btn-outline bg-white w-full">View Cart</button>
                 </Link>
                 <Link
                   href="/shop/checkout"
                   passHref
+                  onClick={() => toggleDrawer("cart-drawer")}
                 >
                   <button className="btn btn-accent text-white w-full">Checkout</button>
                 </Link>

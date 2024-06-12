@@ -80,3 +80,26 @@ h5 {
     width: 50%;
   }
 }
+
+details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+details summary::after {
+  content: "\2795"; /* Plus icon */
+  color: black !important; /* Ensure the icon color is black */
+  margin-right: 1rem;
+  transition: 0.5s;
+  font-size: 0.8rem;
+}
+
+details[open] summary::after {
+  content: "\2796"; /* Minus icon */
+  color: black !important; /* Ensure the icon color is black */
+  margin-right: 1rem;
+  transition: 0.5s;
+  font-size: 0.8rem;
+}

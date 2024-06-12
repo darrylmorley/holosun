@@ -1,10 +1,11 @@
 import prisma from "@/lib/db/prisma";
 import { NextRequest } from "next/server";
 
-import { getDescriptionFromId, getIdFromSlug, getNameFromId } from "@/lib/helpers";
+import { getDescriptionFromId, getIdFromSlug, getNameFromId, getSlugFromId } from "@/lib/helpers";
 
 import ProductCard from "@/components/product-card";
 import ShopFilters from "@/components/shop-filters";
+import Link from "next/link";
 
 async function getItems(request) {
   const slug = request.params.slug;
@@ -30,15 +31,30 @@ async function getItems(request) {
 export default async function Page(request: NextRequest) {
   const { items, id } = await getItems(request);
   const { sort } = request.searchParams;
+  const catgeoryName = getNameFromId(id);
+  const slug = getSlugFromId(id);
 
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1>{getNameFromId(id)}</h1>
+        <h1>{catgeoryName}</h1>
         <p>{getDescriptionFromId(id)}</p>
       </div>
+      <div className="px-12 my-4 text-sm breadcrumbs">
+        <ul>
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/shop">Shop</Link>
+          </li>
+          <li>
+            <Link href={`/shop/category/${slug}`}>{catgeoryName}</Link>
+          </li>
+        </ul>
+      </div>
       <div>
-        <div className="px-4 xl:px-12 h-32 flex items-center justify-between">
+        <div className="px-4 xl:px-12 my-6 flex items-center justify-between">
           <ShopFilters />
         </div>
         <div className="flex justify-center xl:px-8">

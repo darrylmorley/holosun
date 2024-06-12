@@ -5,6 +5,13 @@ const slugToId: { [key: string]: number } = {
   "mounts-and-rails": 36,
 };
 
+const idToSlug: { [key: number]: string } = {
+  139: "lasers",
+  4: "magnifiers",
+  80: "red-dot-and-holo-point",
+  36: "mounts-and-rails",
+};
+
 const idToDescription: { [key: number]: string } = {
   139: "Shop our Lasers",
   4: "Shop our Magnifiers",
@@ -21,6 +28,10 @@ const idToName: { [key: number]: string } = {
 
 export function getIdFromSlug(slug: string): number | undefined {
   return slugToId[slug];
+}
+
+export function getSlugFromId(id: number): string | undefined {
+  return idToSlug[id];
 }
 
 export function getDescriptionFromId(id: number): string | undefined {
