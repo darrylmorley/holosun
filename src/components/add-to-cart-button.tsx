@@ -11,14 +11,23 @@ export default function AddToCartButton({ item }) {
     toggleDrawer("cart-drawer");
   };
 
-  return (
-    <div>
-      <button
-        className="btn w-full bg-accent hover:bg-accent-content text-white"
-        onClick={() => handleAddToCartClick()}
-      >
-        Add to Cart
-      </button>
-    </div>
+  const Button = (text, disabled) => (
+    <button
+      className={`btn w-full ${disabled ? "btn-disabled !bg-secondary !text-white" : "bg-accent hover:bg-accent-content text-white"}`}
+      onClick={handleAddToCartClick}
+      disabled={disabled}
+    >
+      {text}
+    </button>
   );
+
+  if (item.isOnBackorder && item.qoh <= 0) {
+    return <div>{Button("On Order", true)}</div>;
+  }
+
+  if (item.qoh <= 0 && !item.isOnBackorder) {
+    return <div>{Button("Out of Stock", true)}</div>;
+  }
+
+  return <div>{Button("Add to Cart", false)}</div>;
 }
