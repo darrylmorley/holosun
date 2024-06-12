@@ -37,7 +37,7 @@ export default async function Page(request: NextRequest) {
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1>{catgeoryName}</h1>
+        <h1 className="uppercase font-black">{catgeoryName}</h1>
         <p>{getDescriptionFromId(id)}</p>
       </div>
       <div className="px-12 my-4 text-sm breadcrumbs">

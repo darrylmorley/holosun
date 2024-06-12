@@ -23,7 +23,7 @@ export default async function Page(request: NextRequest) {
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1>Shop</h1>
+        <h1 className="font-black uppercase">Shop</h1>
         <p className="text-center">Shop our Lasers, Magnifiers, Red Dots & Mounts</p>
       </div>
       <div>
