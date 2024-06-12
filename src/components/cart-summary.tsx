@@ -5,6 +5,7 @@ import { useCart } from "react-use-cart";
 
 import { getFormattedPrice } from "@/lib/helpers";
 import { Minus, Plus } from "lucide-react";
+import Link from "next/link";
 
 export default function CartSummary() {
   const [shippingPrice, setShippingPrice] = useState(0);
@@ -65,7 +66,13 @@ export default function CartSummary() {
         <span>{getFormattedPrice(cartTotal)}</span>
       </div>
       <div className="mt-8">
-        <button className="btn btn-accent w-full text-white">Checkout</button>
+        <Link
+          href="/shop/checkout"
+          passHref
+          className="btn btn-accent w-full text-white"
+        >
+          <button>Checkout</button>
+        </Link>
       </div>
       <div className="flex flex-col items-center my-8">
         <p className="text-sm font-bold">Checkout Safely with Barclays</p>
