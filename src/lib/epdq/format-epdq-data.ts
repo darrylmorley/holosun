@@ -1,20 +1,20 @@
 import { config } from "../../../config/config";
 
-export const formatEqpdqData = (totalPrice, userDetails, orderNo, preOrderItems) => {
-  return {
+export const formatEqpdqData = (totalPrice, userDetails, orderNo) => {
+  return JSON.stringify({
     accepturl: config.acceptURL,
-    amount: totalPrice,
+    amount: Number(totalPrice),
     backurl: config.backURL,
     cancelurl: config.cancelURL,
-    catalogurl: "https://www.shootingsuppliesltd.co.uk",
+    catalogurl: "https://www.holosun-optics.co.uk",
     cn: `${userDetails.firstName} ${userDetails.lastName}`,
-    com: "shootingsuppliesltd",
-    complus: JSON.stringify({ userDetails, preOrderItems }),
+    com: "holosun-optics",
+    complus: JSON.stringify({ userDetails }),
     currency: "GBP",
     declineurl: config.declineURL,
     email: userDetails.email,
-    exceptionurl: "https://www.shootingsuppliesltd.co.uk/cart",
-    homeurl: "https://www.shootingsuppliesltd.co.uk",
+    exceptionurl: "https://www.holosun-optics.co.uk/cart",
+    homeurl: "https://www.holosun-optics.co.uk",
     language: "en_US",
     orderid: orderNo,
     owneraddress: userDetails.billingAddress1
@@ -26,7 +26,7 @@ export const formatEqpdqData = (totalPrice, userDetails, orderNo, preOrderItems)
       : userDetails.shippingPostcode,
     title: "shooting supplies ltd",
     tp: "shootingsupplies_payment_template.html",
-  };
+  });
 };
 
 export default formatEqpdqData;

@@ -6,6 +6,8 @@ import { isValid } from "postcode";
 import { z } from "zod";
 
 import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
+import { createLightspeedSale } from "@/lib/lightspeed/create-sale";
+import { barclaysCheckoutForm } from "@/lib/epdq/epdq-form";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -150,7 +152,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     }
   }, [totalUniqueItems]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Extract delivery address if different from billing
@@ -174,8 +176,19 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       // Clear previous errors
       setErrors([]);
       // Handle form submission here if data is valid
+      // const lsSale = await createLightspeedSale(items, customerID);
+
+      // Test Order Number
+      const lsSale = "HOLO001";
+
       console.log("Form submitted:", dataToValidate);
-      console.log("Cart data: ", items, cartTotal);
+      console.log("Cart data: ", items, cartTotal.toFixed(2).toString().replace(".", ""));
+
+      barclaysCheckoutForm(
+        cartTotal.toFixed(2).toString().replace(".", ""),
+        dataToValidate,
+        lsSale
+      );
     } catch (error) {
       if (error instanceof z.ZodError) {
         // Use a Set to store unique error messages
@@ -254,7 +267,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
               name="billingCity"
               placeholder="City"
               value={formData.billingCity}
-              autoComplete="billing address-level1"
+              autoComplete="billing address-level2"
               required
               onChange={handleInputChange}
               className="input input-bordered w-full rounded-sm"

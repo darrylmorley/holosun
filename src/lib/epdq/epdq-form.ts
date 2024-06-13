@@ -1,17 +1,21 @@
 import { config } from "../../../config/config";
 import { formatEqpdqData } from "./format-epdq-data";
 
-export const barclaysCheckoutForm = async (totalPrice, userDetails, orderNo, preOrderItems) => {
-  const epdqFormat = formatEqpdqData(totalPrice, userDetails, orderNo, preOrderItems);
+export const barclaysCheckoutForm = async (totalPrice, userDetails, orderNo) => {
+  const epdqFormat = formatEqpdqData(totalPrice, userDetails, orderNo);
   let epdqData;
 
   try {
-    const fetchEpdqData = await fetch("/api/barclayscheckout", {
-      method: "post",
+    const fetchEpdqData = await fetch("/api/epdq", {
+      method: "POST",
       body: JSON.stringify(epdqFormat),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     const fetchedData = await fetchEpdqData.json();
     epdqData = fetchedData;
+    console.log("epdqData", epdqData);
   } catch (error) {
     console.error(error, orderNo);
   }
