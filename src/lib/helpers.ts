@@ -84,3 +84,13 @@ export function isOutsideMainlandUK(postcode: string) {
     /\b(BT\d{1,2}\s?\d[A-Z]{2}|GY\d{1,2}\s?\d[A-Z]{2}|JE\d{1,2}\s?\d[A-Z]{2}|IM\d{1,2}\s?\d[A-Z]{2}|HS\d{1,2}\s?\d[A-Z]{2}|IV\d{1,2}\s?\d[A-Z]{2}|KW\d{1,2}\s?\d[A-Z]{2}|ZE\d{1,2}\s?\d[A-Z]{2})\b/i;
   return postcodeRegex.test(postcode);
 }
+
+export function debounce(func, wait) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
+  };
+}

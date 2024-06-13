@@ -2,12 +2,12 @@
 import { useCart } from "react-use-cart";
 import { useState, useEffect } from "react";
 import { Store, Truck } from "lucide-react";
-import { isOutsideMainlandUK } from "@/lib/helpers";
+import { isValid, POSTCODE_REGEX } from "postcode";
+
+import { debounce, isOutsideMainlandUK } from "@/lib/helpers";
 
 export default function CheckoutForm({ stdDelivery, NIDelivery }) {
-  console.log(stdDelivery, NIDelivery);
-
-  const { setCartMetadata } = useCart();
+  const { setCartMetadata, items, metadata, cartTotal } = useCart();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -20,47 +20,59 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
     deliveryAddress1: "",
     deliveryCity: "",
     deliveryPostcode: "",
-    billingSameAsDelivery: true,
+    deliverySameAsBilling: true,
   });
+
+  const [deliverySet, setDeliverySet] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: checked }));
+  };
 
   const handleDeliverySelection = (e) => {
     setFormData({ ...formData, delivery: e.target.value });
   };
 
-  // useEffect(() => {
-  //   console.log(formData);
-  // }, [
-  //   formData,
-  //   formData.delivery,
-  //   formData.firstName,
-  //   formData.lastName,
-  //   formData.address1,
-  //   formData.city,
-  //   formData.postcode,
-  // ]);
-
   useEffect(() => {
-    if (formData.billingSameAsDelivery && formData.billingPostcode !== "") {
-      const postage = isOutsideMainlandUK(formData.billingPostcode) ? NIDelivery : stdDelivery;
-      setCartMetadata({ delivery: postage });
-    }
+    const debouncedCheckPostcode = debounce(() => {
+      const { deliverySameAsBilling, billingPostcode, deliveryPostcode } = formData;
+      const targetPostcode = deliverySameAsBilling ? billingPostcode : deliveryPostcode;
 
-    if (!formData.billingSameAsDelivery && formData.deliveryPostcode !== "") {
-      const postage = isOutsideMainlandUK(formData.deliveryPostcode) ? NIDelivery : stdDelivery;
-      setCartMetadata({ delivery: postage });
-    }
+      if (targetPostcode && isValid(targetPostcode)) {
+        const postage = isOutsideMainlandUK(targetPostcode) ? NIDelivery : stdDelivery;
+        setCartMetadata({ delivery: postage });
+      }
+    }, 300);
+
+    debouncedCheckPostcode();
+
+    return () => {
+      clearTimeout(debouncedCheckPostcode);
+    };
   }, [
-    formData.billingSameAsDelivery,
     formData.billingPostcode,
     formData.deliveryPostcode,
+    formData.deliverySameAsBilling,
     NIDelivery,
     stdDelivery,
-    setCartMetadata,
   ]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log("Form submitted:", formData);
+    console.log("Cart data: ", items, metadata, cartTotal);
+  };
 
   return (
     <form
-      action=""
+      onSubmit={handleSubmit}
       className="flex-col items-end mr-8 my-12 space-y-8"
     >
       <section className="w-full">
@@ -68,8 +80,10 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
         <input
           type="email"
           name="email"
-          id="email"
+          value={formData.email}
           placeholder="Enter Your Email"
+          required
+          onChange={handleInputChange}
           className="input input-bordered w-full rounded-sm"
         />
       </section>
@@ -79,45 +93,57 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
           <div className="flex gap-2">
             <input
               type="text"
-              name="billing-details"
-              id="firstName"
+              name="firstName"
               placeholder="First Name"
+              value={formData.firstName}
+              autoComplete="given-name"
+              required
+              onChange={handleInputChange}
               className="input input-bordered w-full rounded-sm"
-              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
             />
             <input
               type="text"
-              name="billing-details"
-              id="lastName"
+              name="lastName"
               placeholder="Last Name"
+              value={formData.lastName}
+              autoComplete="family-name"
+              required
+              onChange={handleInputChange}
               className="input input-bordered w-full rounded-sm"
-              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
             />
           </div>
           <input
             type="text"
-            name="billing-details"
-            id="address1"
+            name="billingAddress1"
             placeholder="First Line of Address"
+            value={formData.billingAddress1}
+            autoComplete="billing address-line1"
+            required
+            onChange={handleInputChange}
             className="mt-3 input input-bordered w-full rounded-sm"
-            onChange={(e) => setFormData({ ...formData, address1: e.target.value })}
           />
           <div className="mt-3 flex gap-2">
             <input
               type="text"
-              name="billing-details"
-              id="city"
+              name="billingCity"
               placeholder="City"
+              value={formData.billingCity}
+              autoComplete="billing address-city"
+              required
+              onChange={handleInputChange}
               className="input input-bordered w-full rounded-sm"
-              onChange={(e) => setFormData({ ...formData, city: e.target.value })}
             />
             <input
               type="text"
-              name="billing-details"
-              id="postcode"
+              name="billingPostcode"
               placeholder="Postcode"
+              value={formData.billingPostcode}
+              autoComplete="billing postal-code"
+              required
+              onChange={handleInputChange}
               className="input input-bordered w-full rounded-sm"
-              onChange={(e) => setFormData({ ...formData, postcode: e.target.value })}
+              pattern={POSTCODE_REGEX.source}
+              title="Please enter a valid UK postcode."
             />
           </div>
         </fieldset>
@@ -135,7 +161,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
                   id="delivery"
                   value="delivery"
                   className="radio text-black mr-2"
-                  defaultChecked
+                  checked={formData.delivery === "delivery"}
                   onChange={handleDeliverySelection}
                 />
                 <span>Delivery</span>
@@ -153,8 +179,9 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
                   name="delivery"
                   id="collection"
                   value="collection"
-                  className="radio text-black mr-2"
+                  checked={formData.delivery === "collection"}
                   onChange={handleDeliverySelection}
+                  className="radio text-black mr-2"
                 />
                 <span>Collection</span>
               </div>
@@ -166,56 +193,59 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
         </fieldset>
         <div className="mt-6 w-full p-4 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounde-sm">
           <label
-            htmlFor="delivery-same-as-billing"
+            htmlFor="deliverySameAsBilling"
             className="flex items-center gap-2 cursor-pointer"
           >
             <input
               type="checkbox"
-              name="delivery-same-as-billing"
-              id="delivery-same-as-billing"
-              defaultChecked
+              name="deliverySameAsBilling"
+              id="deliverySameAsBilling"
+              checked={formData.deliverySameAsBilling}
+              onChange={handleCheckboxChange}
               className="checkbox text-black mr-2"
-              onChange={(e) =>
-                setFormData({ ...formData, billingSameAsDelivery: e.target.checked })
-              }
             />
             <p className="text-sm">My delivery address is the same as the billing address above.</p>
           </label>
         </div>
         {formData.delivery === "delivery" ? (
-          formData.billingSameAsDelivery === false ? (
+          !formData.deliverySameAsBilling && (
             <>
               <fieldset className="mt-3">
                 <h2 className="mt-3 text-base">Delivery Details</h2>
                 <input
                   type="text"
-                  name="delivery-details"
-                  id="address1"
+                  name="deliveryAddress1"
                   placeholder="First Line of Address"
+                  value={formData.deliveryAddress1}
+                  autoComplete="shipping address-line1"
+                  onChange={handleInputChange}
                   className="mt-3 input input-bordered w-full rounded-sm"
-                  onChange={(e) => setFormData({ ...formData, address1: e.target.value })}
                 />
                 <div className="mt-3 flex gap-2">
                   <input
                     type="text"
-                    name="delivery-details"
-                    id="city"
+                    name="deliveryCity"
                     placeholder="City"
+                    value={formData.deliveryCity}
+                    autoComplete="shipping address-city"
+                    onChange={handleInputChange}
                     className="input input-bordered w-full rounded-sm"
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                   />
                   <input
                     type="text"
-                    name="delivery-details"
-                    id="postcode"
+                    name="deliveryPostcode"
                     placeholder="Postcode"
+                    value={formData.deliveryPostcode}
+                    autoComplete="shipping postal-code"
+                    onChange={handleInputChange}
+                    pattern={POSTCODE_REGEX.source}
+                    title="Please enter a valid UK postcode."
                     className="input input-bordered w-full rounded-sm"
-                    onChange={(e) => setFormData({ ...formData, postcode: e.target.value })}
                   />
                 </div>
               </fieldset>
             </>
-          ) : null
+          )
         ) : (
           <div className="mt-6 flex flex-col">
             <h3 className="text-xl">Collect From</h3>
@@ -228,6 +258,12 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
           </div>
         )}
       </section>
+      <button
+        type="submit"
+        className="btn btn-accent text-white w-full"
+      >
+        Submit
+      </button>
     </form>
   );
 }

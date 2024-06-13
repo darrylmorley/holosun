@@ -6,7 +6,7 @@ import Image from "next/image";
 import { getFormattedPrice } from "@/lib/helpers";
 
 export default function CheckoutSummary() {
-  const { items, cartTotal, updateItemQuantity, removeItem } = useCart();
+  const { items, cartTotal, updateItemQuantity, removeItem, metadata } = useCart();
 
   const handleAddItem = (e, item) => {
     e.preventDefault();
@@ -90,11 +90,19 @@ export default function CheckoutSummary() {
         </div>
         <div className="flex items-center justify-between">
           <p>Shipping</p>
-          <p>Price</p>
+          <p>
+            {metadata.shipping
+              ? getFormattedPrice(metadata.shipping.price)
+              : "Calculated by Postcode"}
+          </p>
         </div>
         <div className="flex items-center justify-between">
           <p className="text-xl font-bold">Total</p>
-          <p className="text-xl font-bold">{cartTotal}</p>
+          <p className="text-xl font-bold">
+            {metadata.shipping
+              ? getFormattedPrice(metadata.shipping.price + cartTotal)
+              : getFormattedPrice(cartTotal)}
+          </p>
         </div>
       </section>
     </>

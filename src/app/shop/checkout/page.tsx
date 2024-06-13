@@ -28,7 +28,7 @@ export default async function Checkout() {
             NIDelivery={NIDelivery}
           />
         </div>
-        <div className="h-full w-full bg-stone-100 p-12 pr-56">
+        <div className="h-full w-full bg-stone-100 p-8 pr-56">
           <CheckoutSummary />
         </div>
       </div>
