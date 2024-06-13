@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
+import dynamic from "next/dynamic";
 
-import CheckoutForm from "./checkout-form";
-import CheckoutSummary from "./checkout-summary";
+const CheckoutForm = dynamic(() => import("./checkout-form"), { ssr: false });
+const CheckoutSummary = dynamic(() => import("./checkout-summary"), { ssr: false });
 
 export default function CheckoutFull({ stdDelivery, NIDelivery }) {
   const [deliveryItem, setDeliveryItem] = useState(null);
@@ -15,7 +16,6 @@ export default function CheckoutFull({ stdDelivery, NIDelivery }) {
           <CheckoutForm
             stdDelivery={stdDelivery}
             NIDelivery={NIDelivery}
-            deliveryItem={deliveryItem}
             setDeliveryItem={setDeliveryItem}
           />
         </div>

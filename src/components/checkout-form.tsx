@@ -6,7 +6,7 @@ import { isValid } from "postcode";
 
 import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
 
-export default function CheckoutForm({ stdDelivery, NIDelivery, deliveryItem, setDeliveryItem }) {
+export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem }) {
   const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
 
   const [formData, setFormData] = useState({
@@ -55,7 +55,9 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, deliveryItem, se
 
     if (targetPostcode && isValid(targetPostcode)) {
       const postage = isOutsideMainlandUK(targetPostcode) ? NIDelivery : stdDelivery;
-      const existingDeliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
+      const existingDeliveryItem = items.find(
+        (item) => Number(item.id) === 7476 || Number(item.id) === 8403
+      );
 
       if (!existingDeliveryItem) {
         setDeliveryItem(postage);
@@ -65,7 +67,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, deliveryItem, se
   };
 
   const removeDeliveryItem = () => {
-    const deliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
+    const deliveryItem = items.find((item) => Number(item.id) === 7476 || Number(item.id) === 8403);
     if (deliveryItem) {
       setDeliveryItem(null);
       removeItem(deliveryItem.id);
@@ -103,13 +105,13 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, deliveryItem, se
   // If 1 item in cart and is delivery, remove item
   useEffect(() => {
     if (totalUniqueItems === 1) {
-      const deliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
-      if (deliveryItem) {
+      const item = items.find((item) => Number(item.id) === 7476 || Number(item.id) === 8403);
+      if (item) {
         setDeliveryItem(null);
-        removeItem(deliveryItem.id);
+        emptyCart();
       }
     }
-  }, []);
+  }, [totalUniqueItems]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -128,6 +130,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, deliveryItem, se
           name="email"
           value={formData.email}
           placeholder="Enter Your Email"
+          autoComplete="email"
           required
           onChange={handleInputChange}
           className="input input-bordered w-full rounded-sm"
@@ -174,7 +177,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, deliveryItem, se
               name="billingCity"
               placeholder="City"
               value={formData.billingCity}
-              autoComplete="billing address-city"
+              autoComplete="billing address-level1"
               required
               onChange={handleInputChange}
               className="input input-bordered w-full rounded-sm"
@@ -273,7 +276,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, deliveryItem, se
                     name="deliveryCity"
                     placeholder="City"
                     value={formData.deliveryCity}
-                    autoComplete="shipping address-city"
+                    autoComplete="shipping address-level1"
                     onChange={handleInputChange}
                     className="input input-bordered w-full rounded-sm"
                   />

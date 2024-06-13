@@ -1,8 +1,11 @@
-import Categories from "@/components/categories";
+import { Metadata } from "next";
+
+import prisma from "@/lib/db/prisma";
+
 import HeroCarousel from "@/components/hero-carousel";
+import Categories from "@/components/categories";
 import Features from "@/components/features";
 import Featured from "@/components/featured";
-import prisma from "@/lib/db/prisma";
 import Parallax from "@/components/parallax";
 
 async function getFeaturedItems() {
@@ -14,6 +17,12 @@ async function getFeaturedItems() {
     },
   });
 }
+
+export const metadata: Metadata = {
+  title: "Holosun Optics - Advanced Red Dot Sights & Accessories",
+  description:
+    "Discover the latest in red dot sights and tactical optics at Holosun. Innovative technology, rugged designs, and unparalleled performance. Shop now!",
+};
 
 export default async function Page() {
   const featuredItems = await getFeaturedItems();

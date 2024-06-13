@@ -1,16 +1,18 @@
-import prisma from "@/lib/db/prisma";
 import { NextRequest } from "next/server";
+import prisma from "@/lib/db/prisma";
+import Link from "next/link";
 
 import {
   getDescriptionFromId,
   getIdFromSlug,
+  getMetaDescriptionFromId,
+  getMetaNameFromId,
   getNameFromId,
   getSlugFromId,
 } from "@/lib/utils/helpers";
 
 import ProductCard from "@/components/product-card";
 import ShopFilters from "@/components/shop-filters";
-import Link from "next/link";
 
 async function getItems(request) {
   const slug = request.params.slug;
@@ -31,6 +33,17 @@ async function getItems(request) {
   });
 
   return { items, id };
+}
+
+export async function generateMetadata(request: NextRequest) {
+  const slug = request.params.slug;
+  const id = getIdFromSlug(slug);
+  console.log(slug, id);
+
+  return {
+    title: getMetaNameFromId(id),
+    description: getMetaDescriptionFromId(id),
+  };
 }
 
 export default async function Page(request: NextRequest) {

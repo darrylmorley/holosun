@@ -9,13 +9,23 @@ import CartDrawerItems from "./cart-drawer-items";
 
 export default function CartDrawer() {
   const [products, setProducts] = useState([]);
-  const { items, removeItem, isEmpty, updateItemQuantity, cartTotal } = useCart();
+  const { items, removeItem, isEmpty, totalUniqueItems, updateItemQuantity, cartTotal, emptyCart } =
+    useCart();
 
-  const shipping = items.find((item) => item.id === 7476 || item.id === 8403);
+  const shipping = items.find((item) => Number(item.id) === 7476 || Number(item.id) === 8403);
 
   useEffect(() => {
     setProducts(items);
-  }, [items]);
+  }, [items, products]);
+
+  useEffect(() => {
+    if (totalUniqueItems === 1) {
+      const item = items.find((item) => Number(item.id) === 7476 || Number(item.id) === 8403);
+      if (item) {
+        emptyCart();
+      }
+    }
+  }, [totalUniqueItems]);
 
   return (
     <div className="drawer drawer-end z-10">
@@ -30,7 +40,7 @@ export default function CartDrawer() {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        {isEmpty || !products.length ? (
+        {isEmpty || !items.length ? (
           <ul className="menu min-h-full w-96 bg-white p-4 text-base-content text-center">
             <h4>Shopping Cart</h4>
             <div className="divider"></div>
@@ -46,10 +56,7 @@ export default function CartDrawer() {
             </Link>
           </ul>
         ) : (
-          <ul
-            className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open"
-            suppressHydrationWarning
-          >
+          <ul className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open">
             <h4 className="text-xl text-gray-800 text-center">Shopping Cart</h4>
             <div className="divider" />
             <CartDrawerItems

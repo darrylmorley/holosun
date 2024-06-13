@@ -1,9 +1,10 @@
+import { NextRequest } from "next/server";
 import prisma from "@/lib/db/prisma";
+import { Metadata } from "next";
+import Link from "next/link";
 
 import ProductCard from "@/components/product-card";
 import ShopFilters from "@/components/shop-filters";
-import { NextRequest } from "next/server";
-import Link from "next/link";
 
 async function getItems() {
   return await prisma.product.findMany({
@@ -15,6 +16,12 @@ async function getItems() {
     },
   });
 }
+
+export const metadata: Metadata = {
+  title: "Shop Holosun Optics & Accessories",
+  description:
+    "Discover the latest in red dot sights, tactical optics and accessories at Holosun. Innovative technology, rugged designs, and unparalleled performance. Shop now!",
+};
 
 export default async function Page(request: NextRequest) {
   const items = await getItems();
