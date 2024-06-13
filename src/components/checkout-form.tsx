@@ -1,12 +1,10 @@
 "use client";
-import { useCart } from "react-use-cart";
+import { isValid, POSTCODE_REGEX } from "postcode";
 import { useState, useEffect } from "react";
 import { Store, Truck } from "lucide-react";
-import { isValid, POSTCODE_REGEX } from "postcode";
+import { useCart } from "react-use-cart";
 
-import { debounce, isOutsideMainlandUK } from "@/lib/helpers";
-
-console.log(POSTCODE_REGEX.test("CV36 4DE"));
+import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/helpers";
 
 export default function CheckoutForm({ stdDelivery, NIDelivery }) {
   const { setCartMetadata, items, metadata, cartTotal, clearCartMetadata } = useCart();
@@ -52,6 +50,11 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
     }
   };
 
+  // Clear delivery metadata on page load
+  useEffect(() => {
+    clearCartMetadata("delivery");
+  }, []);
+
   useEffect(() => {
     const { deliverySameAsBilling, billingPostcode, deliveryPostcode } = formData;
     const targetPostcode = deliverySameAsBilling ? billingPostcode : deliveryPostcode;
@@ -78,7 +81,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex-col items-end mr-8 my-12 space-y-8"
+      className="w-full flex-col items-end my-12 space-y-8 sm:mr-8"
     >
       <section className="w-full">
         <h2 className="self-start text-2xl mb-4">Contact</h2>
@@ -158,7 +161,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
         <fieldset className="w-full">
           <legend className="sr-only">Choose a Delivery Method</legend>
           <label htmlFor="delivery">
-            <div className="px-4 h-[3rem] flex items-center justify-between border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-t-sm">
+            <div className="px-4 h-[3rem] flex items-center justify-between border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-t-sm w-full">
               <div className="flex items-center">
                 <input
                   type="radio"
@@ -177,7 +180,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
             </div>
           </label>
           <label htmlFor="collection">
-            <div className="px-4 h-[3rem] flex items-center justify-between border-b border-r border-l border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-b-sm">
+            <div className="px-4 h-[3rem] flex items-center justify-between border-b border-r border-l border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-b-sm w-full">
               <div className="flex items-center">
                 <input
                   type="radio"
@@ -196,7 +199,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
             </div>
           </label>
         </fieldset>
-        <div className="mt-6 w-full p-4 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounde-sm">
+        <div className="mt-6 w-full p-4 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-sm">
           <label
             htmlFor="deliverySameAsBilling"
             className="flex items-center gap-2 cursor-pointer"
@@ -215,7 +218,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
         {formData.delivery === "delivery" ? (
           !formData.deliverySameAsBilling && (
             <>
-              <fieldset className="mt-3">
+              <fieldset className="mt-3 w-full">
                 <h2 className="mt-3 text-base">Delivery Details</h2>
                 <input
                   type="text"
@@ -252,7 +255,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
             </>
           )
         ) : (
-          <div className="mt-6 flex flex-col">
+          <div className="mt-6 flex flex-col w-full">
             <h3 className="text-xl">Collect From</h3>
             <div className="p-4 mt-3 h-full w-full border rounded-sm align-middle bg-stone-100">
               <p>Shooting Supplies Ltd</p>
@@ -267,7 +270,12 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
         type="submit"
         className="btn btn-accent text-white w-full"
       >
-        Submit
+        Checkout
+        <span>
+          {metadata?.delivery
+            ? getFormattedPrice(cartTotal + metadata.delivery.price)
+            : getFormattedPrice(cartTotal)}
+        </span>
       </button>
     </form>
   );

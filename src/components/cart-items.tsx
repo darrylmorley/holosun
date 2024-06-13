@@ -8,7 +8,6 @@ export default function CartItems() {
   const { items, removeItem, updateItemQuantity } = useCart();
 
   const handleAddItem = (e, item) => {
-    console.log(e);
     e.preventDefault();
     if (item.quantity < item.qoh) updateItemQuantity(item.id, item.quantity + 1);
   };

@@ -22,11 +22,7 @@ export default function CheckoutSummary() {
 
   useEffect(() => {
     const { delivery } = metadata;
-
     setDelivery(() => delivery);
-
-    console.log(metadata);
-    console.log(delivery);
   }, [metadata.delivery]);
 
   return (

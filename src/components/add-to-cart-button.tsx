@@ -6,7 +6,6 @@ import { formatCartItem, toggleDrawer } from "@/lib/helpers";
 export default function AddToCartButton({ item }) {
   const { addItem, getItem } = useCart();
   const itemInCart = getItem(item.id);
-  console.log(itemInCart);
 
   const handleAddToCartClick = () => {
     addItem(formatCartItem(item));
