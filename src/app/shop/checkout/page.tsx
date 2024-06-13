@@ -1,7 +1,8 @@
-import CheckoutForm from "@/components/checkout-form";
-import CheckoutSummary from "@/components/checkout-summary";
+import { formatCartItem } from "@/lib/utils/helpers";
 import prisma from "@/lib/db/prisma";
-import { formatCartItem } from "@/lib/helpers";
+
+import CheckoutSummary from "@/components/checkout-summary";
+import CheckoutForm from "@/components/checkout-form";
 
 async function getShippingItems() {
   return await prisma.product.findMany({

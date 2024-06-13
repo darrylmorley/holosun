@@ -1,13 +1,13 @@
 "use client";
-import { isValid, POSTCODE_REGEX } from "postcode";
 import { useState, useEffect } from "react";
 import { Store, Truck } from "lucide-react";
 import { useCart } from "react-use-cart";
+import { isValid } from "postcode";
 
-import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/helpers";
+import { formatCartItem, getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
 
 export default function CheckoutForm({ stdDelivery, NIDelivery }) {
-  const { setCartMetadata, items, metadata, cartTotal, clearCartMetadata } = useCart();
+  const { addItem, setCartMetadata, items, metadata, cartTotal, clearCartMetadata } = useCart();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -74,8 +74,9 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission here
-    console.log("Form submitted:", formData);
-    console.log("Cart data: ", items, metadata, cartTotal);
+    // console.log("Form submitted:", formData);
+    // console.log("Cart data: ", items, metadata, cartTotal);
+    console.log(items, cartTotal);
   };
 
   return (

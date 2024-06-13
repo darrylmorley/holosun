@@ -3,7 +3,7 @@ import { useCart } from "react-use-cart";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { getFormattedPrice } from "@/lib/helpers";
+import { getFormattedPrice } from "@/lib/utils/helpers";
 
 export default function CheckoutSummary() {
   const { items, cartTotal, updateItemQuantity, removeItem, metadata } = useCart();

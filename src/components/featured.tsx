@@ -1,4 +1,4 @@
-import { getFormattedPrice } from "@/lib/helpers";
+import { getFormattedPrice } from "@/lib/utils/helpers";
 import Image from "next/image";
 import Link from "next/link";
 

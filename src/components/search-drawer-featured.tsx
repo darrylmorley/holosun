@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { toggleDrawer } from "@/lib/helpers";
+import { toggleDrawer } from "@/lib/utils/helpers";
 
 export default function SearchDrawerFeatured({ item }) {
   const image = item.Images.Image[0]

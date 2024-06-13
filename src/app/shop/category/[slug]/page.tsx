@@ -1,7 +1,12 @@
 import prisma from "@/lib/db/prisma";
 import { NextRequest } from "next/server";
 
-import { getDescriptionFromId, getIdFromSlug, getNameFromId, getSlugFromId } from "@/lib/helpers";
+import {
+  getDescriptionFromId,
+  getIdFromSlug,
+  getNameFromId,
+  getSlugFromId,
+} from "@/lib/utils/helpers";
 
 import ProductCard from "@/components/product-card";
 import ShopFilters from "@/components/shop-filters";

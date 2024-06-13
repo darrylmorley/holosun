@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "react-use-cart";
 import Link from "next/link";
 
-import { getFormattedPrice, toggleDrawer } from "@/lib/helpers";
+import { getFormattedPrice, toggleDrawer } from "@/lib/utils/helpers";
 
 import CartDrawerItems from "./cart-drawer-items";
 

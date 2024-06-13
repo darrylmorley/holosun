@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { toggleDrawer } from "@/lib/helpers";
+import { toggleDrawer } from "@/lib/utils/helpers";
 
 export default function CategoryLinks() {
   return (

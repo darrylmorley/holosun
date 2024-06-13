@@ -1,5 +1,5 @@
 "use client";
-import { toggleDrawer } from "@/lib/helpers";
+import { toggleDrawer } from "@/lib/utils/helpers";
 import Link from "next/link";
 
 export default function MenuDrawer() {

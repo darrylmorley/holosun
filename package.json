@@ -12,8 +12,11 @@
     "@prisma/client": "5.14.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/forms": "^0.5.7",
+    "axios": "^1.7.2",
+    "axios-rate-limit": "^1.4.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
+    "epdq": "^0.3.1",
     "lucide-react": "^0.378.0",
     "next": "14.2.3",
     "nextjs-toploader": "^1.6.12",
@@ -48,5 +51,13 @@
     "tailwindcss": "^3.4.3",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "overrides": {
+      "qs@<6.0.4": ">=6.0.4",
+      "qs@<1.0.0": ">=1.0.0",
+      "qs@<6.2.4": ">=6.2.4",
+      "braces@<3.0.3": ">=3.0.3"
+    }
   }
 }

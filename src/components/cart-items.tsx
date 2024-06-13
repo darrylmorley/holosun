@@ -2,7 +2,7 @@
 import { useCart } from "react-use-cart";
 import Image from "next/image";
 
-import { getFormattedPrice } from "@/lib/helpers";
+import { getFormattedPrice } from "@/lib/utils/helpers";
 
 export default function CartItems() {
   const { items, removeItem, updateItemQuantity } = useCart();

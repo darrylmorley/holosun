@@ -1,7 +1,7 @@
 "use client";
 import { useCart } from "react-use-cart";
 
-import { formatCartItem, toggleDrawer } from "@/lib/helpers";
+import { formatCartItem, toggleDrawer } from "@/lib/utils/helpers";
 
 export default function AddToCartButton({ item }) {
   const { addItem, getItem } = useCart();

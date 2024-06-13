@@ -3,7 +3,7 @@ import { useState } from "react";
 import { isValid } from "postcode";
 import { useCart } from "react-use-cart";
 
-import { getFormattedPrice } from "@/lib/helpers";
+import { getFormattedPrice } from "@/lib/utils/helpers";
 import { Minus, Plus } from "lucide-react";
 import Link from "next/link";
 
