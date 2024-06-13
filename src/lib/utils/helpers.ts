@@ -18,7 +18,7 @@ const categories: Category[] = [
   {
     id: 139,
     slug: "lasers",
-    description: "Discover Holosun's advanced aiming lasers, designed for accuracy and durability.",
+    description: "Discover Holosun's advanced aiming lasers, designed for accuracy and durability",
     name: "Lasers",
     metaName: "Holosun Aiming Lasers - Precision Targeting",
     metaDescription:
@@ -28,7 +28,7 @@ const categories: Category[] = [
     id: 4,
     slug: "magnifiers",
     description:
-      "Discover Holosun's range of high-quality magnifiers designed to improve your shooting accuracy.",
+      "Discover Holosun's range of high-quality magnifiers designed to improve your shooting accuracy",
     name: "Magnifiers",
     metaName: "Holosun Magnifiers - Enhance Your Shooting Precision",
     metaDescription:
@@ -38,7 +38,7 @@ const categories: Category[] = [
     id: 80,
     slug: "red-dot-and-holo-point",
     description:
-      "Explore Holosun's range of innovative red dot sights designed for accuracy and durability.",
+      "Explore Holosun's range of innovative red dot sights designed for accuracy and durability",
     name: "Red Dot & Holo Points",
     metaName: "Holosun Red Dot Sights - Precision Optics for Every Shooter",
     metaDescription:
@@ -48,7 +48,7 @@ const categories: Category[] = [
     id: 36,
     slug: "mounts-and-rails",
     description:
-      "Discover Holosun's range of mounts designed for secure and stable attachment of your optics.",
+      "Discover Holosun's range of mounts designed for secure and stable attachment of your optics",
     name: "Mounts & Rails",
     metaName: "Holosun Mounts - Secure and Reliable Optics Mounting Solutions",
     metaDescription:

@@ -49,14 +49,16 @@ export async function generateMetadata(request: NextRequest) {
 export default async function Page(request: NextRequest) {
   const { items, id } = await getItems(request);
   const { sort } = request.searchParams;
-  const catgeoryName = getNameFromId(id);
+
   const slug = getSlugFromId(id);
+  const catgeoryName = getNameFromId(id);
+  const description = getDescriptionFromId(id);
 
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1 className="uppercase font-black">{catgeoryName}</h1>
-        <p>{getDescriptionFromId(id)}</p>
+        <h1 className="text-5xl uppercase font-black">{catgeoryName}</h1>
+        <p className="text-lg">{description}</p>
       </div>
       <div className="px-12 my-4 text-sm breadcrumbs">
         <ul>
