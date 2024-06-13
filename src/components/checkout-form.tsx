@@ -6,8 +6,10 @@ import { isValid, POSTCODE_REGEX } from "postcode";
 
 import { debounce, isOutsideMainlandUK } from "@/lib/helpers";
 
+console.log(POSTCODE_REGEX.test("CV36 4DE"));
+
 export default function CheckoutForm({ stdDelivery, NIDelivery }) {
-  const { setCartMetadata, items, metadata, cartTotal } = useCart();
+  const { setCartMetadata, items, metadata, cartTotal, clearCartMetadata } = useCart();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -23,8 +25,6 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
     deliverySameAsBilling: true,
   });
 
-  const [deliverySet, setDeliverySet] = useState(false);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -36,11 +36,12 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
   };
 
   const handleDeliverySelection = (e) => {
-    setFormData({ ...formData, delivery: e.target.value });
-  };
+    const { value } = e.target;
+    setFormData({ ...formData, delivery: value });
 
-  useEffect(() => {
-    const debouncedCheckPostcode = debounce(() => {
+    if (value === "collection") {
+      setCartMetadata({ delivery: null });
+    } else if (value === "delivery") {
       const { deliverySameAsBilling, billingPostcode, deliveryPostcode } = formData;
       const targetPostcode = deliverySameAsBilling ? billingPostcode : deliveryPostcode;
 
@@ -48,13 +49,17 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
         const postage = isOutsideMainlandUK(targetPostcode) ? NIDelivery : stdDelivery;
         setCartMetadata({ delivery: postage });
       }
-    }, 300);
+    }
+  };
 
-    debouncedCheckPostcode();
+  useEffect(() => {
+    const { deliverySameAsBilling, billingPostcode, deliveryPostcode } = formData;
+    const targetPostcode = deliverySameAsBilling ? billingPostcode : deliveryPostcode;
 
-    return () => {
-      clearTimeout(debouncedCheckPostcode);
-    };
+    if (targetPostcode && isValid(targetPostcode)) {
+      const postage = isOutsideMainlandUK(targetPostcode) ? NIDelivery : stdDelivery;
+      setCartMetadata({ delivery: postage });
+    }
   }, [
     formData.billingPostcode,
     formData.deliveryPostcode,
@@ -142,7 +147,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
               required
               onChange={handleInputChange}
               className="input input-bordered w-full rounded-sm"
-              pattern={POSTCODE_REGEX.source}
+              pattern="^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$"
               title="Please enter a valid UK postcode."
             />
           </div>
@@ -238,7 +243,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
                     value={formData.deliveryPostcode}
                     autoComplete="shipping postal-code"
                     onChange={handleInputChange}
-                    pattern={POSTCODE_REGEX.source}
+                    pattern="^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$"
                     title="Please enter a valid UK postcode."
                     className="input input-bordered w-full rounded-sm"
                   />

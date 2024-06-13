@@ -1,12 +1,14 @@
 "use client";
 import { useCart } from "react-use-cart";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { getFormattedPrice } from "@/lib/helpers";
 
 export default function CheckoutSummary() {
   const { items, cartTotal, updateItemQuantity, removeItem, metadata } = useCart();
+
+  const [delivery, setDelivery] = useState(metadata.delivery);
 
   const handleAddItem = (e, item) => {
     e.preventDefault();
@@ -18,7 +20,14 @@ export default function CheckoutSummary() {
     if (item.quantity > 1) updateItemQuantity(item.id, item.quantity - 1);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const { delivery } = metadata;
+
+    setDelivery(() => delivery);
+
+    console.log(metadata);
+    console.log(delivery);
+  }, [metadata.delivery]);
 
   return (
     <>
@@ -90,17 +99,13 @@ export default function CheckoutSummary() {
         </div>
         <div className="flex items-center justify-between">
           <p>Shipping</p>
-          <p>
-            {metadata.shipping
-              ? getFormattedPrice(metadata.shipping.price)
-              : "Calculated by Postcode"}
-          </p>
+          <p>{delivery ? getFormattedPrice(delivery.price) : "Calculated by Postcode"}</p>
         </div>
         <div className="flex items-center justify-between">
           <p className="text-xl font-bold">Total</p>
           <p className="text-xl font-bold">
-            {metadata.shipping
-              ? getFormattedPrice(metadata.shipping.price + cartTotal)
+            {delivery
+              ? getFormattedPrice(delivery.price + cartTotal)
               : getFormattedPrice(cartTotal)}
           </p>
         </div>
