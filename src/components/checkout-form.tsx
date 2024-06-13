@@ -3,11 +3,48 @@ import { useState, useEffect } from "react";
 import { Store, Truck } from "lucide-react";
 import { useCart } from "react-use-cart";
 import { isValid } from "postcode";
+import { z } from "zod";
 
 import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
 
+const formSchema = z.object({
+  email: z.string().email(),
+  delivery: z.enum(["delivery", "collection"]),
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+  billingAddress1: z.string().min(1, "Billing address is required"),
+  billingCity: z
+    .string()
+    .min(1, "Billing city is required")
+    .refine(
+      (val) => {
+        return /^[a-zA-Z\s]+$/.test(val);
+      },
+      {
+        message: "Town or city name must only contain letters and spaces",
+      }
+    ),
+  billingPostcode: z.string().regex(/^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/, "Invalid postcode"),
+  deliveryAddress1: z.string().optional(),
+  deliveryCity: z
+    .string()
+    .optional()
+    .refine(
+      (val) => {
+        return /^[a-zA-Z\s]+$/.test(val);
+      },
+      {
+        message: "Town or city name must only contain letters and spaces",
+      }
+    ),
+  deliveryPostcode: z.string().optional(),
+  deliverySameAsBilling: z.boolean(),
+});
+
 export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem }) {
   const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
+
+  const [errors, setErrors] = useState([]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -115,7 +152,38 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(items, cartTotal);
+
+    // Extract delivery address if different from billing
+    const deliveryData = formData.deliverySameAsBilling
+      ? {
+          deliveryAddress1: formData.billingAddress1,
+          deliveryCity: formData.billingCity,
+          deliveryPostcode: formData.billingPostcode,
+        }
+      : {
+          deliveryAddress1: formData.deliveryAddress1,
+          deliveryCity: formData.deliveryCity,
+          deliveryPostcode: formData.deliveryPostcode,
+        };
+
+    // Combine data for validation
+    const dataToValidate = { ...formData, ...deliveryData };
+
+    try {
+      formSchema.parse(dataToValidate);
+      // Clear previous errors
+      setErrors([]);
+      // Handle form submission here if data is valid
+      console.log("Form submitted:", dataToValidate);
+      console.log("Cart data: ", items, cartTotal);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        // Use a Set to store unique error messages
+        const uniqueErrors = new Set();
+        error.errors.forEach((err) => uniqueErrors.add(err.message));
+        setErrors([...uniqueErrors]);
+      }
+    }
   };
 
   return (
@@ -123,6 +191,15 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       onSubmit={handleSubmit}
       className="w-full flex-col items-end my-12 space-y-8 sm:mr-8"
     >
+      {errors.length > 0 && (
+        <div className="w-full bg-red-100 text-red-700 p-4 rounded">
+          <ul>
+            {errors.map((err, index) => (
+              <li key={index}>{err}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <section className="w-full">
         <h2 className="self-start text-2xl mb-4">Contact</h2>
         <input
