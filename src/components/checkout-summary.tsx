@@ -5,10 +5,8 @@ import Image from "next/image";
 
 import { getFormattedPrice } from "@/lib/utils/helpers";
 
-export default function CheckoutSummary() {
+export default function CheckoutSummary({ deliveryItem }) {
   const { items, cartTotal, updateItemQuantity, removeItem } = useCart();
-
-  const [delivery, setDelivery] = useState();
 
   const handleAddItem = (e, item) => {
     e.preventDefault();
@@ -19,13 +17,6 @@ export default function CheckoutSummary() {
     e.preventDefault();
     if (item.quantity > 1) updateItemQuantity(item.id, item.quantity - 1);
   };
-
-  useEffect(() => {
-    const deliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
-    if (deliveryItem) setDelivery((prevState) => deliveryItem);
-    console.log(delivery);
-    console.log(items);
-  }, [items, delivery, setDelivery]);
 
   return (
     <>
@@ -95,14 +86,14 @@ export default function CheckoutSummary() {
         <div className="flex items-center justify-between ">
           <p>Subtotal</p>
           <p>
-            {delivery
-              ? getFormattedPrice(cartTotal - delivery.price)
+            {deliveryItem
+              ? getFormattedPrice(cartTotal - deliveryItem.price)
               : getFormattedPrice(cartTotal)}
           </p>
         </div>
         <div className="flex items-center justify-between">
           <p>Shipping</p>
-          <p>{delivery ? getFormattedPrice(delivery.price) : "Calculated by Postcode"}</p>
+          <p>{deliveryItem ? getFormattedPrice(deliveryItem.price) : "Calculated by Postcode"}</p>
         </div>
         <div className="flex items-center justify-between">
           <p className="text-xl font-bold">Total</p>

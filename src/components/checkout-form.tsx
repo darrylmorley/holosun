@@ -6,10 +6,8 @@ import { isValid } from "postcode";
 
 import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
 
-export default function CheckoutForm({ stdDelivery, NIDelivery }) {
+export default function CheckoutForm({ stdDelivery, NIDelivery, deliveryItem, setDeliveryItem }) {
   const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
-
-  const [deliveryItemId, setDeliveryItemId] = useState(null);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -27,11 +25,27 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
+
+    if (!formData.deliverySameAsBilling && checked) {
+      setFormData((prevData) => ({
+        ...prevData,
+        deliveryAddress1: "",
+        deliveryCity: "",
+        deliveryPostcode: "",
+      }));
+
+      removeDeliveryItem();
+      setDeliveryItem(null);
+
+      addDeliveryItem();
+    }
+
     setFormData((prevData) => ({ ...prevData, [name]: checked }));
   };
 
@@ -44,7 +58,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
       const existingDeliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
 
       if (!existingDeliveryItem) {
-        setDeliveryItemId(postage.id);
+        setDeliveryItem(postage);
         addItem(postage);
       }
     }
@@ -53,6 +67,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
   const removeDeliveryItem = () => {
     const deliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
     if (deliveryItem) {
+      setDeliveryItem(null);
       removeItem(deliveryItem.id);
     }
   };
@@ -90,6 +105,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
     if (totalUniqueItems === 1) {
       const deliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
       if (deliveryItem) {
+        setDeliveryItem(null);
         removeItem(deliveryItem.id);
       }
     }
@@ -293,11 +309,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
         className="btn btn-accent text-white w-full"
       >
         Checkout
-        <span>
-          {items.find((item) => item.id === deliveryItemId)
-            ? getFormattedPrice(cartTotal + items.find((item) => item.id === deliveryItemId).price)
-            : getFormattedPrice(cartTotal)}
-        </span>
+        <span>{getFormattedPrice(cartTotal)}</span>
       </button>
     </form>
   );
