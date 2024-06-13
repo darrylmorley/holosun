@@ -4,10 +4,12 @@ import { Store, Truck } from "lucide-react";
 import { useCart } from "react-use-cart";
 import { isValid } from "postcode";
 
-import { formatCartItem, getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
+import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
 
 export default function CheckoutForm({ stdDelivery, NIDelivery }) {
-  const { addItem, setCartMetadata, items, metadata, cartTotal, clearCartMetadata } = useCart();
+  const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
+
+  const [deliveryItemId, setDeliveryItemId] = useState(null);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -33,35 +35,47 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
     setFormData((prevData) => ({ ...prevData, [name]: checked }));
   };
 
+  const addDeliveryItem = () => {
+    const { deliverySameAsBilling, billingPostcode, deliveryPostcode } = formData;
+    const targetPostcode = deliverySameAsBilling ? billingPostcode : deliveryPostcode;
+
+    if (targetPostcode && isValid(targetPostcode)) {
+      const postage = isOutsideMainlandUK(targetPostcode) ? NIDelivery : stdDelivery;
+      const existingDeliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
+
+      if (!existingDeliveryItem) {
+        setDeliveryItemId(postage.id);
+        addItem(postage);
+      }
+    }
+  };
+
+  const removeDeliveryItem = () => {
+    const deliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
+    if (deliveryItem) {
+      removeItem(deliveryItem.id);
+    }
+  };
+
   const handleDeliverySelection = (e) => {
     const { value } = e.target;
     setFormData({ ...formData, delivery: value });
 
     if (value === "collection") {
-      setCartMetadata({ delivery: null });
+      removeDeliveryItem();
     } else if (value === "delivery") {
-      const { deliverySameAsBilling, billingPostcode, deliveryPostcode } = formData;
-      const targetPostcode = deliverySameAsBilling ? billingPostcode : deliveryPostcode;
-
-      if (targetPostcode && isValid(targetPostcode)) {
-        const postage = isOutsideMainlandUK(targetPostcode) ? NIDelivery : stdDelivery;
-        setCartMetadata({ delivery: postage });
-      }
+      addDeliveryItem();
     }
   };
-
-  // Clear delivery metadata on page load
-  useEffect(() => {
-    clearCartMetadata("delivery");
-  }, []);
 
   useEffect(() => {
     const { deliverySameAsBilling, billingPostcode, deliveryPostcode } = formData;
     const targetPostcode = deliverySameAsBilling ? billingPostcode : deliveryPostcode;
 
     if (targetPostcode && isValid(targetPostcode)) {
-      const postage = isOutsideMainlandUK(targetPostcode) ? NIDelivery : stdDelivery;
-      setCartMetadata({ delivery: postage });
+      addDeliveryItem();
+    } else {
+      removeDeliveryItem();
     }
   }, [
     formData.billingPostcode,
@@ -71,11 +85,18 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
     stdDelivery,
   ]);
 
+  // If 1 item in cart and is delivery, remove item
+  useEffect(() => {
+    if (totalUniqueItems === 1) {
+      const deliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
+      if (deliveryItem) {
+        removeItem(deliveryItem.id);
+      }
+    }
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    // console.log("Form submitted:", formData);
-    // console.log("Cart data: ", items, metadata, cartTotal);
     console.log(items, cartTotal);
   };
 
@@ -273,8 +294,8 @@ export default function CheckoutForm({ stdDelivery, NIDelivery }) {
       >
         Checkout
         <span>
-          {metadata?.delivery
-            ? getFormattedPrice(cartTotal + metadata.delivery.price)
+          {items.find((item) => item.id === deliveryItemId)
+            ? getFormattedPrice(cartTotal + items.find((item) => item.id === deliveryItemId).price)
             : getFormattedPrice(cartTotal)}
         </span>
       </button>

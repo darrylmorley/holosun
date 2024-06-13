@@ -15,6 +15,7 @@ export default function CartDrawerItems({ items, updateItemQuantity, removeItem 
     <>
       {items
         ? items.map((item) => {
+            if (item.id === 7476 || item.id === 8403) return null;
             return (
               <div key={item.id}>
                 <li className="flex">

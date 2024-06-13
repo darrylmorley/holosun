@@ -6,9 +6,9 @@ import Image from "next/image";
 import { getFormattedPrice } from "@/lib/utils/helpers";
 
 export default function CheckoutSummary() {
-  const { items, cartTotal, updateItemQuantity, removeItem, metadata } = useCart();
+  const { items, cartTotal, updateItemQuantity, removeItem } = useCart();
 
-  const [delivery, setDelivery] = useState(metadata.delivery);
+  const [delivery, setDelivery] = useState();
 
   const handleAddItem = (e, item) => {
     e.preventDefault();
@@ -21,14 +21,17 @@ export default function CheckoutSummary() {
   };
 
   useEffect(() => {
-    const { delivery } = metadata;
-    setDelivery(() => delivery);
-  }, [metadata.delivery]);
+    const deliveryItem = items.find((item) => item.id === 7476 || item.id === 8403);
+    if (deliveryItem) setDelivery((prevState) => deliveryItem);
+    console.log(delivery);
+    console.log(items);
+  }, [items, delivery, setDelivery]);
 
   return (
     <>
       {items
         ? items.map((item) => {
+            if (item.id === 7476 || item.id === 8403) return null;
             return (
               <section key={item.id}>
                 <li className="flex">
@@ -91,7 +94,11 @@ export default function CheckoutSummary() {
       <section className="flex flex-col w-full justify-between space-y-3">
         <div className="flex items-center justify-between ">
           <p>Subtotal</p>
-          <p>{getFormattedPrice(cartTotal)}</p>
+          <p>
+            {delivery
+              ? getFormattedPrice(cartTotal - delivery.price)
+              : getFormattedPrice(cartTotal)}
+          </p>
         </div>
         <div className="flex items-center justify-between">
           <p>Shipping</p>
@@ -99,11 +106,7 @@ export default function CheckoutSummary() {
         </div>
         <div className="flex items-center justify-between">
           <p className="text-xl font-bold">Total</p>
-          <p className="text-xl font-bold">
-            {delivery
-              ? getFormattedPrice(delivery.price + cartTotal)
-              : getFormattedPrice(cartTotal)}
-          </p>
+          <p className="text-xl font-bold">{getFormattedPrice(cartTotal)}</p>
         </div>
       </section>
     </>

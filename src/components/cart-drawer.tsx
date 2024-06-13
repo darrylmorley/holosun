@@ -11,6 +11,8 @@ export default function CartDrawer() {
   const [products, setProducts] = useState([]);
   const { items, removeItem, isEmpty, updateItemQuantity, cartTotal } = useCart();
 
+  const shipping = items.find((item) => item.id === 7476 || item.id === 8403);
+
   useEffect(() => {
     setProducts(items);
   }, [items]);
@@ -38,6 +40,7 @@ export default function CartDrawer() {
               href="/shop"
               passHref
               className="btn btn-accent text-white mt-8"
+              onClick={() => toggleDrawer("cart-drawer")}
             >
               <button>Shop</button>
             </Link>
@@ -57,7 +60,11 @@ export default function CartDrawer() {
             <div className="bg-stone-100 absolute flex flex-col bottom-0 left-0 right-0">
               <div className="mt-4 px-4 flex justify-between">
                 <p className="text-center text-xl items">Subtotal</p>
-                <span>{getFormattedPrice(cartTotal)}</span>
+                <span>
+                  {shipping
+                    ? getFormattedPrice(cartTotal - shipping.price)
+                    : getFormattedPrice(cartTotal)}
+                </span>
               </div>
               <div className="px-4">
                 <p className="text-xs mt-2">Shipping calculated at checkout</p>
