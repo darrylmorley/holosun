@@ -14,6 +14,7 @@ const initialFormState = {
 
 function SubmitButton() {
   const { pending } = useFormStatus();
+  console.log(pending);
 
   return (
     <button
@@ -21,7 +22,7 @@ function SubmitButton() {
       className="self-end px-6 py-3 font-bold text-white rounded-sm w-36 bg-accent hover:ring-2 hover:ring-offset-2 active:bg-secondary active:ring-secondary"
       aria-disabled={pending}
     >
-      Send
+      {pending ? <span className="loading loading-spinner"></span> : "Send"}
     </button>
   );
 }
