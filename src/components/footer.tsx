@@ -4,7 +4,7 @@ import logo from "../../public/holosun-logo.webp";
 
 export default function Footer() {
   return (
-    <footer className="footer px-8 py-12 bg-gray-100 text-base-content">
+    <footer className="footer px-5 lg:px-12 py-12 bg-gray-100 text-base-content">
       <aside>
         <Link
           href="/"

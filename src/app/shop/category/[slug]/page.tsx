@@ -57,10 +57,10 @@ export default async function Page(request: NextRequest) {
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1 className="text-5xl uppercase font-black">{catgeoryName}</h1>
+        <h1 className="text-4xl lg:text-5xl uppercase font-black">{catgeoryName}</h1>
         <p className="text-lg">{description}</p>
       </div>
-      <div className="px-12 my-4 text-sm breadcrumbs">
+      <div className="px-4 lg:pl-12 my-4 text-sm breadcrumbs">
         <ul>
           <li>
             <Link href="/">Home</Link>

@@ -11,7 +11,7 @@ export default function Header({ featuredItems }) {
   return (
     <header className="h-16 p-4 shadow-sm">
       <div className="flex items-center">
-        <div className="w-1/4 flex justify-start">
+        <div className="w-1/4 flex justify-start pl-2">
           <button className="z-20">
             <label htmlFor="menu-drawer">
               <MenuIcon className="cursor-pointer" />
@@ -30,8 +30,8 @@ export default function Header({ featuredItems }) {
             />
           </Link>
         </div>
-        <div className="w-1/4 ">
-          <div className="w-full space-x-2 flex justify-end">
+        <div className="w-1/4 pr-2">
+          <div className="w-full space-x-3 flex justify-end">
             <button>
               <label htmlFor="search-drawer">
                 <Search

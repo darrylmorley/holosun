@@ -45,7 +45,7 @@ export default function MenuDrawer() {
               About
             </Link>
           </li>
-          <div className="mt-12">
+          <div className="pl-4 mt-12">
             <p className="font-bold underline">Need help?</p>
             <p className="mt-3">
               Email:{" "}

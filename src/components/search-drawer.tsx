@@ -3,7 +3,7 @@ import CategoryLinks from "./category-links";
 
 export default function SearchDrawer({ featuredItems }) {
   return (
-    <div className="drawer drawer-end z-10">
+    <div className="drawer drawer-end z-30">
       <input
         id="search-drawer"
         type="checkbox"
