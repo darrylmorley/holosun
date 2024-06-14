@@ -53,7 +53,7 @@ export default async function Page(request: NextRequest) {
           <div className="mt-4">
             <ul className="flex flex-wrap gap-8">
               <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base cursor-pointer">
-                <QuestionModal />
+                <QuestionModal item={item} />
               </li>
 
               <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base cursor-pointer">

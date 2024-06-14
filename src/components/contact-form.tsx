@@ -1,5 +1,6 @@
 "use client";
 import { useFormState, useFormStatus } from "react-dom";
+import { MailCheck, MailWarning } from "lucide-react";
 
 import { sendContactFormEmail } from "@/app/actions";
 
@@ -26,6 +27,34 @@ function SubmitButton() {
 
 export default function ContactForm() {
   const [state, formAction] = useFormState(sendContactFormEmail, initialFormState);
+
+  if (state.status === 200) {
+    return (
+      <div className="min-h-[500px] flex flex-col justify-center items-center px-4 py-8 space-y-8 border lg:p-12 lg:w-2/3 border-secondary lg:shadow-lg text-secondary">
+        <p className="flex flex-row items-center gap-2 text-xl">
+          <span>
+            {" "}
+            <MailCheck className="text-green-500" />
+          </span>{" "}
+          {state.message}
+        </p>
+      </div>
+    );
+  }
+
+  if (state.status === 500) {
+    return (
+      <div className="min-h-[500px] flex flex-col justify-center px-4 py-8 space-y-8 border lg:p-12 lg:w-2/3 border-secondary lg:shadow-lg text-secondary">
+        <p className="flex flex-row items-center gap-2 text-xl">
+          <span>
+            {" "}
+            <MailWarning className="text-red-500" />
+          </span>{" "}
+          {state.message}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col px-4 py-8 space-y-8 border lg:p-12 lg:w-2/3 border-secondary lg:shadow-lg text-secondary">

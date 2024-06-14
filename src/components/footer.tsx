@@ -54,7 +54,7 @@ export default function Footer() {
       <nav>
         <h6 className="footer-title">Support</h6>
         <Link
-          href="/faq"
+          href="/support/faq"
           className="link link-hover"
         >
           FAQ

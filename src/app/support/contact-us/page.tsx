@@ -1,6 +1,5 @@
 import ContactForm from "@/components/contact-form";
 import { Metadata } from "next";
-import { z } from "zod";
 
 export const metadata: Metadata = {
   title: "Contact Holosun Optics - Reach Our Team",
@@ -8,34 +7,7 @@ export const metadata: Metadata = {
     "Get in touch with our team for help with your red dot sights, magnifiers, aiming lasers, and mounts. We're here to provide expert guidance and address any inquiries you may have.",
 };
 
-const schema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  subject: z.string().min(1, "Subject is required"),
-  message: z.string().min(1, "Message is required"),
-});
-
 export default function Page() {
-  async function sendMessage(formData: FormData) {
-    "use server";
-    const rawFormData = {
-      name: event.target.name.value,
-      email: event.target.email.value,
-      tel: event.target.subject.value,
-      message: event.target.message.value,
-    };
-
-    try {
-      schema.parse(formData);
-    } catch (error) {
-      const formattedErrors = error.errors.reduce((acc, err) => {
-        acc[err.path[0]] = err.message;
-        return acc;
-      }, {});
-      alert(JSON.stringify(formattedErrors, null, 2)); // Display errors
-    }
-  }
-
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">

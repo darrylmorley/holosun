@@ -146,3 +146,8 @@ export function debounce(func, wait) {
     }, wait);
   };
 }
+
+export function closeModal(modalId: string) {
+  const modal = document.getElementById(modalId);
+  modal.close();
+}

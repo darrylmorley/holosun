@@ -1,7 +1,11 @@
 "use client";
 import { CircleHelp } from "lucide-react";
+import QuestionForm from "./question-form";
 
-export default function QuestionModal() {
+export default function QuestionModal({ item }) {
+  const itemName = item.name;
+  const itemId = item.id;
+
   return (
     <>
       <span
@@ -18,54 +22,10 @@ export default function QuestionModal() {
       >
         <div className="modal-box rounded-sm p-12 text-gray-900">
           <h3 className="font-bold text-2xl">Ask a question</h3>
-
-          <form
-            action=""
-            className="flex flex-col gap-4 mt-6"
-          >
-            <div className="flex flex-col">
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                type="text"
-                required
-                autoComplete="name"
-                className="rounded-sm"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                required
-                autoComplete="email"
-                className="rounded-sm"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="phone">Phone</label>
-              <input
-                id="phone"
-                type="tel"
-                autoComplete="tel"
-                className="rounded-sm"
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                className="rounded-sm"
-              />
-            </div>
-            <button
-              type="submit"
-              className="btn bg-accent text-white rounded-sm"
-            >
-              Send
-            </button>
-          </form>
+          <QuestionForm
+            itemId={itemId}
+            itemName={itemName}
+          />
         </div>
 
         <form
