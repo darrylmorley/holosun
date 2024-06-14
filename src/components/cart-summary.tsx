@@ -1,13 +1,12 @@
 "use client";
-import { useState } from "react";
-import { isValid } from "postcode";
 import { useCart } from "react-use-cart";
-
-import { getFormattedPrice } from "@/lib/utils/helpers";
-import { Minus, Plus } from "lucide-react";
+import { isValid } from "postcode";
+import { useState } from "react";
 import Link from "next/link";
 
-export default function CartSummary() {
+import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
+
+export default function CartSummary({ stdDelivery, NIDelivery }) {
   const [shippingPrice, setShippingPrice] = useState(0);
   const [postcode, setPostcode] = useState("");
   const [error, setError] = useState("");
@@ -22,9 +21,10 @@ export default function CartSummary() {
       return;
     }
 
-    // if postcode is valid, call API to get shipping price. also clear error state
+    const outsideMainland = isOutsideMainlandUK(postcode);
+
     setError("");
-    setShippingPrice(5.95);
+    setShippingPrice(outsideMainland ? NIDelivery.price : stdDelivery.price);
   };
 
   return (
@@ -42,7 +42,6 @@ export default function CartSummary() {
             className="w-full"
             onChange={(e) => setPostcode(e.target.value)}
           />
-          {error && <p className="text-red-500 mt-2">{error}</p>}
           <button
             className="btn btn-accent text-white w-1/2 mt-4"
             onClick={handleEstimateClick}
@@ -56,6 +55,7 @@ export default function CartSummary() {
             {shippingPrice > 0 &&
               `Your estimated shipping price is ${getFormattedPrice(shippingPrice)}`}
           </p>
+          {error && <p className="text-red-500 mt-4">{error}</p>}
         </div>
       </details>
       <div className="divider" />

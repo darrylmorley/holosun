@@ -1,10 +1,27 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 
+import prisma from "@/lib/db/prisma";
+import { formatCartItem } from "@/lib/utils/helpers";
+
 const CartItems = dynamic(() => import("@/components/cart-items"), { ssr: false });
 const CartSummary = dynamic(() => import("@/components/cart-summary"), { ssr: false });
 
-export default function CartPage() {
+async function getShippingItems() {
+  return await prisma.product.findMany({
+    where: {
+      id: {
+        in: [7476, 8403],
+      },
+    },
+  });
+}
+
+export default async function CartPage() {
+  const shippingItems = await getShippingItems();
+  const stdDelivery = formatCartItem(shippingItems.find((item) => item.id === 7476));
+  const NIDelivery = formatCartItem(shippingItems.find((item) => item.id === 8403));
+
   return (
     <div>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
@@ -29,7 +46,10 @@ export default function CartPage() {
           <CartItems />
         </div>
         <div className="lg:w-1/3 mt-4 lg:mt-0 bg-stone-100">
-          <CartSummary />
+          <CartSummary
+            stdDelivery={stdDelivery}
+            NIDelivery={NIDelivery}
+          />
         </div>
       </div>
     </div>
