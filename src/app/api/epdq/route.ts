@@ -12,6 +12,5 @@ export async function POST(req) {
   const body = await req.json();
   const request = new EPDQ.Request(JSON.parse(body));
   const signature = request.shaSign();
-  console.log(request.formAttributes());
   return NextResponse.json(request.formAttributes());
 }
