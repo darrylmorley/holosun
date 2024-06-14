@@ -121,12 +121,14 @@ export default function QuestionForm({ itemId, itemName }) {
           name="itemName"
           type="text"
           value={itemName}
+          readOnly
         />
         <input
           id="itemId"
           name="itemId"
           type="number"
           value={itemId}
+          readOnly
         />
       </div>
       <SubmitButton />
