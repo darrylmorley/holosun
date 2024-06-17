@@ -3,9 +3,11 @@
 }
 import { MenuIcon, Search, ShoppingBag } from "lucide-react";
 import Link from "next/link";
-import CartDrawer from "./cart-drawer";
 import MenuDrawer from "./menu-drawer";
 import SearchDrawer from "./search-drawer";
+import dynamic from "next/dynamic";
+
+const CartDrawer = dynamic(() => import("./cart-drawer"), { ssr: false });
 
 export default function Header({ featuredItems }) {
   return (
