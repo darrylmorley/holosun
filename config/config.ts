@@ -12,7 +12,7 @@ export const config = {
   // backURL: "https://www.holosun-optics.co.uk/shop/cart",
   backURL: "http://localhost:3000/shop/cart",
   // cancelURL: "https://www.holosun-optics.co.uk/shop/result?accept=cancelled",
-  cancelURL: "http://localhost:3000/shop/shop/result?accept=cancelled",
+  cancelURL: "http://localhost:3000/shop/result?accept=cancelled",
   // exceptionURL: "https://www.holosun-optics.co.uk/shop/result?accept=exception",
   exceptionURL: "http://localhost:3000/shop/shop/result?accept=exception",
 };
