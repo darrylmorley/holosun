@@ -24,8 +24,8 @@ export const formatEqpdqData = (totalPrice, userDetails, orderNo) => {
     ownerzip: userDetails.billingPostcode
       ? userDetails.billingPostcode
       : userDetails.shippingPostcode,
-    title: "shooting supplies ltd",
-    tp: "shootingsupplies_payment_template.html",
+    title: "Holosun Optics UK",
+    // tp: "shootingsupplies_payment_template.html",
   });
 };
 
