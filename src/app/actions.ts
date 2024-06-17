@@ -1,19 +1,13 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { render } from "@react-email/render";
-import { SES } from "@aws-sdk/client-ses";
 import z from "zod";
 
-import ItemEnquiry from "@/emails/item-enquiry";
-import ContactEmail from "../emails/contact-form-email";
+import { brevoApiInstance, sendSmtpEmail } from "@/lib/email/brevo-api";
 
-const ses = new SES({
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  },
-  region: "eu-west-2",
-});
+import ContactEmail from "@/emails/contact-form-email";
+import ItemEnquiry from "@/emails/item-enquiry";
+import { config } from "../../config/config";
 
 export async function sendContactFormEmail(prevState: any, formData: FormData) {
   const schema = z.object({
@@ -41,28 +35,19 @@ export async function sendContactFormEmail(prevState: any, formData: FormData) {
     ? render(ItemEnquiry(data))
     : render(ContactEmail(data));
 
-  const params = {
-    Source: "no-reply@holosun-optics.co.uk",
-    Destination: {
-      ToAddresses: ["darryl@holosun-optics.co.uk"],
-    },
-    Message: {
-      Body: {
-        Html: {
-          Charset: "UTF-8",
-          Data: emailHtml,
-        },
-      },
-      Subject: {
-        Charset: "UTF-8",
-        Data: "A Message From The Holosun Optics Contact Form",
-      },
-    },
-  };
+  sendSmtpEmail.subject = "Holosun Website Contact Form Submission";
+  sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
+  sendSmtpEmail.to = config.emailTo;
+  sendSmtpEmail.htmlContent = emailHtml;
+  sendSmtpEmail.params = data;
 
   try {
     revalidatePath("/support/contact-us");
-    await ses.sendEmail(params);
+
+    brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
+      console.log("API called successfully. Returned data: " + JSON.stringify(data));
+    });
+
     return { message: "Message sent successfully!", status: 200 };
   } catch (e) {
     return {
