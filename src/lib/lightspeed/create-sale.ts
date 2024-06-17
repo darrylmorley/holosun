@@ -1,53 +1,43 @@
-export const createLightspeedSale = async (items, customerID) => {
-  const SHOP_ID = 1;
-  const EMPLOYEE_ID = 10;
-  const REGISTER_ID = 2;
-  const TAX_CLASS_ID = 1;
+"use server";
+import { createSale } from "./lightspeed";
 
-  const formatSale = (items, customerID) => {
-    const formatPrice = (price) => price.replace("£", "").replace(",", "");
-
-    const saleLines = items.map((item) => ({
-      SaleLine: {
-        shopID: SHOP_ID,
-        employeeID: EMPLOYEE_ID,
-        customSku: item.sku,
-        unitQuantity: item.quantity,
-        unitPrice: formatPrice(item.price),
-        itemID: parseInt(item.id),
-        taxClassID: TAX_CLASS_ID,
-      },
-    }));
-
-    return {
-      employeeID: EMPLOYEE_ID,
-      registerID: REGISTER_ID,
-      customerID,
-      completed: false,
-      shopID: SHOP_ID,
-      SaleLines: saleLines,
-    };
-  };
-
-  const lsSaleObject = formatSale(items, customerID);
-
-  try {
-    const response = await fetch("/api/postsale", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(lsSaleObject),
+export const createLightspeedSale = async (cartItems) => {
+  const formatSale = (cartItems) => {
+    const saleLines = cartItems.map((item) => {
+      return {
+        SaleLine: [
+          {
+            shopID: 1,
+            employeeID: 13,
+            customSku: item.sku,
+            unitQuantity: item.quantity,
+            unitPrice: item.price,
+            itemID: item.id,
+          },
+        ],
+      };
     });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+    const sale = {
+      employeeID: 13,
+      registerID: 2,
+      completed: false,
+      shopID: 1,
+      SaleLines: saleLines.map((item) => {
+        return item;
+      }),
+    };
 
-    const createdSale = await response.json();
-    return createdSale;
+    return sale;
+  };
+
+  const lsSaleObject = formatSale(cartItems);
+
+  try {
+    const sale = await createSale(lsSaleObject);
+    console.log("Sale created in createLightspeedSale: ", sale);
+    return sale;
   } catch (error) {
-    console.error("Failed to create Lightspeed sale:", error);
-    throw error; // Re-throw the error after logging it
+    console.error(error);
   }
 };

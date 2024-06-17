@@ -35,7 +35,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/(auth)/protected",
-    "prettier.config.js"
+    "prettier.config.js",
+    "src/lib/lightspeed/lightspeed.js"
   ],
   "exclude": [
     "node_modules"

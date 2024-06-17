@@ -176,10 +176,10 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       // Clear previous errors
       setErrors([]);
       // Handle form submission here if data is valid
-      // const lsSale = await createLightspeedSale(items, customerID);
+      const lsSale = await createLightspeedSale(items);
 
       // Test Order Number
-      const lsSale = "HOLO001";
+      // const lsSale = "HOLO001";
 
       console.log("Form submitted:", dataToValidate);
       console.log("Cart data: ", items, cartTotal.toFixed(2).toString().replace(".", ""));

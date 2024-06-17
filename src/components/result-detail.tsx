@@ -11,12 +11,16 @@ export default function ResultDetail({ params, lsSale }) {
     emptyCart();
 
     return (
-      <div className="flex flex-col items-center py-8 mb-5 space-y-8 sm:mb-24 text-fabgrey">
-        <p className="text-2xl font-semibold">Thank you for your order!</p>
+      <div className="flex flex-col items-center py-8 px-4 mb-5 space-y-8 sm:mb-24 text-fabgrey">
+        <p className="mt-12 text-2xl font-semibold">Thank you for your order!</p>
         <p className="text-xl">
           Your order number is <span className="font-bold">{orderID}</span>
         </p>
-        <p className="text-xl">Please allow for up to 2-4 working days for delivery.</p>
+        <p className="text-xl text-center">*Please allow 2-4 working days for delivery.</p>
+        <p className="text-center text-sm">
+          *Please be aware that we are closed on a Monday (We operate Tue-Sat). Orders received over
+          the weekend are despatched the following Tuesday
+        </p>
       </div>
     );
   }

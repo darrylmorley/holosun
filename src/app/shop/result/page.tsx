@@ -41,8 +41,8 @@ export default async function Page({ searchParams }) {
       completeSale(orderID, amount);
 
       // Send confirmation emails
-      newSaleOffice(orderID, lines, contactDetails.userDetails);
-      newSaleCustomer(orderID, lines, contactDetails.userDetails);
+      // newSaleOffice(orderID, lines, contactDetails.userDetails);
+      // newSaleCustomer(orderID, lines, contactDetails.userDetails);
     }
   }
 

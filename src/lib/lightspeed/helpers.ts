@@ -1,5 +1,5 @@
 export function formatCompleteSale(amount) {
-  const EMPLOYEE_ID = 10;
+  const EMPLOYEE_ID = 13;
   const REGISTER_ID = 2;
   const PAYMENT_TYPE_ID = 9;
 
