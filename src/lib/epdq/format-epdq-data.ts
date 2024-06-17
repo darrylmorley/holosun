@@ -25,7 +25,7 @@ export const formatEqpdqData = (totalPrice, userDetails, orderNo) => {
       ? userDetails.billingPostcode
       : userDetails.shippingPostcode,
     title: "Holosun Optics UK",
-    // tp: "shootingsupplies_payment_template.html",
+    tp: "shootingsupplies_payment_template.html",
   });
 };
 

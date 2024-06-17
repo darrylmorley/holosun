@@ -1,6 +1,5 @@
 import axios from "axios";
 import rateLimit from "axios-rate-limit";
-import formatCompleteSale from "../utils/formatCompleteSale";
 
 async function refreshToken() {
   const body = {
@@ -71,6 +70,22 @@ async function handleRequest(promise) {
     console.error(error);
     throw error;
   }
+}
+
+export default function formatCompleteSale(amount) {
+  const sale = {
+    employeeID: 10,
+    registerID: 2,
+    completed: true,
+    SalePayments: {
+      SalePayment: {
+        paymentTypeID: 9,
+        amount,
+      },
+    },
+  };
+
+  return JSON.stringify(sale);
 }
 
 export async function completeSale(saleID, amount) {
