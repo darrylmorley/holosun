@@ -11,8 +11,14 @@ import {
   Tailwind,
 } from "@react-email/components";
 
-export default function officeSaleEmail(props) {
-  const { customerData, itemLines } = props;
+export default function OfficeSaleEmail(props) {
+  const { customer, lines } = props;
+
+  const deliveryAddress = {
+    address1: customer.deliveryAddress1 ? customer.deliveryAddress1 : customer.billingAddress1,
+    city: customer.deliveryCity ? customer.deliveryCity : customer.billingCity,
+    postcode: customer.deliveryPostcode ? customer.deliveryPostcode : customer.billingPostcode,
+  };
 
   return (
     <Html
@@ -64,23 +70,23 @@ export default function officeSaleEmail(props) {
             <Section className="flex mt-12">
               <p>
                 <span className="font-bold">Name: </span>
-                {customerData.firstName} {customerData.lastName}
+                {customer.firstName} {customer.lastName}
               </p>
               <p>
                 <span className="font-bold">Email: </span>
-                {customerData.email}
+                {customer.email}
               </p>
               <p>
                 <span className="font-bold">Address: </span>
-                {customerData.address1}, {customerData.city}, {customerData.postcode}
+                {deliveryAddress.address1}, {deliveryAddress.city}, {deliveryAddress.postcode}
               </p>
             </Section>
             <Section>
-              {itemLines.map((item) => {
+              {lines.map((item) => {
                 return (
                   <div
                     key={item.id}
-                    className="flex justify-between py-4"
+                    className="flex"
                   >
                     <p>
                       {item.name} x {item.quantity}
@@ -96,16 +102,19 @@ export default function officeSaleEmail(props) {
   );
 }
 
-officeSaleEmail.PreviewProps = {
-  customerData: {
+OfficeSaleEmail.PreviewProps = {
+  customer: {
     firstName: "John",
     lastName: "Doe",
     email: "johndoe@gmail.com",
-    address1: "1234 Main St",
-    city: "Anytown",
-    postcode: "B60 3DR",
+    billingAddress1: "1234 Main St",
+    billingCity: "Anytown",
+    billingPostcode: "B60 3DR",
+    deliveryAddress1: "1234 Other St",
+    deliveryCity: "Othertown",
+    deliverPostcode: "B60 3JS",
   },
-  itemLines: [
+  lines: [
     {
       id: 1,
       name: "Holosun Optics",

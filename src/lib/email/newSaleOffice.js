@@ -1,6 +1,8 @@
-import { config } from "../../../config";
 import { render } from "@react-email/render";
+
 import { brevoApiInstance, sendSmtpEmail } from "@/lib/email/brevo-api";
+import { OfficeSaleEmail } from "@/emails/officeSaleEmail";
+import { config } from "../../../config";
 
 export async function newSaleOfficeEmail(orderID, lines, customer) {
   const data = { orderID, lines, customer };
@@ -10,6 +12,8 @@ export async function newSaleOfficeEmail(orderID, lines, customer) {
   sendSmtpEmail.to = config.emailTo;
   sendSmtpEmail.htmlContent = emailHtml;
   sendSmtpEmail.params = data;
+
+  const emailHtml = render(<OfficeSaleEmail props={data} />);
 
   try {
     brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
