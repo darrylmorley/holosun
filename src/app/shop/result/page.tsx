@@ -1,6 +1,9 @@
 import ResultDetail from "@/components/result-detail";
 import { cancelSale, completeSale, getSale } from "@/lib/lightspeed/lightspeed";
 
+import { newSaleCustomerEmail } from "@/lib/email/newSaleCustomer";
+import { newSaleOfficeEmail } from "@/lib/email/newSaleOffice";
+
 export const metadata = {
   title: "Your Cart",
   robots: {
@@ -41,7 +44,8 @@ export default async function Page({ searchParams }) {
       completeSale(orderID, amount);
 
       // Send confirmation emails
-      // newSaleOffice(orderID, lines, contactDetails.userDetails);
+      newSaleCustomerEmail(orderID, lines, contactDetails.userDetails);
+      newSaleOfficeEmail(orderID, lines, contactDetails.userDetails);
       // newSaleCustomer(orderID, lines, contactDetails.userDetails);
     }
   }
