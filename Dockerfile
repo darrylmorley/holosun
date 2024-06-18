@@ -5,6 +5,9 @@ WORKDIR /app
 RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 COPY ./prisma/schema.prisma ./prisma/schema.prisma
+ENV PNPM_HOME="/var/lib/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 RUN pnpm install
 
 # Stage 2: Rebuild the source code only when needed
