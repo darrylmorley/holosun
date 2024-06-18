@@ -2,7 +2,6 @@ import { render } from "@react-email/render";
 
 import { brevoApiInstance, sendSmtpEmail } from "@/lib/email/brevo-api";
 import CustomerSaleEmail from "@/emails/new-sale-customer";
-import { config } from "../../../config/config";
 
 export async function newSaleCustomerEmail(orderID, lines, customer) {
   const data = { orderID, lines, customer };
@@ -10,7 +9,9 @@ export async function newSaleCustomerEmail(orderID, lines, customer) {
 
   sendSmtpEmail.subject = "Your Holosun Optics Order";
   sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
-  sendSmtpEmail.to = config.emailTo;
+  sendSmtpEmail.to = [
+    { email: customer.email, name: customer.firstName + " " + customer.lastName },
+  ];
   sendSmtpEmail.htmlContent = emailHtml;
   sendSmtpEmail.params = data;
 

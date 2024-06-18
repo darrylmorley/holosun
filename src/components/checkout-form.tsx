@@ -5,7 +5,7 @@ import { useCart } from "react-use-cart";
 import { isValid } from "postcode";
 import { z } from "zod";
 
-import config from "../../config/config";
+import { config } from "../../config/config";
 
 import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
 import { createLightspeedSale } from "@/lib/lightspeed/create-sale";
