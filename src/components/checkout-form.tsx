@@ -135,6 +135,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     } else {
       removeDeliveryItem();
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [
     formData.billingPostcode,
     formData.deliveryPostcode,

@@ -55,6 +55,7 @@ export default function HeroCarousel() {
           />
           <img
             {...rest}
+            alt={common.alt}
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
           />
         </picture>

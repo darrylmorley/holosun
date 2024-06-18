@@ -1,4 +1,4 @@
-import { createSale } from "../../../lib/lightspeed/lightspeed";
+import { createSale } from "@/lib/lightspeed/lightspeed";
 
 export async function POST(req) {
   try {

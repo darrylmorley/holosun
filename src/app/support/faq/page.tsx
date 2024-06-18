@@ -18,10 +18,10 @@ export default function Page() {
           <summary className="text-xl font-medium">My Optic Won&apos;t Turn On?</summary>
           <div className="py-2">
             <p>
-              To turn on Holosun optics, simply press any button once. If the optic doesn't power
-              on, verify the battery orientation. For models with a battery tray that slides into
-              the optic, ensure the POSITIVE side is facing DOWN. For models with a side-mounted
-              battery and cap, the POSITIVE side should be facing OUTWARD.
+              To turn on Holosun optics, simply press any button once. If the optic doesn&apos;t
+              power on, verify the battery orientation. For models with a battery tray that slides
+              into the optic, ensure the POSITIVE side is facing DOWN. For models with a
+              side-mounted battery and cap, the POSITIVE side should be facing OUTWARD.
             </p>
           </div>
         </details>

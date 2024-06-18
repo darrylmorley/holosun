@@ -25,7 +25,7 @@ export default function CartDrawer() {
         emptyCart();
       }
     }
-  }, [totalUniqueItems]);
+  }, [totalUniqueItems, items, emptyCart]);
 
   return (
     <div className="drawer drawer-end z-30">

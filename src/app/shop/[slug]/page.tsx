@@ -1,7 +1,5 @@
 import { ShieldCheck } from "lucide-react";
-import { NextRequest } from "next/server";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 
 import prisma from "@/lib/db/prisma";
 
@@ -11,9 +9,14 @@ import QuestionModal from "@/components/question-modal";
 import ImageGallery from "@/components/image-gallery";
 import ShareButton from "@/components/share-button";
 
-async function getItem(request) {
-  const slug = request.params.slug;
+type PageProps = {
+  params: {
+    slug: string;
+    url: string;
+  };
+};
 
+async function getItem(slug: string) {
   return await prisma.product.findUnique({
     where: {
       slug: slug,
@@ -21,14 +24,18 @@ async function getItem(request) {
   });
 }
 
-export default async function Page(request: NextRequest) {
-  const item = await getItem(request);
+export default async function Page({ params }: PageProps) {
+  const { slug, url } = params;
+  const item = await getItem(slug);
 
+  // @ts-expect-error - Images is not defined in the Prisma schema
   const images = Array.isArray(item.Images.Image)
-    ? item.Images.Image.map((image) => {
+    ? // @ts-expect-error - Images is not defined in the Prisma schema
+      item.Images.Image.map((image) => {
         return `${image.baseImageURL}/w_800/${image.publicID}.webp`;
       })
-    : [`${item.Images.Image.baseImageURL}/w_800/${item.Images.Image.publicID}.webp`];
+    : // @ts-expect-error - Images is not defined in the Prisma schema
+      [`${item.Images.Image.baseImageURL}/w_800/${item.Images.Image.publicID}.webp`];
 
   return (
     <div className="px-4 xl:px-12 mb-4 lg:my-12">
@@ -63,7 +70,7 @@ export default async function Page(request: NextRequest) {
                 <ShareButton
                   title={item.name}
                   text={`Check out this ${item.name} @ holosun.co.uk!`}
-                  url={request.url}
+                  url={url}
                 />
               </li>
             </ul>

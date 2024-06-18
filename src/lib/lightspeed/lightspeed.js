@@ -105,7 +105,7 @@ export async function completeSale(saleID, amount) {
   return post.data;
 }
 
-export async function cancelSale(saleID, amount) {
+export async function cancelSale(saleID) {
   const axiosConfig = await getHeader();
   const cancelEposSale = await http
     .delete(`Sale/${saleID}.json?load_relations["SaleLines.Item"]`, axiosConfig)

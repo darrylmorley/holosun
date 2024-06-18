@@ -1,10 +1,15 @@
-import { NextRequest } from "next/server";
 import prisma from "@/lib/db/prisma";
 import { Metadata } from "next";
 import Link from "next/link";
 
 import ProductCard from "@/components/product-card";
 import ShopFilters from "@/components/shop-filters";
+
+type PageProps = {
+  searchParams: {
+    sort: string;
+  };
+};
 
 async function getItems() {
   return await prisma.product.findMany({
@@ -18,14 +23,14 @@ async function getItems() {
 }
 
 export const metadata: Metadata = {
-  title: "Holosun Shop - Premium Tactical Optics & Accessories",
+  title: "Premium Tactical Optics & Accessories: Holosun UK",
   description:
     "Explore the full range of Holosun's high-quality tactical optics and accessories. From red dot sights and magnifiers to aiming lasers and mounts, we have everything you need for precise shooting and reliability. Shop now for top-tier performance and innovation.",
 };
 
-export default async function Page(request: NextRequest) {
+export default async function Page({ searchParams }: PageProps) {
   const items = await getItems();
-  const { sort } = request.searchParams;
+  const { sort } = searchParams;
 
   return (
     <>

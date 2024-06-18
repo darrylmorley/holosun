@@ -24,16 +24,17 @@ export async function sendContactFormEmail(prevState: any, formData: FormData) {
     itemName: z.string().optional(),
   });
 
-  const dataObject: Record<string, any> = {};
-  formData.forEach((value, key) => {
+  const dataObject: Record<string, FormDataEntryValue> = {};
+  formData.forEach((value: FormDataEntryValue, key) => {
     dataObject[key] = value;
   });
 
   const data = schema.parse(dataObject);
 
-  const emailHtml = dataObject.itemName?.length
-    ? render(ItemEnquiry(data))
-    : render(ContactEmail(data));
+  const emailHtml =
+    typeof dataObject.itemName === "string" && dataObject.itemName.length
+      ? render(ItemEnquiry(data))
+      : render(ContactEmail(data));
 
   sendSmtpEmail.subject = "Holosun Website Contact Form Submission";
   sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };

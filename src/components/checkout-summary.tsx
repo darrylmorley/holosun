@@ -1,6 +1,5 @@
 "use client";
 import { useCart } from "react-use-cart";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { getFormattedPrice } from "@/lib/utils/helpers";
@@ -22,7 +21,7 @@ export default function CheckoutSummary({ deliveryItem }) {
     <>
       {items
         ? items.map((item) => {
-            if (item.id === 7476 || item.id === 8403) return null;
+            if (Number(item.id) === 7476 || Number(item.id) === 8403) return null;
             return (
               <section key={item.id}>
                 <li className="flex">

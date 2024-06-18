@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import prisma from "@/lib/db/prisma";
 import Link from "next/link";
 
@@ -8,14 +7,22 @@ import {
   getMetaDescriptionFromId,
   getMetaNameFromId,
   getNameFromId,
-  getSlugFromId,
 } from "@/lib/utils/helpers";
 
 import ProductCard from "@/components/product-card";
 import ShopFilters from "@/components/shop-filters";
 
-async function getItems(request) {
-  const slug = request.params.slug;
+type PageProps = {
+  params: {
+    slug: string;
+    url: string;
+  };
+  searchParams: {
+    sort: string;
+  };
+};
+
+async function getItems(slug: string) {
   const id = getIdFromSlug(slug);
 
   const items = await prisma.product.findMany({
@@ -35,8 +42,8 @@ async function getItems(request) {
   return { items, id };
 }
 
-export async function generateMetadata(request: NextRequest) {
-  const slug = request.params.slug;
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = params;
   const id = getIdFromSlug(slug);
 
   return {
@@ -45,11 +52,11 @@ export async function generateMetadata(request: NextRequest) {
   };
 }
 
-export default async function Page(request: NextRequest) {
-  const { items, id } = await getItems(request);
-  const { sort } = request.searchParams;
+export default async function Page({ params, searchParams }: PageProps) {
+  const { slug } = params;
+  const { sort } = searchParams;
+  const { items, id } = await getItems(slug);
 
-  const slug = getSlugFromId(id);
   const catgeoryName = getNameFromId(id);
   const description = getDescriptionFromId(id);
 

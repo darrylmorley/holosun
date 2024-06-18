@@ -6,6 +6,11 @@ import { newSaleOfficeEmail } from "@/lib/email/newSaleOffice";
 
 import ResultDetail from "@/components/result-detail";
 
+type ResultProps = {
+  params: any; // Define the specific type if you know it
+  lsSale: any; // Define the specific type if you know it
+};
+
 export const metadata = {
   title: "Your Cart",
   robots: {
@@ -28,8 +33,6 @@ export default async function Page({ searchParams }) {
 
       if (Array.isArray(sale.Sale.SaleLines.SaleLine)) {
         lines = sale.Sale.SaleLines.SaleLine.map((line) => {
-          console.log(line);
-
           return {
             id: line.itemID,
             sku: line.Item.customSku,
@@ -69,10 +72,7 @@ export default async function Page({ searchParams }) {
         <h1 className="text-4xl lg:text-5xl font-black uppercase">Result</h1>
         <p className="text-lg text-center">Your checkout result.</p>
       </div>
-      <ResultDetail
-        params={searchParams}
-        lsSale={orderID}
-      />
+      <ResultDetail params={searchParams} />
     </>
   );
 }

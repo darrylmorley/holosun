@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useCart } from "react-use-cart";
 
-export default function ResultDetail({ params, lsSale }) {
-  const { accept, orderID, STATUS, COMPLUS, amount } = params;
+export default function ResultDetail({ params }) {
+  const { accept, orderID, STATUS } = params;
   const { emptyCart } = useCart();
 
   if (accept === "true" && STATUS === "9") {
