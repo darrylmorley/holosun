@@ -12,7 +12,7 @@ import {
 } from "@react-email/components";
 
 export default function CustomerSaleEmail(props) {
-  const { customer, lines } = props;
+  const { customer, lines } = props.data;
 
   const deliveryAddress = {
     address1: customer.deliveryAddress1 ? customer.deliveryAddress1 : customer.billingAddress1,

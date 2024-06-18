@@ -5,15 +5,15 @@ import OfficeSaleEmail from "@/emails/new-sale-office";
 import { config } from "../../../config/config";
 
 export async function newSaleOfficeEmail(orderID, lines, customer) {
+  console.log(customer);
   const data = { orderID, lines, customer };
+  const emailHtml = render(<OfficeSaleEmail data={data} />);
 
   sendSmtpEmail.subject = "New Holosun Optics Sale";
   sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
   sendSmtpEmail.to = config.emailTo;
   sendSmtpEmail.htmlContent = emailHtml;
   sendSmtpEmail.params = data;
-
-  const emailHtml = render(<OfficeSaleEmail props={data} />);
 
   try {
     brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {

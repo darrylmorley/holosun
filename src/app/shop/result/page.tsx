@@ -1,3 +1,5 @@
+import { config } from "../../../../config/config";
+
 import ResultDetail from "@/components/result-detail";
 import { cancelSale, completeSale, getSale } from "@/lib/lightspeed/lightspeed";
 
@@ -15,44 +17,46 @@ export const metadata = {
 
 export default async function Page({ searchParams }) {
   const { orderID, amount, accept, STATUS, COMPLUS } = searchParams;
+  const contactDetails = JSON.parse(COMPLUS);
+  let sale;
+  let lines = [];
 
   if (accept === "true" && STATUS === "9") {
-    const sale = await getSale(orderID);
+    // In  production, if card payment is successful, get the sale from epos. Else, use the orderID in dev.
+    if (config.env === "production") {
+      sale = await getSale(orderID);
 
-    let lines;
-    const contactDetails = JSON.parse(COMPLUS);
+      if (Array.isArray(sale.Sale.SaleLines.SaleLine)) {
+        lines = sale.Sale.SaleLines.SaleLine.map((line) => {
+          return {
+            sku: line.Item.customSku,
+            description: line.Item.description,
+            qty: line.unitQuantity,
+          };
+        });
+      } else
+        lines = [
+          {
+            sku: sale.Sale.SaleLines.SaleLine.Item.customSku,
+            description: sale.Sale.SaleLines.SaleLine.Item.description,
+            qty: sale.Sale.SaleLines.SaleLine.unitQuantity,
+          },
+        ];
 
-    if (Array.isArray(sale.Sale.SaleLines.SaleLine)) {
-      lines = sale.Sale.SaleLines.SaleLine.map((line) => {
-        return {
-          sku: line.Item.customSku,
-          description: line.Item.description,
-          qty: line.unitQuantity,
-        };
-      });
-    } else
-      lines = [
-        {
-          sku: sale.Sale.SaleLines.SaleLine.Item.customSku,
-          description: sale.Sale.SaleLines.SaleLine.Item.description,
-          qty: sale.Sale.SaleLines.SaleLine.unitQuantity,
-        },
-      ];
+      if (sale.Sale.completed != "true") {
+        // complete the sale on the epos
+        completeSale(orderID, amount);
+      }
 
-    if (sale.Sale.completed != "true") {
-      // complete the sale on epos
-      completeSale(orderID, amount);
+      if (accept === "cancelled" && accept != "9") {
+        // If card payment is cancelled, cancel the sale on epos
+        cancelSale(orderID);
+      }
+    } else sale = orderID;
 
-      // Send confirmation emails
-      newSaleCustomerEmail(orderID, lines, contactDetails.userDetails);
-      newSaleOfficeEmail(orderID, lines, contactDetails.userDetails);
-      // newSaleCustomer(orderID, lines, contactDetails.userDetails);
-    }
-  }
-
-  if (accept === "cancelled" && accept != "9") {
-    // If card payment is cancelled, cancel the sale on epos
-    cancelSale(orderID);
+    // Send confirmation emails
+    newSaleCustomerEmail(orderID, lines, contactDetails.userDetails);
+    newSaleOfficeEmail(orderID, lines, contactDetails.userDetails);
   }
 
   return (

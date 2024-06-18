@@ -6,14 +6,13 @@ import { config } from "../../../config/config";
 
 export async function newSaleCustomerEmail(orderID, lines, customer) {
   const data = { orderID, lines, customer };
+  const emailHtml = render(<CustomerSaleEmail data={data} />);
 
   sendSmtpEmail.subject = "Your Holosun Optics Order";
   sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
   sendSmtpEmail.to = config.emailTo;
   sendSmtpEmail.htmlContent = emailHtml;
   sendSmtpEmail.params = data;
-
-  const emailHtml = render(<CustomerSaleEmail props={data} />);
 
   try {
     brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
