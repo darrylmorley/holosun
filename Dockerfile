@@ -1,7 +1,7 @@
 # Stage 1: Install dependencies only when needed
 FROM node:18-bullseye-slim AS deps
 WORKDIR /app
-# Install pnpm
+# Install pnpm globally
 RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 COPY ./prisma/schema.prisma ./prisma/schema.prisma
@@ -10,6 +10,8 @@ RUN pnpm install
 # Stage 2: Rebuild the source code only when needed
 FROM node:18-bullseye-slim AS builder
 WORKDIR /app
+# Install pnpm globally in the builder stage as well
+RUN npm install -g pnpm
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 ARG DATABASE_URL=${DATABASE_URL}
