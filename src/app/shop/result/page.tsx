@@ -28,7 +28,10 @@ export default async function Page({ searchParams }) {
 
       if (Array.isArray(sale.Sale.SaleLines.SaleLine)) {
         lines = sale.Sale.SaleLines.SaleLine.map((line) => {
+          console.log(line);
+
           return {
+            id: line.itemID,
             sku: line.Item.customSku,
             description: line.Item.description,
             qty: line.unitQuantity,
@@ -37,6 +40,7 @@ export default async function Page({ searchParams }) {
       } else
         lines = [
           {
+            id: sale.Sale.SaleLines.SaleLine.itemID,
             sku: sale.Sale.SaleLines.SaleLine.Item.customSku,
             description: sale.Sale.SaleLines.SaleLine.Item.description,
             qty: sale.Sale.SaleLines.SaleLine.unitQuantity,

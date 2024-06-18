@@ -5,14 +5,17 @@ import {
   Font,
   Head,
   Heading,
+  Hr,
   Html,
   Img,
+  Row,
   Section,
   Tailwind,
+  Text,
 } from "@react-email/components";
 
 export default function OfficeSaleEmail(props) {
-  const { customer, lines } = props.data;
+  const { customer, lines, orderID } = props.data;
 
   return (
     <Html
@@ -50,42 +53,47 @@ export default function OfficeSaleEmail(props) {
           fontStyle="normal"
         />
         <Body className="bg-white">
-          <Container className="py-12 shadow-lg bg-stone-100 my-12 p-12">
-            <Img
-              src={"/static/holosun-logo.png"}
-              width="493"
-              height="108"
-              alt="Holosun Optics"
-              className="mx-auto"
-            />
-            <Heading className="text-center text-xl py-4">
-              You have a new Holosun Optics sale!
-            </Heading>
-            <Section className="flex mt-12">
-              <p>
+          <Container className="p-12 shadow-lg bg-stone-100 text-center">
+            <Section>
+              <Img
+                src={"/static/holosun-logo.png"}
+                width="256"
+                height="54"
+                alt="Holosun Optics"
+                className="mx-auto"
+              />
+              <Heading
+                as="h1"
+                className="mt-8"
+              >
+                You Have A New Holosun Order
+              </Heading>
+              <Heading as="h2">Order No. {orderID}</Heading>
+            </Section>
+            <Hr />
+            <Section className="mt-4">
+              <Heading as="h3">Customer Details</Heading>
+              <Text>
                 <span className="font-bold">Name: </span>
                 {customer.firstName} {customer.lastName}
-              </p>
-              <p>
+              </Text>
+              <Text>
                 <span className="font-bold">Email: </span>
                 {customer.email}
-              </p>
-              <p>
+              </Text>
+              <Text>
                 <span className="font-bold">Address: </span>
                 {customer.deliveryAddress1}, {customer.deliveryCity}, {customer.deliveryPostcode}
-              </p>
+              </Text>
             </Section>
-            <Section>
+            <Hr />
+            <Section className="mt-4">
+              <Heading as="h3">Items</Heading>
               {lines.map((item) => {
                 return (
-                  <div
-                    key={item.id}
-                    className="flex"
-                  >
-                    <p>
-                      {item.name} x {item.quantity}
-                    </p>
-                  </div>
+                  <Text key={item.id}>
+                    {item.description} x {item.qty}
+                  </Text>
                 );
               })}
             </Section>
@@ -97,24 +105,27 @@ export default function OfficeSaleEmail(props) {
 }
 
 OfficeSaleEmail.PreviewProps = {
-  customer: {
-    firstName: "John",
-    lastName: "Doe",
-    email: "johndoe@gmail.com",
-    deliveryAddress1: "1234 Other St",
-    deliveryCity: "Othertown",
-    deliveryPostcode: "B60 3JS",
+  data: {
+    orderID: 1234,
+    customer: {
+      firstName: "John",
+      lastName: "Doe",
+      email: "johndoe@gmail.com",
+      deliveryAddress1: "1234 Other St",
+      deliveryCity: "Othertown",
+      deliveryPostcode: "B60 3JS",
+    },
+    lines: [
+      {
+        id: 1,
+        description: "Holosun Optics",
+        qty: 1,
+      },
+      {
+        id: 2,
+        description: "Holosun Optics Elite",
+        qty: 1,
+      },
+    ],
   },
-  lines: [
-    {
-      id: 1,
-      name: "Holosun Optics",
-      quantity: 1,
-    },
-    {
-      id: 2,
-      name: "Holosun Optics Elite",
-      quantity: 1,
-    },
-  ],
 };

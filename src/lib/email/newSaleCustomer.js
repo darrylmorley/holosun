@@ -7,7 +7,7 @@ export async function newSaleCustomerEmail(orderID, lines, customer) {
   const data = { orderID, lines, customer };
   const emailHtml = render(<CustomerSaleEmail data={data} />);
 
-  sendSmtpEmail.subject = "Your Holosun Optics Order";
+  sendSmtpEmail.subject = "Holosun Optics UK Order Confirmation";
   sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
   sendSmtpEmail.to = [
     { email: customer.email, name: customer.firstName + " " + customer.lastName },
