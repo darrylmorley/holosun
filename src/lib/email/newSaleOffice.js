@@ -1,7 +1,7 @@
 import { render } from "@react-email/render";
 
 import { brevoApiInstance, sendSmtpEmail } from "@/lib/email/brevo-api";
-import { OfficeSaleEmail } from "@/emails/officeSaleEmail";
+import OfficeSaleEmail from "@/emails/officeSaleEmail";
 import { config } from "../../../config";
 
 export async function newSaleOfficeEmail(orderID, lines, customer) {

@@ -1,31 +1,26 @@
-export async function newSaleCustomer(orderID, lines, customer) {
+import { render } from "@react-email/render";
+
+import { brevoApiInstance, sendSmtpEmail } from "@/lib/email/brevo-api";
+import CustomerSaleEmail from "@/emails/customerSaleEmail";
+import { config } from "../../../config";
+
+export async function newSaleCustomerEmail(orderID, lines, customer) {
+  const data = { orderID, lines, customer };
+
+  sendSmtpEmail.subject = "Your Holosun Optics Order";
+  sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
+  sendSmtpEmail.to = config.emailTo;
+  sendSmtpEmail.htmlContent = emailHtml;
+  sendSmtpEmail.params = data;
+
+  const emailHtml = render(<CustomerSaleEmail props={data} />);
+
   try {
-    const res = fetch("https://api.sendinblue.com/v3/smtp/email", {
-      method: "POST",
-      headers: {
-        "api-key": process.env.EMAIL_API,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: "New Sale",
-        templateId: 6,
-        to: [{ name: customer.name, email: customer.email }],
-        params: {
-          firstname: customer.firstName,
-          lastname: customer.lastName,
-          address1: customer.address1,
-          city: customer.city,
-          county: customer.county,
-          postcode: customer.postcode,
-          phone: customer.phone,
-          email: customer.email,
-          lines: lines,
-          orderID: orderID,
-        },
-      }),
+    brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
+      console.log("API called successfully. Returned data: " + JSON.stringify(data));
     });
 
-    const result = await res;
+    return { message: "Message sent successfully!", status: 200 };
   } catch (error) {
     console.error(error);
   }
