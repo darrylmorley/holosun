@@ -1,25 +1,27 @@
-# Install dependencies only when needed
+# Stage 1: Install dependencies only when needed
 FROM node:18-bullseye-slim AS deps
 WORKDIR /app
+# Install pnpm
+RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
 COPY ./prisma/schema.prisma ./prisma/schema.prisma
-RUN npm install -g pnpm && pnpm install
+RUN pnpm install
 
-# Rebuild the source code only when needed
+# Stage 2: Rebuild the source code only when needed
 FROM node:18-bullseye-slim AS builder
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 ARG DATABASE_URL=${DATABASE_URL}
 # ENV DATABASE_URL ${DATABASE_URL}
-RUN npm install -g pnpm && pnpm run build
-RUN npm install -g pnpm && pnpm prune --production
+RUN pnpm run build
+RUN pnpm prune --prod
 
-# Production image, copy all the files and run next
+# Stage 3: Production image, copy all the files and run the app
 FROM node:18-bullseye-slim AS runner
 WORKDIR /app
 
-ENV NODE_ENV development
+ENV NODE_ENV production
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
@@ -27,8 +29,8 @@ RUN adduser --system --uid 1001 nextjs
 RUN mkdir -p /app/.next/cache/images && chown nextjs:nodejs /app/.next/cache/images
 VOLUME /app/.next/cache/images
 
-# You only need to copy next.config.js if you are NOT using the default configuration
-COPY --from=builder /app/next.config.mjs ./
+# Copy necessary files from the builder stage
+COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 # COPY --from=builder /app/node_modules ./node_modules
