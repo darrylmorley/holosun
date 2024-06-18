@@ -1,10 +1,10 @@
 import { config } from "../../../../config/config";
 
-import ResultDetail from "@/components/result-detail";
 import { cancelSale, completeSale, getSale } from "@/lib/lightspeed/lightspeed";
-
 import { newSaleCustomerEmail } from "@/lib/email/newSaleCustomer";
 import { newSaleOfficeEmail } from "@/lib/email/newSaleOffice";
+
+import ResultDetail from "@/components/result-detail";
 
 export const metadata = {
   title: "Your Cart",
@@ -20,6 +20,7 @@ export default async function Page({ searchParams }) {
   const contactDetails = JSON.parse(COMPLUS);
   let sale;
   let lines = [];
+  let emailSent = false;
 
   if (accept === "true" && STATUS === "9") {
     // In  production, if card payment is successful, get the sale from epos. Else, use the orderID in dev.
@@ -54,9 +55,13 @@ export default async function Page({ searchParams }) {
       }
     } else sale = orderID;
 
+    if (emailSent) return;
+
     // Send confirmation emails
     newSaleCustomerEmail(orderID, lines, contactDetails.userDetails);
     newSaleOfficeEmail(orderID, lines, contactDetails.userDetails);
+
+    emailSent = true;
   }
 
   return (

@@ -14,12 +14,6 @@ import {
 export default function OfficeSaleEmail(props) {
   const { customer, lines } = props.data;
 
-  const deliveryAddress = {
-    address1: customer.deliveryAddress1 ? customer.deliveryAddress1 : customer.billingAddress1,
-    city: customer.deliveryCity ? customer.deliveryCity : customer.billingCity,
-    postcode: customer.deliveryPostcode ? customer.deliveryPostcode : customer.billingPostcode,
-  };
-
   return (
     <Html
       lang="en"
@@ -78,7 +72,7 @@ export default function OfficeSaleEmail(props) {
               </p>
               <p>
                 <span className="font-bold">Address: </span>
-                {deliveryAddress.address1}, {deliveryAddress.city}, {deliveryAddress.postcode}
+                {customer.deliveryAddress1}, {customer.deliveryCity}, {customer.deliveryPostcode}
               </p>
             </Section>
             <Section>
@@ -107,12 +101,9 @@ OfficeSaleEmail.PreviewProps = {
     firstName: "John",
     lastName: "Doe",
     email: "johndoe@gmail.com",
-    billingAddress1: "1234 Main St",
-    billingCity: "Anytown",
-    billingPostcode: "B60 3DR",
     deliveryAddress1: "1234 Other St",
     deliveryCity: "Othertown",
-    deliverPostcode: "B60 3JS",
+    deliveryPostcode: "B60 3JS",
   },
   lines: [
     {

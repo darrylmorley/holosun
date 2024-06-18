@@ -5,6 +5,8 @@ import { useCart } from "react-use-cart";
 import { isValid } from "postcode";
 import { z } from "zod";
 
+import config from "../../config/config";
+
 import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
 import { createLightspeedSale } from "@/lib/lightspeed/create-sale";
 import { barclaysCheckoutForm } from "@/lib/epdq/epdq-form";
@@ -154,6 +156,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let lsSale;
 
     // Extract delivery address if different from billing
     const deliveryData = formData.deliverySameAsBilling
@@ -172,18 +175,21 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     const dataToValidate = { ...formData, ...deliveryData };
 
     try {
+      // validate form data
       formSchema.parse(dataToValidate);
       // Clear previous errors
+
       setErrors([]);
-      // Handle form submission here if data is valid
-      // const lsSale = await createLightspeedSale(items);
 
-      // Test Order Number
-      const lsSale = "HOLO006";
+      if (config.env === "production") {
+        // Get sale ID form epos in prod.
+        lsSale = await createLightspeedSale(items);
+      } else {
+        // Use test Order Number for testing in dev.
+        lsSale = "HOLO008";
+      }
 
-      // console.log("Form submitted:", dataToValidate);
-      // console.log("Cart data: ", items, cartTotal.toFixed(2).toString().replace(".", ""));
-
+      // Create Barclay's checkout form
       barclaysCheckoutForm(
         cartTotal.toFixed(2).toString().replace(".", ""),
         dataToValidate,
