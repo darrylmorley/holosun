@@ -15,7 +15,6 @@ export const barclaysCheckoutForm = async (totalPrice, userDetails, orderNo) => 
     });
     const fetchedData = await fetchEpdqData.json();
     epdqData = fetchedData;
-    console.log("epdqData", epdqData);
   } catch (error) {
     console.error(error, orderNo);
   }

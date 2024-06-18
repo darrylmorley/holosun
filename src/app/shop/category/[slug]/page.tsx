@@ -38,7 +38,6 @@ async function getItems(request) {
 export async function generateMetadata(request: NextRequest) {
   const slug = request.params.slug;
   const id = getIdFromSlug(slug);
-  console.log(slug, id);
 
   return {
     title: getMetaNameFromId(id),

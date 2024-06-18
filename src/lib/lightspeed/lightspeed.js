@@ -77,7 +77,6 @@ export async function getCustomerSales(customerID) {
 }
 
 export async function createSale(postData) {
-  console.log(postData);
   const axiosConfig = await getHeader();
   const postSale = await http.post(`Sale.json`, postData, axiosConfig).catch((error) => {
     console.error(error);

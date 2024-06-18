@@ -13,8 +13,6 @@ import {
 
 export default function OfficeSaleEmail(props) {
   const { customer, lines } = props.data;
-  console.log(props.props.customer, lines);
-  console.log(props);
 
   const deliveryAddress = {
     address1: customer.deliveryAddress1 ? customer.deliveryAddress1 : customer.billingAddress1,

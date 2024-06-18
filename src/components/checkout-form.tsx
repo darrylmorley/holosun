@@ -181,8 +181,8 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       // Test Order Number
       const lsSale = "HOLO006";
 
-      console.log("Form submitted:", dataToValidate);
-      console.log("Cart data: ", items, cartTotal.toFixed(2).toString().replace(".", ""));
+      // console.log("Form submitted:", dataToValidate);
+      // console.log("Cart data: ", items, cartTotal.toFixed(2).toString().replace(".", ""));
 
       barclaysCheckoutForm(
         cartTotal.toFixed(2).toString().replace(".", ""),

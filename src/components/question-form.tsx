@@ -14,7 +14,6 @@ const initialFormState = {
 
 function SubmitButton() {
   const { pending } = useFormStatus();
-  console.log(pending);
 
   return (
     <button
