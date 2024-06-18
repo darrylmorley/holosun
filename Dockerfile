@@ -4,8 +4,9 @@ FROM node:18-alpine AS base
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
-COPY ./prisma/schema.prisma ./prisma/schema.prisma
 WORKDIR /app
+
+COPY ./prisma/schema.prisma ./prisma/schema.prisma
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -20,8 +21,8 @@ RUN \
 # Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
-ARG DATABASE_URL=${DATABASE_URL}
 COPY --from=deps /app/node_modules ./node_modules
+ARG DATABASE_URL=${DATABASE_URL}
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
@@ -44,11 +45,11 @@ ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN mkdir -p /app/.next/cache/images && chown nextjs:nodejs /app/.next/cache/images
-VOLUME /app/.next/cache/images
-
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
+
+RUN mkdir -p /app/.next/cache/images && chown nextjs:nodejs /app/.next/cache/images
+VOLUME /app/.next/cache/images
 
 COPY --from=builder /app/public ./public
 
