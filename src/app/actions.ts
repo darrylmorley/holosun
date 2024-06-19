@@ -119,3 +119,33 @@ export async function newsletterSignup(prevState: any, formData: FormData) {
     };
   }
 }
+
+export async function search(prevState: any, formData: FormData) {
+  const schema = z.object({
+    search: z.string().min(1, "Search term is required").max(80, "Search term is too long"),
+  });
+
+  const dataObject: Record<string, FormDataEntryValue> = {};
+  formData.forEach((value: FormDataEntryValue, key) => {
+    dataObject[key] = value;
+  });
+
+  const data = schema.parse(dataObject);
+
+  console.log(data);
+
+  try {
+    revalidatePath("/shop/search");
+
+    return {
+      message: "Search Successfull!",
+      status: 200,
+      data: JSON.stringify(data),
+    };
+  } catch (e) {
+    return {
+      message: "Search failed. Please try again later.",
+      status: 500,
+    };
+  }
+}

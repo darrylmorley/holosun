@@ -5,7 +5,7 @@ import { MailCheck, MailWarning } from "lucide-react";
 import { newsletterSignup } from "@/app/actions";
 
 const initialFormState = {
-  email: ",",
+  email: "",
 };
 
 function SubmitButton() {
@@ -24,7 +24,6 @@ function SubmitButton() {
 
 export default function NewsletterForm() {
   const [state, formAction] = useFormState(newsletterSignup, initialFormState);
-  console.log(state);
 
   return (
     <form action={formAction}>
