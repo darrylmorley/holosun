@@ -11,6 +11,8 @@ import {
   Tailwind,
 } from "@react-email/components";
 
+const baseUrl = process.env.NODE_ENV == "production" ? "https://holosun.com" : "localhost:3000";
+
 export default function ContactEmail(formData) {
   return (
     <Html
@@ -50,9 +52,9 @@ export default function ContactEmail(formData) {
         <Body className="bg-white">
           <Container className="py-12 shadow-lg bg-stone-100 my-12 p-12">
             <Img
-              src={"/static/holosun-logo.png"}
-              width="493"
-              height="108"
+              src={`${baseUrl}/holosun-logo.png`}
+              width="246"
+              height="54"
               alt="Holosun Optics"
               className="mx-auto"
             />
