@@ -11,7 +11,8 @@ import {
   Tailwind,
 } from "@react-email/components";
 
-const baseUrl = process.env.NODE_ENV == "production" ? "https://holosun.com" : "localhost:3000";
+const baseUrl =
+  process.env.NODE_ENV == "production" ? "https://holosun-optics.co.uk" : "localhost:3000";
 
 export default function ItemEnquiry(formData) {
   return (
