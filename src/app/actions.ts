@@ -51,11 +51,11 @@ export async function sendContactFormEmail(prevState: any, formData: FormData) {
   try {
     revalidatePath("/support/contact-us");
 
-    brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
-      console.log("API called successfully. Returned data: " + JSON.stringify(data));
+    const sendEmail = await brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function () {
+      console.log("API called successfully.");
     });
 
-    return { message: "Message sent successfully!", status: 200 };
+    return { message: "Message sent successfully!", status: 200, data: JSON.stringify(sendEmail) };
   } catch (e) {
     return {
       message: "Message sending failed. Please try again later. Or call us on 01527 831 261.",
@@ -80,13 +80,11 @@ export async function newsletterSignup(prevState: any, formData: FormData) {
     createContact.email = email;
     createContact.listIds = [6];
 
-    brevoContactsInstance.createContact(createContact).then((data) => {
-      console.log("Contact Created: " + JSON.stringify(data));
-    });
+    return await brevoContactsInstance.createContact(createContact);
   };
 
   const sendSignupConfirmation = async (email: string) => {
-    const emailHtml = render(NewsletterSignup(data));
+    const emailHtml = render(NewsletterSignup());
 
     sendSmtpEmail.subject = "Holosun Website Contact Form Submission";
     sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
@@ -94,21 +92,30 @@ export async function newsletterSignup(prevState: any, formData: FormData) {
     sendSmtpEmail.htmlContent = emailHtml;
     sendSmtpEmail.params = data;
 
-    brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
-      console.log("Email Sent successfully. Returned data: " + JSON.stringify(data));
-    });
+    return await brevoApiInstance.sendTransacEmail(sendSmtpEmail);
   };
 
   try {
     revalidatePath("/");
-    addContactToList(data.email);
-    sendSignupConfirmation(data.email);
+    await addContactToList(data.email);
+    await sendSignupConfirmation(data.email);
 
-    return { message: "Message sent successfully!", status: 200 };
-  } catch (e) {
+    console.log({
+      message: "Newsletter signup successfull!",
+      status: 200,
+    });
     return {
-      message: "Message sending failed. Please try again later. Or call us on 01527 831 261.",
-      status: 500,
+      message: "Newsletter signup successfull!",
+      status: 200,
+    };
+  } catch (e) {
+    console.log({
+      message: e.body.message,
+      status: e.statusCode,
+    });
+    return {
+      message: e.body.message,
+      status: e.statusCode,
     };
   }
 }

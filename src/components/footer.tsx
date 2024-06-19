@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/holosun-logo.webp";
+import NewsletterForm from "./newsletter-form";
 
 export default function Footer() {
   return (
@@ -78,26 +79,7 @@ export default function Footer() {
           Contact Us
         </Link>
       </nav>
-      <form>
-        <h6 className="footer-title">Newsletter</h6>
-        <fieldset className="form-control w-80">
-          <label
-            className="label"
-            htmlFor="subscribe-email"
-          >
-            <span className="label-text">Enter your email address</span>
-          </label>
-          <div className="join">
-            <input
-              id="subscribe-email"
-              type="text"
-              placeholder="username@site.com"
-              className="input input-bordered input-md join-item"
-            />
-            <button className="btn btn-md btn-secondary join-item">Subscribe</button>
-          </div>
-        </fieldset>
-      </form>
+      <NewsletterForm />
     </footer>
   );
 }
