@@ -12,7 +12,7 @@ import {
 } from "@react-email/components";
 
 const baseUrl =
-  process.env.NODE_ENV == "production" ? "https://holosun-optics.co.uk" : "localhost:3000";
+  process.env.NODE_ENV == "production" ? "https://www.holosun-optics.co.uk" : "localhost:3000";
 
 export default function ItemEnquiry(formData) {
   return (
