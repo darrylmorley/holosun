@@ -13,6 +13,8 @@ import {
   Text,
 } from "@react-email/components";
 
+const baseUrl = process.env.NODE_ENV == "production" ? "https://holosun.com" : "localhost:3000";
+
 export default function OfficeSaleEmail(props) {
   const { customer, lines, orderID } = props.data;
 
@@ -55,7 +57,7 @@ export default function OfficeSaleEmail(props) {
           <Container className="p-12 shadow-lg bg-stone-100 text-center">
             <Section>
               <Img
-                src={"/static/holosun-logo.png"}
+                src={`${baseUrl}/holosun-logo.png`}
                 width="256"
                 height="54"
                 alt="Holosun Optics"

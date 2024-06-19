@@ -36,6 +36,8 @@ export async function sendContactFormEmail(prevState: any, formData: FormData) {
       ? render(ItemEnquiry(data))
       : render(ContactEmail(data));
 
+  console.log(emailHtml);
+
   sendSmtpEmail.subject = "Holosun Website Contact Form Submission";
   sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
   sendSmtpEmail.to = config.emailTo;
