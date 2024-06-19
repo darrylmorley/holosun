@@ -3,11 +3,17 @@ import { revalidatePath } from "next/cache";
 import { render } from "@react-email/render";
 import z from "zod";
 
-import { brevoApiInstance, sendSmtpEmail } from "@/lib/email/brevo-api";
+import {
+  brevoApiInstance,
+  sendSmtpEmail,
+  brevoContactsInstance,
+  createContact,
+} from "@/lib/email/brevo-api";
 
 import ContactEmail from "@/emails/contact-form-email";
 import ItemEnquiry from "@/emails/item-enquiry";
 import { config } from "../../config/config";
+import NewsletterSignup from "@/emails/newsletter-signup";
 
 export async function sendContactFormEmail(prevState: any, formData: FormData) {
   const schema = z.object({
@@ -36,8 +42,6 @@ export async function sendContactFormEmail(prevState: any, formData: FormData) {
       ? render(ItemEnquiry(data))
       : render(ContactEmail(data));
 
-  console.log(emailHtml);
-
   sendSmtpEmail.subject = "Holosun Website Contact Form Submission";
   sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
   sendSmtpEmail.to = config.emailTo;
@@ -50,6 +54,55 @@ export async function sendContactFormEmail(prevState: any, formData: FormData) {
     brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
       console.log("API called successfully. Returned data: " + JSON.stringify(data));
     });
+
+    return { message: "Message sent successfully!", status: 200 };
+  } catch (e) {
+    return {
+      message: "Message sending failed. Please try again later. Or call us on 01527 831 261.",
+      status: 500,
+    };
+  }
+}
+
+export async function newsletterSignup(prevState: any, formData: FormData) {
+  const schema = z.object({
+    email: z.string().email("Invalid email address").max(80, "Email is too long"),
+  });
+
+  const dataObject: Record<string, FormDataEntryValue> = {};
+  formData.forEach((value: FormDataEntryValue, key) => {
+    dataObject[key] = value;
+  });
+
+  const data = schema.parse(dataObject);
+
+  const addContactToList = async (email: string) => {
+    createContact.email = email;
+    createContact.listIds = [6];
+
+    brevoContactsInstance.createContact(createContact).then((data) => {
+      console.log("Contact Created: " + JSON.stringify(data));
+    });
+  };
+
+  const sendSignupConfirmation = async (email: string) => {
+    const emailHtml = render(NewsletterSignup(data));
+
+    sendSmtpEmail.subject = "Holosun Website Contact Form Submission";
+    sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
+    sendSmtpEmail.to = [{ email: email }];
+    sendSmtpEmail.htmlContent = emailHtml;
+    sendSmtpEmail.params = data;
+
+    brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
+      console.log("Email Sent successfully. Returned data: " + JSON.stringify(data));
+    });
+  };
+
+  try {
+    revalidatePath("/");
+    addContactToList(data.email);
+    sendSignupConfirmation(data.email);
 
     return { message: "Message sent successfully!", status: 200 };
   } catch (e) {

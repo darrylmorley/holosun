@@ -8,18 +8,16 @@ import {
   Hr,
   Html,
   Img,
-  Link,
   Section,
   Tailwind,
   Text,
+  Link,
 } from "@react-email/components";
 
 const baseUrl =
-  process.env.NODE_ENV == "production" ? "https://www.holosun-optics.co.uk" : "localhost:3000";
+  process.env.NODE_ENV == "production" ? "https://www.holosun-optics.co.uk.com" : "localhost:3000";
 
-export default function OfficeSaleEmail(props) {
-  const { customer, lines, orderID } = props.data;
-
+export default function NewsletterSignup() {
   return (
     <Html
       lang="en"
@@ -60,7 +58,7 @@ export default function OfficeSaleEmail(props) {
             <Section>
               <Img
                 src={`${baseUrl}/holosun-logo.png`}
-                width="246"
+                width="256"
                 height="54"
                 alt="Holosun Optics"
                 className="mx-auto"
@@ -69,36 +67,14 @@ export default function OfficeSaleEmail(props) {
                 as="h1"
                 className="mt-8"
               >
-                We&apos;ve Got Your Order!
+                Thankyou for signing up to our newsletter!
               </Heading>
-              <Heading as="h2">Order No. {orderID}</Heading>
             </Section>
-            <Hr />
             <Section className="mt-4">
-              <Heading as="h3">Your Delivery Details</Heading>
-              <Text>
-                <span className="font-bold">Name: </span>
-                {customer.firstName} {customer.lastName}
-              </Text>
-              <Text>
-                <span className="font-bold">Email: </span>
-                {customer.email}
-              </Text>
-              <Text>
-                <span className="font-bold">Address: </span>
-                {customer.deliveryAddress1}, {customer.deliveryCity}, {customer.deliveryPostcode}
-              </Text>
-            </Section>
-            <Hr />
-            <Section className="mt-4">
-              <Heading as="h3">Your Items</Heading>
-              {lines.map((item) => {
-                return (
-                  <Text key={item.id}>
-                    {item.description} x {item.qty}
-                  </Text>
-                );
-              })}
+              <Heading as="h4">
+                You&apos;ll be among the first to receive updates on new gear, special offers &
+                more!
+              </Heading>
             </Section>
             <Hr />
             <Section className="my-4">
@@ -157,28 +133,6 @@ export default function OfficeSaleEmail(props) {
   );
 }
 
-OfficeSaleEmail.PreviewProps = {
-  data: {
-    orderID: 1234,
-    customer: {
-      firstName: "John",
-      lastName: "Doe",
-      email: "johndoe@gmail.com",
-      deliveryAddress1: "1234 Other St",
-      deliveryCity: "Othertown",
-      deliveryPostcode: "B60 3JS",
-    },
-    lines: [
-      {
-        id: 1,
-        description: "Holosun Optics",
-        qty: 1,
-      },
-      {
-        id: 2,
-        description: "Holosun Optics Elite",
-        qty: 1,
-      },
-    ],
-  },
+NewsletterSignup.PreviewProps = {
+  email: "someemail@somedomain.com",
 };
