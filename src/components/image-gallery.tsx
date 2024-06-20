@@ -27,6 +27,7 @@ export default function ImageGallery({ images, name }) {
               src={image}
               key={image}
               alt={`Image of ${name}`}
+              priority
               className="p-2"
               onMouseEnter={() => handleImageHover(image)}
             />
