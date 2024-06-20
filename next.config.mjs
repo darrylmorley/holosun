@@ -12,6 +12,7 @@ const nextConfig = {
     // Set this to true to ignore TypeScript errors during build
     ignoreBuildErrors: true,
   },
+  skipTrailingSlashRedirect: true,
 };
 
 export default nextConfig;
