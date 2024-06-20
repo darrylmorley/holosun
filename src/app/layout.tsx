@@ -2,6 +2,7 @@ import { Archivo } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 
 import prisma from "@/lib/db/prisma";
+import UmamiTracking from "@/lib/umami/umami";
 
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -66,6 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Header featuredItems={featuredItems} />
           <main className="flex-grow">{children}</main>
           <Footer />
+          <UmamiTracking />
         </Providers>
       </body>
     </html>
