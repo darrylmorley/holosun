@@ -13,6 +13,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   skipTrailingSlashRedirect: true,
+  output: "standalone",
 };
 
 export default nextConfig;
