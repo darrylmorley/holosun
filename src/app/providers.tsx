@@ -1,7 +1,19 @@
 "use client";
-
+import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
 import { CartProvider } from "react-use-cart";
 
+if (typeof window !== "undefined") {
+  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    person_profiles: "always", // or 'always' to create profiles for anonymous users as well
+  });
+}
+
 export function Providers({ children }) {
-  return <CartProvider id="holosun-cart">{children}</CartProvider>;
+  return (
+    <PostHogProvider client={posthog}>
+      <CartProvider id="holosun-cart">{children}</CartProvider>
+    </PostHogProvider>
+  );
 }
