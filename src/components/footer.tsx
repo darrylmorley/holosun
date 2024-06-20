@@ -12,8 +12,6 @@ export default function Footer() {
           className="mobile-header_logo"
         >
           <Image
-            // width={300}
-            // height={65}
             src={logo}
             alt="Holosun Logo"
             className="h-10 w-auto"

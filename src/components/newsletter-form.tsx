@@ -41,6 +41,7 @@ export default function NewsletterForm() {
             name="email"
             type="email"
             placeholder="username@site.com"
+            autoComplete="email"
             required
             className="input input-bordered input-md join-item"
           />
