@@ -8,6 +8,7 @@ import DeliveryModal from "@/components/delivery-modal";
 import QuestionModal from "@/components/question-modal";
 import ImageGallery from "@/components/image-gallery";
 import ShareButton from "@/components/share-button";
+import { capitalise } from "@/lib/utils/helpers";
 
 type PageProps = {
   params: {
@@ -15,6 +16,16 @@ type PageProps = {
     url: string;
   };
 };
+
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = params;
+  const item = await getItem(slug);
+
+  return {
+    title: `${capitalise(item.name)}`,
+    description: `${item.shortDescription}`,
+  };
+}
 
 async function getItem(slug: string) {
   return await prisma.product.findUnique({

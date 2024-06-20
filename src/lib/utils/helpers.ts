@@ -151,3 +151,12 @@ export function closeModal(modalId: string) {
   const modal = document.getElementById(modalId);
   modal.close();
 }
+
+export const capitalise = (string: string) => {
+  if (!string) return "";
+  return string
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
