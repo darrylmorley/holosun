@@ -19,7 +19,7 @@ async function getFeaturedItems() {
 }
 
 export const metadata: Metadata = {
-  title: "Holosun Optics - Advanced Red Dot Sights & Accessories",
+  title: "Advanced Red Dot Sights & Accessories: Holosun Optics UK",
   description:
     "Discover the latest in red dot sights and tactical optics at Holosun. Innovative technology, rugged designs, and unparalleled performance. Shop now!",
 };
