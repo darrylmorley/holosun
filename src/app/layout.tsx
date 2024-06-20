@@ -1,8 +1,8 @@
 import { Archivo } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
+import Script from "next/script";
 
 import prisma from "@/lib/db/prisma";
-import UmamiTracking from "@/lib/umami/umami";
 
 import Header from "@/components/header";
 import Footer from "@/components/footer";
@@ -67,7 +67,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Header featuredItems={featuredItems} />
           <main className="flex-grow">{children}</main>
           <Footer />
-          <UmamiTracking />
+          <Script
+            src="http://analytics.shootingsuppliesltd.co.uk/script.js"
+            data-website-id="b50e3bc4-3bdb-4eb2-bf55-72a0d175c7c9"
+          />
         </Providers>
       </body>
     </html>
