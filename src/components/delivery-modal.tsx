@@ -56,7 +56,7 @@ export default function DeliveryModal() {
               </p>
               <ul className="mt-4 flex flex-col gap-2">
                 <li className="flex items-center gap-2">
-                  <Mail size={16} /> info@shootingsuppliesltd.co.uk
+                  <Mail size={16} /> info@holosun-optics.co.uk
                 </li>
                 <li className="flex items-center gap-2">
                   <Phone size={16} /> 01527831261
