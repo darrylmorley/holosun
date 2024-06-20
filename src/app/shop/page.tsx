@@ -23,7 +23,7 @@ async function getItems() {
 }
 
 export const metadata: Metadata = {
-  title: "Premium Tactical Optics & Accessories: Holosun UK",
+  title: "Premium Tactical Optics & Accessories: Holosun Optics UK",
   description:
     "Explore the full range of Holosun's high-quality tactical optics and accessories. From red dot sights and magnifiers to aiming lasers and mounts, we have everything you need for precise shooting and reliability. Shop now for top-tier performance and innovation.",
 };
