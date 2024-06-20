@@ -18,38 +18,38 @@ const categories: Category[] = [
   {
     id: 139,
     slug: "lasers",
-    description: "Discover Holosun's advanced aiming lasers, designed for accuracy and durability",
     name: "Lasers",
     metaName: "Holosun Aiming Lasers - Precision Targeting",
+    description: "Discover Holosun's advanced aiming lasers, designed for accuracy and durability",
     metaDescription:
       "Discover Holosun's advanced aiming lasers, designed for accuracy and durability. Ideal for law enforcement, military, and tactical applications, our lasers ensure precise target acquisition in any condition. Shop our range now for superior performance.",
   },
   {
     id: 4,
     slug: "magnifiers",
-    description:
-      "Discover Holosun's range of high-quality magnifiers designed to improve your shooting accuracy",
     name: "Magnifiers",
     metaName: "Holosun Magnifiers - Enhance Your Shooting Precision",
+    description:
+      "Discover Holosun's range of high-quality magnifiers designed to improve your shooting accuracy",
     metaDescription:
       "Discover Holosun's range of high-quality magnifiers designed to improve your shooting accuracy. Perfect for pairing with red dot sights, our magnifiers offer superior clarity and durability. Shop now for precision optics!",
   },
   {
     id: 80,
     slug: "red-dot-and-holo-point",
-    description:
-      "Explore Holosun's range of innovative red dot sights designed for accuracy and durability",
     name: "Red Dot & Holo Points",
     metaName: "Holosun Red Dot Sights - Precision Optics for Every Shooter",
+    description:
+      "Explore Holosun's range of innovative red dot sights designed for accuracy and durability",
     metaDescription:
       "Explore Holosun's range of innovative red dot sights designed for accuracy and durability. Perfect for shooters of all levels, our red dot sights offer fast target acquisition and reliable performance in any environment. Shop now for top-tier optics!",
   },
   {
     id: 36,
     slug: "mounts-and-rails",
+    name: "Mounts & Rails",
     description:
       "Discover Holosun's range of mounts designed for secure and stable attachment of your optics",
-    name: "Mounts & Rails",
     metaName: "Holosun Mounts - Secure and Reliable Optics Mounting Solutions",
     metaDescription:
       "Discover Holosun's range of mounts designed for secure and stable attachment of your optics. Engineered for durability and precision, our mounts ensure your red dot sights and magnifiers stay perfectly aligned. Shop now for top-quality mounting solutions!",
