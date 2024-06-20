@@ -97,7 +97,7 @@ export default function QuestionForm({ itemId, itemName }) {
         />
       </div>
       <div className="flex flex-col">
-        <label htmlFor="phone">Phone</label>
+        <label htmlFor="tel">Phone</label>
         <input
           id="tel"
           name="tel"
