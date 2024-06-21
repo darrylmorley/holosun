@@ -407,6 +407,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       <button
         type="submit"
         className="btn btn-accent text-white w-full"
+        data-umami-event="checkout"
       >
         Checkout
         <span>{getFormattedPrice(cartTotal)}</span>

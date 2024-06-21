@@ -16,6 +16,7 @@ function SubmitButton() {
       type="submit"
       className="btn btn-md join-item btn-accent text-white"
       aria-disabled={pending}
+      data-umami-event="email-signup"
     >
       {pending ? <span className="loading loading-spinner"></span> : "Send"}
     </button>
