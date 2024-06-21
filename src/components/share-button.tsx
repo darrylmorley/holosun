@@ -2,7 +2,7 @@
 
 import { Share } from "lucide-react";
 
-const ShareButton = ({ title, text, url }) => {
+const ShareButton = ({ title, text, url, itemID }) => {
   const handleShare = async () => {
     if (navigator.share) {
       try {
@@ -23,6 +23,7 @@ const ShareButton = ({ title, text, url }) => {
     <span
       onClick={handleShare}
       className="flex items-center gap-2"
+      data-umami-event={`share-button-item-${itemID}`}
     >
       <Share /> Share
     </span>

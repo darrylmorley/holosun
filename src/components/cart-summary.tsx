@@ -45,6 +45,7 @@ export default function CartSummary({ stdDelivery, NIDelivery }) {
           <button
             className="btn btn-accent text-white w-1/2 mt-4"
             onClick={handleEstimateClick}
+            data-umami-event="postcode-estimate"
           >
             Estimate
           </button>

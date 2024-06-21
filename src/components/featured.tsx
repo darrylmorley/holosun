@@ -34,7 +34,12 @@ export default function Featured({ featuredItems }) {
                     href={`/shop/${item.slug}`}
                     passHref
                   >
-                    <button className="btn btn-accent text-white self-center">BUY NOW</button>
+                    <button
+                      className="btn btn-accent text-white self-center"
+                      data-umami-event="featured-item-click"
+                    >
+                      BUY NOW
+                    </button>
                   </Link>
                 </div>
               </li>

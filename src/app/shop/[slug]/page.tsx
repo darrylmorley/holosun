@@ -82,6 +82,7 @@ export default async function Page({ params }: PageProps) {
                   title={item.name}
                   text={`Check out this ${item.name} @ holosun.co.uk!`}
                   url={url}
+                  itemID={item.id}
                 />
               </li>
             </ul>
