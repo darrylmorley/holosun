@@ -68,8 +68,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <main className="flex-grow">{children}</main>
           <Footer />
           <Script
-            src="https://analytics.shootingsuppliesltd.co.uk/script.js"
-            data-website-id="b50e3bc4-3bdb-4eb2-bf55-72a0d175c7c9"
+            src="https://analytics.shootingsuppliesltd.co.uk/js/script.tagged-events.js"
+            data-domain="holosun-optics.co.uk"
           />
         </Providers>
       </body>
