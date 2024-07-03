@@ -1,6 +1,45 @@
 /** @type {import('next').NextConfig} */
 import { withSentryConfig } from "@sentry/nextjs";
 
+const securityHeaders = [
+  {
+    key: "Content-Security-Policy",
+    value: "upgrade-insecure-requests",
+  },
+  {
+    key: "X-DNS-Prefetch-Control",
+    value: "on",
+  },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  {
+    key: "Server",
+    value: "Apache", // phony server value
+  },
+  {
+    key: "X-Content-Type-Options",
+    value: "nosniff",
+  },
+  {
+    key: "X-Frame-Options",
+    value: "sameorigin",
+  },
+  {
+    key: "X-XSS-Protection",
+    value: "1; mode=block",
+  },
+  {
+    key: "Referrer-Policy",
+    value: "strict-origin-when-cross-origin",
+  },
+  {
+    key: "Permissions-Policy",
+    value: "geolocation=*", // allow specified policies here
+  },
+];
+
 const nextConfig = {
   images: {
     domains: ["res.cloudinary.com"],
@@ -16,6 +55,9 @@ const nextConfig = {
   },
   skipTrailingSlashRedirect: true,
   output: "standalone",
+  async headers() {
+    return [{ source: "/:path*", headers: securityHeaders }];
+  },
 };
 
 export default withSentryConfig(nextConfig, {
