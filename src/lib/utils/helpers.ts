@@ -54,6 +54,15 @@ const categories: Category[] = [
     metaDescription:
       "Discover Holosun's range of mounts designed for secure and stable attachment of your optics. Engineered for durability and precision, our mounts ensure your red dot sights and magnifiers stay perfectly aligned. Shop now for top-quality mounting solutions!",
   },
+  {
+    id: 336,
+    slug: "reflex-sights",
+    name: "Reflex Sights",
+    description: "Explore our range of high-quality reflex sights. Perfect for precision shooting.",
+    metaName: "High-Quality Reflex Sights: Holosun Optics UK",
+    metaDescription:
+      "Explore our range of high-quality reflex sights. Perfect for precision shooting.",
+  },
 ];
 
 export function getCategoryById(id: number): Category | undefined {
