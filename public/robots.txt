@@ -1,24 +1,7 @@
 User-agent: *
-# Next.JS Crawl Budget Performance Updates
-# Block files ending in .json, _buildManifest.js, _middlewareManifest.js, _ssgManifest.js, and any other JS files
-Disallow: /*.json$
-Disallow: /*_buildManifest.js$
-Disallow: /*_middlewareManifest.js$
-Disallow: /*_ssgManifest.js$
-# Disallow: /*.js$
 Disallow: /api/
-Disallow: /_next/
-Disallow: /server/
-Disallow: /private/
 Disallow: /checkout/
 Disallow: /result/
-
-# Optionally, you can disallow any other sensitive routes or directories
-# Disallow: /admin/
-# Disallow: /dashboard/
-
-# Allow specific directories or files if necessary
-Allow: /public/
 
 # Sitemap location
 Sitemap: https://holosun-optics.co.uk/sitemap.xml
