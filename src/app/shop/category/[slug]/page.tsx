@@ -64,7 +64,7 @@ export default async function Page({ params, searchParams }: PageProps) {
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
         <h1 className="text-4xl lg:text-5xl uppercase font-black">{categoryName}</h1>
-        <p className="text-lg">{description}</p>
+        <h2 className="text-lg font-normal">{description}</h2>
       </div>
       <div className="px-4 lg:pl-12 my-4 text-sm breadcrumbs">
         <ul>
