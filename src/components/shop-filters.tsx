@@ -32,7 +32,8 @@ export default function ShopFilters() {
           </option>
           <option value="/shop/category/lasers">Lasers</option>
           <option value="/shop/category/magnifiers">Magnifiers</option>
-          <option value="/shop/category/red-dot-and-holo-point">Red Dots</option>
+          <option value="/shop/category/red-dot-sights">Red Dot Sights</option>
+          <option value="/shop/category/reflex-sights">Reflex Sights</option>
           <option value="/shop/category/mounts-and-rails">Mounts</option>
         </select>
       </div>

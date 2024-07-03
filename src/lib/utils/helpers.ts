@@ -36,8 +36,8 @@ const categories: Category[] = [
   },
   {
     id: 80,
-    slug: "red-dot-and-holo-point",
-    name: "Red Dot & Holo Points",
+    slug: "red-dot-sights",
+    name: "Red Dot Sights",
     metaName: "Holosun Red Dot Sights - Precision Optics for Every Shooter",
     description:
       "Explore Holosun's range of innovative red dot sights designed for accuracy and durability",
