@@ -71,6 +71,7 @@ export default function MenuDrawer() {
             <Link
               href="https://www.facebook.com/holosunuk"
               target="_blank"
+              rel="noopener"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,6 +85,7 @@ export default function MenuDrawer() {
             <Link
               href="https://www.instagram.com/holosun_optics/"
               target="_blank"
+              rel="noopener"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -97,6 +99,7 @@ export default function MenuDrawer() {
             <Link
               href="https://x.com/holosunopticsuk"
               target="_blank"
+              rel="noopener"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

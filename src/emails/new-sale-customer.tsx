@@ -106,6 +106,7 @@ export default function OfficeSaleEmail(props) {
                 <Link
                   href="https://www.facebook.com/holosunuk"
                   target="_blank"
+                  rel="noopener"
                 >
                   <Img
                     src={"/static/facebook.png"}
@@ -118,6 +119,7 @@ export default function OfficeSaleEmail(props) {
                 <Link
                   href="https://www.instagram.com/holosun_optics/"
                   target="_blank"
+                  rel="noopener"
                 >
                   <Img
                     src={"/static/instagram.png"}
@@ -130,6 +132,7 @@ export default function OfficeSaleEmail(props) {
                 <Link
                   href="https://x.com/holosunopticsuk"
                   target="_blank"
+                  rel="noopener"
                 >
                   <Img
                     src={"/static/twitter.png"}
