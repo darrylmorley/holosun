@@ -57,13 +57,13 @@ export default async function Page({ params, searchParams }: PageProps) {
   const { sort } = searchParams;
   const { items, id } = await getItems(slug);
 
-  const catgeoryName = getNameFromId(id);
+  const categoryName = getNameFromId(id);
   const description = getDescriptionFromId(id);
 
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1 className="text-4xl lg:text-5xl uppercase font-black">{catgeoryName}</h1>
+        <h1 className="text-4xl lg:text-5xl uppercase font-black">{categoryName}</h1>
         <p className="text-lg">{description}</p>
       </div>
       <div className="px-4 lg:pl-12 my-4 text-sm breadcrumbs">
@@ -75,7 +75,7 @@ export default async function Page({ params, searchParams }: PageProps) {
             <Link href="/shop">Shop</Link>
           </li>
           <li>
-            <Link href={`/shop/category/${slug}`}>{catgeoryName}</Link>
+            <Link href={`/shop/category/${slug}`}>{categoryName}</Link>
           </li>
         </ul>
       </div>
