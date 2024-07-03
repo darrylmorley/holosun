@@ -3,8 +3,9 @@ Disallow: /api/
 Disallow: /checkout/
 Disallow: /result/
 
+User-agent: Baiduspider
+Disallow: /
+
 # Sitemap location
 Sitemap: https://holosun-optics.co.uk/sitemap.xml
 
-User-agent: Baiduspider
-Disallow: /
