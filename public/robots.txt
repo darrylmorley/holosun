@@ -5,12 +5,13 @@ Disallow: /*.json$
 Disallow: /*_buildManifest.js$
 Disallow: /*_middlewareManifest.js$
 Disallow: /*_ssgManifest.js$
-Disallow: /*.js$
+# Disallow: /*.js$
 Disallow: /api/
 Disallow: /_next/
-Disallow: /static/
 Disallow: /server/
 Disallow: /private/
+Disallow: /checkout/
+Disallow: /result/
 
 # Optionally, you can disallow any other sensitive routes or directories
 # Disallow: /admin/
