@@ -50,7 +50,7 @@ export const categories: Category[] = [
     name: "Mounts & Rails",
     description:
       "Discover Holosun's range of mounts designed for secure and stable attachment of your optics",
-    metaName: "Holosun Mounts - Secure and Reliable Optics Mounting Solutions",
+    metaName: "Holosun Mounts - Secure and Reliable Optics Mounting",
     metaDescription:
       "Discover Holosun's range of mounts designed for secure and stable attachment of your optics. Engineered for durability and precision, our mounts ensure your red dot sights and magnifiers stay perfectly aligned. Shop now for top-quality mounting solutions!",
   },
