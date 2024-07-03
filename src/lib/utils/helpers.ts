@@ -14,7 +14,7 @@ type Category = {
   metaDescription?: string;
 };
 
-const categories: Category[] = [
+export const categories: Category[] = [
   {
     id: 139,
     slug: "lasers",

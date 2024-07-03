@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import prisma from "@/lib/db/prisma";
 import Link from "next/link";
 
@@ -24,6 +25,7 @@ type PageProps = {
 
 async function getItems(slug: string) {
   const id = getIdFromSlug(slug);
+  if (!id) notFound();
 
   const items = await prisma.product.findMany({
     where: {
