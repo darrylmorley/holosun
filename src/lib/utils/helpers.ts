@@ -60,7 +60,7 @@ export const categories: Category[] = [
     name: "Reflex Sights",
     description: "Explore our range of high-quality reflex sights. Perfect for precision shooting.",
     metaName: "High-Quality Reflex Sights: Holosun Optics UK",
-    metaDescription: "High quality reflex sights form Holsun. Perfect for precision shooting!",
+    metaDescription: "High quality Reflex Sights form Holosun. Perfect for precision shooting!",
   },
 ];
 
