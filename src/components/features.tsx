@@ -5,7 +5,7 @@ export default function Features() {
     <ul className="w-full grid grid-cols-2 gap-y-12 md:flex md:justify-around uppercase">
       <li className="flex flex-col items-center">
         <Image
-          src="/images/features/MultilayerCoatings.png"
+          src="/images/features/MultilayerCoatings.webp"
           alt="Multilayer Coatings Badge"
           width={100}
           height={100}
@@ -15,7 +15,7 @@ export default function Features() {
       </li>
       <li className="flex flex-col items-center">
         <Image
-          src="/images/features/MultiReticleSystem.png"
+          src="/images/features/MultiReticleSystem.webp"
           alt="Multi Reticle System Badge"
           width={100}
           height={100}
@@ -25,7 +25,7 @@ export default function Features() {
       </li>
       <li className="flex flex-col items-center">
         <Image
-          src="/images/features/ShakeAwake.png"
+          src="/images/features/ShakeAwake.webp"
           alt="Shake Awake Badge"
           width={100}
           height={100}
@@ -35,7 +35,7 @@ export default function Features() {
       </li>
       <li className="flex flex-col items-center">
         <Image
-          src="/images/features/SolarFailsafe.png"
+          src="/images/features/SolarFailsafe.webp"
           alt="Solar Failsafe Badge"
           width={100}
           height={100}
@@ -45,7 +45,7 @@ export default function Features() {
       </li>
       <li className="flex flex-col items-center">
         <Image
-          src="/images/features/SuperLED.png"
+          src="/images/features/SuperLED.webp"
           alt="Super LED Badge"
           width={100}
           height={100}
@@ -55,7 +55,7 @@ export default function Features() {
       </li>
       <li className="flex flex-col items-center">
         <Image
-          src="/images/features/Titanium.png"
+          src="/images/features/Titanium.webp"
           alt="Titanium Badge"
           width={100}
           height={100}
