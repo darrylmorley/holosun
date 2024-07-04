@@ -19,14 +19,14 @@ async function getFeaturedItems() {
 }
 
 export const metadata: Metadata = {
-  title: "Holusun Optics UK",
+  title: "Holosun Optics UK - Innovative Reflex & Red Dot Sights",
   description:
     "Holosun Optics UK for advanced red dot sights, reflex sights, magnifiers and accessories. Innovative technology, rugged designs, and unparalleled performance!",
   alternates: {
     canonical: "https://www.holosun-optics.co.uk",
   },
   openGraph: {
-    title: "Holosun Optics UK",
+    title: "Holosun Optics UK - Innovative Reflex & Red Dot Sights",
     description:
       "Holosun Optics UK for advanced red dot sights, reflex sights, magnifiers and accessories. Innovative technology, rugged designs, and unparalleled performance!",
     url: "https://www.holosun-optics.co.uk",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Holusun Optics UK",
+    title: "Holosun Optics UK - Innovative Reflex & Red Dot Sights",
     description:
       "Holosun Optics UK for advanced red dot sights, reflex sights, magnifiers and accessories. Innovative technology, rugged designs, and unparalleled performance!",
     images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"],
