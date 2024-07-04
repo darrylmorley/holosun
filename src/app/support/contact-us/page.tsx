@@ -19,7 +19,7 @@ export default function Page() {
       </div>
       <div className="mb-12 flex flex-col bg-white lg:mb-0 lg:flex-row lg:px-24 lg:py-12">
         <div className="order-last flex flex-col space-y-8 bg-secondary px-6 py-12 text-gray-200 lg:order-first lg:w-1/3 lg:p-12 lg:shadow-lg">
-          <h1 className="text-2xl font-bold">Contact Us</h1>
+          <p className="text-2xl font-bold">Contact Us</p>
           <div className="flex space-x-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ export default function Page() {
                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>
-            <span>Holosun Optics, 38 Sherwood Road, Bromsgrove, Worcestershire, B60 3DR</span>
+            <span>Holosun Optics UK, 38 Sherwood Road, Bromsgrove, Worcestershire, B60 3DR</span>
           </div>
           <div className="flex space-x-4">
             <svg
