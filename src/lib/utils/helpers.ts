@@ -22,7 +22,7 @@ export const categories: Category[] = [
     metaName: "Holosun Aiming Lasers - Precision Targeting",
     description: "Discover Holosun's advanced aiming lasers, designed for accuracy and durability",
     metaDescription:
-      "Holosun's advanced aiming lasers, designed for accuracy and durability. Ideal for law enforcement, military, and tactical applications, our lasers ensure precise target acquisition in any condition. Shop our range now for superior performance.",
+      "Holosun's advanced aiming lasers are designed for accuracy and durability. Our lasers ensure precise target acquisition in any condition!",
   },
   {
     id: 4,
@@ -32,7 +32,7 @@ export const categories: Category[] = [
     description:
       "Discover Holosun's range of high-quality tactical red dot magnifiers designed to improve your shooting accuracy",
     metaDescription:
-      "Discover Holosun's range of high-quality magnifiers designed to improve your shooting accuracy. Perfect for pairing with red dot sights, our magnifiers offer superior clarity and durability. Shop now for precision optics!",
+      "Holosun high-quality magnifiers are designed to improve your shooting accuracy. Perfect for pairing with our red dot sights!",
   },
   {
     id: 80,
@@ -42,7 +42,7 @@ export const categories: Category[] = [
     description:
       "Explore Holosun's range of innovative red dot sights designed for accuracy and durability",
     metaDescription:
-      "Holosun's range of innovative red dot sights are designed for accuracy and durability. Perfect for shooters of all levels, our red dot sights offer fast target acquisition and reliable performance in any environment. Shop now for top-tier optics!",
+      "Holosun red dot sights are designed for accuracy, durability, and reliable performance in any environment. Perfect for shooters of all levels!",
   },
   {
     id: 36,
@@ -52,7 +52,7 @@ export const categories: Category[] = [
       "Discover Holosun's range of mounts designed for secure and stable attachment of your optics",
     metaName: "Holosun Mounts - Secure and Reliable Optics Mounting",
     metaDescription:
-      "Discover Holosun's range of mounts designed for secure and stable attachment of your optics. Engineered for durability and precision, our mounts ensure your red dot sights and magnifiers stay perfectly aligned. Shop now for top-quality mounting solutions!",
+      "Holosun mounts are designed for secure attachment of your optics. Engineered for precision, our mounts ensure your red dot sights stay perfectly aligned.",
   },
   {
     id: 336,
@@ -60,8 +60,7 @@ export const categories: Category[] = [
     name: "Reflex Sights",
     description: "Explore our range of high-quality reflex sights. Perfect for precision shooting.",
     metaName: "High-Quality Reflex Sights: Holosun Optics UK",
-    metaDescription:
-      "Explore our range of high-quality reflex sights. Perfect for precision shooting.",
+    metaDescription: "High quality reflex sights form Holsun. Perfect for precision shooting!",
   },
 ];
 
