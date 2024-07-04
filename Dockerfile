@@ -24,6 +24,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 ARG DATABASE_URL=${DATABASE_URL}
+ENV NODE_ENV production
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.

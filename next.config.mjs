@@ -55,6 +55,7 @@ const nextConfig = {
   },
   skipTrailingSlashRedirect: true,
   output: "standalone",
+  legacyBrowsers: false,
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
