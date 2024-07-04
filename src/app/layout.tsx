@@ -21,9 +21,6 @@ export const metadata = {
   title: "Holusun Optics UK",
   description:
     "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     title: "Holosun Optics UK",
     description:
