@@ -41,31 +41,31 @@ export default function Page() {
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
         <h1 className="text-4xl lg:text-5xl uppercase font-black">About Holosun UK</h1>
-        <p className="text-lg">
+        <h2 className="text-base font-bold lg:text-lg">
           Welcome to Holosun Optics UK, your premier destination for cutting-edge optical technology
-          and innovative sight solutions.
-        </p>
+          and innovative reflex and red dot sight solutions.
+        </h2>
       </div>
-      <div>
-        <h2>Who We Are</h2>
-        <p>
-          At Holosun Optics UK, we are dedicated to providing top-quality optics that enhance
-          accuracy and performance. Our passion for precision drives us to offer a wide range of
-          products designed to meet the needs of hunters and sport shooters.
-        </p>
-      </div>
-      <div>
-        <h2>Our Mission</h2>
-        <p>
-          Our mission is to equip you with reliable, high-performance optics that stand the test of
-          time. We believe in the power of innovation and are committed to delivering products that
-          incorporate the latest advancements in optical technology.
-        </p>
-      </div>
-      <div>
-        <h2>Why Choose Us</h2>
-        <p>
-          <ul>
+      <div className="px-12 lg:px-24 py-8 space-y-6">
+        <div>
+          <h3>Who We Are</h3>
+          <p className="mt-2">
+            At Holosun Optics UK, we are dedicated to providing top-quality optics that enhance
+            accuracy and performance. Our passion for precision drives us to offer a wide range of
+            products designed to meet the needs of hunters and sport shooters.
+          </p>
+        </div>
+        <div>
+          <h3>Our Mission</h3>
+          <p className="mt-2">
+            Our mission is to equip you with reliable, high-performance optics that stand the test
+            of time. We believe in the power of innovation and are committed to delivering products
+            that incorporate the latest advancements in optical technology.
+          </p>
+        </div>
+        <div>
+          <h3>Why Choose Us</h3>
+          <ul className="ml-4 mt-2 list-disc">
             <li>
               <strong>Innovative Technology:</strong> Our products feature state-of-the-art
               technology, including solar power, multi-reticle systems, and advanced LED
@@ -81,16 +81,16 @@ export default function Page() {
               needs.
             </li>
           </ul>
-        </p>
-      </div>
-      <div>
-        <h2>Our Products</h2>
-        <p>
-          Holosun Optics UK offers a diverse range of products, including red dot sights,
-          magnifiers, laser aiming devices, and accessories. Each product is engineered with
-          precision and crafted for reliability, ensuring you have the best tools for your shooting
-          experience.
-        </p>
+        </div>
+        <div>
+          <h3>Our Products</h3>
+          <p className="mt-2">
+            Holosun Optics UK offers a diverse range of products, including red dot sights,
+            magnifiers, laser aiming devices, and accessories. Each product is engineered with
+            precision and crafted for reliability, ensuring you have the best tools for your
+            shooting experience.
+          </p>
+        </div>
       </div>
     </>
   );
