@@ -1,5 +1,5 @@
 "use client";
-import { getImageProps } from "next/image";
+import Image, { getImageProps } from "next/image";
 import Slider from "react-slick";
 
 import "slick-carousel/slick/slick.css";
@@ -32,8 +32,8 @@ export default function HeroCarousel() {
     props: { srcSet: mobile, ...rest },
   } = getImageProps({
     ...common,
-    width: 1350,
-    height: 1080,
+    width: 1080,
+    height: 1350,
     quality: 70,
     src: "/images/hero-carousel/aems-banner-1080x1350.jpg",
   });
@@ -53,7 +53,7 @@ export default function HeroCarousel() {
             media="(min-width: 500px)"
             srcSet={mobile}
           />
-          <img
+          <Image
             {...rest}
             alt={common.alt}
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
