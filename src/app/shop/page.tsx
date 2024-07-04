@@ -29,6 +29,34 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.holosun-optics.co.uk/shop",
   },
+  openGraph: {
+    title: "Tactical Optics & Accessories: Holosun Optics UK",
+    description:
+      "Explore the full range of Holosun's high-quality tactical optics and accessories. From red dot sights and magnifiers to aiming lasers and mounts, we have everything you need for precise shooting and reliability. Shop now for top-tier performance and innovation.",
+    url: "https://www.holosun-optics.co.uk",
+    images: [
+      {
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg", // Must be an absolute URL
+        width: 1080,
+        height: 1350,
+      },
+      {
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg", // Must be an absolute URL
+        width: 1920,
+        height: 860,
+        alt: "Holosun AEMS Red Dot",
+      },
+    ],
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tactical Optics & Accessories: Holosun Optics UK",
+    description:
+      "Explore the full range of Holosun's high-quality tactical optics and accessories. From red dot sights and magnifiers to aiming lasers and mounts, we have everything you need for precise shooting and reliability. Shop now for top-tier performance and innovation.",
+    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
+  },
 };
 
 export default async function Page({ searchParams }: PageProps) {
