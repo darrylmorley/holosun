@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps) {
     title: `${capitalise(item.name)}`,
     description: `${description}`,
     alternates: {
-      canonical: `/shop/${item.slug}`,
+      canonical: `https://www.holosun-optics.co.uk/shop/${item.slug}`,
     },
     openGraph: {
       title: `${capitalise(item.name)}`,
