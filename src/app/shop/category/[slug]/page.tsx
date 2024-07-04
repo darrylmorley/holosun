@@ -45,19 +45,17 @@ async function getItems(slug: string) {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = params;
-
-  const category = getCategoryBySlug(slug);
-  const { title, descripton } = category;
+  const { metaName, metaDescription } = getCategoryBySlug(slug);
 
   return {
-    title: title,
-    description: descripton,
+    title: metaName,
+    description: metaDescription,
     alternates: {
       canonical: `https://www.holosun-optics.co.uk/shop/category/${slug}`,
     },
     openGraph: {
-      title: title,
-      description: descripton,
+      title: metaName,
+      description: metaDescription,
       url: `https://www.holosun-optics.co.uk/shop/category/${slug}`,
       images: [
         {
@@ -77,8 +75,8 @@ export async function generateMetadata({ params }: PageProps) {
     },
     twitter: {
       card: "summary_large_image",
-      title: title,
-      description: descripton,
+      title: metaName,
+      description: metaDescription,
       images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
     },
   };
