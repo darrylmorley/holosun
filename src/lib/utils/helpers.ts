@@ -22,15 +22,15 @@ export const categories: Category[] = [
     metaName: "Holosun Aiming Lasers - Precision Targeting",
     description: "Discover Holosun's advanced aiming lasers, designed for accuracy and durability",
     metaDescription:
-      "Discover Holosun's advanced aiming lasers, designed for accuracy and durability. Ideal for law enforcement, military, and tactical applications, our lasers ensure precise target acquisition in any condition. Shop our range now for superior performance.",
+      "Holosun's advanced aiming lasers, designed for accuracy and durability. Ideal for law enforcement, military, and tactical applications, our lasers ensure precise target acquisition in any condition. Shop our range now for superior performance.",
   },
   {
     id: 4,
     slug: "magnifiers",
     name: "Magnifiers",
-    metaName: "Holosun Magnifiers - Enhance Your Shooting Precision",
+    metaName: "Holosun Red Dot Magnifiers - Enhance Your Shooting Precision",
     description:
-      "Discover Holosun's range of high-quality magnifiers designed to improve your shooting accuracy",
+      "Discover Holosun's range of high-quality tactical red dot magnifiers designed to improve your shooting accuracy",
     metaDescription:
       "Discover Holosun's range of high-quality magnifiers designed to improve your shooting accuracy. Perfect for pairing with red dot sights, our magnifiers offer superior clarity and durability. Shop now for precision optics!",
   },
@@ -42,7 +42,7 @@ export const categories: Category[] = [
     description:
       "Explore Holosun's range of innovative red dot sights designed for accuracy and durability",
     metaDescription:
-      "Explore Holosun's range of innovative red dot sights designed for accuracy and durability. Perfect for shooters of all levels, our red dot sights offer fast target acquisition and reliable performance in any environment. Shop now for top-tier optics!",
+      "Holosun's range of innovative red dot sights are designed for accuracy and durability. Perfect for shooters of all levels, our red dot sights offer fast target acquisition and reliable performance in any environment. Shop now for top-tier optics!",
   },
   {
     id: 36,
