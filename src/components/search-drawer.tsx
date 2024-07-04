@@ -17,16 +17,16 @@ export default function SearchDrawer({ featuredItems }) {
           className="drawer-overlay"
         ></label>
         <ul className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open">
-          <h4>Search our items</h4>
+          <p className="text-2xl font-bold mb-2">Search our items</p>
           <SearchForm />
           <div className="divider" />
           <div>
-            <h4 className="text-lg">Quick Links</h4>
+            <p className="text-lg font-bold">Quick Links</p>
             <CategoryLinks />
           </div>
           <div className="divider" />
           <div>
-            <h4 className="text-lg">Need some insipration?</h4>
+            <p className="text-lg font-bold">Need some insipration?</p>
             <ul className="mt-4 flex flex-col">
               {featuredItems.map((item) => (
                 <SearchDrawerFeatured
