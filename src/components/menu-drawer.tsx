@@ -73,6 +73,7 @@ export default function MenuDrawer() {
               target="_blank"
               rel="noopener"
             >
+              <p className="sr-only">Visit our Facebook Page</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -87,6 +88,7 @@ export default function MenuDrawer() {
               target="_blank"
               rel="noopener"
             >
+              <p className="sr-only">Visit our Instagram Page</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -101,6 +103,7 @@ export default function MenuDrawer() {
               target="_blank"
               rel="noopener"
             >
+              <p className="sr-only">Visit our Twitter Page</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
