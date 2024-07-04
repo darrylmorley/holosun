@@ -10,7 +10,7 @@ export default function Categories() {
             RED DOTS
           </p>
           <Image
-            src="/images/category/holosun-red-dot.png"
+            src="/images/category/holosun-red-dot.webp"
             width={400}
             height={400}
             alt="Holosun Red Dot Sight"
@@ -23,7 +23,7 @@ export default function Categories() {
             LASERS
           </p>
           <Image
-            src="/images/category/holosun-laser.png"
+            src="/images/category/holosun-laser.webp"
             width={400}
             height={400}
             alt="Holosun Red Dot Sight"
@@ -36,7 +36,7 @@ export default function Categories() {
             MAGNIFIERS
           </p>
           <Image
-            src="/images/category/holosun-magnifier.png"
+            src="/images/category/holosun-magnifier.webp"
             width={400}
             height={400}
             alt="Holosun Red Dot Sight"
@@ -49,7 +49,7 @@ export default function Categories() {
             MOUNTS
           </p>
           <Image
-            src="/images/category/holosun-spacer.png"
+            src="/images/category/holosun-spacer.webp"
             width={400}
             height={400}
             alt="Holosun Red Dot Sight"
