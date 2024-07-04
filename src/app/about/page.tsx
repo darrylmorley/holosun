@@ -40,9 +40,56 @@ export default function Page() {
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1 className="text-4xl lg:text-5xl uppercase font-black">About</h1>
+        <h1 className="text-4xl lg:text-5xl uppercase font-black">About Holosun UK</h1>
         <p className="text-lg">
-          Holosun has been delivering high quality red dot optics since 2013
+          Welcome to Holosun Optics UK, your premier destination for cutting-edge optical technology
+          and innovative sight solutions.
+        </p>
+      </div>
+      <div>
+        <h2>Who We Are</h2>
+        <p>
+          At Holosun Optics UK, we are dedicated to providing top-quality optics that enhance
+          accuracy and performance. Our passion for precision drives us to offer a wide range of
+          products designed to meet the needs of hunters and sport shooters.
+        </p>
+      </div>
+      <div>
+        <h2>Our Mission</h2>
+        <p>
+          Our mission is to equip you with reliable, high-performance optics that stand the test of
+          time. We believe in the power of innovation and are committed to delivering products that
+          incorporate the latest advancements in optical technology.
+        </p>
+      </div>
+      <div>
+        <h2>Why Choose Us</h2>
+        <p>
+          <ul>
+            <li>
+              <strong>Innovative Technology:</strong> Our products feature state-of-the-art
+              technology, including solar power, multi-reticle systems, and advanced LED
+              illumination.
+            </li>
+            <li>
+              <strong>Exceptional Quality:</strong> We adhere to the highest standards of quality
+              and durability, ensuring that our optics perform in the most demanding environments.
+            </li>
+            <li>
+              <strong>Customer Focus:</strong> Your satisfaction is our priority. We offer
+              unparalleled customer service and support to help you find the perfect optic for your
+              needs.
+            </li>
+          </ul>
+        </p>
+      </div>
+      <div>
+        <h2>Our Products</h2>
+        <p>
+          Holosun Optics UK offers a diverse range of products, including red dot sights,
+          magnifiers, laser aiming devices, and accessories. Each product is engineered with
+          precision and crafted for reliability, ensuring you have the best tools for your shooting
+          experience.
         </p>
       </div>
     </>
