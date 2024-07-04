@@ -57,6 +57,7 @@ export default function HeroCarousel() {
             {...rest}
             alt={common.alt}
             style={{ width: "100%", height: "auto", objectFit: "cover" }}
+            priority
           />
         </picture>
       </div>
