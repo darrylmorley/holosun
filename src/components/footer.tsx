@@ -46,10 +46,16 @@ export default function Footer() {
       <nav>
         <h6 className="footer-title">Products</h6>
         <Link
-          href="/shop/category/red-dot-and-holo-point"
+          href="/shop/category/red-dot-sights"
           className="link link-hover"
         >
-          Red Dots
+          Red Dot Sights
+        </Link>
+        <Link
+          href="/shop/category/reflex-sights"
+          className="link link-hover"
+        >
+          Reflex Sights
         </Link>
         <Link
           href="/shop/category/lasers"
