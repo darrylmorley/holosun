@@ -23,7 +23,7 @@ async function getItems() {
 }
 
 export const metadata: Metadata = {
-  title: "Premium Tactical Optics & Accessories: Holosun Optics UK",
+  title: "Tactical Optics & Accessories: Holosun Optics UK",
   description:
     "Explore the full range of Holosun's high-quality tactical optics and accessories. From red dot sights and magnifiers to aiming lasers and mounts, we have everything you need for precise shooting and reliability. Shop now for top-tier performance and innovation.",
 };
@@ -35,7 +35,7 @@ export default async function Page({ searchParams }: PageProps) {
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1 className="text-4xl lg:text-5xl font-black uppercase">Shop</h1>
+        <h1 className="text-4xl lg:text-5xl font-black uppercase">Shop Holosun Optics</h1>
         <p className="text-lg text-center">
           Explore the full range of Holosun&apos;s high-quality tactical optics and accessories.
         </p>

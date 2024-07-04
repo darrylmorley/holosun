@@ -6,7 +6,7 @@ import ProductCard from "@/components/product-card";
 
 export const metadata = {
   title: "Search Results",
-  description: "Search results for Holosun products",
+  description: "Your search results for Holosun products",
 };
 
 async function getSearchItems(query: string) {
@@ -47,7 +47,7 @@ export default async function Page({ searchParams }) {
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1 className="text-4xl lg:text-5xl font-black uppercase">Search Results</h1>
+        <h1 className="text-4xl lg:text-5xl font-black uppercase">Your Search Results</h1>
         <p className="text-lg text-center">
           Your search has {items.length} results for the term{" "}
           <span className="underline font-bold">{query}</span>
