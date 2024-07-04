@@ -19,7 +19,7 @@ export const categories: Category[] = [
     id: 139,
     slug: "lasers",
     name: "Lasers",
-    metaName: "Holosun Aiming Lasers - Precision Targeting",
+    metaName: "Holosun Aiming Lasers - Accurate and Reliable Targeting",
     description: "Discover Holosun's advanced aiming lasers, designed for accuracy and durability",
     metaDescription:
       "Holosun's advanced aiming lasers are designed for accuracy and durability. Our lasers ensure precise target acquisition in any condition!",
@@ -59,7 +59,7 @@ export const categories: Category[] = [
     slug: "reflex-sights",
     name: "Reflex Sights",
     description: "Explore our range of high-quality reflex sights. Perfect for precision shooting.",
-    metaName: "High-Quality Reflex Sights: Holosun Optics UK",
+    metaName: "Holosun Reflex Sights - Superior Accuracy and Performance",
     metaDescription: "High quality Reflex Sights form Holosun. Perfect for precision shooting!",
   },
 ];
