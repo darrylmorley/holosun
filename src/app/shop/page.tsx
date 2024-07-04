@@ -23,16 +23,16 @@ async function getItems() {
 }
 
 export const metadata: Metadata = {
-  title: "Tactical Optics & Accessories: Holosun Optics UK",
+  title: "Holosun Tactical Optics & Accessories: Holosun Optics UK",
   description:
-    "Explore the full range of Holosun's high-quality tactical optics and accessories. From red dot sights and magnifiers to aiming lasers and mounts, we have everything you need for precise shooting and reliability. Shop now for top-tier performance and innovation.",
+    "Explore the full range of Holosun's high-quality tactical optics. From red dot and reflex sights to aiming lasers and mounts.",
   alternates: {
     canonical: "https://www.holosun-optics.co.uk/shop",
   },
   openGraph: {
     title: "Tactical Optics & Accessories: Holosun Optics UK",
     description:
-      "Explore the full range of Holosun's high-quality tactical optics and accessories. From red dot sights and magnifiers to aiming lasers and mounts, we have everything you need for precise shooting and reliability. Shop now for top-tier performance and innovation.",
+      "Explore the full range of Holosun's high-quality tactical optics. From red dot and reflex sights to aiming lasers and mounts.",
     url: "https://www.holosun-optics.co.uk/shop",
     images: [
       {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tactical Optics & Accessories: Holosun Optics UK",
     description:
-      "Explore the full range of Holosun's high-quality tactical optics and accessories. From red dot sights and magnifiers to aiming lasers and mounts, we have everything you need for precise shooting and reliability. Shop now for top-tier performance and innovation.",
+      "Explore the full range of Holosun's high-quality tactical optics. From red dot and reflex sights to aiming lasers and mounts.",
     images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
   },
 };
