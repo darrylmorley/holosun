@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: PageProps) {
       card: "summary_large_image",
       title: `${capitalise(item.name)}`,
       description: `${description}`,
-      images: images, // Must be an absolute URL
+      images: images,
     },
   };
 }
