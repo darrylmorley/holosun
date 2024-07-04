@@ -51,6 +51,9 @@ export async function generateMetadata({ params }: PageProps) {
   return {
     title: getMetaNameFromId(id),
     description: getMetaDescriptionFromId(id),
+    alternates: {
+      canonical: `https://www.holosun-optics.co.uk/shop/category/${slug}`,
+    },
   };
 }
 

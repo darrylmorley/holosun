@@ -1,3 +1,12 @@
+export const metadata = {
+  title: "About Holosun Optics UK",
+  description:
+    "Discover the innovation and precision behind Holosun Optics UK. Learn about our mission, cutting-edge technologies, and commitment to delivering the highest quality red dot sights and tactical optics.",
+  alternates: {
+    canonical: "https://www.holsun-optics.co.uk/about",
+  },
+};
+
 export default function Page() {
   return (
     <>
