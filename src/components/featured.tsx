@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Featured({ featuredItems }) {
   return (
     <>
-      <h2 className="text-center text-4xl font-black my-12">FEATURED</h2>
+      <h2 className="text-center text-4xl font-black my-12">FEATURED HOLOSUN OPTICS</h2>
       <ul className="grid grid-cols-2 gap-2 px-4 lg:px-24">
         {featuredItems
           .sort((a, b) => a.price - b.price)
