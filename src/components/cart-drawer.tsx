@@ -42,9 +42,9 @@ export default function CartDrawer() {
         ></label>
         {isEmpty || !items.length ? (
           <ul className="menu min-h-full w-96 bg-white p-4 text-base-content text-center">
-            <h4>Shopping Cart</h4>
+            <p className="text-2xl font-bold">Shopping Cart</p>
             <div className="divider"></div>
-            <h4 className="mt-4">Your cart is empty</h4>
+            <p className="mt-4 font-bold text-xl">Your cart is empty</p>
             <li className="mt-8">Head over to the shop page to browse our products</li>
             <Link
               href="/shop"
@@ -57,7 +57,7 @@ export default function CartDrawer() {
           </ul>
         ) : (
           <ul className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open">
-            <h4 className="text-xl text-gray-800 text-center">Shopping Cart</h4>
+            <p className="text-2xl font-bold">Shopping Cart</p>
             <div className="divider" />
             <CartDrawerItems
               items={products}
