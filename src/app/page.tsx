@@ -42,7 +42,7 @@ export default async function Page() {
 
       <section>
         <Parallax
-          imageSrc="/images/parallax/holosun_reddot_magnifier_rifle.png"
+          imageSrc="/images/parallax/holosun_reddot_magnifier_rifle.jpg"
           text="DICOVER HIGH QUALITY RED DOT OPTICS FROM HOLOSUN®"
         />
         {/* Credit to https://www.facebook.com/instinct.tactique for image  */}
