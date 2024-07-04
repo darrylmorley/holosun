@@ -29,6 +29,7 @@ export default async function Page() {
 
   return (
     <>
+      <h1 className="sr-only">Holosun Optics</h1>
       {/* Hero Section */}
       <section>
         <HeroCarousel />
