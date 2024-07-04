@@ -25,11 +25,20 @@ export default function CategoryLinks() {
       </li>
       <li>
         <Link
-          href="/shop/category/red-dots"
+          href="/shop/category/red-dot-sights"
           className="hover:bg-accent hover:text-white"
           onClick={() => toggleDrawer("search-drawer")}
         >
-          Red Dots
+          Red Dot Sights
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/shop/category/reflex-sights"
+          className="hover:bg-accent hover:text-white"
+          onClick={() => toggleDrawer("search-drawer")}
+        >
+          Reflex Sights
         </Link>
       </li>
       <li>

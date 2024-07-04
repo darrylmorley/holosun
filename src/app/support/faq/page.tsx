@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Holosun FAQ - Your Questions Answered",
@@ -29,9 +30,10 @@ export default function Page() {
           <summary className="text-xl font-medium">Why Is My Objective Lens Angled?</summary>
           <div className="py-2">
             <p>
-              A canted objective lens is an integral feature of a reflective/reflex sight&apos;s
-              design. This canting is necessary to correctly reflect the dot or reticle back to the
-              user&apos;s eye.
+              A canted objective lens is an integral feature of a reflective/
+              <Link href="/shop/category/reflex-sights">reflex sight&apos;s</Link> design. This
+              canting is necessary to correctly reflect the dot or reticle back to the user&apos;s
+              eye.
             </p>
           </div>
         </details>
