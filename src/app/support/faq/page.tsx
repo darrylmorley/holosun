@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Holosun FAQ - Your Questions Answered",
   description:
     "Find answers to common questions about Holosun's products. Learn about features, compatibility, installation, and more. Visit our FAQ page for support and information.",
+  alternates: {
+    canonical: "https://www.holosun-optics.co.uk/support/faq",
+  },
 };
 
 export default function Page() {

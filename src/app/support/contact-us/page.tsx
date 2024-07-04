@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Contact Holosun Optics UK - Reach Our Team",
   description:
     "Get in touch with our team for help with your red dot sights, magnifiers, aiming lasers, and mounts. We're here to provide expert guidance and address any inquiries you may have.",
+  alternates: {
+    canonical: "https://www.holosun-optics.co.uk/support/contact-us",
+  },
 };
 
 export default function Page() {
