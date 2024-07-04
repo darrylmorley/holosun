@@ -1,3 +1,4 @@
+import { stripHtml } from "string-strip-html";
 import { ShieldCheck } from "lucide-react";
 import dynamic from "next/dynamic";
 
@@ -21,9 +22,44 @@ export async function generateMetadata({ params }: PageProps) {
   const { slug } = params;
   const item = await getItem(slug);
 
+  const images = Array.isArray(item.Images.Image)
+    ? // @ts-expect-error - Images is not defined in the Prisma schema
+      item.Images.Image.map((image) => {
+        return `${image.baseImageURL}/w_800/${image.publicID}.webp`;
+      })
+    : // @ts-expect-error - Images is not defined in the Prisma schema
+      [`${item.Images.Image.baseImageURL}/w_800/${item.Images.Image.publicID}.webp`];
+
+  const description = stripHtml(item.shortDescription).result;
+
   return {
     title: `${capitalise(item.name)}`,
-    description: `${item.shortDescription}`,
+    description: `${description}`,
+    alternates: {
+      canonical: `/shop/${item.slug}`,
+    },
+    openGraph: {
+      title: `${capitalise(item.name)}`,
+      description:
+        "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
+      url: `https://www.holosun-optics.co.uk/shop/${item.slug}`,
+      siteName: "Holosun Optics UK",
+      images: [
+        {
+          url: images[0],
+          width: 1080,
+          height: 1080,
+        },
+      ],
+      locale: "en_GB",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${capitalise(item.name)}`,
+      description: `${description}`,
+      images: images, // Must be an absolute URL
+    },
   };
 }
 

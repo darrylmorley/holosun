@@ -18,8 +18,41 @@ const archivo = Archivo({
 });
 
 export const metadata = {
-  title: "Holusun Optics",
-  description: "Holsun Optics UK",
+  title: "Holusun Optics UK",
+  description:
+    "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Holosun Optics UK",
+    description:
+      "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
+    url: "https://www.holosun-optics.co.uk",
+    siteName: "Holosun Optics UK",
+    images: [
+      {
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg", // Must be an absolute URL
+        width: 1080,
+        height: 1350,
+      },
+      {
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg", // Must be an absolute URL
+        width: 1920,
+        height: 860,
+        alt: "Holosun AEMS Red Dot",
+      },
+    ],
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Holusun Optics UK",
+    description:
+      "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
+    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
+  },
 };
 
 async function getFeaturedItems() {
