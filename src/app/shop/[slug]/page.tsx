@@ -43,7 +43,6 @@ export async function generateMetadata({ params }: PageProps) {
       description:
         "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
       url: `https://www.holosun-optics.co.uk/shop/${item.slug}`,
-      siteName: "Holosun Optics UK",
       images: [
         {
           url: images[0],

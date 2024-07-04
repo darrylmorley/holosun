@@ -6,12 +6,18 @@ export const metadata = {
     "Our Terms & Conditions page outlines the rules and expectations that govern your interactions with Holosun Optics UK. Familiarize yourself with these guidelines to ensure your understanding of our products and services.",
   openGraph: {
     title: "Terms & Conditions: Your Guide to Holosun Optics UK's Policies",
-    siteName: "Holosun Optics UK",
     description:
       "Our Terms & Conditions page outlines the rules and expectations that govern your interactions with Holosun Optics UK. Familiarize yourself with these guidelines to ensure your understanding of our products and services.",
-    url: `/terms`,
+    url: "https://www.holosun-optics.co.uk/terms",
     locale: "en_GB",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terms & Conditions: Your Guide to Holosun Optics UK's Policies",
+    description:
+      "Our Terms & Conditions page outlines the rules and expectations that govern your interactions with Holosun Optics UK. Familiarize yourself with these guidelines to ensure your understanding of our products and services.",
+    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
   },
   alternates: {
     canonical: "https://www.holosun-optics.co.uk/terms",

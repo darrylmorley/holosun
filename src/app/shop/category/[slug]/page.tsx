@@ -3,10 +3,9 @@ import prisma from "@/lib/db/prisma";
 import Link from "next/link";
 
 import {
+  getCategoryBySlug,
   getDescriptionFromId,
   getIdFromSlug,
-  getMetaDescriptionFromId,
-  getMetaNameFromId,
   getNameFromId,
 } from "@/lib/utils/helpers";
 
@@ -46,13 +45,41 @@ async function getItems(slug: string) {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = params;
-  const id = getIdFromSlug(slug);
+
+  const category = getCategoryBySlug(slug);
+  const { title, descripton } = category;
 
   return {
-    title: getMetaNameFromId(id),
-    description: getMetaDescriptionFromId(id),
+    title: title,
+    description: descripton,
     alternates: {
       canonical: `https://www.holosun-optics.co.uk/shop/category/${slug}`,
+    },
+    openGraph: {
+      title: title,
+      description: descripton,
+      url: `https://www.holosun-optics.co.uk/shop/category/${slug}`,
+      images: [
+        {
+          url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg", // Must be an absolute URL
+          width: 1080,
+          height: 1350,
+        },
+        {
+          url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg", // Must be an absolute URL
+          width: 1920,
+          height: 860,
+          alt: "Holosun AEMS Red Dot",
+        },
+      ],
+      locale: "en_GB",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: descripton,
+      images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
     },
   };
 }

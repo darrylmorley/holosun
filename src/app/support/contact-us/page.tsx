@@ -8,6 +8,34 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.holosun-optics.co.uk/support/contact-us",
   },
+  openGraph: {
+    title: "Contact Holosun Optics UK - Reach Our Team",
+    description:
+      "Get in touch with our team for help with your red dot sights, magnifiers, aiming lasers, and mounts. We're here to provide expert guidance and address any inquiries you may have.",
+    url: "https://www.holosun-optics.co.uk/support/contact-us",
+    images: [
+      {
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg", // Must be an absolute URL
+        width: 1080,
+        height: 1350,
+      },
+      {
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg", // Must be an absolute URL
+        width: 1920,
+        height: 860,
+        alt: "Holosun AEMS Red Dot",
+      },
+    ],
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Holosun Optics UK - Reach Our Team",
+    description:
+      "Get in touch with our team for help with your red dot sights, magnifiers, aiming lasers, and mounts. We're here to provide expert guidance and address any inquiries you may have.",
+    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
+  },
 };
 
 export default function Page() {

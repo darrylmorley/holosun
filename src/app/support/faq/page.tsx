@@ -8,6 +8,34 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://www.holosun-optics.co.uk/support/faq",
   },
+  openGraph: {
+    title: "Holosun FAQ - Your Questions Answered",
+    description:
+      "Find answers to common questions about Holosun's products. Learn about features, compatibility, installation, and more. Visit our FAQ page for support and information.",
+    url: "https://www.holosun-optics.co.uk/support/faq",
+    images: [
+      {
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg", // Must be an absolute URL
+        width: 1080,
+        height: 1350,
+      },
+      {
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg", // Must be an absolute URL
+        width: 1920,
+        height: 860,
+        alt: "Holosun AEMS Red Dot",
+      },
+    ],
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Holosun FAQ - Your Questions Answered",
+    description:
+      "Find answers to common questions about Holosun's products. Learn about features, compatibility, installation, and more. Visit our FAQ page for support and information.",
+    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
+  },
 };
 
 export default function Page() {
