@@ -20,11 +20,11 @@ const archivo = Archivo({
 export const metadata = {
   title: "Holusun Optics UK",
   description:
-    "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
+    "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Innovative technology, rugged designs, and unparalleled performance!",
   openGraph: {
     title: "Holosun Optics UK",
     description:
-      "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
+      "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Innovative technology, rugged designs, and unparalleled performance!",
     url: "https://www.holosun-optics.co.uk",
     siteName: "Holosun Optics UK",
     images: [
@@ -47,7 +47,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Holusun Optics UK",
     description:
-      "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
+      "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Innovative technology, rugged designs, and unparalleled performance!",
     images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
   },
 };
