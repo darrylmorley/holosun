@@ -1,26 +1,25 @@
 import { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Holosun FAQ - Your Questions Answered",
+  title: "Holosun Model Number Guide: Understand Our Optics & Lasers Model Numbers",
   description:
-    "Find answers to common questions about Holosun's products. Learn about features, compatibility, installation, and more. Visit our FAQ page for support and information.",
+    "Explore the Holosun Model Number Guide to understand the meaning behind each model's optics and lasers.",
   alternates: {
-    canonical: "https://www.holosun-optics.co.uk/support/faq",
+    canonical: "https://www.holosun-optics.co.uk/support/model-guide",
   },
   openGraph: {
-    title: "Holosun FAQ - Your Questions Answered",
+    title: "Holosun Model Number Guide: Understand Our Optics & Lasers Model Numbers",
     description:
-      "Find answers to common questions about Holosun's products. Learn about features, compatibility, installation, and more. Visit our FAQ page for support and information.",
-    url: "https://www.holosun-optics.co.uk/support/faq",
+      "Explore the Holosun Model Number Guide to understand the meaning behind each model's optics and lasers.",
+    url: "https://www.holosun-optics.co.uk/support/model-guide",
     images: [
       {
-        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg", // Must be an absolute URL
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg",
         width: 1080,
         height: 1350,
       },
       {
-        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg", // Must be an absolute URL
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg",
         width: 1920,
         height: 860,
         alt: "Holosun AEMS Red Dot",
@@ -31,10 +30,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Holosun FAQ - Your Questions Answered",
+    title: "Holosun Model Number Guide: Understand Our Optics & Lasers Model Numbers",
     description:
-      "Find answers to common questions about Holosun's products. Learn about features, compatibility, installation, and more. Visit our FAQ page for support and information.",
-    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
+      "Explore the Holosun Model Number Guide to understand the meaning behind each model's optics and lasers.",
+    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"],
   },
 };
 
@@ -42,10 +41,20 @@ export default function Page() {
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
-        <h1 className="text-5xl font-black uppercase">Model Number Glossary</h1>
+        <h1 className="text-5xl font-black uppercase">Model Number Guide</h1>
         <h2 className="text-lg text-center">Understanding HOLOSUN Model Numbers</h2>
       </div>
       <div className="px-12 lg:px-24 py-12">
+        <p className="mb-8">
+          Welcome to the HOLOSUN Model Number Guide! This reference page is designed to help you
+          decode the nomenclature of HOLOSUN and HOLOSUN Elite products. By understanding the
+          meaning behind each model&apos;s optics and laser designations, you can make informed
+          decisions about which features best suit your needs. From reticle types and accessories to
+          optic types and unique features like solar failsafe and titanium housing, this guide
+          covers all the essential details. Whether you&apos;re a seasoned user or new to HOLOSUN
+          products, this guide will provide the clarity you need to navigate our product lineup with
+          confidence.
+        </p>
         <h3>Optics</h3>
         <div className="mt-4 ml-4 space-y-6">
           <div>

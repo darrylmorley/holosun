@@ -85,6 +85,12 @@ export default function Footer() {
           FAQ
         </Link>
         <Link
+          href="/support/model-guide"
+          className="link link-hover"
+        >
+          Model Guide
+        </Link>
+        <Link
           href="#"
           className="link link-hover"
         >
