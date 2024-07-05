@@ -1,8 +1,8 @@
-# Holosu Optics UK
+# Holosun Optics UK
 
 ## Table of Contents
 
-- [Holosu Optics UK](#holosu-optics-uk)
+- [Holosun Optics UK](#holosun-optics-uk)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Features](#features)
