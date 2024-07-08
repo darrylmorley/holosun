@@ -17,8 +17,8 @@ export default function CartDrawerItems({ items, updateItemQuantity, removeItem 
         ? items.map((item) => {
             if (item.id === 7476 || item.id === 8403) return null;
             return (
-              <div key={item.id}>
-                <li className="flex">
+              <li key={item.id}>
+                <div className="flex">
                   <picture className="relative flex items-center justify-center min-w-20 min-h-20 mr-2 bg-stone-300">
                     <Image
                       src={item.image}
@@ -42,6 +42,8 @@ export default function CartDrawerItems({ items, updateItemQuantity, removeItem 
                           className="w-6 h-6 bg-stone-100 join-item"
                           onClick={(e) => handleRemoveItem(e, item)}
                           disabled={item.quantity <= 1}
+                          title="Minus Item Quantity"
+                          type="button"
                         >
                           -
                         </button>
@@ -52,26 +54,31 @@ export default function CartDrawerItems({ items, updateItemQuantity, removeItem 
                           value={item.quantity}
                           max={item.qoh}
                           disabled
+                          title="Quantity Display"
                         />
                         <button
                           className="w-6 h-6 bg-stone-100 join-item"
                           onClick={(e) => handleAddItem(e, item)}
                           disabled={item.quantity >= item.qoh}
+                          title="Add Item Quantity"
+                          type="button"
                         >
                           +
                         </button>
                       </form>
-                      <p
+                      <button
                         onClick={() => removeItem(item.id)}
                         className="text-xs font-bold hover:text-accent cursor-pointer"
+                        title="Remove Item"
+                        type="button"
                       >
                         Remove
-                      </p>
+                      </button>
                     </div>
                   </div>
-                </li>
+                </div>
                 <div className="divider" />
-              </div>
+              </li>
             );
           })
         : null}

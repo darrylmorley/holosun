@@ -18,6 +18,7 @@ export default function AddToCartButton({ item }) {
       onClick={handleAddToCartClick}
       disabled={disabled}
       data-umami-event="add-to-cart"
+      title="Add to Cart"
     >
       {text}
     </button>
