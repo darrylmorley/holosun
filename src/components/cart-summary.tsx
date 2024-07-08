@@ -46,6 +46,8 @@ export default function CartSummary({ stdDelivery, NIDelivery }) {
             className="btn btn-accent text-white w-1/2 mt-4"
             onClick={handleEstimateClick}
             data-umami-event="postcode-estimate"
+            title="Estimate Shipping Cost"
+            type="button"
           >
             Estimate
           </button>
@@ -72,7 +74,7 @@ export default function CartSummary({ stdDelivery, NIDelivery }) {
           passHref
           className="btn btn-accent w-full text-white"
         >
-          <button>Checkout</button>
+          Checkout
         </Link>
       </div>
       <div className="flex flex-col items-center my-8">

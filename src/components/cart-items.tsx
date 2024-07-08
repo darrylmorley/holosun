@@ -50,6 +50,8 @@ export default function CartItems() {
                   <button
                     onClick={() => removeItem(item.id)}
                     className="font-bold"
+                    title="Remove Item"
+                    type="button"
                   >
                     Remove
                   </button>
@@ -62,6 +64,8 @@ export default function CartItems() {
                     className="w-8 h-8 bg-stone-100 join-item"
                     onClick={(e) => handleRemoveItem(e, item)}
                     disabled={item.quantity <= 1}
+                    title="Decrease Quantity"
+                    type="button"
                   >
                     -
                   </button>
@@ -72,12 +76,15 @@ export default function CartItems() {
                     value={item.quantity}
                     max={item.qoh}
                     disabled
+                    title="Display Quantity"
                   />
                   <div id="increment-container">
                     <button
                       className="w-8 h-8 bg-stone-100 join-item"
                       onClick={(e) => handleAddItem(e, item)}
                       disabled={item.quantity >= item.qoh}
+                      title="Increase Quantity"
+                      type="button"
                     >
                       +
                     </button>
