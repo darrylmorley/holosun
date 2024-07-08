@@ -14,7 +14,10 @@ export default function Header({ featuredItems }) {
     <header className="h-16 p-4 shadow-sm">
       <div className="flex items-center">
         <div className="w-1/4 flex justify-start pl-2">
-          <button className="z-20">
+          <button
+            className="z-20"
+            title="Menu"
+          >
             <label htmlFor="menu-drawer">
               <MenuIcon className="cursor-pointer" />
             </label>
@@ -34,7 +37,7 @@ export default function Header({ featuredItems }) {
         </div>
         <div className="w-1/4 pr-2">
           <div className="w-full space-x-3 flex justify-end">
-            <button>
+            <button title="Search">
               <label htmlFor="search-drawer">
                 <Search
                   size={22}
@@ -42,7 +45,7 @@ export default function Header({ featuredItems }) {
                 />
               </label>
             </button>
-            <button>
+            <button title="Cart">
               <label htmlFor="cart-drawer">
                 <ShoppingBag
                   size={22}
