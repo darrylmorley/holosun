@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import prisma from "@/lib/db/prisma";
 
-import HeroCarousel from "@/components/hero-carousel";
+import Hero from "@/components/hero";
 import Categories from "@/components/categories";
 import Features from "@/components/features";
 import Featured from "@/components/featured";
@@ -64,7 +64,7 @@ export default async function Page() {
       <h1 className="sr-only">Holosun Optics</h1>
       {/* Hero Section */}
       <section>
-        <HeroCarousel />
+        <Hero />
       </section>
 
       {/* Cateogries Section */}
