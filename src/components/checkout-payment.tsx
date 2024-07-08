@@ -1,3 +1,4 @@
+// TODO iframe checkout
 "use client";
 import { useState } from "react";
 import axios from "axios";
@@ -41,9 +42,15 @@ const CheckoutPayment = () => {
             value={orderId}
             onChange={(e) => setOrderId(e.target.value)}
             required
+            title="Order ID"
           />
         </div>
-        <button type="submit">Generate Tokenization</button>
+        <button
+          type="submit"
+          title="Generate Token"
+        >
+          Generate Tokenization
+        </button>
       </form>
 
       {iframeSrc && (

@@ -19,8 +19,9 @@ function SubmitButton() {
     <button
       type="submit"
       className="self-end px-6 py-3 font-bold text-white rounded-sm w-36 bg-accent hover:ring-2 hover:ring-offset-2 active:bg-secondary active:ring-secondary"
-      aria-disabled={pending}
+      // aria-disabled={pending}
       data-umami-event="item-contact-form"
+      title="Submit Checkout Details"
     >
       {pending ? <span className="loading loading-spinner"></span> : "Send"}
     </button>
@@ -43,6 +44,8 @@ export default function QuestionForm({ itemId, itemName }) {
         <button
           onClick={() => closeModal("question-modal")}
           className="btn w-32 bg-accent text-white"
+          type="button"
+          title="Close Form"
         >
           Close
         </button>
@@ -63,6 +66,8 @@ export default function QuestionForm({ itemId, itemName }) {
         <button
           onClick={() => closeModal("question-modal")}
           className="btn w-32 bg-accent text-white"
+          title="Close Form"
+          type="button"
         >
           Close
         </button>
@@ -122,6 +127,7 @@ export default function QuestionForm({ itemId, itemName }) {
           type="text"
           value={itemName}
           readOnly
+          title="Item Name"
         />
         <input
           id="itemId"
@@ -129,6 +135,7 @@ export default function QuestionForm({ itemId, itemName }) {
           type="number"
           value={itemId}
           readOnly
+          title="Item ID"
         />
       </div>
       <SubmitButton />

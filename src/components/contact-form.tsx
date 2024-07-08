@@ -18,8 +18,9 @@ function SubmitButton() {
     <button
       type="submit"
       className="self-end px-6 py-3 font-bold text-white rounded-sm w-36 bg-accent hover:ring-2 hover:ring-offset-2 active:bg-secondary active:ring-secondary"
-      aria-disabled={pending}
+      // aria-disabled={pending}
       data-umami-event="contact-form"
+      title="Send"
     >
       {pending ? <span className="loading loading-spinner"></span> : "Send"}
     </button>

@@ -48,6 +48,8 @@ export default function CheckoutSummary({ deliveryItem }) {
                           className="w-6 h-6 bg-stone-300 join-item"
                           onClick={(e) => handleRemoveItem(e, item)}
                           disabled={item.quantity <= 1}
+                          title="Decrease Quantity"
+                          type="button"
                         >
                           -
                         </button>
@@ -58,11 +60,14 @@ export default function CheckoutSummary({ deliveryItem }) {
                           value={item.quantity}
                           max={item.qoh}
                           disabled
+                          title="Display Quantity"
                         />
                         <button
                           className="w-6 h-6 bg-stone-300 join-item"
                           onClick={(e) => handleAddItem(e, item)}
                           disabled={item.quantity >= item.qoh}
+                          title="Increase Quantity"
+                          type="button"
                         >
                           +
                         </button>

@@ -70,7 +70,12 @@ export default function DeliveryModal() {
           method="dialog"
           className="modal-backdrop"
         >
-          <button>close</button>
+          <button
+            type="button"
+            title="Close"
+          >
+            close
+          </button>
         </form>
       </dialog>
     </>

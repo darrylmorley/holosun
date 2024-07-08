@@ -31,6 +31,8 @@ export default function SearchForm() {
         className="btn btn-accent item-join text-white"
         onClick={(e) => handleSearchClick(e, text)}
         data-umami-event="search-form"
+        type="button"
+        title="Search"
       >
         Search
       </button>

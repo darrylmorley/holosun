@@ -32,7 +32,12 @@ export default function QuestionModal({ item }) {
           method="dialog"
           className="modal-backdrop"
         >
-          <button>close</button>
+          <button
+            title="Close Form"
+            type="button"
+          >
+            close
+          </button>
         </form>
       </dialog>
     </>

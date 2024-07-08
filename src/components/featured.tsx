@@ -37,6 +37,8 @@ export default function Featured({ featuredItems }) {
                     <button
                       className="btn btn-accent text-white self-center"
                       data-umami-event="featured-item-click"
+                      type="button"
+                      title="Buy Now"
                     >
                       BUY NOW
                     </button>
