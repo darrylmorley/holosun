@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Categories() {
   return (
-    <div className="grid grid-cols-2 gap-2 mb-2">
+    <div className="grid grid-cols-2 gap-2 mb-2 mt-2">
       <Link href="/shop/category/red-dot-sights">
         <div className="relative h-[30rem] w-full flex justify-center items-center col-span-1 bg-stone-300 hover:bg-secondary group">
           <p className="absolute invisible group-hover:visible group-hover:bg-secondary group-hover:px-3 group-hover:py-2 group-hover:rounded-sm z-10 text-center text-3xl text-white font-black transition-all duration-200 ease-in-out">
