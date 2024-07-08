@@ -71,7 +71,8 @@ async function getItem(slug: string) {
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug, url } = params;
+  const { slug } = params;
+  const url = `https://www.holosun-optics.co.uk/${slug}`;
   const item = await getItem(slug);
 
   // @ts-expect-error - Images is not defined in the Prisma schema
@@ -115,7 +116,6 @@ export default async function Page({ params }: PageProps) {
               <li className="flex items-center gap-2 hover:text-accent text-sm lg:text-base cursor-pointer">
                 <ShareButton
                   title={item.name}
-                  text={`Check out this ${item.name} @ holosun.co.uk!`}
                   url={url}
                   itemID={item.id}
                 />
