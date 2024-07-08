@@ -26,7 +26,7 @@ export default function HeroCarousel() {
     width: 1920,
     height: 860,
     quality: 80,
-    src: "/images/hero-carousel/aems-banner-1920x860.jpg",
+    src: "/images/hero-carousel/aems-banner-1920x860.webp",
   });
   const {
     props: { srcSet: mobile, ...rest },
@@ -35,7 +35,7 @@ export default function HeroCarousel() {
     width: 1080,
     height: 1350,
     quality: 70,
-    src: "/images/hero-carousel/aems-banner-1080x1350.jpg",
+    src: "/images/hero-carousel/aems-banner-1080x1350.webp",
   });
 
   return (
