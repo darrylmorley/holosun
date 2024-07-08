@@ -41,22 +41,22 @@ export default function CartDrawer() {
           className="drawer-overlay"
         ></label>
         {isEmpty || !items.length ? (
-          <ul className="menu min-h-full w-96 bg-white p-4 text-base-content text-center">
+          <div className="menu min-h-full w-96 bg-white p-4 text-base-content text-center">
             <p className="text-2xl font-bold">Shopping Cart</p>
             <div className="divider"></div>
             <p className="mt-4 font-bold text-xl">Your cart is empty</p>
-            <li className="mt-8">Head over to the shop page to browse our products</li>
+            <p className="mt-8">Head over to the shop page to browse our products</p>
             <Link
               href="/shop"
               passHref
               className="btn btn-accent text-white mt-8"
               onClick={() => toggleDrawer("cart-drawer")}
             >
-              <button>Shop</button>
+              Shop
             </Link>
-          </ul>
+          </div>
         ) : (
-          <ul className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open">
+          <div className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open">
             <p className="text-2xl font-bold">Shopping Cart</p>
             <div className="divider" />
             <CartDrawerItems
@@ -82,19 +82,21 @@ export default function CartDrawer() {
                   href="/shop/cart"
                   passHref
                   onClick={() => toggleDrawer("cart-drawer")}
+                  className="btn btn-outline bg-white w-full"
                 >
-                  <button className="btn btn-outline bg-white w-full">View Cart</button>
+                  View Cart
                 </Link>
                 <Link
                   href="/shop/checkout"
                   passHref
                   onClick={() => toggleDrawer("cart-drawer")}
+                  className="btn btn-accent text-white w-full"
                 >
-                  <button className="btn btn-accent text-white w-full">Checkout</button>
+                  Checkout
                 </Link>
               </div>
             </div>
-          </ul>
+          </div>
         )}
       </div>
     </div>

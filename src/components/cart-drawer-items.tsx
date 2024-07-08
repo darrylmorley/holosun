@@ -12,7 +12,7 @@ export default function CartDrawerItems({ items, updateItemQuantity, removeItem 
   };
 
   return (
-    <>
+    <ul>
       {items
         ? items.map((item) => {
             if (item.id === 7476 || item.id === 8403) return null;
@@ -82,6 +82,6 @@ export default function CartDrawerItems({ items, updateItemQuantity, removeItem 
             );
           })
         : null}
-    </>
+    </ul>
   );
 }
