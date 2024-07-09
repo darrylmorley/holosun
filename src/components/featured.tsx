@@ -26,6 +26,7 @@ export default function Featured({ featuredItems }) {
                       alt={item.name}
                       width={300}
                       height={300}
+                      sizes="(min-width: 200px) and (max-width: 800px) 110px, (min-width: 800px) 300px"
                     />
                   </picture>
                   <h3 className="text-sm lg:text-xl font-black text-center">{item.name}</h3>
