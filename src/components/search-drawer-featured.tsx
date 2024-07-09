@@ -10,13 +10,13 @@ export default function SearchDrawerFeatured({ item }) {
     : `${item.Images.Image.baseImageURL}/w_70/${item.Images.Image.publicID}.webp`;
 
   return (
-    <Link
-      href={`/shop/${item.slug}`}
-      onClick={() => toggleDrawer("search-drawer")}
+    <li
+      key={item.id}
+      className="flex"
     >
-      <li
-        key={item.id}
-        className="flex"
+      <Link
+        href={`/shop/${item.slug}`}
+        onClick={() => toggleDrawer("search-drawer")}
       >
         <div className="flex">
           <picture className="relative flex justify-center items-center min-w-20 min-h-20 mr-2 bg-stone-300">
@@ -38,8 +38,7 @@ export default function SearchDrawerFeatured({ item }) {
             </span>
           </div>
         </div>
-      </li>
-      <div className="divider" />
-    </Link>
+      </Link>
+    </li>
   );
 }
