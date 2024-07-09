@@ -35,7 +35,7 @@ export default function Featured({ featuredItems }) {
                     passHref
                   >
                     <button
-                      className="btn btn-accent text-white self-center"
+                      className="btn btn-secondary hover:btn-accent hover:text-white text-white self-center"
                       data-umami-event="featured-item-click"
                       type="button"
                       title="Buy Now"

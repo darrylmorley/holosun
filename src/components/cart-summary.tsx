@@ -72,7 +72,7 @@ export default function CartSummary({ stdDelivery, NIDelivery }) {
         <Link
           href="/shop/checkout"
           passHref
-          className="btn btn-accent w-full text-white"
+          className="btn btn-secondary hover:btn-accent hover:text-white w-full text-white"
         >
           Checkout
         </Link>

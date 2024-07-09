@@ -28,7 +28,7 @@ export default function SearchForm() {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <button
-        className="btn btn-accent item-join text-white"
+        className="btn btn-secondary hover:btn-accent hover:text-white item-join text-white"
         onClick={(e) => handleSearchClick(e, text)}
         data-umami-event="search-form"
         type="button"

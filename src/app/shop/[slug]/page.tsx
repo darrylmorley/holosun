@@ -231,12 +231,6 @@ export default async function Page({ params }: PageProps) {
           </div>
         </div>
       </div>
-      {/* <div className="mt-4">
-        <p
-          dangerouslySetInnerHTML={{ __html: item.longDescription }}
-          className="prose text-base leading-relaxed"
-        />
-      </div> */}
     </div>
   );
 }

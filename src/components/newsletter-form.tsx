@@ -14,7 +14,7 @@ function SubmitButton() {
   return (
     <button
       type="submit"
-      className="btn btn-md join-item btn-accent text-white"
+      className="btn btn-md join-item btn-secondary hover:btn-accent hover:text-white text-white"
       // aria-disabled={pending}
       data-umami-event="email-signup"
       title="Send"

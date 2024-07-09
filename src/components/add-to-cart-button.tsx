@@ -14,7 +14,7 @@ export default function AddToCartButton({ item }) {
 
   const Button = (text, disabled) => (
     <button
-      className={`btn w-full ${disabled ? "btn-disabled !bg-secondary !text-white" : "bg-accent hover:bg-accent-content text-white"}`}
+      className={`btn w-full ${disabled ? "btn-disabled !bg-secondary !text-white" : "bg-secondary hover:bg-accent hover:text-white text-white"}`}
       onClick={handleAddToCartClick}
       disabled={disabled}
       data-umami-event="add-to-cart"

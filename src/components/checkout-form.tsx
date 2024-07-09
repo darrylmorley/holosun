@@ -406,7 +406,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       </section>
       <button
         type="submit"
-        className="btn btn-accent text-white w-full"
+        className="btn btn-secondary hover:btn-accent hover:text-white text-white w-full"
         data-umami-event="checkout"
         title="Checkout"
       >

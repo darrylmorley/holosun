@@ -49,7 +49,7 @@ export default function CartDrawer() {
             <Link
               href="/shop"
               passHref
-              className="btn btn-accent text-white mt-8"
+              className="btn btn-secondary hover:btn-accent hover:text-white text-white mt-8"
               onClick={() => toggleDrawer("cart-drawer")}
             >
               Shop
@@ -90,7 +90,7 @@ export default function CartDrawer() {
                   href="/shop/checkout"
                   passHref
                   onClick={() => toggleDrawer("cart-drawer")}
-                  className="btn btn-accent text-white w-full"
+                  className="btn btn-secondary hover:btn-accent hover:text-white text-white w-full"
                 >
                   Checkout
                 </Link>
