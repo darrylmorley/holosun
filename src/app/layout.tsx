@@ -97,12 +97,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Header featuredItems={featuredItems} />
           <main className="flex-grow">{children}</main>
           <Footer />
-          <Script
-            src="https://analytics.shootingsuppliesltd.co.uk/js/script.tagged-events.js"
-            data-domain="holosun-optics.co.uk"
-          />
         </Providers>
       </body>
+      <Script
+        src="https://analytics.shootingsuppliesltd.co.uk/js/script.tagged-events.js"
+        data-domain="holosun-optics.co.uk"
+      />
     </html>
   );
 }
