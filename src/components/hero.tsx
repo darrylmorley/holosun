@@ -13,7 +13,7 @@ export default function Hero() {
     width: 0,
     height: 0,
     quality: 80,
-    src: "/images/hero-carousel/aems-banner-1920x860.webp",
+    src: "https://res.cloudinary.com/shooting-supplies/image/upload/v1720530008/holosun-optics.co.uk/hero-carousel/ekzsc8x3ur2141uug7yx.webp",
   });
   const {
     props: { srcSet: mobile, ...rest },
@@ -22,7 +22,7 @@ export default function Hero() {
     width: 0,
     height: 0,
     quality: 70,
-    src: "/images/hero-carousel/aems-banner-1080x1350.webp",
+    src: "https://res.cloudinary.com/shooting-supplies/image/upload/v1720530009/holosun-optics.co.uk/hero-carousel/yx1z2tfhtm2lkwpr2xne.webp",
   });
 
   return (
