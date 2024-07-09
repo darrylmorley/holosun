@@ -2,9 +2,7 @@ import type { Config } from "tailwindcss";
 // prettier-ignore
 
 const config: Config = {
-  darkMode: "class",
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", "'./node_modules/preline/preline.js',"],
-  // purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   extend: {
     fontFamily: {
       sans: ["Archivo", "sans-serif"],
