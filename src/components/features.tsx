@@ -20,6 +20,7 @@ export default function Features() {
           width={100}
           height={100}
           className="hover:brightness-125 transition duration-200 ease-in-out"
+          sizes="(min-width: 200px) and (max-width: 800px) 100px, (min-width: 800px) 150px"
         />
         <h3 className="text-sm text-center mt-4 font-bold">Multi Reticle System</h3>
       </li>
