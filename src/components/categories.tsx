@@ -14,6 +14,7 @@ export default function Categories() {
             width={400}
             height={400}
             alt="Holosun Red Dot Sight"
+            sizes="(min-width: 200px) and (max-width: 800px) 100px, (min-width: 800px) 400px"
           />
         </div>
       </Link>
@@ -27,6 +28,7 @@ export default function Categories() {
             width={400}
             height={400}
             alt="Holosun Red Dot Sight"
+            sizes="(min-width: 200px) and (max-width: 800px) 100px, (min-width: 800px) 400px"
           />
         </div>
       </Link>
@@ -40,6 +42,7 @@ export default function Categories() {
             width={400}
             height={400}
             alt="Holosun Red Dot Sight"
+            sizes="(min-width: 200px) and (max-width: 800px) 100px, (min-width: 800px) 400px"
           />
         </div>
       </Link>
@@ -53,6 +56,7 @@ export default function Categories() {
             width={400}
             height={400}
             alt="Holosun Red Dot Sight"
+            sizes="(min-width: 200px) and (max-width: 800px) 100px, (min-width: 800px) 400px"
           />
         </div>
       </Link>
