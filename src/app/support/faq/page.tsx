@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  const schemaData = {
+  const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
@@ -96,7 +96,10 @@ export default function Page() {
 
   return (
     <section>
-      <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
         <h1 className="text-5xl font-black uppercase">FAQ</h1>
         <p className="text-lg text-center">Your fequently asked questions answered.</p>
