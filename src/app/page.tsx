@@ -59,8 +59,37 @@ export const metadata: Metadata = {
 export default async function Page() {
   const featuredItems = await getFeaturedItems();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: "https://www.holosun-optics.co.uk",
+    name: "Holosun Optics UK",
+    description: "Holosun Optics UK - Innovative Reflex & Red Dot Sights",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://www.holosun-optics.co.uk/?s={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "01527831261",
+      contactType: "Customer Service",
+      email: "info@holosun-optics.co.uk",
+    },
+    sameAs: [
+      "https://www.facebook.com/holosunuk",
+      "https://www.instagram.com/holosun_optics",
+      "https://x.com/holosunopticsuk",
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <h1 className="sr-only">Holosun Optics</h1>
       {/* Hero Section */}
       <section>
