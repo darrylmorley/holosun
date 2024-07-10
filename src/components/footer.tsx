@@ -91,7 +91,7 @@ export default function Footer() {
           Model Guide
         </Link>
         <Link
-          href="#"
+          href="/terms"
           className="link link-hover"
         >
           Terms
