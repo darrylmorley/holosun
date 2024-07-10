@@ -67,7 +67,7 @@ export default async function Page() {
     description: "Holosun Optics UK - Innovative Reflex & Red Dot Sights",
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://www.holosun-optics.co.uk/?s={search_term_string}",
+      target: "https://www.holosun-optics.co.uk/shop/search?query={search_term_string}",
       "query-input": "required name=search_term_string",
     },
     contactPoint: {
