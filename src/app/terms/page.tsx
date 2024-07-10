@@ -58,7 +58,7 @@ const Terms = () => {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(termsSchema) }}
       />
       <div className="mx-8 py-12 text-secondary lg:mx-56">
         <h1
