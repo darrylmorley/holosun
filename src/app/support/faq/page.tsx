@@ -39,8 +39,64 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "My Optic Won't Turn On?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "To turn on Holosun optics, simply press any button once. If the optic doesn't power on, verify the battery orientation...",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Why Is My Objective Lens Angled?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "A canted objective lens is an integral feature of a reflective/reflex sight's design...",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "My Shake Awake Isn't Working?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "If you turn off the optic manually by pressing both buttons simultaneously, the shake awake feature will be disabled...",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What Is Auto Mode / Manual Mode?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "In Auto Mode, the optic uses light as its power source and adjusts the reticle intensity automatically based on the surrounding ambient light...",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Why Does My Optic Turn Off When I Cover The Solar Cell?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "When the solar cell is covered while in Auto Mode, it blocks all light from reaching the light sensor...",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Why Am I Seeing Glare?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Some glare may be present in reflective/reflex optical sights at certain angles due to the special reflective coatings on the objective lens...",
+        },
+      },
+    ],
+  };
+
   return (
-    <>
+    <section>
+      <script type="application/ld+json">{JSON.stringify(schemaData)}</script>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
         <h1 className="text-5xl font-black uppercase">FAQ</h1>
         <p className="text-lg text-center">Your fequently asked questions answered.</p>
@@ -143,6 +199,6 @@ export default function Page() {
           </div>
         </details>
       </div>
-    </>
+    </section>
   );
 }
