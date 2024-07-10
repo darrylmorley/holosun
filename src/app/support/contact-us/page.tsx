@@ -51,14 +51,14 @@ export default function Page() {
         telephone: "01527831261",
         contactType: "Customer Service",
         email: "info@holosun-optics.co.uk",
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "38 Sherwood Road",
-          addressLocality: "Bromsgrove",
-          addressRegion: "Worcestershire",
-          postalCode: "B60 3DR",
-          addressCountry: "UK",
-        },
+      },
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "38 Sherwood Road",
+        addressLocality: "Bromsgrove",
+        addressRegion: "Worcestershire",
+        postalCode: "B60 3DR",
+        addressCountry: "UK",
       },
     },
   };
