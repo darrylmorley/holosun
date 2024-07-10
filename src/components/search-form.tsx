@@ -6,7 +6,7 @@ import { toggleDrawer } from "@/lib/utils/helpers";
 
 export default function SearchForm() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [text] = useDebounce(searchTerm, 500);
+  const [text] = useDebounce(searchTerm, 200);
   const router = useRouter();
 
   function handleSearchClick(e, text) {
@@ -26,6 +26,9 @@ export default function SearchForm() {
         className="input input-bordered item-join w-full"
         placeholder="Search"
         onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") handleSearchClick(e, text);
+        }}
       />
       <button
         className="btn btn-secondary hover:btn-accent hover:text-white item-join text-white"
