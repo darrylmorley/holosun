@@ -57,7 +57,7 @@ export default function Page() {
         name: "Holosun Optics UK",
         logo: {
           "@type": "ImageObject",
-          url: "https://www.holosun-optics.co.uk/images/logo.png", // Update with actual logo URL
+          url: "https://www.holosun-optics.co.uk/holosun-logo.webp",
         },
       },
       datePublished: "2024-07-10", // Update to the actual publish date
