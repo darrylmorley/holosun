@@ -81,11 +81,30 @@ async function getFeaturedItems() {
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const featuredItems = await getFeaturedItems();
 
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Holosun Optics UK",
+    url: "https://www.holosun-optics.co.uk",
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: "01527831261",
+      contactType: "Customer Service",
+      email: "info@holosun-optics.co.uk",
+    },
+  };
+
   return (
     <html
       lang="en"
       className={`${archivo.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+      </head>
       <body className="flex flex-col h-screen">
         <NextTopLoader
           height={4}
