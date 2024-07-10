@@ -70,12 +70,6 @@ export default async function Page() {
       target: "https://www.holosun-optics.co.uk/shop/search?query={search_term_string}",
       "query-input": "required name=search_term_string",
     },
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "01527831261",
-      contactType: "Customer Service",
-      email: "info@holosun-optics.co.uk",
-    },
     sameAs: [
       "https://www.facebook.com/holosunuk",
       "https://www.instagram.com/holosun_optics",
