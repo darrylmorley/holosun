@@ -39,8 +39,36 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    url: "https://www.holosun-optics.co.uk/support/contact-us",
+    mainEntity: {
+      "@type": "Organization",
+      name: "Holosun Optics UK",
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "01527831261",
+        contactType: "Customer Service",
+        email: "info@holosun-optics.co.uk",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "38 Sherwood Road",
+          addressLocality: "Bromsgrove",
+          addressRegion: "Worcestershire",
+          postalCode: "B60 3DR",
+          addressCountry: "UK",
+        },
+      },
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
         <h1 className="text-5xl font-black uppercase">Contact Us</h1>
         <p className="text-lg text-center">
