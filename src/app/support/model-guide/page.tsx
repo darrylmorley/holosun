@@ -60,7 +60,7 @@ export default function Page() {
           url: "https://www.holosun-optics.co.uk/holosun-logo.webp",
         },
       },
-      datePublished: "2024-07-10", // Update to the actual publish date
+      datePublished: "2024-07-03",
       description:
         "This guide provides clarity on the nomenclature of Holosun products, including reticle types, accessories, optic types, and unique features.",
       articleBody:
