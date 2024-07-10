@@ -38,8 +38,42 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const modelSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    url: "https://www.holosun-optics.co.uk/support/model-guide",
+    name: "Holosun Model Number Guide",
+    description:
+      "This reference page helps you decode the nomenclature of HOLOSUN and HOLOSUN Elite products, covering reticle types, accessories, optic types, and unique features like solar failsafe and titanium housing.",
+    mainEntity: {
+      "@type": "Article",
+      headline: "Understanding HOLOSUN Model Numbers",
+      author: {
+        "@type": "Organization",
+        name: "Holosun Optics UK",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Holosun Optics UK",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://www.holosun-optics.co.uk/images/logo.png", // Update with actual logo URL
+        },
+      },
+      datePublished: "2024-07-10", // Update to the actual publish date
+      description:
+        "This guide provides clarity on the nomenclature of Holosun products, including reticle types, accessories, optic types, and unique features.",
+      articleBody:
+        "Welcome to the HOLOSUN Model Number Guide! This reference page is designed to help you decode the nomenclature of HOLOSUN and HOLOSUN Elite products...",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(modelSchema) }}
+      />
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
         <h1 className="text-5xl font-black uppercase">Model Number Guide</h1>
         <h2 className="text-lg text-center">Understanding HOLOSUN Model Numbers</h2>
