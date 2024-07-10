@@ -19,8 +19,41 @@ export const metadata = {
 };
 
 export default function Page() {
+  const privacySchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    url: "https://www.holosun-optics.co.uk/privacy",
+    name: "Holosun Privacy Policy",
+    description:
+      "Holosun Optics UK's privacy policy detailing data protection, GDPR compliance, cookie usage, payment security, and data access and erasure requests.",
+    mainEntity: {
+      "@type": "Article",
+      headline: "Holosun Privacy Policy",
+      author: {
+        "@type": "Organization",
+        name: "Holosun Optics UK",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Holosun Optics UK",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://www.holosun-optics.co.uk/holosun-logo.webp",
+        },
+      },
+      datePublished: "2024-07-3",
+      description:
+        "Holosun Optics UK's privacy policy detailing data protection, GDPR compliance, cookie usage, payment security, and data access and erasure requests.",
+      articleBody:
+        "We analyze traffic to this website to help us improve both what we do as a business and the site itself. We comply with GDPR, and we don’t sell or pass your details on to anyone else for marketing purposes...",
+    },
+  };
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(privacySchema) }}
+      />
       <div className="mx-8 py-12 text-secondary lg:mx-56">
         <h1
           id="privacy"
