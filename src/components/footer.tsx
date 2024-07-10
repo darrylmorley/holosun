@@ -97,7 +97,7 @@ export default function Footer() {
           Terms
         </Link>
         <Link
-          href="#"
+          href="/privacy"
           className="link link-hover"
         >
           Privacy policy
