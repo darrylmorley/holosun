@@ -90,7 +90,7 @@ export default async function Page({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: item.name,
-    image: images[0], // Replace with actual image URL
+    image: images[0],
     description: description,
     sku: item.sku,
     mpn: item.manufacturerSku,
@@ -105,6 +105,47 @@ export default async function Page({ params }: PageProps) {
       price: item.price,
       itemCondition: "https://schema.org/NewCondition",
       availability: item.qoh > 0 ? "https://schema.org/InStock" : "https://schema.org/BackOrder",
+      hasMerchantReturnPolicy: {
+        "@type": "MerchantReturnPolicy",
+        url: "https://www.holosun-optics.co.uk/terms#cancellation",
+        returnPolicyCategory: "https://schema.org/Refundable",
+      },
+      shippingDetails: [
+        {
+          "@type": "OfferShippingDetails",
+          shippingRate: {
+            "@type": "MonetaryAmount",
+            value: "5.95",
+            currency: "GBP",
+          },
+          deliveryTime: {
+            "@type": "ShippingDeliveryTime",
+            businessDays: "1-3",
+          },
+          shippingDestination: {
+            "@type": "DefinedRegion",
+            addressCountry: "GB",
+            addressRegion: "GB-EAW, GB-SCT",
+          },
+        },
+        {
+          "@type": "OfferShippingDetails",
+          shippingRate: {
+            "@type": "MonetaryAmount",
+            value: "10.00",
+            currency: "GBP",
+          },
+          deliveryTime: {
+            "@type": "ShippingDeliveryTime",
+            businessDays: "1-3",
+          },
+          shippingDestination: {
+            "@type": "DefinedRegion",
+            addressCountry: "GB",
+            addressRegion: "GB-NIR,GB-ELS,GB-ORK",
+          },
+        },
+      ],
     },
   };
 
