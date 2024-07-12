@@ -85,7 +85,6 @@ export default async function Page({ params }: PageProps) {
       [`${item.Images.Image.baseImageURL}/w_800/${item.Images.Image.publicID}.webp`];
 
   const description = stripHtml(item.shortDescription).result;
-  const sku = item.sku.replaceAll(" ", "");
 
   const ldJson = {
     "@context": "https://schema.org",
@@ -93,8 +92,8 @@ export default async function Page({ params }: PageProps) {
     name: item.name,
     image: images[0],
     description: description,
-    sku: sku,
-    mpn: item.manufacturerSku,
+    sku: item.sku.replaceAll(" ", ""),
+    mpn: item.manufacturerSku.replaceAll(" ", ""),
     brand: {
       "@type": "Brand",
       name: "Holosun",
