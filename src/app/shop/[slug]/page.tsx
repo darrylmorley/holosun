@@ -85,6 +85,7 @@ export default async function Page({ params }: PageProps) {
       [`${item.Images.Image.baseImageURL}/w_800/${item.Images.Image.publicID}.webp`];
 
   const description = stripHtml(item.shortDescription).result;
+  const sku = item.sku.replaceAll(" ", "");
 
   const ldJson = {
     "@context": "https://schema.org",
@@ -92,7 +93,7 @@ export default async function Page({ params }: PageProps) {
     name: item.name,
     image: images[0],
     description: description,
-    sku: item.sku,
+    sku: sku,
     mpn: item.manufacturerSku,
     brand: {
       "@type": "Brand",
@@ -121,6 +122,18 @@ export default async function Page({ params }: PageProps) {
           deliveryTime: {
             "@type": "ShippingDeliveryTime",
             businessDays: "1-3",
+            handlingTime: {
+              "@type": "QuantitativeValue",
+              minValue: 1,
+              maxValue: 1,
+              unitCode: "d",
+            },
+            shippingTime: {
+              "@type": "ShippingDeliveryTime",
+              minValue: 1,
+              maxValue: 2,
+              unitCode: "d", // "d" stands for days
+            },
           },
           shippingDestination: {
             "@type": "DefinedRegion",
@@ -138,6 +151,22 @@ export default async function Page({ params }: PageProps) {
           deliveryTime: {
             "@type": "ShippingDeliveryTime",
             businessDays: "1-3",
+            deliveryTime: {
+              "@type": "ShippingDeliveryTime",
+              businessDays: "1-3",
+              handlingTime: {
+                "@type": "QuantitativeValue",
+                minValue: 1,
+                maxValue: 1,
+                unitCode: "d",
+              },
+              shippingTime: {
+                "@type": "ShippingDeliveryTime",
+                minValue: 1,
+                maxValue: 2,
+                unitCode: "d", // "d" stands for days
+              },
+            },
           },
           shippingDestination: {
             "@type": "DefinedRegion",
