@@ -109,7 +109,11 @@ export default async function Page({ params }: PageProps) {
       hasMerchantReturnPolicy: {
         "@type": "MerchantReturnPolicy",
         url: "https://www.holosun-optics.co.uk/terms#cancellation",
-        returnPolicyCategory: "https://schema.org/Refundable",
+        returnPolicyCategory: "https://schema.org/ReturnFeesCustomerResponsibility",
+        applicableCountry: {
+          "@type": "Country",
+          name: "GB",
+        },
       },
       shippingDetails: [
         {
@@ -121,18 +125,17 @@ export default async function Page({ params }: PageProps) {
           },
           deliveryTime: {
             "@type": "ShippingDeliveryTime",
-            businessDays: "1-3",
+            transitTime: {
+              "@type": "QuantitativeValue",
+              minValue: 1,
+              maxValue: 2,
+              unitCode: "d",
+            },
             handlingTime: {
               "@type": "QuantitativeValue",
               minValue: 1,
               maxValue: 1,
               unitCode: "d",
-            },
-            shippingTime: {
-              "@type": "ShippingDeliveryTime",
-              minValue: 1,
-              maxValue: 2,
-              unitCode: "d", // "d" stands for days
             },
           },
           shippingDestination: {
@@ -150,28 +153,23 @@ export default async function Page({ params }: PageProps) {
           },
           deliveryTime: {
             "@type": "ShippingDeliveryTime",
-            businessDays: "1-3",
-            deliveryTime: {
-              "@type": "ShippingDeliveryTime",
-              businessDays: "1-3",
-              handlingTime: {
-                "@type": "QuantitativeValue",
-                minValue: 1,
-                maxValue: 1,
-                unitCode: "d",
-              },
-              shippingTime: {
-                "@type": "ShippingDeliveryTime",
-                minValue: 1,
-                maxValue: 2,
-                unitCode: "d", // "d" stands for days
-              },
+            transitTime: {
+              "@type": "QuantitativeValue",
+              minValue: 1,
+              maxValue: 2,
+              unitCode: "d",
+            },
+            handlingTime: {
+              "@type": "QuantitativeValue",
+              minValue: 1,
+              maxValue: 1,
+              unitCode: "d",
             },
           },
           shippingDestination: {
             "@type": "DefinedRegion",
             addressCountry: "GB",
-            addressRegion: "GB-NIR,GB-ELS,GB-ORK",
+            addressRegion: "GB-NIR, GB-ELS, GB-ORK",
           },
         },
       ],
