@@ -1,4 +1,6 @@
 import Image, { getImageProps } from "next/image";
+import DesktopHeroImage from "../../public/images/hero-carousel/aems-banner-1920x860.webp";
+import MobileHeroImage from "../../public/images/hero-carousel/aems-banner-1080x1350.webp";
 
 export default function Hero() {
   const common = {
@@ -13,7 +15,7 @@ export default function Hero() {
     width: 0,
     height: 0,
     quality: 80,
-    src: "/images/hero-carousel/aems-banner-1920x860.webp",
+    src: DesktopHeroImage,
   });
   const {
     props: { srcSet: mobile, ...rest },
@@ -22,7 +24,7 @@ export default function Hero() {
     width: 0,
     height: 0,
     quality: 70,
-    src: "/images/hero-carousel/aems-banner-1080x1350.webp",
+    src: MobileHeroImage,
   });
 
   return (
