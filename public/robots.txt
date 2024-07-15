@@ -2,6 +2,7 @@ User-agent: *
 Disallow: /api/*
 Disallow: /checkout/*
 Disallow: /result/*
+Disallow: /search/*
 
 User-agent: Baiduspider
 Disallow: /
