@@ -10,6 +10,7 @@ import QuestionModal from "@/components/question-modal";
 import ImageGallery from "@/components/image-gallery";
 import ShareButton from "@/components/share-button";
 import { capitalise } from "@/lib/utils/helpers";
+import { notFound } from "next/navigation";
 
 type PageProps = {
   params: {
@@ -21,6 +22,8 @@ type PageProps = {
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = params;
   const item = await getItem(slug);
+
+  if (!item) notFound();
 
   const images = Array.isArray(item.Images.Image)
     ? // @ts-expect-error - Images is not defined in the Prisma schema
