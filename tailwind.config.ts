@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 // prettier-ignore
 
 const config: Config = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", "'./node_modules/preline/preline.js',"],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", "./node_modules/preline/preline.js", "./node_modules/daisyui/dist/**/*.js"],
   extend: {
     fontFamily: {
       sans: ["Archivo", "sans-serif"],
