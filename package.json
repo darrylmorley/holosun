@@ -33,7 +33,6 @@
     "react-toastify": "^10.0.5",
     "react-use-cart": "^1.13.0",
     "sharp": "^0.33.4",
-    "string-strip-html": "^13.4.8",
     "use-debounce": "^10.0.1",
     "vaul": "^0.9.1",
     "zod": "^3.23.8"

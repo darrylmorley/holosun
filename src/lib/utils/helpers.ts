@@ -139,6 +139,7 @@ export function toggleDrawer(drawName: string) {
   document.getElementById(`${drawName}`)?.click();
 }
 
+// Identify if a postcode is outside of mainland UK
 export function isOutsideMainlandUK(postcode: string) {
   const postcodeRegex =
     /\b(BT\d{1,2}\s?\d[A-Z]{2}|GY\d{1,2}\s?\d[A-Z]{2}|JE\d{1,2}\s?\d[A-Z]{2}|IM\d{1,2}\s?\d[A-Z]{2}|HS\d{1,2}\s?\d[A-Z]{2}|IV\d{1,2}\s?\d[A-Z]{2}|KW\d{1,2}\s?\d[A-Z]{2}|ZE\d{1,2}\s?\d[A-Z]{2})\b/i;
@@ -160,6 +161,7 @@ export function closeModal(modalId: string) {
   modal.close();
 }
 
+// Capitalise first letter of each word in a string
 export const capitalise = (string: string) => {
   if (!string) return "";
   return string
@@ -168,3 +170,9 @@ export const capitalise = (string: string) => {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 };
+
+// Strip html from strings
+export function stripHtml(html) {
+  // Remove HTML tags using a regular expression
+  return html.replace(/<\/?[^>]+(>|$)/g, "");
+}
