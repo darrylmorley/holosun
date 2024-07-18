@@ -87,7 +87,7 @@ export default async function Page({ params }: PageProps) {
     : // @ts-expect-error - Images is not defined in the Prisma schema
       [`${item.Images.Image.baseImageURL}/w_800/${item.Images.Image.publicID}.webp`];
 
-  const description = stripHtml(item.shortDescription).result;
+  const description = stripHtml(item.shortDescription);
 
   const ldJson = {
     "@context": "https://schema.org",
