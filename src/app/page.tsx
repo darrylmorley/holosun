@@ -21,14 +21,14 @@ async function getFeaturedItems() {
 export const metadata: Metadata = {
   title: "Holosun Optics UK - Innovative Reflex & Red Dot Sights",
   description:
-    "Holosun Optics UK for advanced red dot sights, reflex sights, magnifiers and accessories. Innovative technology, rugged designs, and unparalleled performance!",
+    "Discover top-quality red dot and reflex sights at Holosun Optics UK. Experience superior accuracy with innovative features like Solar Failsafe and Shake Awake.",
   alternates: {
     canonical: "https://www.holosun-optics.co.uk",
   },
   openGraph: {
     title: "Holosun Optics UK - Innovative Reflex & Red Dot Sights",
     description:
-      "Holosun Optics UK for advanced red dot sights, reflex sights, magnifiers and accessories. Innovative technology, rugged designs, and unparalleled performance!",
+      "Discover top-quality red dot and reflex sights at Holosun Optics UK. Experience superior accuracy with innovative features like Solar Failsafe and Shake Awake.",
     url: "https://www.holosun-optics.co.uk",
     siteName: "Holosun Optics UK",
     images: [
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Holosun Optics UK - Innovative Reflex & Red Dot Sights",
     description:
-      "Holosun Optics UK for advanced red dot sights, reflex sights, magnifiers and accessories. Innovative technology, rugged designs, and unparalleled performance!",
+      "Discover top-quality red dot and reflex sights at Holosun Optics UK. Experience superior accuracy with innovative features like Solar Failsafe and Shake Awake.",
     images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.webp"],
   },
 };
