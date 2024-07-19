@@ -2,7 +2,9 @@ import type { Config } from "tailwindcss";
 // prettier-ignore
 
 const config: Config = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}", "./node_modules/preline/preline.js", "./node_modules/daisyui/dist/**/*.js"],
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   extend: {
     fontFamily: {
       sans: ["Archivo", "sans-serif"],
@@ -34,9 +36,6 @@ const config: Config = {
     ],
   },
   plugins: [
-    require("tailwindcss-animate"),
-    require('@tailwindcss/aspect-ratio'),
-    require("@tailwindcss/forms"),
     require("daisyui"),
   ],
 };

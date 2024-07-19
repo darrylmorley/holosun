@@ -88,7 +88,7 @@ export default function QuestionForm({ itemId, itemName }) {
           name="name"
           required
           autoComplete="name"
-          className="rounded-sm"
+          className="p-2 border rounded-sm border-secondary"
         />
       </div>
       <div className="flex flex-col">
@@ -99,7 +99,7 @@ export default function QuestionForm({ itemId, itemName }) {
           type="email"
           required
           autoComplete="email"
-          className="rounded-sm"
+          className="p-2 border rounded-sm border-secondary"
         />
       </div>
       <div className="flex flex-col">
@@ -109,7 +109,7 @@ export default function QuestionForm({ itemId, itemName }) {
           name="tel"
           type="tel"
           autoComplete="tel"
-          className="rounded-sm"
+          className="p-2 border rounded-sm border-secondary"
         />
       </div>
       <div className="flex flex-col">
@@ -117,7 +117,7 @@ export default function QuestionForm({ itemId, itemName }) {
         <textarea
           id="message"
           name="message"
-          className="rounded-sm"
+          className="p-2 border rounded-sm border-secondary"
         />
       </div>
       <div className="hidden">
