@@ -8,6 +8,4 @@ User-agent: Baiduspider
 Disallow: /
 
 # Sitemap location
-Sitemap: https://holosun-optics.co.uk/sitemap.xml
-Sitemap: https://holosun-optics.co.uk/images-sitemap.xml
-
+Sitemap: https://www.holosun-optics.co.uk/sitemap.xml
