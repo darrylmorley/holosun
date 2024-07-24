@@ -1,11 +1,7 @@
 User-agent: *
-Disallow: /api/*
-Disallow: /checkout/*
-Disallow: /result/*
-Disallow: /search/*
+Disallow: /api/
+Disallow: /checkout/
+Disallow: /result/
+Disallow: /search/
 
-User-agent: Baiduspider
-Disallow: /
-
-# Sitemap location
 Sitemap: https://www.holosun-optics.co.uk/sitemap.xml

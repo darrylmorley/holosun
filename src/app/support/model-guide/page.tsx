@@ -1,14 +1,14 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Holosun Model Number Guide: Understand Our Optics & Lasers Model Numbers",
+  title: "Holosun Model Number Guide: Understand Our Model Numbers",
   description:
     "Explore the Holosun Model Number Guide to understand the meaning behind each model's optics and lasers.",
   alternates: {
     canonical: "https://www.holosun-optics.co.uk/support/model-guide",
   },
   openGraph: {
-    title: "Holosun Model Number Guide: Understand Our Optics & Lasers Model Numbers",
+    title: "Holosun Model Number Guide: Understand Our Model Numbers",
     description:
       "Explore the Holosun Model Number Guide to understand the meaning behind each model's optics and lasers.",
     url: "https://www.holosun-optics.co.uk/support/model-guide",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Holosun Model Number Guide: Understand Our Optics & Lasers Model Numbers",
+    title: "Holosun Model Number Guide: Understand Our Model Numbers",
     description:
       "Explore the Holosun Model Number Guide to understand the meaning behind each model's optics and lasers.",
     images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"],
