@@ -65,6 +65,121 @@ const nextConfig = {
         destination: "/shop/category/red-dot-sights",
         permanent: true,
       },
+      {
+        source: "/holosun-he512t-gr-green-dot-sight",
+        destination: "/shop/holosun-he512t-gr-green-dot-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-407k-x2-6-moa-red-dot-reflex-sight",
+        destination: "/shop/holosun-407k-x2-6-moa-red-dot-reflex-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-aems-core-gr120101-green-reflex-sight",
+        destination: "/shop/holosun-aems-core-gr120101-green-reflex-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-hs515cm-red-dot-sight",
+        destination: "/shop/holosun-hs515cm-red-dot-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-ls117g-green-laser-aiming-device",
+        destination: "/shop/holosun-ls117g-green-laser-aiming-device",
+        permanent: true,
+      },
+      {
+        source: "/holosun-hs403r-red-dot-sight",
+        destination: "/shop/holosun-hs403r-red-dot-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-rml-green-laser",
+        destination: "/shop/holosun-rml-green-laser",
+        permanent: true,
+      },
+      {
+        source: "/holosun-he407c-gr-x2-green-dot-reflex-sight",
+        destination: "/shop/holosun-he407c-gr-x2-green-dot-reflex-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-set-hs510c-red-dot-and-hm3x-magnifier-and-hardcase",
+        destination: "/shop/holosun-set-hs510c-red-dot-and-hm3x-magnifier-and-hardcase",
+        permanent: true,
+      },
+      {
+        source: "/holosun-510c-spacer",
+        destination: "/shop/holosun-510c-spacer",
+        permanent: true,
+      },
+      {
+        source: "/holosun-he507c-grx2-reflex-sight",
+        destination: "/shop/holosun-he507c-grx2-reflex-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-407c-x2-2-moa-red-dot-solar-powered-reflex-sight",
+        destination: "/shop/holosun-407c-x2-2-moa-red-dot-solar-powered-reflex-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-407c507c508t-picatinny",
+        destination: "/shop/holosun-407c507c508t-picatinny",
+        permanent: true,
+      },
+      {
+        source: "/holosun-he403c-gr-green-dot-sight",
+        destination: "/shop/holosun-he403c-gr-green-dot-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-hs510c-red-dot-reflex-sight",
+        destination: "/shop/holosun-hs510c-red-dot-reflex-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-aems-low-mount",
+        destination: "/shop/holosun-aems-low-mount",
+        permanent: true,
+      },
+      {
+        source: "/holosun-aems-core-110101-red-reflex-sight",
+        destination: "/shop/holosun-aems-core-110101-red-reflex-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-aems-2moa-red-dot-sight",
+        destination: "/shop/holosun-aems-2moa-red-dot-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-aems-gr-221301-green-reflex-sight",
+        destination: "/shop/holosun-aems-gr-221301-green-reflex-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-scrs-gr-2-green-dot-sight",
+        destination: "/shop/holosun-scrs-gr-2-green-dot-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-he510c-gr-green-dot-reflex-sight",
+        destination: "/shop/holosun-he510c-gr-green-dot-reflex-sight",
+        permanent: true,
+      },
+      {
+        source: "/holosun-le117-gr-green-laser-aiming-device",
+        destination: "/shop/holosun-le117-gr-green-laser-aiming-device",
+        permanent: true,
+      },
+      {
+        source: "/holosun-hs507c-x2-red-dot-reflex-sight",
+        destination: "/shop/holosun-hs507c-x2-red-dot-reflex-sight",
+        permanent: true,
+      },
     ];
   },
 };
