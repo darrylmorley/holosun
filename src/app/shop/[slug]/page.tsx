@@ -1,5 +1,5 @@
 import { stripHtml } from "@/lib/utils/helpers";
-import { ShieldCheck } from "lucide-react";
+import { Currency, ShieldCheck } from "lucide-react";
 import dynamic from "next/dynamic";
 
 import prisma from "@/lib/db/prisma";
@@ -54,7 +54,10 @@ export async function generateMetadata({ params }: PageProps) {
         },
       ],
       locale: "en_GB",
-      type: "website",
+      type: "og:product",
+      price: item.price,
+      currency: "GBP",
+      availability: item.qoh > 0 ? "instock" : "outofstock",
     },
     twitter: {
       card: "summary_large_image",
@@ -82,10 +85,10 @@ export default async function Page({ params }: PageProps) {
   const images = Array.isArray(item.Images.Image)
     ? // @ts-expect-error - Images is not defined in the Prisma schema
       item.Images.Image.map((image) => {
-        return `${image.baseImageURL}/w_800/${image.publicID}.webp`;
+        return `${image.baseImageURL}/w_1500/${image.publicID}.webp`;
       })
     : // @ts-expect-error - Images is not defined in the Prisma schema
-      [`${item.Images.Image.baseImageURL}/w_800/${item.Images.Image.publicID}.webp`];
+      [`${item.Images.Image.baseImageURL}/w_1500/${item.Images.Image.publicID}.webp`];
 
   const description = stripHtml(item.shortDescription);
 
@@ -93,14 +96,16 @@ export default async function Page({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: item.name,
+    url: `https://www.holosun-optics.co.uk/shop/${slug}`,
+    sku: item.sku.replaceAll(" ", ""),
     image: images[0],
     description: description,
-    sku: item.sku.replaceAll(" ", ""),
     mpn: item.manufacturerSku.replaceAll(" ", ""),
     brand: {
       "@type": "Brand",
       name: "Holosun",
     },
+    manufacturer: "Holosun",
     offers: {
       "@type": "Offer",
       url: `https://www.holosun-optics.co.uk/shop/${slug}`,
@@ -116,6 +121,8 @@ export default async function Page({ params }: PageProps) {
           "@type": "Country",
           name: "GB",
         },
+        merchantReturnDays: 14,
+        returnMethod: "https://schema.org/ReturnByMail",
       },
       shippingDetails: [
         {
