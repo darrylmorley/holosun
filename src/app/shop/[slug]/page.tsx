@@ -28,10 +28,10 @@ export async function generateMetadata({ params }: PageProps) {
   const images = Array.isArray(item.Images.Image)
     ? // @ts-expect-error - Images is not defined in the Prisma schema
       item.Images.Image.map((image) => {
-        return `${image.baseImageURL}/w_800/${image.publicID}.webp`;
+        return `${image.baseImageURL}/w_1500/${image.publicID}.webp`;
       })
     : // @ts-expect-error - Images is not defined in the Prisma schema
-      [`${item.Images.Image.baseImageURL}/w_800/${item.Images.Image.publicID}.webp`];
+      [`${item.Images.Image.baseImageURL}/w_1500/${item.Images.Image.publicID}.webp`];
 
   const description = stripHtml(item.shortDescription);
 
@@ -49,8 +49,8 @@ export async function generateMetadata({ params }: PageProps) {
       images: [
         {
           url: images[0],
-          width: 1080,
-          height: 1080,
+          width: 1500,
+          height: 1500,
         },
       ],
       locale: "en_GB",
