@@ -1,5 +1,5 @@
 import { stripHtml } from "@/lib/utils/helpers";
-import { Currency, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import dynamic from "next/dynamic";
 
 import prisma from "@/lib/db/prisma";
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: PageProps) {
         },
       ],
       locale: "en_GB",
-      type: "og:product",
+      type: "website",
       price: item.price,
       currency: "GBP",
       availability: item.qoh > 0 ? "instock" : "outofstock",
