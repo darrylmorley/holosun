@@ -58,6 +58,15 @@ const nextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  async redirects() {
+    return [
+      {
+        source: "/shop/category/red-dots",
+        destination: "/shop/category/red-dot-sights",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withSentryConfig(nextConfig, {
