@@ -103,7 +103,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Script
           src="https://analytics.shootingsuppliesltd.co.uk/js/script.tagged-events.js"
           data-domain="holosun-optics.co.uk"
-          strategy="worker"
         />
         <script
           type="application/ld+json"
