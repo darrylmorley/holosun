@@ -100,6 +100,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       className={`${archivo.variable}`}
     >
       <head>
+        <Script
+          src="https://analytics.shootingsuppliesltd.co.uk/js/script.tagged-events.js"
+          data-domain="holosun-optics.co.uk"
+          strategy="worker"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
@@ -118,11 +123,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <Footer />
         </Providers>
       </body>
-      <Script
-        src="https://analytics.shootingsuppliesltd.co.uk/js/script.tagged-events.js"
-        data-domain="holosun-optics.co.uk"
-        strategy="worker"
-      />
     </html>
   );
 }
