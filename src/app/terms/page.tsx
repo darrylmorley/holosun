@@ -360,7 +360,6 @@ const Terms = () => {
           4.10 Time is not the essence of the contract unless expressly stated otherwise in writing
           by a Director of the Company.
         </p>
-        <p>4.11 Free delivery is available on orders where the goods cost more than £50.</p>
 
         <hr className="my-4" />
 
