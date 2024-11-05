@@ -42,7 +42,12 @@ const securityHeaders = [
 
 const nextConfig = {
   images: {
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
   eslint: {
     // Warning: This allows production builds to successfully complete even if
