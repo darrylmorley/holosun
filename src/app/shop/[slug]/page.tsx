@@ -92,6 +92,11 @@ export default async function Page({ params }: PageProps) {
 
   const description = stripHtml(item.shortDescription);
 
+  const isSaleItem =
+    item.CustomFieldValues.CustomFieldValue.some(
+      (field) => field.customFieldID === "12" && field.value === "true"
+    ) || item.onSale === true;
+
   const ldJson = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -196,15 +201,30 @@ export default async function Page({ params }: PageProps) {
           <ImageGallery
             images={images}
             name={item.name}
+            isSaleItem={isSaleItem}
           />
 
           <div className="flex flex-col gap-8">
             <h1 className="text-3xl font-black">{item.name}</h1>
-            <p className="text-xl font-semibold">
-              {new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(
+            {isSaleItem ? (
+              <p>
+                <span className="line-through text-sm">
+                  {new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
+                    item.price
+                  )}
+                </span>
+                <span className="ml-2">
+                  {" "}
+                  {new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
+                    item.salePrice
+                  )}
+                </span>
+              </p>
+            ) : (
+              new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
                 item.price
-              )}
-            </p>
+              )
+            )}
             <div
               dangerouslySetInnerHTML={{ __html: item.shortDescription }}
               className="prose text-base leading-relaxed flex flex-grow"

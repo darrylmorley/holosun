@@ -7,6 +7,11 @@ export default function ProductCard({ item: product, index }) {
   let imgUrl;
   let img2Url;
 
+  const isSaleItem =
+    product.CustomFieldValues.CustomFieldValue.some(
+      (field) => field.customFieldID === "12" && field.value === "true"
+    ) || product.onSale === true;
+
   if (Array.isArray(product.Images.Image)) {
     imgUrl = `${product.Images.Image[0].baseImageURL}/w_300/${product.Images.Image[0].publicID}.webp`;
     img2Url = `${product.Images.Image[1].baseImageURL}/w_300/${product.Images.Image[1].publicID}.webp`;
@@ -19,8 +24,15 @@ export default function ProductCard({ item: product, index }) {
   return (
     <div
       key={product.id}
-      className="group"
+      className="group relative overflow-hidden"
     >
+      {isSaleItem && (
+        <div className="z-10 absolute right-0 top-0 h-16 w-16">
+          <div className="absolute transform rotate-45 bg-secondary text-center text-white font-semibold py-1 right-[-35px] top-[32px] w-[170px]">
+            <span>Sale</span>
+          </div>
+        </div>
+      )}
       <Link
         href={`/shop/${product.slug}`}
         className="relative mb-2 flex h-80 items-center justify-center overflow-hidden bg-stone-100 hover:bg-stone-300 lg:mb-3"
@@ -68,8 +80,24 @@ export default function ProductCard({ item: product, index }) {
 
         <div className="flex items-end gap-2">
           <span>
-            {new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
-              product.price
+            {isSaleItem ? (
+              <>
+                <span className="line-through text-sm">
+                  {new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
+                    product.price
+                  )}
+                </span>
+                <span>
+                  {" "}
+                  {new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
+                    product.salePrice
+                  )}
+                </span>
+              </>
+            ) : (
+              new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
+                product.price
+              )
             )}
           </span>
         </div>

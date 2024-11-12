@@ -96,7 +96,10 @@ export function getMetaDescriptionFromId(id: number): string | undefined {
 }
 
 export function formatCartItem(item) {
-  const isOnSale = item.onSale;
+  const isOnSale =
+    item.CustomFieldValues.CustomFieldValue.some(
+      (field) => field.customFieldID === "12" && field.value === "true"
+    ) || item.onSale === true;
 
   const cartImage = Array.isArray(item.Images?.Image)
     ? `${item.Images?.Image[0].baseImageURL}/w_100/${item.Images?.Image[0].publicID}.webp`
@@ -107,7 +110,7 @@ export function formatCartItem(item) {
     name: item.name,
     brand: item.Manufacturer?.name,
     sku: item.sku,
-    price: isOnSale === "true" ? item.salePrice : item.price,
+    price: isOnSale === true ? item.salePrice : item.price,
     image: cartImage,
     qoh: item.qoh,
   };
