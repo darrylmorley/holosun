@@ -108,6 +108,7 @@ export default function Footer() {
         >
           Contact Us
         </Link>
+        <a href="https://highland-defence.co.uk/" rel="nofollow, noopener" target="_blank">Military Enquiries</a>
       </nav>
       <NewsletterForm />
     </footer>
