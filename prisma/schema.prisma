@@ -9,16 +9,18 @@ datasource db {
 }
 
 model Category {
-  id           Int     @id @unique
-  name         String
-  fullPathName String
-  parentID     Int?
-  nodeDepth    Int?
-  leftNode     Int?
-  rightNode    Int?
-  description  String?
-  image        String?
-  slug         String
+  id            Int             @id @unique
+  name          String
+  fullPathName  String
+  parentID      Int?
+  nodeDepth     Int?
+  leftNode      Int?
+  rightNode     Int?
+  description   String?
+  image         String?
+  slug          String
+  Product       Product[]
+  matrixProduct matrixProduct[]
 }
 
 model Gun {
@@ -50,15 +52,17 @@ model Image {
 }
 
 model Manufacturer {
-  id          Int     @id @unique
-  name        String
-  description String?
-  image       String?
-  slug        String  @unique
+  id            Int             @id @unique
+  name          String
+  description   String?
+  image         String?
+  slug          String          @unique
+  Product       Product[]
+  matrixProduct matrixProduct[]
 }
 
 model Product {
-  id                Int      @id @unique
+  id                Int           @id @unique
   matrixID          Int
   sku               String
   manufacturerSku   String
@@ -67,10 +71,10 @@ model Product {
   qoh               Int
   price             Float
   salePrice         Float
-  onSale            Boolean? @default(false)
+  onSale            Boolean?      @default(false)
   reorderLevel      Int?
   reorderPoint      Int?
-  isOnBackorder     Boolean? @default(false)
+  isOnBackorder     Boolean?      @default(false)
   backorderQty      Int?
   shortDescription  String?
   longDescription   String?
@@ -84,17 +88,19 @@ model Product {
   height            String?
   length            String?
   weight            String?
-  listOnWebsite     Boolean? @default(true)
+  listOnWebsite     Boolean?      @default(true)
   metaTitle         String?
   metaDescription   String?
-  isPreorder        Boolean? @default(false)
+  isPreorder        Boolean?      @default(false)
   preOrderQty       Int?
-  slug              String   @unique
+  slug              String        @unique
   Images            Json?
   ItemAttributes    Json?
   CustomFieldValues Json?
   ItemECommerce     Json?
   ItemShops         Json?
+  category          Category?     @relation(fields: [categoryID], references: [id])
+  manufacturer      Manufacturer? @relation(fields: [manufacturerID], references: [id])
   Review            Review[]
 }
 
@@ -108,11 +114,11 @@ model Review {
 }
 
 model matrixProduct {
-  id               Int     @id @unique
+  id               Int           @id @unique
   name             String
-  categoryID       Int
+  categoryID       Int?
   Category         Json?
-  manufacturerID   Int
+  manufacturerID   Int?
   Manufacturer     Json?
   ItemAttributeSet Json?
   Items            Json?
@@ -121,5 +127,43 @@ model matrixProduct {
   salePrice        Float
   shortDescription String?
   longDescription  String?
-  slug             String  @unique
+  slug             String        @unique
+  category         Category?     @relation(fields: [categoryID], references: [id])
+  manufacturer     Manufacturer? @relation(fields: [manufacturerID], references: [id])
+}
+
+model category_name_change_log {
+  id               Int       @id @default(autoincrement())
+  category_id      Int?
+  field_name       String?
+  old_value        String?
+  new_value        String?
+  change_timestamp DateTime? @default(now()) @db.Timestamptz(6)
+}
+
+model manufacturer_name_change_log {
+  id               Int       @id @default(autoincrement())
+  manufacturer_id  Int?
+  field_name       String?
+  old_value        String?
+  new_value        String?
+  change_timestamp DateTime? @default(now()) @db.Timestamptz(6)
+}
+
+model product_change_log {
+  id               Int       @id @default(autoincrement())
+  product_id       Int?
+  field_name       String?
+  old_value        Json?
+  new_value        Json?
+  change_timestamp DateTime? @default(now()) @db.Timestamptz(6)
+}
+
+model product_sku_change_log {
+  id               Int       @id @default(autoincrement())
+  product_id       Int?
+  field_name       String?
+  old_value        String?
+  new_value        String?
+  change_timestamp DateTime? @default(now()) @db.Timestamptz(6)
 }
