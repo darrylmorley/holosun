@@ -39,7 +39,6 @@ RUN chown nextjs:nodejs .next
 
 # Copy build output and necessary files
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.js ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
