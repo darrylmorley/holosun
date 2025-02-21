@@ -2,7 +2,7 @@ export const config = {
   // env: "development",
   env: "production",
   emailTo: [
-    { name: "Antony", email: "info@shootingsuppliesltd.co.uk" },
+    // { name: "Antony", email: "info@shootingsuppliesltd.co.uk" },
     { name: "Darryl", email: "darryl@shootingsuppliesltd.co.uk" },
   ],
   epdqURL: "https://payments.epdq.co.uk/ncol/prod/orderstandard_utf8.asp",
