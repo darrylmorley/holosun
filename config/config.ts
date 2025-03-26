@@ -4,6 +4,7 @@ export const config = {
   emailTo: [
     { name: "Antony", email: "info@shootingsuppliesltd.co.uk" },
     { name: "Darryl", email: "darryl@shootingsuppliesltd.co.uk" },
+    { name: "Staff", email: "staff@shootingsuppliesltd.co.uk" },
   ],
   epdqURL: "https://payments.epdq.co.uk/ncol/prod/orderstandard_utf8.asp",
   // epdqURL: "https://mdepayments.epdq.co.uk/ncol/test/orderstandard_utf8.asp",
