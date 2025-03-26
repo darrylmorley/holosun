@@ -12,11 +12,11 @@ export default function ProductCard({ item: product, index }) {
       (field) => field.customFieldID === "12" && field.value === "true"
     ) || product.onSale === true;
 
-  if (Array.isArray(product.Images.Image)) {
-    imgUrl = `${product.Images.Image[0].baseImageURL}/w_300/${product.Images.Image[0].publicID}.webp`;
-    img2Url = `${product.Images.Image[1].baseImageURL}/w_300/${product.Images.Image[1].publicID}.webp`;
+  if (Array.isArray(product.Images?.Image)) {
+    imgUrl = `${product.Images?.Image[0].baseImageURL}/w_300/${product.Images?.Image[0].publicID}.webp`;
+    img2Url = `${product.Images?.Image[1].baseImageURL}/w_300/${product.Images?.Image[1].publicID}.webp`;
   } else {
-    imgUrl = `${product.Images.Image.baseImageURL}/w_300/${product.Images.Image.publicID}.webp`;
+    imgUrl = `${product.Images?.Image.baseImageURL}/w_300/${product.Images?.Image.publicID}.webp`;
   }
 
   const [isImg2Loaded, setIsImg2Loaded] = useState(false);
