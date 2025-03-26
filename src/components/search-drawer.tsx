@@ -3,6 +3,13 @@ import CategoryLinks from "./category-links";
 import SearchForm from "./search-form";
 
 export default function SearchDrawer({ featuredItems }) {
+  const validFeaturedItems = featuredItems.filter(item =>
+    item.Images && (
+      (Array.isArray(item.Images.Image) && item.Images.Image.length > 0) ||
+      (!Array.isArray(item.Images.Image) && item.Images.Image)
+    )
+  );
+
   return (
     <div className="drawer drawer-end z-30">
       <input
@@ -28,12 +35,16 @@ export default function SearchDrawer({ featuredItems }) {
           <div>
             <p className="text-lg font-bold">Need some insipration?</p>
             <ul className="mt-4 flex flex-col gap-y-4">
-              {featuredItems.map((item) => (
-                <SearchDrawerFeatured
-                  key={item.id}
-                  item={item}
-                />
-              ))}
+              {validFeaturedItems.length > 0 ? (
+                validFeaturedItems.map((item) => (
+                  <SearchDrawerFeatured
+                    key={item.id}
+                    item={item}
+                  />
+                ))
+              ) : (
+                <li>No featured items available</li>
+              )}
             </ul>
           </div>
         </div>
