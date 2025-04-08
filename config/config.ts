@@ -1,21 +1,33 @@
 export const config = {
-  // env: "development",
-  env: "production",
-  emailTo: [
-    { name: "Antony", email: "info@shootingsuppliesltd.co.uk" },
-    { name: "Darryl", email: "darryl@shootingsuppliesltd.co.uk" },
-    { name: "Staff", email: "staff@shootingsuppliesltd.co.uk" },
-  ],
-  epdqURL: "https://payments.epdq.co.uk/ncol/prod/orderstandard_utf8.asp",
-  // epdqURL: "https://mdepayments.epdq.co.uk/ncol/test/orderstandard_utf8.asp",
-  acceptURL: "https://www.holosun-optics.co.uk/shop/result?accept=true",
-  // acceptURL: "http://localhost:3000/shop/result?accept=true",
-  declineURL: "https://www.holosun-optics.co.uk/shop/result?accept=false",
-  // declineURL: "http://localhost:3000/shop/result?accept=false",
-  backURL: "https://www.holosun-optics.co.uk/shop/cart",
-  // backURL: "http://localhost:3000/shop/cart",
-  cancelURL: "https://www.holosun-optics.co.uk/shop/result?accept=cancelled",
-  // cancelURL: "http://localhost:3000/shop/result?accept=cancelled",
-  exceptionURL: "https://www.holosun-optics.co.uk/shop/result?accept=exception",
-  // exceptionURL: "http://localhost:3000/shop/shop/result?accept=exception",
+  emailTo:
+    process.env.NODE_ENV === "production"
+      ? [
+          { name: "Darryl", email: "darryl@shootingsuppliesltd.co.uk" },
+          { name: "Antony", email: "info@shootingsuppliesltd.co.uk" },
+          { name: "Staff", email: "staff@shootingsuppliesltd.co.uk" },
+        ]
+      : [{ name: "Darryl", email: "darryl@shootingsuppliesltd.co.uk" }],
+  URLs: {
+    exceptionurl: "/result?accept=exception",
+    declineURL: "/result?accept=declined",
+    cancelurl: "/result?accept=cancelled",
+    acceptURL: "/result?accept=success",
+    backurl: "/cart",
+  },
+  worldPayURL:
+    process.env.NODE_ENV === "production"
+      ? "https://access.worldpay.com/payment_pages"
+      : "https://try.access.worldpay.com/payment_pages",
+  worldpayEntity:
+    process.env.NODE_ENV === "production"
+      ? process.env.WORLDPAY_ENTITY
+      : process.env.WORLDPAY_ENTITY_TEST,
+  worldpayuser:
+    process.env.NODE_ENV === "production"
+      ? process.env.WORLDPAY_USER
+      : process.env.WORLDPAY_USER_TEST,
+  worldpayPassword:
+    process.env.NODE_ENV === "production"
+      ? process.env.WORLDPAY_PASSWORD
+      : process.env.WORLDPAY_PASSWORD_TEST,
 };
