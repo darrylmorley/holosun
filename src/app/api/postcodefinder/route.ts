@@ -1,30 +1,38 @@
-export default async function handler(req, res) {
-  const { postcode } = req.query;
+export async function POST(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const postcode = searchParams.get("postcode");
   const API_KEY = process.env.IDEAL_POSTCODE_API_KEY;
 
-  // Only allow POST requests
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  // Return error if no postcode is provided
   if (!postcode) {
-    return res.status(400).json({ error: "Postcode is required" });
+    return new Response(JSON.stringify({ error: "Postcode is required" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  // Return error if no API key is provided
   if (!API_KEY) {
     console.error("Missing IDEAL_POSTCODE_API_KEY");
-    return res.status(500).json({ error: "Missing API key" });
+    return new Response(JSON.stringify({ error: "Missing API key" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  // Make sure postcode is valid UK postalcode
   const postcodeRegex = /^[A-Z]{1,2}[0-9][0-9]?[A-Z]?\s*[0-9][A-Z]{2}$/i;
   if (!postcodeRegex.test(postcode)) {
-    return res.status(400).json({ error: "Invalid postcode format" });
+    return new Response(JSON.stringify({ error: "Invalid postcode format" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  // Remove spaces from postcode
   const sanitizedPostcode = postcode.replace(/\s+/g, "");
 
   try {
@@ -49,12 +57,22 @@ export default async function handler(req, res) {
         const bLabel = [b.line_1, b.line_2, b.post_town, b.postcode].filter(Boolean).join(", ");
         return collator.compare(aLabel, bLabel);
       });
-      res.status(200).json(sorted);
+
+      return new Response(JSON.stringify(sorted), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      });
     } else {
-      res.status(404).json({ error: "No addresses found" });
+      return new Response(JSON.stringify({ error: "No addresses found" }), {
+        status: 404,
+        headers: { "Content-Type": "application/json" },
+      });
     }
   } catch (error) {
     console.error("Error fetching address:", error);
-    res.status(500).json({ error: "Failed to fetch address" });
+    return new Response(JSON.stringify({ error: "Failed to fetch address" }), {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

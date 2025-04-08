@@ -50,11 +50,12 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
   const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
 
   const [billingAddress, setBillingAddress] = useState("");
-
+  const [deliveryAddress, setDeliveryAddress] = useState("");
   const [errors, setErrors] = useState([]);
 
   const [formData, setFormData] = useState({
     email: "",
+    tel: "",
     delivery: "delivery",
     firstName: "",
     lastName: "",
