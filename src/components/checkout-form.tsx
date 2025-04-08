@@ -49,9 +49,17 @@ const formSchema = z.object({
 export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem }) {
   const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
 
+  const [errors, setErrors] = useState([]);
+  const [deliveryAddressOpen, setDeliveryAddressOpen] = useState(false);
   const [billingAddress, setBillingAddress] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [customerDetails, setCustomerDetails] = useState({
+    title: "Mr",
+    firstName: "",
+    lastName: "",
+    email: "",
+    tel: "",
+  });
 
   const [formData, setFormData] = useState({
     email: "",
@@ -67,12 +75,6 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     deliveryPostcode: "",
     deliverySameAsBilling: true,
   });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
@@ -187,7 +189,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
 
       setErrors([]);
 
-      if (config.env === "production") {
+      if (process.env.NODE_ENV == "production") {
         // Get sale ID form epos in prod.
         lsSale = await createLightspeedSale(items);
       } else {
@@ -232,41 +234,57 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
             type="text"
             name="firstName"
             placeholder="First Name"
-            value={formData.firstName}
             autoComplete="given-name"
             required
-            onChange={handleInputChange}
+            onChange={(e) =>
+              setCustomerDetails({
+                ...customerDetails,
+                firstName: e.target.value,
+              })
+            }
             className="input input-bordered w-full rounded-sm"
           />
           <input
             type="text"
             name="lastName"
-            placeholder="Last Name"
-            value={formData.lastName}
+            placeholder="Surname"
             autoComplete="family-name"
             required
-            onChange={handleInputChange}
+            onChange={(e) =>
+              setCustomerDetails({
+                ...customerDetails,
+                lastName: e.target.value,
+              })
+            }
             className="input input-bordered w-full rounded-sm"
           />
         </div>
         <input
           type="email"
           name="email"
-          value={formData.email}
           placeholder="Enter Your Email"
           autoComplete="email"
           required
-          onChange={handleInputChange}
+          onChange={(e) =>
+            setCustomerDetails({
+              ...customerDetails,
+              email: e.target.value,
+            })
+          }
           className="input input-bordered w-full rounded-sm"
         />
         <input
           type="tel"
           name="tel"
-          value={formData.tel}
           placeholder="Enter Your Phone Number"
           autoComplete="tel"
           required
-          onChange={handleInputChange}
+          onChange={(e) =>
+            setCustomerDetails({
+              ...customerDetails,
+              tel: e.target.value,
+            })
+          }
           className="input input-bordered w-full rounded-sm"
         />
       </section>
@@ -338,37 +356,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
             <>
               <fieldset className="mt-3 w-full">
                 <h2 className="mt-3 text-base">Delivery Details</h2>
-                <input
-                  type="text"
-                  name="deliveryAddress1"
-                  placeholder="First Line of Address"
-                  value={formData.deliveryAddress1}
-                  autoComplete="shipping address-line1"
-                  onChange={handleInputChange}
-                  className="mt-3 input input-bordered w-full rounded-sm"
-                />
-                <div className="mt-3 flex gap-2">
-                  <input
-                    type="text"
-                    name="deliveryCity"
-                    placeholder="City"
-                    value={formData.deliveryCity}
-                    autoComplete="shipping address-level1"
-                    onChange={handleInputChange}
-                    className="input input-bordered w-full rounded-sm"
-                  />
-                  <input
-                    type="text"
-                    name="deliveryPostcode"
-                    placeholder="Postcode"
-                    value={formData.deliveryPostcode}
-                    autoComplete="shipping postal-code"
-                    onChange={handleInputChange}
-                    pattern="^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$"
-                    title="Please enter a valid UK postcode."
-                    className="input input-bordered w-full rounded-sm"
-                  />
-                </div>
+                <AddressFinder selected={deliveryAddress} setSelected={setDeliveryAddress} />
               </fieldset>
             </>
           )
