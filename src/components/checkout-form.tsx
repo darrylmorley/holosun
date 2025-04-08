@@ -10,6 +10,7 @@ import { config } from "../../config/config";
 import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
 import { createLightspeedSale } from "@/lib/lightspeed/create-sale";
 import { barclaysCheckoutForm } from "@/lib/epdq/epdq-form";
+import AddressFinder from "./address-finder";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -47,6 +48,8 @@ const formSchema = z.object({
 
 export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem }) {
   const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
+
+  const [billingAddress, setBillingAddress] = useState("");
 
   const [errors, setErrors] = useState([]);
 
@@ -155,6 +158,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     }
   }, [totalUniqueItems]);
 
+  // Handle Checkout Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     let lsSale;
@@ -162,15 +166,15 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     // Extract delivery address if different from billing
     const deliveryData = formData.deliverySameAsBilling
       ? {
-          deliveryAddress1: formData.billingAddress1,
-          deliveryCity: formData.billingCity,
-          deliveryPostcode: formData.billingPostcode,
-        }
+        deliveryAddress1: formData.billingAddress1,
+        deliveryCity: formData.billingCity,
+        deliveryPostcode: formData.billingPostcode,
+      }
       : {
-          deliveryAddress1: formData.deliveryAddress1,
-          deliveryCity: formData.deliveryCity,
-          deliveryPostcode: formData.deliveryPostcode,
-        };
+        deliveryAddress1: formData.deliveryAddress1,
+        deliveryCity: formData.deliveryCity,
+        deliveryPostcode: formData.deliveryPostcode,
+      };
 
     // Combine data for validation
     const dataToValidate = { ...formData, ...deliveryData };
@@ -220,8 +224,30 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
           </ul>
         </div>
       )}
-      <section className="w-full">
+      <section className="w-full space-y-4">
         <h2 className="self-start text-2xl mb-4">Contact</h2>
+        <div className="flex gap-4">
+          <input
+            type="text"
+            name="firstName"
+            placeholder="First Name"
+            value={formData.firstName}
+            autoComplete="given-name"
+            required
+            onChange={handleInputChange}
+            className="input input-bordered w-full rounded-sm"
+          />
+          <input
+            type="text"
+            name="lastName"
+            placeholder="Last Name"
+            value={formData.lastName}
+            autoComplete="family-name"
+            required
+            onChange={handleInputChange}
+            className="input input-bordered w-full rounded-sm"
+          />
+        </div>
         <input
           type="email"
           name="email"
@@ -232,67 +258,20 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
           onChange={handleInputChange}
           className="input input-bordered w-full rounded-sm"
         />
+        <input
+          type="tel"
+          name="tel"
+          value={formData.tel}
+          placeholder="Enter Your Phone Number"
+          autoComplete="tel"
+          required
+          onChange={handleInputChange}
+          className="input input-bordered w-full rounded-sm"
+        />
       </section>
       <section className="w-full">
-        <h2 className="self-start text-2xl mb-4">Billing Details</h2>
-        <fieldset className="mt-6">
-          <div className="flex gap-2">
-            <input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              value={formData.firstName}
-              autoComplete="given-name"
-              required
-              onChange={handleInputChange}
-              className="input input-bordered w-full rounded-sm"
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              value={formData.lastName}
-              autoComplete="family-name"
-              required
-              onChange={handleInputChange}
-              className="input input-bordered w-full rounded-sm"
-            />
-          </div>
-          <input
-            type="text"
-            name="billingAddress1"
-            placeholder="First Line of Address"
-            value={formData.billingAddress1}
-            autoComplete="billing address-line1"
-            required
-            onChange={handleInputChange}
-            className="mt-3 input input-bordered w-full rounded-sm"
-          />
-          <div className="mt-3 flex gap-2">
-            <input
-              type="text"
-              name="billingCity"
-              placeholder="City"
-              value={formData.billingCity}
-              autoComplete="billing address-level2"
-              required
-              onChange={handleInputChange}
-              className="input input-bordered w-full rounded-sm"
-            />
-            <input
-              type="text"
-              name="billingPostcode"
-              placeholder="Postcode"
-              value={formData.billingPostcode}
-              autoComplete="billing postal-code"
-              required
-              onChange={handleInputChange}
-              className="input input-bordered w-full rounded-sm"
-              pattern="^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$"
-              title="Please enter a valid UK postcode."
-            />
-          </div>
-        </fieldset>
+        <h2 className="self-start text-2xl mb-4">Billing Address</h2>
+        <AddressFinder selected={billingAddress} setSelected={setBillingAddress} />
       </section>
       <section className="w-full">
         <h2 className="self-start text-2xl mb-4">Delivery</h2>
