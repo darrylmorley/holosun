@@ -1,76 +1,102 @@
 "use client";
-
 import Link from "next/link";
 import { useCart } from "react-use-cart";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
-export default function ResultDetail({ params }) {
-  const { accept, orderID, STATUS } = params;
-  const { emptyCart } = useCart();
-
-  if (accept === "true" && STATUS === "9") {
-    emptyCart();
-
-    return (
-      <div className="flex flex-col items-center py-8 px-4 mb-5 space-y-8 sm:mb-24 text-fabgrey">
-        <p className="mt-12 text-2xl font-semibold">Thank you for your order!</p>
+const messages = {
+  success: {
+    title: "Thank you for your order!",
+    body: (orderID) => (
+      <>
         <p className="text-xl">
           Your order number is <span className="font-bold">{orderID}</span>
         </p>
-        <p className="text-xl text-center">*Please allow 2-4 working days for delivery.</p>
-        <p className="text-center text-sm">
-          *Please be aware that we are closed on a Monday (We operate Tue-Sat). Orders received over
-          the weekend are despatched the following Tuesday
-        </p>
-      </div>
-    );
-  }
-
-  if (accept === "cancelled") {
-    emptyCart();
-
-    return (
-      <div className="flex flex-col items-center py-8 mb-5 space-y-8 sm:mb-24 text-fabgrey">
-        <p className="text-2xl font-semibold">Your order has been cancelled!</p>
         <p className="text-xl">
-          Go back to the{" "}
-          <Link
-            href="/"
-            className="underline cursor-pointer hover:text-secondary"
-          >
-            Home page
-          </Link>
+          Please allow for up to 2-4 working days for delivery.
         </p>
-      </div>
-    );
-  }
-
-  if (accept === "false") {
-    return (
-      <div className="flex flex-col items-center py-8 mb-5 space-y-4 sm:mb-24 text-fabgrey">
-        <p className="text-2xl font-semibold">There was a problem with your payment method.</p>
-
+      </>
+    ),
+  },
+  cancelled: {
+    title: "Your order has been cancelled!",
+    body: () => (
+      <p className="text-xl">
+        Go back to the{" "}
+        <Link
+          href="/"
+          className="hover:text-secondary cursor-pointer underline"
+        >
+          Home page
+        </Link>
+      </p>
+    ),
+  },
+  declined: {
+    title: "There was a problem with your payment method.",
+    body: () => (
+      <>
         <p className="text-xl">
           You can return{" "}
           <Link
             href="/cart"
-            passHref
-            className="underline cursor-pointer hover:text-secondary"
+            className="hover:text-secondary cursor-pointer underline"
           >
             to your cart
           </Link>{" "}
           and try again
         </p>
-
         <p className="text-xl">
           Or, go back to the{" "}
           <Link
             href="/"
-            className="underline cursor-pointer hover:text-secondary"
+            className="hover:text-secondary cursor-pointer underline"
           >
             Home page
           </Link>
         </p>
-      </div>
-    );
-  }
+      </>
+    ),
+  },
+  exception: {
+    title: "There was a problem with your payment method.",
+    body: () => (
+      <>
+        <p className="text-xl">
+          Go back to the{" "}
+          <Link
+            href="/"
+            className="hover:text-secondary cursor-pointer underline"
+          >
+            Home page
+          </Link>
+        </p>
+      </>
+    ),
+  },
+};
+
+export default function ResultDetail({ params, lsSale }) {
+  const [orderID] = useState(lsSale);
+  const [accept] = useState(params.accept);
+  const { emptyCart } = useCart();
+
+  const message = messages[accept];
+
+  useEffect(() => {
+    if (message) {
+      if (Cookies.get("orderID")) Cookies.remove("orderID");
+      if (Cookies.get("formData")) Cookies.remove("formData");
+      emptyCart();
+    }
+  }, [accept, emptyCart, message]);
+
+  if (!message) return null;
+
+  return (
+    <div className="mb-5 flex flex-col items-center space-y-8 py-8 sm:mb-24">
+      <p className="text-2xl font-semibold">{message.title}</p>
+      {message.body(orderID)}
+    </div>
+  );
 }

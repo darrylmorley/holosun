@@ -1,18 +1,15 @@
+import { NextRequest, NextResponse } from "next/server";
 import { config } from "../../../../config/config";
 
-export default async function handler(req, res) {
+export async function POST(request: NextRequest) {
   const WORLDPAY_URL = config.worldPayURL;
   const WORLDPAY_ENTITY = config.worldpayEntity;
   const WORLDPAY_USER = config.worldpayUser;
   const WORLDPAY_PASSWORD = config.worldpayPassword;
 
-  // Only allow POST requests
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
   try {
-    const { amount, orderNumber, formData } = req.body;
+    const body = await request.json();
+    const { amount, orderNumber, formData } = body;
 
     const paymentRequest = {
       transactionReference: orderNumber,
@@ -27,11 +24,11 @@ export default async function handler(req, res) {
         amount: amount,
       },
       billingAddress: {
-        address1: formData.billingAddress.line_1,
-        address2: formData.billingAddress.line_2,
-        city: formData.billingAddress.post_town,
-        state: formData.billingAddress.county,
-        postalCode: formData.billingAddress.postcode,
+        address1: formData.billingAddress1,
+        address2: formData.billingAddress2,
+        city: formData.billingCity,
+        state: formData.billingCounty,
+        postalCode: formData.billingPostcode,
         countryCode: "GB",
       },
       riskData: {
@@ -39,11 +36,11 @@ export default async function handler(req, res) {
           firstName: formData.firstName,
           lastName: formData.lastName,
           address: {
-            address1: formData.deliveryAddress?.line_1 || formData.billingAddress.line_1,
-            address2: formData.deliveryAddress?.line_2 || formData.billingAddress.line_2,
-            city: formData.deliveryAddress?.post_town || formData.billingAddress.post_town,
-            state: formData.deliveryAddress?.county || formData.billingAddress.county,
-            postalCode: formData.deliveryAddress?.postcode || formData.billingAddress.postcode,
+            address1: formData.deliveryAddress1 || formData.billingAddress1,
+            address2: formData.deliveryAddress2 || formData.billingAddress2,
+            city: formData.deliveryCity || formData.billingCity,
+            state: formData.deliveryCounty || formData.billingCounty,
+            postalCode: formData.deliveryPostcode || formData.billingPostcode,
             phoneNumber: formData.tel || "",
             countryCode: "GB",
           },
@@ -79,16 +76,41 @@ export default async function handler(req, res) {
         status: response.status,
         response: errorText,
       });
-      return res.status(response.status).json({
-        error: `WorldPay API error: ${response.status}`,
-        details: errorText,
-      });
+      return NextResponse.json(
+        { error: `WorldPay API error: ${response.status}`, details: errorText },
+        { status: response.status }
+      );
     }
 
     const data = await response.json();
-    return res.status(200).json(data);
+    return NextResponse.json(data);
   } catch (error) {
     console.error("Payment process error:", error);
-    return res.status(500).json({ error: error.message });
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
+}
+
+// Add these handlers to handle other HTTP methods
+export async function GET() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+}
+
+export async function PUT() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+}
+
+export async function DELETE() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+}
+
+export async function PATCH() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+}
+
+export async function HEAD() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
+}
+
+export async function OPTIONS() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
 }

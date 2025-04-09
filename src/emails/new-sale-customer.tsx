@@ -17,7 +17,7 @@ import {
 const baseUrl =
   process.env.NODE_ENV == "production" ? "https://www.holosun-optics.co.uk" : "localhost:3000";
 
-export default function OfficeSaleEmail(props) {
+export default function CustomerSaleEmail(props) {
   const { customer, lines, orderID } = props.data;
 
   return (
@@ -160,7 +160,7 @@ export default function OfficeSaleEmail(props) {
   );
 }
 
-OfficeSaleEmail.PreviewProps = {
+CustomerSaleEmail.PreviewProps = {
   data: {
     orderID: 1234,
     customer: {

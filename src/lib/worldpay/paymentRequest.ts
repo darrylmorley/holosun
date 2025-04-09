@@ -42,7 +42,7 @@ export async function getPaymentURL({ amount, orderNumber, formData }) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(`Error during payment request: ${error.message}`);
+    console.error(`Error during payment request: ${error}`);
     return null;
   }
 }
