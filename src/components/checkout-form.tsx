@@ -251,6 +251,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
 
       if (worldPayPaymentURL.url) {
         setPaymentURL(() => worldPayPaymentURL.url);
+        setSubmitDisabled(false);
       } else {
         console.error("Failed to get payment URL");
         alert(
