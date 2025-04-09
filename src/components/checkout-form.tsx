@@ -11,13 +11,17 @@ import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
 import { createLightspeedSale } from "@/lib/lightspeed/create-sale";
 import { barclaysCheckoutForm } from "@/lib/epdq/epdq-form";
 import AddressFinder from "./address-finder";
+import WorldpayCheckout from "./worldpay-checkout";
 
 const formSchema = z.object({
-  email: z.string().email(),
-  delivery: z.enum(["delivery", "collection"]),
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
+  email: z.string().email(),
+  tel: z.string().regex(/^\+?[0-9\s\-().]{7,20}$/, {
+    message: 'Invalid phone number',
+  }),
   billingAddress1: z.string().min(1, "Billing address is required"),
+  billingAddreess2: z.string().optional(),
   billingCity: z
     .string()
     .min(1, "Billing city is required")
@@ -29,8 +33,10 @@ const formSchema = z.object({
         message: "Town or city name must only contain letters and spaces",
       }
     ),
+  billingCounty: z.string().optional(),
   billingPostcode: z.string().regex(/^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/, "Invalid postcode"),
   deliveryAddress1: z.string().optional(),
+  deliveryAddress2: z.string().optional(),
   deliveryCity: z
     .string()
     .optional()
@@ -42,39 +48,76 @@ const formSchema = z.object({
         message: "Town or city name must only contain letters and spaces",
       }
     ),
+  deliveryCounty: z.string().optional(),
   deliveryPostcode: z.string().optional(),
   deliverySameAsBilling: z.boolean(),
+  delivery: z.enum(["delivery", "collection"]),
 });
 
 export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem }) {
   const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
 
-  const [errors, setErrors] = useState([]);
-  const [deliveryAddressOpen, setDeliveryAddressOpen] = useState(false);
-  const [billingAddress, setBillingAddress] = useState("");
+  const [billingAddress, setBillingAddress] = useState("")
   const [deliveryAddress, setDeliveryAddress] = useState("");
-  const [customerDetails, setCustomerDetails] = useState({
-    title: "Mr",
-    firstName: "",
-    lastName: "",
-    email: "",
-    tel: "",
-  });
+  const [paymentURL, setPaymentURL] = useState(null);
+
+  const [errors, setErrors] = useState([]);
 
   const [formData, setFormData] = useState({
-    email: "",
-    tel: "",
-    delivery: "delivery",
     firstName: "",
     lastName: "",
+    email: "",
+    tel: "",
     billingAddress1: "",
+    billingAddress2: "",
     billingCity: "",
+    billingCounty: "",
     billingPostcode: "",
     deliveryAddress1: "",
+    deliveryAddress2: "",
     deliveryCity: "",
+    deliveryCounty: "",
     deliveryPostcode: "",
+    delivery: "delivery",
     deliverySameAsBilling: true,
   });
+
+  // Use a useEffect to sync billingAddress state with formData
+  useEffect(() => {
+    if (billingAddress) {
+      setFormData((prevData) => ({
+        ...prevData,
+        billingAddress1: billingAddress.line_1,
+        billingAddress2: billingAddress.line_2,
+        billingCity: billingAddress.post_town,
+        billingCounty: billingAddress.postal_county,
+        billingPostcode: billingAddress.postcode,
+      }));
+    }
+  }, [billingAddress]);
+
+  // Use a useEffect to sync deliveryAddress state with formData
+  useEffect(() => {
+    if (deliveryAddress) {
+      setFormData((prevData) => ({
+        ...prevData,
+        deliveryAddress1: deliveryAddress.line_1,
+        deliveryAddress2: deliveryAddress.line_2,
+        deliveryCity: deliveryAddress.post_town,
+        deliveryCounty: deliveryAddress.postal_county,
+        deliveryPostcode: deliveryAddress.postcode,
+      }));
+    }
+  }, [deliveryAddress]);
+
+  useEffect(() => console.log("Form Data:", formData), [formData]);
+  useEffect(() => console.log("Billing Address:", billingAddress), [billingAddress]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
@@ -161,7 +204,6 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     }
   }, [totalUniqueItems]);
 
-  // Handle Checkout Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     let lsSale;
@@ -189,7 +231,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
 
       setErrors([]);
 
-      if (process.env.NODE_ENV == "production") {
+      if (config.env === "production") {
         // Get sale ID form epos in prod.
         lsSale = await createLightspeedSale(items);
       } else {
@@ -214,173 +256,162 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-full flex-col items-end my-12 space-y-8 sm:mr-8"
-    >
-      {errors.length > 0 && (
-        <div className="w-full bg-red-100 text-red-700 p-4 rounded">
-          <ul>
-            {errors.map((err, index) => (
-              <li key={index}>{err}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <section className="w-full space-y-4">
-        <h2 className="self-start text-2xl mb-4">Contact</h2>
-        <div className="flex gap-4">
-          <input
-            type="text"
-            name="firstName"
-            placeholder="First Name"
-            autoComplete="given-name"
-            required
-            onChange={(e) =>
-              setCustomerDetails({
-                ...customerDetails,
-                firstName: e.target.value,
-              })
-            }
-            className="input input-bordered w-full rounded-sm"
-          />
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Surname"
-            autoComplete="family-name"
-            required
-            onChange={(e) =>
-              setCustomerDetails({
-                ...customerDetails,
-                lastName: e.target.value,
-              })
-            }
-            className="input input-bordered w-full rounded-sm"
-          />
-        </div>
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Your Email"
-          autoComplete="email"
-          required
-          onChange={(e) =>
-            setCustomerDetails({
-              ...customerDetails,
-              email: e.target.value,
-            })
-          }
-          className="input input-bordered w-full rounded-sm"
-        />
-        <input
-          type="tel"
-          name="tel"
-          placeholder="Enter Your Phone Number"
-          autoComplete="tel"
-          required
-          onChange={(e) =>
-            setCustomerDetails({
-              ...customerDetails,
-              tel: e.target.value,
-            })
-          }
-          className="input input-bordered w-full rounded-sm"
-        />
-      </section>
-      <section className="w-full">
-        <h2 className="self-start text-2xl mb-4">Billing Address</h2>
-        <AddressFinder selected={billingAddress} setSelected={setBillingAddress} />
-      </section>
-      <section className="w-full">
-        <h2 className="self-start text-2xl mb-4">Delivery</h2>
-        <fieldset className="w-full">
-          <legend className="sr-only">Choose a Delivery Method</legend>
-          <label htmlFor="delivery">
-            <div className="px-4 h-[3rem] flex items-center justify-between border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-t-sm w-full">
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="delivery"
-                  id="delivery"
-                  value="delivery"
-                  className="radio text-black mr-2"
-                  checked={formData.delivery === "delivery"}
-                  onChange={handleDeliverySelection}
-                />
-                <span>Delivery</span>
-              </div>
-              <p>
-                <Truck />
-              </p>
-            </div>
-          </label>
-          <label htmlFor="collection">
-            <div className="px-4 h-[3rem] flex items-center justify-between border-b border-r border-l border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-b-sm w-full">
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="delivery"
-                  id="collection"
-                  value="collection"
-                  checked={formData.delivery === "collection"}
-                  onChange={handleDeliverySelection}
-                  className="radio text-black mr-2"
-                />
-                <span>Collection</span>
-              </div>
-              <p>
-                <Store />
-              </p>
-            </div>
-          </label>
-        </fieldset>
-        <div className="mt-6 w-full p-4 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-sm">
-          <label
-            htmlFor="deliverySameAsBilling"
-            className="flex items-center gap-2 cursor-pointer"
-          >
-            <input
-              type="checkbox"
-              name="deliverySameAsBilling"
-              id="deliverySameAsBilling"
-              checked={formData.deliverySameAsBilling}
-              onChange={handleCheckboxChange}
-              className="checkbox text-black mr-2"
-            />
-            <p className="text-sm">My delivery address is the same as the billing address above.</p>
-          </label>
-        </div>
-        {formData.delivery === "delivery" ? (
-          !formData.deliverySameAsBilling && (
-            <>
-              <fieldset className="mt-3 w-full">
-                <h2 className="mt-3 text-base">Delivery Details</h2>
-                <AddressFinder selected={deliveryAddress} setSelected={setDeliveryAddress} />
-              </fieldset>
-            </>
-          )
-        ) : (
-          <div className="mt-6 flex flex-col w-full">
-            <h3 className="text-xl">Collect From</h3>
-            <div className="p-4 mt-3 h-full w-full border rounded-sm align-middle bg-stone-100">
-              <p>Shooting Supplies Ltd</p>
-              <p>38 Sherwood Road</p>
-              <p>Bromsgrove</p>
-              <p>B60 3DR</p>
-            </div>
+    <>
+      {paymentURL && <WorldpayCheckout paymentURL={paymentURL} />}
+      <form
+        onSubmit={handleSubmit}
+        className="w-full flex-col items-end my-12 space-y-8 sm:mr-8"
+      >
+        {errors.length > 0 && (
+          <div className="w-full bg-red-100 text-red-700 p-4 rounded">
+            <ul>
+              {errors.map((err, index) => (
+                <li key={index}>{err}</li>
+              ))}
+            </ul>
           </div>
         )}
-      </section>
-      <button
-        type="submit"
-        className="btn btn-secondary hover:btn-accent hover:text-white text-white w-full"
-        data-umami-event="checkout"
-        title="Checkout"
-      >
-        Checkout
-        <span>{getFormattedPrice(cartTotal)}</span>
-      </button>
-    </form>
+        <section className="w-full space-y-4">
+          <h2 className="self-start text-2xl mb-4">Contact</h2>
+          <div className="flex space-x-2 mb-4">
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              value={formData.firstName}
+              autoComplete="given-name"
+              required
+              onChange={handleInputChange}
+              className="input input-bordered w-full rounded-sm"
+            />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              value={formData.lastName}
+              autoComplete="family-name"
+              required
+              onChange={handleInputChange}
+              className="input input-bordered w-full rounded-sm"
+            />
+          </div>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            placeholder="Enter Your Email"
+            autoComplete="email"
+            required
+            onChange={handleInputChange}
+            className="input input-bordered w-full rounded-sm"
+          />
+          <input
+            type="tel"
+            name="tel"
+            value={formData.tel}
+            placeholder="Enter Your Phone Number"
+            autoComplete="tel"
+            required
+            onChange={handleInputChange}
+            className="input input-bordered w-full rounded-sm"
+          />
+        </section>
+        <section className="w-full">
+          <h2 className="self-start text-2xl mb-4">Billing Details</h2>
+          <fieldset className="mt-6">
+            <AddressFinder selected={billingAddress} setSelected={setBillingAddress} />
+          </fieldset>
+        </section>
+        <section className="w-full">
+          <h2 className="self-start text-2xl mb-4">Delivery</h2>
+          <fieldset className="w-full">
+            <legend className="sr-only">Choose a Delivery Method</legend>
+            <label htmlFor="delivery">
+              <div className="px-4 h-[3rem] flex items-center justify-between border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-t-sm w-full">
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    name="delivery"
+                    id="delivery"
+                    value="delivery"
+                    className="radio text-black mr-2"
+                    checked={formData.delivery === "delivery"}
+                    onChange={handleDeliverySelection}
+                  />
+                  <span>Delivery</span>
+                </div>
+                <p>
+                  <Truck />
+                </p>
+              </div>
+            </label>
+            <label htmlFor="collection">
+              <div className="px-4 h-[3rem] flex items-center justify-between border-b border-r border-l border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-b-sm w-full">
+                <div className="flex items-center">
+                  <input
+                    type="radio"
+                    name="delivery"
+                    id="collection"
+                    value="collection"
+                    checked={formData.delivery === "collection"}
+                    onChange={handleDeliverySelection}
+                    className="radio text-black mr-2"
+                  />
+                  <span>Collection</span>
+                </div>
+                <p>
+                  <Store />
+                </p>
+              </div>
+            </label>
+          </fieldset>
+          <div className="mt-6 w-full p-4 border border-[var(--fallback-bc,oklch(var(--bc)/0.2))] rounded-sm">
+            <label
+              htmlFor="deliverySameAsBilling"
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              <input
+                type="checkbox"
+                name="deliverySameAsBilling"
+                id="deliverySameAsBilling"
+                checked={formData.deliverySameAsBilling}
+                onChange={handleCheckboxChange}
+                className="checkbox text-black mr-2"
+              />
+              <p className="text-sm">My delivery address is the same as the billing address above.</p>
+            </label>
+          </div>
+          {formData.delivery === "delivery" ? (
+            !formData.deliverySameAsBilling && (
+              <>
+                <fieldset className="mt-3 w-full">
+                  <h2 className="my-3 text-base">Delivery Details</h2>
+                  <AddressFinder selected={deliveryAddress} setSelected={setDeliveryAddress} />
+                </fieldset>
+              </>
+            )
+          ) : (
+            <div className="mt-6 flex flex-col w-full">
+              <h3 className="text-xl">Collect From</h3>
+              <div className="p-4 mt-3 h-full w-full border rounded-sm align-middle bg-stone-100">
+                <p>Shooting Supplies Ltd</p>
+                <p>38 Sherwood Road</p>
+                <p>Bromsgrove</p>
+                <p>B60 3DR</p>
+              </div>
+            </div>
+          )}
+        </section>
+        <button
+          type="submit"
+          className="btn btn-secondary hover:btn-accent hover:text-white text-white w-full"
+          data-umami-event="checkout"
+          title="Checkout"
+        >
+          Checkout
+          <span>{getFormattedPrice(cartTotal)}</span>
+        </button>
+      </form>
+    </>
   );
 }
