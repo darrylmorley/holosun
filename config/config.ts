@@ -22,7 +22,7 @@ export const config = {
     process.env.NODE_ENV === "production"
       ? process.env.WORLDPAY_ENTITY
       : process.env.WORLDPAY_ENTITY_TEST,
-  worldpayuser:
+  worldpayUser:
     process.env.NODE_ENV === "production"
       ? process.env.WORLDPAY_USER
       : process.env.WORLDPAY_USER_TEST,

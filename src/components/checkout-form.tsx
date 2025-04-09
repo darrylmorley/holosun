@@ -1,15 +1,15 @@
 "use client";
+import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { Store, Truck } from "lucide-react";
 import { useCart } from "react-use-cart";
 import { isValid } from "postcode";
 import { z } from "zod";
 
-import { config } from "../../config/config";
-
-import { getFormattedPrice, isOutsideMainlandUK } from "@/lib/utils/helpers";
+import { isOutsideMainlandUK } from "@/lib/utils/helpers";
 import { createLightspeedSale } from "@/lib/lightspeed/create-sale";
-import { barclaysCheckoutForm } from "@/lib/epdq/epdq-form";
+import { getPaymentURL } from "@/lib/worldpay/paymentRequest";
+
 import AddressFinder from "./address-finder";
 import WorldpayCheckout from "./worldpay-checkout";
 
@@ -24,30 +24,14 @@ const formSchema = z.object({
   billingAddreess2: z.string().optional(),
   billingCity: z
     .string()
-    .min(1, "Billing city is required")
-    .refine(
-      (val) => {
-        return /^[a-zA-Z\s]+$/.test(val);
-      },
-      {
-        message: "Town or city name must only contain letters and spaces",
-      }
-    ),
+    .min(1, "Billing city is required"),
   billingCounty: z.string().optional(),
   billingPostcode: z.string().regex(/^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/, "Invalid postcode"),
   deliveryAddress1: z.string().optional(),
   deliveryAddress2: z.string().optional(),
   deliveryCity: z
     .string()
-    .optional()
-    .refine(
-      (val) => {
-        return /^[a-zA-Z\s]+$/.test(val);
-      },
-      {
-        message: "Town or city name must only contain letters and spaces",
-      }
-    ),
+    .optional(),
   deliveryCounty: z.string().optional(),
   deliveryPostcode: z.string().optional(),
   deliverySameAsBilling: z.boolean(),
@@ -57,6 +41,7 @@ const formSchema = z.object({
 export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem }) {
   const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
 
+  const [submitDisabled, setSubmitDisabled] = useState(false);
   const [billingAddress, setBillingAddress] = useState("")
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [paymentURL, setPaymentURL] = useState(null);
@@ -205,19 +190,34 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
   }, [totalUniqueItems]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     let lsSale;
+    e.preventDefault();
+    setSubmitDisabled(true);
+
+    if (!billingAddress) {
+      alert("Please select a billing address.");
+      return;
+    }
+
+    if (!formData.deliverySameAsBilling && !deliveryAddress) {
+      alert("Please select a delivery address.");
+      return;
+    }
 
     // Extract delivery address if different from billing
     const deliveryData = formData.deliverySameAsBilling
       ? {
         deliveryAddress1: formData.billingAddress1,
+        deliveryAddress2: formData.billingAddress2,
         deliveryCity: formData.billingCity,
+        deliveryCounty: formData.billingCounty,
         deliveryPostcode: formData.billingPostcode,
       }
       : {
         deliveryAddress1: formData.deliveryAddress1,
+        deliveryAddress2: formData.deliveryAddress2,
         deliveryCity: formData.deliveryCity,
+        deliveryCounty: formData.deliveryCounty,
         deliveryPostcode: formData.deliveryPostcode,
       };
 
@@ -225,26 +225,39 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     const dataToValidate = { ...formData, ...deliveryData };
 
     try {
+      lsSale = Cookies.get("orderID");
+
       // validate form data
       formSchema.parse(dataToValidate);
       // Clear previous errors
-
       setErrors([]);
 
-      if (config.env === "production") {
-        // Get sale ID form epos in prod.
+      if (process.env.NODE_ENV == "production" && !lsSale) {
+        // Only create a new sale if we don't have one in production.
         lsSale = await createLightspeedSale(items);
-      } else {
+      } else if (!lsSale) {
         // Use test Order Number for testing in dev.
-        lsSale = "HOLO008";
+        lsSale = "HOLO001";
       }
 
-      // Create Barclay's checkout form
-      barclaysCheckoutForm(
-        cartTotal.toFixed(2).toString().replace(".", ""),
-        dataToValidate,
-        lsSale
-      );
+      Cookies.set("orderID", lsSale);
+      Cookies.set("formData", JSON.stringify(formData));
+
+      const worldPayPaymentURL = await getPaymentURL({
+        amount: Math.round(cartTotal * 100),
+        orderNumber: lsSale,
+        formData
+      });
+
+      if (worldPayPaymentURL.url) {
+        setPaymentURL(() => worldPayPaymentURL.url);
+      } else {
+        console.error("Failed to get payment URL");
+        alert(
+          "Something went wrong while processing your order. Please try again.",
+        );
+        setSubmitDisabled(false);
+      }
     } catch (error) {
       if (error instanceof z.ZodError) {
         // Use a Set to store unique error messages
@@ -407,9 +420,32 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
           className="btn btn-secondary hover:btn-accent hover:text-white text-white w-full"
           data-umami-event="checkout"
           title="Checkout"
+          disabled={submitDisabled}
         >
-          Checkout
-          <span>{getFormattedPrice(cartTotal)}</span>
+          {submitDisabled ? (
+            <svg
+              className="h-5 w-5 animate-spin text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              ></path>
+            </svg>
+          ) : (
+            "Submit"
+          )}
         </button>
       </form>
     </>

@@ -3,7 +3,7 @@ import { config } from "../../../../config/config";
 export default async function handler(req, res) {
   const WORLDPAY_URL = config.worldPayURL;
   const WORLDPAY_ENTITY = config.worldpayEntity;
-  const WORLDPAY_USER = config.worldpayuser;
+  const WORLDPAY_USER = config.worldpayUser;
   const WORLDPAY_PASSWORD = config.worldpayPassword;
 
   // Only allow POST requests
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { amount, orderNumber, customerDetails, billingAddress, deliveryAddress } = req.body;
+    const { amount, orderNumber, formData } = req.body;
 
     const paymentRequest = {
       transactionReference: orderNumber,
@@ -27,24 +27,24 @@ export default async function handler(req, res) {
         amount: amount,
       },
       billingAddress: {
-        address1: billingAddress.line_1,
-        address2: billingAddress.line_2,
-        city: billingAddress.post_town,
-        state: billingAddress.county,
-        postalCode: billingAddress.postcode,
+        address1: formData.billingAddress.line_1,
+        address2: formData.billingAddress.line_2,
+        city: formData.billingAddress.post_town,
+        state: formData.billingAddress.county,
+        postalCode: formData.billingAddress.postcode,
         countryCode: "GB",
       },
       riskData: {
         shipping: {
-          firstName: customerDetails.firstName,
-          lastName: customerDetails.lastName,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
           address: {
-            address1: deliveryAddress?.line_1 || billingAddress.line_1,
-            address2: deliveryAddress?.line_2 || billingAddress.line_2,
-            city: deliveryAddress?.post_town || billingAddress.post_town,
-            state: deliveryAddress?.county || billingAddress.county,
-            postalCode: deliveryAddress?.postcode || billingAddress.postcode,
-            phoneNumber: customerDetails.tel || "",
+            address1: formData.deliveryAddress?.line_1 || formData.billingAddress.line_1,
+            address2: formData.deliveryAddress?.line_2 || formData.billingAddress.line_2,
+            city: formData.deliveryAddress?.post_town || formData.billingAddress.post_town,
+            state: formData.deliveryAddress?.county || formData.billingAddress.county,
+            postalCode: formData.deliveryAddress?.postcode || formData.billingAddress.postcode,
+            phoneNumber: formData.tel || "",
             countryCode: "GB",
           },
         },
