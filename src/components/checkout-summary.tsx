@@ -106,7 +106,7 @@ export default function CheckoutSummary({ deliveryItem }) {
         <div className="pt-12 flex space-x-4 px-8 lg:px-0">
           {/* Visa */}
           <svg
-            width="62"
+            width="48"
             // height="500"
             viewBox="0 0 780 500"
             fill="none"
@@ -127,7 +127,7 @@ export default function CheckoutSummary({ deliveryItem }) {
           </svg>
           {/* Mastercard */}
           <svg
-            width="62"
+            width="48"
             viewBox="0 0 780 500"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +162,7 @@ export default function CheckoutSummary({ deliveryItem }) {
           </svg>
           {/* Masestro */}
           <svg
-            width="62"
+            width="48"
             viewBox="0 0 780 500"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -197,7 +197,7 @@ export default function CheckoutSummary({ deliveryItem }) {
           </svg>
           {/* American Express */}
           <svg
-            width="62"
+            width="48"
             viewBox="0 0 120 80"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +218,7 @@ export default function CheckoutSummary({ deliveryItem }) {
           </svg>
           {/* Google Pay */}
           <svg
-            width="62"
+            width="48"
             viewBox="0 0 120 80"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -247,7 +247,7 @@ export default function CheckoutSummary({ deliveryItem }) {
           </svg>
           {/* Apple Pay */}
           <svg
-            width="62"
+            width="48"
             viewBox="0 0 120 80"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

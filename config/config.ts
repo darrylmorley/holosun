@@ -8,11 +8,11 @@ export const config = {
         ]
       : [{ name: "Darryl", email: "darryl@shootingsuppliesltd.co.uk" }],
   URLs: {
-    exceptionurl: "/result?accept=exception",
-    declineURL: "/result?accept=declined",
-    cancelurl: "/result?accept=cancelled",
-    acceptURL: "/result?accept=success",
-    backurl: "/cart",
+    exceptionurl: "/shop/result?accept=exception",
+    declineURL: "/shop/result?accept=declined",
+    cancelurl: "/shop/result?accept=cancelled",
+    acceptURL: "/shop/result?accept=success",
+    backurl: "/shop/cart",
   },
   worldPayURL:
     process.env.NODE_ENV === "production"
