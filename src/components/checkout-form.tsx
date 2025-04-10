@@ -325,6 +325,8 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
             value={formData.tel}
             placeholder="Enter Your Phone Number"
             autoComplete="tel"
+            pattern="^(0[1-9][0-9]{8,9}|[1-9][0-9]{9,14})$"
+            title="Please enter a valid phone number starting with 0 for UK numbers (e.g. 01234567890), or an international number without the ‘+’ (e.g. 441234567890)."
             required
             onChange={handleInputChange}
             className="input input-bordered w-full rounded-sm"
