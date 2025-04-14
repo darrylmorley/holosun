@@ -86,7 +86,10 @@ export default function CustomerSaleEmail(props) {
               </Text>
               <Text>
                 <span className="font-bold">Address: </span>
-                {customer.deliveryAddress1}, {customer.deliveryCity}, {customer.deliveryPostcode}
+                {customer.deliveryAddress1}
+                {customer.deliveryAddress2 && `, ${customer.deliveryAddress2}`}
+                {customer.deliveryCity && `, ${customer.deliveryCity}`}
+                {customer.deliveryPostcode && `, ${customer.deliveryPostcode}`}
               </Text>
             </Section>
             <Hr />
@@ -168,6 +171,7 @@ CustomerSaleEmail.PreviewProps = {
       lastName: "Doe",
       email: "johndoe@gmail.com",
       deliveryAddress1: "1234 Other St",
+      deliveryAddress2: "Apt 567",
       deliveryCity: "Othertown",
       deliveryPostcode: "B60 3JS",
     },
