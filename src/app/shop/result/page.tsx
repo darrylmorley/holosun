@@ -28,13 +28,11 @@ export default async function Page({ searchParams }) {
     lastName: formData.lastName,
     email: formData.email,
     tel: formData.tel,
-    deliveryAddress1: formData.deliveryAddress1,
-    deliveryAddress2: formData.deliveryAddress2,
-    deliveryCity: formData.deliveryCity,
-    deliveryPostcode: formData.deliveryPostcode,
+    deliveryAddress1: formData.deliveryAddress1 || formData.billingAddress1,
+    deliveryAddress2: formData.deliveryAddress2 || formData.billingAddress2,
+    deliveryCity: formData.deliveryCity || formData.billingCity,
+    deliveryPostcode: formData.deliveryPostcode || formData.billingPostcode,
   }
-
-  console.log(customerDetails)
 
   if (accept === "success") {
     const sale = await getSale(orderID);
