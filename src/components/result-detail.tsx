@@ -92,9 +92,7 @@ export default function ResultDetail({ params, lsSale }) {
       const timer = setTimeout(() => {
         // Clean up cookies
         if (Cookies.get("orderID")) Cookies.remove("orderID");
-        if (Cookies.get("customerDetails")) Cookies.remove("customerDetails");
-        if (Cookies.get("billingAddress")) Cookies.remove("billingAddress");
-        if (Cookies.get("deliveryAddress")) Cookies.remove("deliveryAddress");
+        if (Cookies.get("formData")) Cookies.remove("formData");
 
         // Empty the cart
         emptyCart();
