@@ -8,15 +8,21 @@ export async function newSaleOfficeEmail(orderID, lines, customer) {
   const data = { orderID, lines, customer };
   const emailHtml = render(<OfficeSaleEmail data={data} />);
 
-  sendSmtpEmail.subject = "New Holosun Optics Sale";
-  sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
-  sendSmtpEmail.to = config.emailTo;
-  sendSmtpEmail.htmlContent = emailHtml;
-  sendSmtpEmail.params = data;
+  // Create a new email object each time instead of using the shared one
+  const emailPayload = {
+    subject: "New Holosun Optics Sale",
+    sender: { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" },
+    to: config.emailTo,
+    htmlContent: emailHtml,
+    params: data,
+  };
 
   try {
-    const response = await brevoApiInstance.sendTransacEmail(sendSmtpEmail);
-    console.log("API called successfully. Returned data: " + JSON.stringify(response));
+    // Log the data being sent to help with debugging
+    console.log("Sending office email with customer data:", JSON.stringify(customer));
+
+    await brevoApiInstance.sendTransacEmail(emailPayload);
+    console.log("Office email sent successfully");
 
     return { message: "Message sent successfully!", status: 200 };
   } catch (error) {
