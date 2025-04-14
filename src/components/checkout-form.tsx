@@ -196,11 +196,13 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
 
     if (!billingAddress) {
       alert("Please select a billing address.");
+      setSubmitDisabled(false);
       return;
     }
 
     if (!formData.deliverySameAsBilling && !deliveryAddress) {
       alert("Please select a delivery address.");
+      setSubmitDisabled(false);
       return;
     }
 
