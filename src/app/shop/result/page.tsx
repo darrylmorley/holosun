@@ -64,7 +64,7 @@ export default async function Page({ searchParams }) {
     if (sale.Sale.completed != "true") {
       try {
         const completedSale = await completeSale(orderID, amount);
-        console.log("Sale completed:", completedSale);
+        console.log("Sale completed:", completedSale.Sale.saleID);
         try {
           await newSaleCustomerEmail(orderID, lines, customerDetails);
         } catch (error) {
