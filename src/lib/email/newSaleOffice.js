@@ -15,12 +15,12 @@ export async function newSaleOfficeEmail(orderID, lines, customer) {
   sendSmtpEmail.params = data;
 
   try {
-    brevoApiInstance.sendTransacEmail(sendSmtpEmail).then(function (data) {
-      console.log("API called successfully. Returned data: " + JSON.stringify(data));
-    });
+    const response = await brevoApiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log("API called successfully. Returned data: " + JSON.stringify(response));
 
     return { message: "Message sent successfully!", status: 200 };
   } catch (error) {
-    console.error(error);
+    console.error("Failed to send email:", error);
+    return { message: "Failed to send email", status: 500 };
   }
 }

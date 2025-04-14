@@ -65,12 +65,18 @@ export default async function Page({ searchParams }) {
       try {
         const completedSale = await completeSale(orderID, amount);
         console.log("Sale completed:", completedSale);
-        newSaleCustomerEmail(
-          orderID,
-          lines,
-          customerDetails
-        );
-        newSaleOfficeEmail(orderID, lines, customerDetails);
+        try {
+          await newSaleCustomerEmail(orderID, lines, customerDetails);
+        } catch (error) {
+          console.error("Failed to send customer email:", error);
+        }
+
+        try {
+          await newSaleOfficeEmail(orderID, lines, customerDetails);
+        } catch (error) {
+          console.error("Failed to send office email:", error);
+          console.log("Customer details:", customerDetails);
+        }
       } catch (error) {
         if (error.response) {
           // Server responded with a non-2xx status
