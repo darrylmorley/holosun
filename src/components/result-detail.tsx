@@ -111,8 +111,12 @@ export default function ResultDetail({ params, lsSale }) {
     return (
       <div className="mb-5 flex flex-col items-center space-y-8 py-8 text-fabgrey sm:mb-24">
         <p className="text-2xl font-semibold">Session Expired</p>
-        <div className="text-xl">
-          <p>Your checkout session has expired or already been completed. If your order was successful, you&apos;ll receive a confirmation email shortly.</p>
+        <div className="flex flex-col items-center text-xl">
+          <p>
+            Your checkout session has expired or already been completed. If your
+            order was successful, you&apos;ll receive a confirmation email
+            shortly.
+          </p>
           <p className="mt-4">
             <Link
               href="/"
