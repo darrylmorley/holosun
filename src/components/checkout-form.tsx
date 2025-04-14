@@ -232,12 +232,9 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       // Clear previous errors
       setErrors([]);
 
-      if (process.env.NODE_ENV == "production" && !lsSale) {
-        // Only create a new sale if we don't have one in production.
+      if (!lsSale) {
+        // Only create a new sale if we don't have one.
         lsSale = await createLightspeedSale(items);
-      } else if (!lsSale) {
-        // Use test Order Number for testing in dev.
-        lsSale = "HOLO001";
       }
 
       Cookies.set("orderID", lsSale);
