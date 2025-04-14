@@ -1,6 +1,6 @@
 import { render } from "@react-email/render";
 
-import { brevoApiInstance, sendSmtpEmail } from "@/lib/email/brevo-api";
+import { brevoApiInstance } from "@/lib/email/brevo-api";
 import OfficeSaleEmail from "@/emails/new-sale-office";
 import { config } from "../../../config/config";
 
@@ -27,6 +27,6 @@ export async function newSaleOfficeEmail(orderID, lines, customer) {
     return { message: "Message sent successfully!", status: 200 };
   } catch (error) {
     console.error("Failed to send email:", error);
-    return { message: "Failed to send email", status: 500 };
+    throw error;
   }
 }
