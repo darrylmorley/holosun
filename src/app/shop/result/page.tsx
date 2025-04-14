@@ -16,7 +16,13 @@ export const metadata = {
 };
 
 export default async function Page({ searchParams }) {
-  const { accept } = searchParams;
+  const params = await searchParams;
+  let accept = params?.accept || "cancelled";
+
+  if (!["success", "declined", "exception", "cancelled"].includes(accept)) {
+    accept = "cancelled";
+  }
+
   const cookieStore = cookies();
   const orderID = cookieStore.get("orderID")?.value;
   const formData = JSON.parse(
@@ -34,8 +40,11 @@ export default async function Page({ searchParams }) {
     deliveryPostcode: formData.deliveryPostcode || formData.billingPostcode,
   }
 
-  if (accept === "success") {
+  if (accept === "success" && orderID) {
     const sale = await getSale(orderID);
+    console.log(
+      `Retrieved sale data for order ${orderID}, completed status: ${sale.Sale.completed}`,
+    );
 
     const amount = sale.Sale.totalDue;
 
@@ -104,13 +113,14 @@ export default async function Page({ searchParams }) {
     console.log("Payment was cancelled.");
     cancelSale(orderID);
   }
+
   return (
     <>
       <div className="px-4 text-center flex flex-col justify-center items-center h-56 bg-secondary text-white space-y-4">
         <h1 className="text-4xl lg:text-5xl font-black uppercase">Result</h1>
         <p className="text-lg text-center">Your checkout result.</p>
       </div>
-      <ResultDetail params={searchParams} lsSale={orderID} />
+      <ResultDetail params={params} lsSale={orderID} />
     </>
   );
 }
