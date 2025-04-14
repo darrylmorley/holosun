@@ -60,8 +60,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({ searchParams }: PageProps) {
+  const params = await searchParams;
+  const { sort } = params;
+
   const items = await getItems();
-  const { sort } = searchParams;
 
   return (
     <>

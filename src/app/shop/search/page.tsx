@@ -41,7 +41,8 @@ async function getSearchItems(query: string) {
 }
 
 export default async function Page({ searchParams }) {
-  const { query, sort } = searchParams;
+  const params = await searchParams;
+  const { query, sort } = params;
   const items = await getSearchItems(query);
 
   return (
