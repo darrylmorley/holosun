@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useCart } from "react-use-cart";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import Cookies from "js-cookie";
 
 const messages = {
@@ -77,24 +77,40 @@ const messages = {
 };
 
 export default function ResultDetail({ params, lsSale }) {
-  const [orderID] = useState(lsSale);
-  const [accept] = useState(params.accept);
+  // Store the initial values
+  const orderID = useRef(lsSale).current;
+  const accept = useRef(params.accept).current;
+  const cleanupDone = useRef(false);
   const { emptyCart } = useCart();
 
   const message = messages[accept];
 
+  // Use a one-time effect for cleanup
   useEffect(() => {
-    if (message) {
-      if (Cookies.get("orderID")) Cookies.remove("orderID");
-      if (Cookies.get("formData")) Cookies.remove("formData");
-      emptyCart();
+    if (message && !cleanupDone.current) {
+      // Add a small delay to ensure the page renders first
+      const timer = setTimeout(() => {
+        // Clean up cookies
+        if (Cookies.get("orderID")) Cookies.remove("orderID");
+        if (Cookies.get("customerDetails")) Cookies.remove("customerDetails");
+        if (Cookies.get("billingAddress")) Cookies.remove("billingAddress");
+        if (Cookies.get("deliveryAddress")) Cookies.remove("deliveryAddress");
+
+        // Empty the cart
+        emptyCart();
+
+        // Mark as done
+        cleanupDone.current = true;
+      }, 300);
+
+      return () => clearTimeout(timer);
     }
-  }, [accept, emptyCart, message]);
+  }, [message, emptyCart]);
 
   if (!message) return null;
 
   return (
-    <div className="mb-5 flex flex-col items-center space-y-8 py-8 sm:mb-24">
+    <div className="mb-5 flex flex-col items-center space-y-8 py-8 text-fabgrey sm:mb-24">
       <p className="text-2xl font-semibold">{message.title}</p>
       {message.body(orderID)}
     </div>
