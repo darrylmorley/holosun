@@ -85,7 +85,7 @@ export default function OfficeSaleEmail(props) {
               </Text>
               <Text>
                 <span className="font-bold">Address: </span>
-                {customer.deliveryAddress1}, {customer.deliveryCity}, {customer.deliveryPostcode}
+                {customer.deliveryAddress1}, {customer.deliveryAddress2}, {customer.deliveryCity}, {customer.deliveryPostcode}
               </Text>
             </Section>
             <Hr />
