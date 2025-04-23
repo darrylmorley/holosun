@@ -107,11 +107,17 @@ export default async function Page({ searchParams }) {
   } else if (accept === "declined" || accept === "exception") {
     // Handle declined or exception case
     console.log("Payment was declined or an exception occurred.");
-    cancelSale(orderID);
+    if (orderID) {
+      cancelSale(orderID);
+      console.log("Sale cancelled:", orderID);
+    }
   } else {
     // Handle other cases (e.g., cancelled)
-    console.log("Payment was cancelled.");
-    cancelSale(orderID);
+    console.log("Payment was cancelled by the user.");
+    if (orderID) {
+      cancelSale(orderID);
+      console.log("Sale cancelled:", orderID);
+    }
   }
 
   return (
