@@ -1,5 +1,6 @@
 "use client";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { MailCheck, MailWarning } from "lucide-react";
 
 import { newsletterSignup } from "@/app/actions";
@@ -25,7 +26,7 @@ function SubmitButton() {
 }
 
 export default function NewsletterForm() {
-  const [state, formAction] = useFormState(newsletterSignup, initialFormState);
+  const [state, formAction] = useActionState(newsletterSignup, initialFormState);
 
   return (
     <form action={formAction}>

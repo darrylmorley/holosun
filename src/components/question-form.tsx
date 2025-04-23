@@ -1,5 +1,6 @@
 "use client";
-import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import { MailCheck, MailWarning } from "lucide-react";
 
 import { sendContactFormEmail } from "@/app/actions";
@@ -29,7 +30,7 @@ function SubmitButton() {
 }
 
 export default function QuestionForm({ itemId, itemName }) {
-  const [state, formAction] = useFormState(sendContactFormEmail, initialFormState);
+  const [state, formAction] = useActionState(sendContactFormEmail, initialFormState);
 
   if (state.status === 200) {
     return (

@@ -12,13 +12,14 @@ import { capitalise } from "@/lib/utils/helpers";
 import { notFound } from "next/navigation";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
     url: string;
-  };
+  }>;
 };
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata(props: PageProps) {
+  const params = await props.params;
   const { slug } = params;
   const item = await getItem(slug);
 
@@ -75,7 +76,8 @@ async function getItem(slug: string) {
   });
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page(props: PageProps) {
+  const params = await props.params;
   const { slug } = params;
   const url = `https://www.holosun-optics.co.uk/${slug}`;
   const item = await getItem(slug);

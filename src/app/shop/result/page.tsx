@@ -23,7 +23,7 @@ export default async function Page({ searchParams }) {
     accept = "cancelled";
   }
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const orderID = cookieStore.get("orderID")?.value;
   const formData = JSON.parse(
     cookieStore.get("formData")?.value || "{}",

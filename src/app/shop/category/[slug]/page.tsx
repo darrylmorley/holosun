@@ -13,13 +13,13 @@ import ProductCard from "@/components/product-card";
 import ShopFilters from "@/components/shop-filters";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     slug: string;
     url: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     sort: string;
-  };
+  }>;
 };
 
 async function getItems(slug: string) {
@@ -43,7 +43,8 @@ async function getItems(slug: string) {
   return { items, id };
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata(props: PageProps) {
+  const params = await props.params;
   const { slug } = params;
   const { metaName, metaDescription } = getCategoryBySlug(slug);
 
@@ -82,7 +83,9 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-export default async function Page({ params, searchParams }: PageProps) {
+export default async function Page(props: PageProps) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const { slug } = params;
   const { sort } = searchParams;
   const { items, id } = await getItems(slug);
