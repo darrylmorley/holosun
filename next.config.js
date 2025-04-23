@@ -41,25 +41,23 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  productionBrowserSourceMaps: false,
+  reactStrictMode: process.env.NODE_ENV !== "production",
+  output: "standalone",
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "res.cloudinary.com",
       },
     ],
+    deviceSizes: [360, 640, 820, 1080, 1200, 1920],
+    minimumCacheTTL: 600,
   },
-  eslint: {
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    // Set this to true to ignore TypeScript errors during build
-    ignoreBuildErrors: true,
-  },
-  skipTrailingSlashRedirect: true,
-  output: "standalone",
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

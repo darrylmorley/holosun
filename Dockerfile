@@ -26,8 +26,8 @@ RUN npm install -g pnpm@latest && pnpm run build
 FROM base AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # Add Node.js user
 RUN addgroup --system --gid 1001 nodejs
@@ -47,6 +47,7 @@ USER nextjs
 
 EXPOSE 3000
 
-ENV PORT 3000
+ENV PORT=3000
 
-CMD HOSTNAME="0.0.0.0" node server.js
+ENV HOSTNAME="0.0.0.0"
+CMD ["node", "server.js"]
