@@ -1,11 +1,10 @@
-import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import prisma from "@/lib/db/prisma";
 import { formatCartItem } from "@/lib/utils/helpers";
 
-const CartItems = dynamic(() => import("@/components/cart-items"), { ssr: false });
-const CartSummary = dynamic(() => import("@/components/cart-summary"), { ssr: false });
+import CartItems from "@/components/cart-items"
+import CartSummary from "@/components/cart-summary"
 
 async function getShippingItems() {
   return await prisma.product.findMany({
