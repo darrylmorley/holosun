@@ -1,5 +1,4 @@
 import { stripHtml } from "@/lib/utils/helpers";
-import { ShieldCheck } from "lucide-react";
 import dynamic from "next/dynamic";
 
 import prisma from "@/lib/db/prisma";
