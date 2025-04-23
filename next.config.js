@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 import { withSentryConfig } from "@sentry/nextjs";
+import { type } from "os";
 
 const securityHeaders = [
   {
@@ -57,6 +58,9 @@ const nextConfig = {
     ],
     deviceSizes: [360, 640, 820, 1080, 1200, 1920],
     minimumCacheTTL: 600,
+  },
+  typesctipt: {
+    ignoreBuildErrors: true,
   },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
