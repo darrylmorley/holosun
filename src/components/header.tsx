@@ -6,6 +6,7 @@ import Link from "next/link";
 import MenuDrawer from "./menu-drawer";
 import SearchDrawer from "./search-drawer";
 import CartDrawer from "./cart-drawer";
+import CartIcon from "./cart-icon";
 
 export default function Header({ featuredItems }) {
   return (
@@ -52,10 +53,7 @@ export default function Header({ featuredItems }) {
               type="button"
             >
               <label htmlFor="cart-drawer">
-                <ShoppingBag
-                  size={22}
-                  className="cursor-pointer"
-                />
+                <CartIcon />
               </label>
             </button>
           </div>
