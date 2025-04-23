@@ -59,7 +59,7 @@ const nextConfig = {
     deviceSizes: [360, 640, 820, 1080, 1200, 1920],
     minimumCacheTTL: 600,
   },
-  typesctipt: {
+  typescript: {
     ignoreBuildErrors: true,
   },
   async headers() {
