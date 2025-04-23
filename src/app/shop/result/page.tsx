@@ -113,7 +113,7 @@ export default async function Page({ searchParams }) {
     }
   } else {
     // Handle other cases (e.g., cancelled)
-    console.log("Payment was cancelled by the user.");
+    console.log("Payment was cancelled or the session expired.");
     if (orderID) {
       cancelSale(orderID);
       console.log("Sale cancelled:", orderID);
