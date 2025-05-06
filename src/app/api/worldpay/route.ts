@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
         entity: WORLDPAY_ENTITY,
       },
       narrative: {
-        line1: "FAB Defense UK",
+        line1: "Holosun UK",
       },
       value: {
         currency: "GBP",
