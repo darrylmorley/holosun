@@ -20,6 +20,8 @@ const WorldpayCheckout = ({ paymentURL }) => {
   const handleCheckoutResponse = (responseData) => {
     let redirectUrl;
     const status = responseData.order.status;
+    console.log("Worldpay response data:", responseData);
+
     switch (status) {
       case "success":
         redirectUrl = config.URLs.acceptURL;

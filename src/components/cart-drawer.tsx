@@ -9,6 +9,7 @@ import CartDrawerItems from "./cart-drawer-items";
 
 export default function CartDrawer() {
   const [products, setProducts] = useState([]);
+  const [isClient, setIsClient] = useState(false);
   const { items, removeItem, isEmpty, totalUniqueItems, updateItemQuantity, cartTotal, emptyCart } =
     useCart();
 
@@ -16,7 +17,8 @@ export default function CartDrawer() {
 
   useEffect(() => {
     setProducts(items);
-  }, [items, products]);
+    setIsClient(true);
+  }, [items]);
 
   useEffect(() => {
     if (totalUniqueItems === 1) {
@@ -26,6 +28,23 @@ export default function CartDrawer() {
       }
     }
   }, [totalUniqueItems, items, emptyCart]);
+
+  // Display a consistent placeholder during SSR and initial hydration
+  if (!isClient) {
+    return (
+      <div className="drawer drawer-end z-30">
+        <input id="cart-drawer" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-side">
+          <label htmlFor="cart-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
+          <div className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open">
+            <p className="text-2xl font-bold">Shopping Cart</p>
+            <div className="divider"></div>
+            <div className="flex-1 animate-pulse bg-gray-100"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="drawer drawer-end z-30">
@@ -41,19 +60,21 @@ export default function CartDrawer() {
           className="drawer-overlay"
         ></label>
         {isEmpty || !items.length ? (
-          <div className="menu min-h-full w-96 bg-white p-4 text-base-content text-center">
+          <div className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open">
             <p className="text-2xl font-bold">Shopping Cart</p>
             <div className="divider"></div>
-            <p className="mt-4 font-bold text-xl">Your cart is empty</p>
-            <p className="mt-8">Head over to the shop page to browse our products</p>
-            <Link
-              href="/shop"
-              passHref
-              className="btn btn-secondary hover:btn-accent hover:text-white text-white mt-8"
-              onClick={() => toggleDrawer("cart-drawer")}
-            >
-              Shop
-            </Link>
+            <div className="flex-1">
+              <p className="mt-4 font-bold text-xl">Your cart is empty</p>
+              <p className="mt-8">Head over to the shop page to browse our products</p>
+              <Link
+                href="/shop"
+                passHref
+                className="btn btn-secondary hover:btn-accent hover:text-white text-white mt-8"
+                onClick={() => toggleDrawer("cart-drawer")}
+              >
+                Shop
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="w-96 min-h-full flex flex-col bg-white p-4 text-base-content lg:drawer-open">
