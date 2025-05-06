@@ -94,7 +94,6 @@ export default async function Page({ searchParams }) {
           await newSaleOfficeEmail(orderID, lines, customerDetails);
         } catch (error) {
           console.error("Failed to send office email:", error);
-          console.log("Customer details:", customerDetails);
         }
       } catch (error) {
         if (error.response) {

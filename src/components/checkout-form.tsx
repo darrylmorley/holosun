@@ -146,9 +146,6 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     }
   }, [deliveryAddress]);
 
-  useEffect(() => console.log("Form Data:", formData), [formData]);
-  useEffect(() => console.log("Billing Address:", billingAddress), [billingAddress]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 

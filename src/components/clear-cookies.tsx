@@ -9,8 +9,6 @@ export default function ClearCookies() {
     Cookies.remove("formData");
     Cookies.remove("paymentURL");
     Cookies.remove("paymentInitiated");
-
-    console.log("All cookies cleared client-side with js-cookie");
   }, []);
 
   return null;
