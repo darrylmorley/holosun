@@ -23,7 +23,7 @@ async function clearOrderCookies() {
   cookieStore.delete("orderID");
   cookieStore.delete("formData");
   cookieStore.delete("paymentURL");
-  cookieStore.delete("oaymentInitiated");
+  cookieStore.delete("paymentInitiated");
 }
 
 export default async function Page({ searchParams }) {
