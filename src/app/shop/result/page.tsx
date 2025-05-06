@@ -55,8 +55,8 @@ export default async function Page({ searchParams }) {
     // Handle declined or exception case
     console.log("Payment was declined, cancelled or an exception occurred.");
     if (orderID) {
-      cancelSale(orderID);
-      clearOrderCookies();
+      await cancelSale(orderID);
+      await clearOrderCookies();
       console.log("Sale cancelled:", orderID);
     }
   }
