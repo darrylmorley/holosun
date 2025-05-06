@@ -1,6 +1,7 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { render } from "@react-email/render";
+import { cookies } from "next/headers";
 import z from "zod";
 
 import {

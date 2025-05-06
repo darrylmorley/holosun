@@ -5,6 +5,7 @@ import { newSaleCustomerEmail } from "@/lib/email/newSaleCustomer";
 import { newSaleOfficeEmail } from "@/lib/email/newSaleOffice";
 
 import ResultDetail from "@/components/result-detail";
+import ClearCookies from "@/components/clear-cookies";
 
 export const metadata = {
   title: "Your Cart",
@@ -14,17 +15,6 @@ export const metadata = {
     nocache: true,
   },
 };
-
-// Server action to handle cookie deletion
-async function clearOrderCookies() {
-  "use server";
-
-  const cookieStore = await cookies();
-  cookieStore.delete("orderID");
-  cookieStore.delete("formData");
-  cookieStore.delete("paymentURL");
-  cookieStore.delete("paymentInitiated");
-}
 
 export default async function Page({ searchParams }) {
   const params = await searchParams;
@@ -56,7 +46,6 @@ export default async function Page({ searchParams }) {
     console.log("Payment was declined, cancelled or an exception occurred.");
     if (orderID) {
       await cancelSale(orderID);
-      await clearOrderCookies();
       console.log("Sale cancelled:", orderID);
     }
   }
@@ -107,10 +96,6 @@ export default async function Page({ searchParams }) {
           console.error("Failed to send office email:", error);
           console.log("Customer details:", customerDetails);
         }
-
-        // Clear cookies after successful order processing
-        await clearOrderCookies();
-
       } catch (error) {
         if (error.response) {
           // Server responded with a non-2xx status
@@ -141,6 +126,7 @@ export default async function Page({ searchParams }) {
         <p className="text-lg text-center">Your checkout result.</p>
       </div>
       <ResultDetail params={params} lsSale={orderID} />
+      <ClearCookies />
     </>
   );
 }
