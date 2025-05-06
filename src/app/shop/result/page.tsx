@@ -40,6 +40,15 @@ export default async function Page({ searchParams }) {
     deliveryPostcode: formData.deliveryPostcode || formData.billingPostcode,
   }
 
+  if (accept === "declined" || accept === "exception" || accept === "cancelled") {
+    // Handle declined or exception case
+    console.log("Payment was declined, cancelled or an exception occurred.");
+    if (orderID) {
+      cancelSale(orderID);
+      console.log("Sale cancelled:", orderID);
+    }
+  }
+
   if (accept === "success" && orderID) {
     const sale = await getSale(orderID);
     console.log(
@@ -72,6 +81,8 @@ export default async function Page({ searchParams }) {
       try {
         const completedSale = await completeSale(orderID, amount);
         console.log("Sale completed:", completedSale.Sale.saleID);
+
+        // Send emails to customer and office
         try {
           await newSaleCustomerEmail(orderID, lines, customerDetails);
         } catch (error) {
@@ -103,20 +114,6 @@ export default async function Page({ searchParams }) {
           );
         }
       }
-    }
-  } else if (accept === "declined" || accept === "exception") {
-    // Handle declined or exception case
-    console.log("Payment was declined or an exception occurred.");
-    if (orderID) {
-      cancelSale(orderID);
-      console.log("Sale cancelled:", orderID);
-    }
-  } else {
-    // Handle other cases (e.g., cancelled)
-    console.log("Payment was cancelled or the session expired.");
-    if (orderID) {
-      cancelSale(orderID);
-      console.log("Sale cancelled:", orderID);
     }
   }
 

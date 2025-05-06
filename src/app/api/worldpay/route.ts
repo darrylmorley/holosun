@@ -83,6 +83,7 @@ export async function POST(request: NextRequest) {
     }
 
     const data = await response.json();
+    console.log("WorldPay API response:", data);
     return NextResponse.json(data);
   } catch (error) {
     console.error("Payment process error:", error);

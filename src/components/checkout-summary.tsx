@@ -288,7 +288,7 @@ export default function CheckoutSummary({ deliveryItem }) {
                 height="77.25"
                 rx="6.625"
                 stroke="black"
-                stroke-width="2.75"
+                strokeWidth="2.75"
               />
             </g>
             <defs>

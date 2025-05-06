@@ -67,6 +67,57 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     deliverySameAsBilling: true,
   });
 
+  // Recovery for interrupted payments
+  useEffect(() => {
+    const checkForInterruptedPayment = () => {
+      const savedOrderID = Cookies.get("orderID");
+      const savedPaymentURL = Cookies.get("paymentURL");
+      const paymentInitiated = Cookies.get("paymentInitiated");
+      const savedFormData = Cookies.get("formData");
+
+      // If we have evidence of an interrupted payment flow
+      if (savedOrderID && savedPaymentURL && paymentInitiated && savedFormData) {
+        try {
+          const parsedFormData = JSON.parse(savedFormData);
+          setFormData(parsedFormData);
+
+          // Determine if the payment was recently initiated (e.g., within the last hour)
+          const initiatedTime = new Date(paymentInitiated);
+          const currentTime = new Date();
+          const timeDifference = (currentTime - initiatedTime) / (1000 * 60); // minutes
+
+          // If payment was initiated recently (within 60 minutes)
+          if (timeDifference < 60) {
+            // Ask user if they want to resume their payment
+            const wantToResume = confirm(
+              "It looks like your previous payment was interrupted. Would you like to resume where you left off?"
+            );
+
+            if (wantToResume) {
+              setPaymentURL(savedPaymentURL);
+            } else {
+              // User doesn't want to resume, clear the payment cookies but keep form data
+              Cookies.remove("paymentURL");
+              Cookies.remove("paymentInitiated");
+            }
+          } else {
+            // Payment attempt is too old, clean up
+            Cookies.remove("paymentURL");
+            Cookies.remove("paymentInitiated");
+          }
+        } catch (e) {
+          console.error("Error recovering payment data:", e);
+          // Clean up corrupted data
+          Cookies.remove("formData");
+          Cookies.remove("paymentURL");
+          Cookies.remove("paymentInitiated");
+        }
+      }
+    };
+
+    checkForInterruptedPayment();
+  }, []);
+
   // Use a useEffect to sync billingAddress state with formData
   useEffect(() => {
     if (billingAddress) {
@@ -242,6 +293,10 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       Cookies.set("orderID", lsSale);
       Cookies.set("formData", JSON.stringify(formData));
 
+      // Set a timestamp for when payment was initiated
+      const paymentInitiatedAt = new Date().toISOString();
+      Cookies.set("paymentInitiated", paymentInitiatedAt);
+
       const worldPayPaymentURL = await getPaymentURL({
         amount: Math.round(cartTotal * 100),
         orderNumber: lsSale,
@@ -249,6 +304,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       });
 
       if (worldPayPaymentURL.url) {
+        Cookies.set("paymentURL", worldPayPaymentURL.url);
         setPaymentURL(() => worldPayPaymentURL.url);
         setSubmitDisabled(false);
       } else {
@@ -264,7 +320,11 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
         const uniqueErrors = new Set();
         error.errors.forEach((err) => uniqueErrors.add(err.message));
         setErrors([...uniqueErrors]);
+      } else {
+        console.error("Checkout error:", error);
+        setErrors(["There was a problem processing your order. Please try again."]);
       }
+      setSubmitDisabled(false);
     }
   };
 
@@ -450,6 +510,16 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
           )}
         </button>
       </form>
+      {!paymentURL && Cookies.get("paymentURL") && (
+        <div className="mt-4">
+          <button
+            onClick={() => setPaymentURL(Cookies.get("paymentURL"))}
+            className="btn btn-outline btn-secondary w-full"
+          >
+            Resume Previous Payment
+          </button>
+        </div>
+      )}
     </>
   );
 }

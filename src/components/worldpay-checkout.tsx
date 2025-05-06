@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+
 import { config } from "../../config/config";
 
 declare global {
@@ -33,6 +35,26 @@ const WorldpayCheckout = ({ paymentURL }) => {
     }
     window.location = redirectUrl;
   };
+
+  useEffect(() => {
+    // Listen for online/offline events
+    const handleOnline = () => {
+      // If we were offline and are now online, check if payment is incomplete
+      const paymentURL = Cookies.get("paymentURL");
+      const paymentInitiated = Cookies.get("paymentInitiated");
+
+      if (paymentURL && paymentInitiated) {
+        // Optionally refresh the payment page or show a notification
+        alert("Your connection has been restored. You can continue with your payment.");
+      }
+    };
+
+    window.addEventListener('online', handleOnline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+    };
+  }, []);
 
   useEffect(() => {
     // Clear any previous scripts to avoid conflicts
