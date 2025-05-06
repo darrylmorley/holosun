@@ -15,6 +15,17 @@ export const metadata = {
   },
 };
 
+// Server action to handle cookie deletion
+async function clearOrderCookies() {
+  "use server";
+
+  const cookieStore = await cookies();
+  cookieStore.delete("orderID");
+  cookieStore.delete("formData");
+  cookieStore.delete("paymentURL");
+  cookieStore.delete("oaymentInitiated");
+}
+
 export default async function Page({ searchParams }) {
   const params = await searchParams;
   let accept = params?.accept || "cancelled";
@@ -45,9 +56,8 @@ export default async function Page({ searchParams }) {
     console.log("Payment was declined, cancelled or an exception occurred.");
     if (orderID) {
       cancelSale(orderID);
+      clearOrderCookies();
       console.log("Sale cancelled:", orderID);
-      cookieStore.delete("orderID");
-      cookieStore.delete("formData");
     }
   }
 
@@ -97,6 +107,10 @@ export default async function Page({ searchParams }) {
           console.error("Failed to send office email:", error);
           console.log("Customer details:", customerDetails);
         }
+
+        // Clear cookies after successful order processing
+        await clearOrderCookies();
+
       } catch (error) {
         if (error.response) {
           // Server responded with a non-2xx status
@@ -116,6 +130,7 @@ export default async function Page({ searchParams }) {
           );
         }
       }
+
     }
   }
 
