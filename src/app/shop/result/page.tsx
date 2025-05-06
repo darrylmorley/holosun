@@ -46,6 +46,8 @@ export default async function Page({ searchParams }) {
     if (orderID) {
       cancelSale(orderID);
       console.log("Sale cancelled:", orderID);
+      cookieStore.delete("orderID");
+      cookieStore.delete("formData");
     }
   }
 
