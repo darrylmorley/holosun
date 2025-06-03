@@ -42,7 +42,7 @@ export async function sendContactFormEmail(prevState: any, formData: FormData) {
       ? render(ItemEnquiry(data))
       : render(ContactEmail(data));
 
-  sendSmtpEmail.subject = "Holosun Website Contact Form Submission";
+  sendSmtpEmail.subject = "Holosun Website Contact Form";
   sendSmtpEmail.sender = { email: data.email, name: data.name };
   sendSmtpEmail.to = config.emailTo;
   sendSmtpEmail.htmlContent = emailHtml;

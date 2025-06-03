@@ -52,13 +52,6 @@ export default function ContactEmail(formData) {
         />
         <Body className="bg-white">
           <Container className="py-12 shadow-lg bg-stone-100 my-12 p-12">
-            <Img
-              src={`${baseUrl}/holosun-logo.png`}
-              width="246"
-              height="54"
-              alt="Holosun Optics"
-              className="mx-auto"
-            />
             <Heading className="text-center text-xl py-4">
               You have a new message from the Holosun contact form
             </Heading>
@@ -66,6 +59,12 @@ export default function ContactEmail(formData) {
               <p>
                 <span className="font-bold">From: </span>
                 {formData.name}
+              </p>
+            </Section>
+            <Section>
+              <p>
+                <span className="font-bold">Tel: </span>
+                {formData.tel || "No phone number provided"}
               </p>
             </Section>
             <Section>
