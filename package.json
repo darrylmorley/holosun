@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "email": "email dev --dir ./src/emails --port 8080"
+    "email": "email dev --dir ./src/emails --port 8080",
+    "indexnow": "node /src/lib/indexnow/index.js"
   },
   "dependencies": {
     "@getbrevo/brevo": "^2.2.0",
@@ -48,6 +49,9 @@
     "eslint-config-next": "15.3.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.6",
+    "fast-xml-parser": "^5.2.3",
+    "http": "0.0.1-security",
+    "https": "^1.0.0",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "prisma": "^5.22.0",
