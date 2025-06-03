@@ -1,7 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { render } from "@react-email/render";
-import { cookies } from "next/headers";
 import z from "zod";
 
 import {
@@ -37,8 +36,6 @@ export async function sendContactFormEmail(prevState: any, formData: FormData) {
   });
 
   const data = schema.parse(dataObject);
-
-  console.log("Contact Form Data:", data);
 
   const emailHtml =
     typeof dataObject.itemName === "string" && dataObject.itemName.length
