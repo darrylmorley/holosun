@@ -29,12 +29,12 @@ export const metadata = {
     siteName: "Holosun Optics UK",
     images: [
       {
-        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg", // Must be an absolute URL
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.webp",
         width: 1080,
         height: 1350,
       },
       {
-        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg", // Must be an absolute URL
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.webp",
         width: 1920,
         height: 860,
         alt: "Holosun AEMS Red Dot",
@@ -48,7 +48,7 @@ export const metadata = {
     title: "Holusun Optics UK",
     description:
       "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Innovative technology, rugged designs, and unparalleled performance!",
-    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
+    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.webp"],
   },
 };
 

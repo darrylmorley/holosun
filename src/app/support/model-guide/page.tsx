@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     url: "https://www.holosun-optics.co.uk/support/model-guide",
     images: [
       {
-        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg",
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.webp",
         width: 1080,
         height: 1350,
       },
       {
-        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg",
+        url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.webp",
         width: 1920,
         height: 860,
         alt: "Holosun AEMS Red Dot",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: "Holosun Model Number Guide: Understand Our Model Numbers",
     description:
       "Explore the Holosun Model Number Guide to understand the meaning behind each model's optics and lasers.",
-    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"],
+    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.webp"],
   },
 };
 

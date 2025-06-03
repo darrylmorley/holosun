@@ -17,7 +17,7 @@ export const metadata = {
     title: "Terms & Conditions: Your Guide to Holosun Optics UK's Policies",
     description:
       "Our Terms & Conditions page outlines the rules and expectations that govern your interactions with Holosun Optics UK. Familiarize yourself with these guidelines to ensure your understanding of our products and services.",
-    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
+    images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.webp"],
   },
   alternates: {
     canonical: "https://www.holosun-optics.co.uk/terms",

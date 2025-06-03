@@ -60,12 +60,12 @@ export async function generateMetadata(props: PageProps) {
       url: `https://www.holosun-optics.co.uk/shop/category/${slug}`,
       images: [
         {
-          url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg", // Must be an absolute URL
+          url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.webp",
           width: 1080,
           height: 1350,
         },
         {
-          url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.jpg", // Must be an absolute URL
+          url: "https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1920x860.webp",
           width: 1920,
           height: 860,
           alt: "Holosun AEMS Red Dot",
@@ -78,7 +78,7 @@ export async function generateMetadata(props: PageProps) {
       card: "summary_large_image",
       title: metaName,
       description: metaDescription,
-      images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.jpg"], // Must be an absolute URL
+      images: ["https://www.holosun-optics.co.uk/images/hero-carousel/aems-banner-1080x1350.webp"],
     },
   };
 }
