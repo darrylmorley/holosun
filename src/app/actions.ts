@@ -38,13 +38,15 @@ export async function sendContactFormEmail(prevState: any, formData: FormData) {
 
   const data = schema.parse(dataObject);
 
+  console.log("Contact Form Data:", data);
+
   const emailHtml =
     typeof dataObject.itemName === "string" && dataObject.itemName.length
       ? render(ItemEnquiry(data))
       : render(ContactEmail(data));
 
   sendSmtpEmail.subject = "Holosun Website Contact Form Submission";
-  sendSmtpEmail.sender = { email: "noreply@holosun-optics.co.uk", name: "Holosun Optics" };
+  sendSmtpEmail.sender = { email: data.email, name: data.name };
   sendSmtpEmail.to = config.emailTo;
   sendSmtpEmail.htmlContent = emailHtml;
   sendSmtpEmail.params = data;
