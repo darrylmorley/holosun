@@ -12,7 +12,7 @@ import {
 
 import ContactEmail from "@/emails/contact-form-email";
 import ItemEnquiry from "@/emails/item-enquiry";
-import { config } from "../../config/config";
+import { config } from "../../../config/config";
 import NewsletterSignup from "@/emails/newsletter-signup";
 
 export async function sendContactFormEmail(prevState: any, formData: FormData) {

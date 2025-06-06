@@ -6,13 +6,9 @@ import {
   Head,
   Heading,
   Html,
-  Img,
   Section,
   Tailwind,
 } from "@react-email/components";
-
-const baseUrl =
-  process.env.NODE_ENV == "production" ? "https://www.holosun-optics.co.uk" : "localhost:3000";
 
 export default function ContactEmail(formData) {
   return (

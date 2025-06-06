@@ -27,6 +27,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@payload-config": [
+        "./src/payload.config.ts"
       ]
     }
   },
@@ -35,7 +38,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/(auth)/protected",
+    "src/(website)/(auth)/protected",
     "prettier.config.js",
     "src/lib/lightspeed/lightspeed.js"
   ],

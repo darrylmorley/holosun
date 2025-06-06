@@ -20,12 +20,25 @@ export default async function Page({ searchParams }) {
   const params = await searchParams;
   let accept = params?.accept || "cancelled";
 
+  // Get orderID from URL parameters or cookies
+  const cookieStore = await cookies();
+  const orderIDFromCookie = cookieStore.get("orderID")?.value;
+  const orderIDFromURL = params?.orderID;
+
+  // Use URL parameter if available, otherwise fall back to cookie
+  const orderID = orderIDFromURL || orderIDFromCookie;
+
+  console.log("Processing payment result:", {
+    accept,
+    orderID,
+    source: orderIDFromURL ? "URL parameter" : "cookie",
+    wpDebug: params?.wpDebug
+  });
+
   if (!["success", "declined", "exception", "cancelled"].includes(accept)) {
     accept = "cancelled";
   }
 
-  const cookieStore = await cookies();
-  const orderID = cookieStore.get("orderID")?.value;
   const formData = JSON.parse(
     cookieStore.get("formData")?.value || "{}",
   );

@@ -1,3 +1,4 @@
+const { withPayload } = require("@payloadcms/next/withPayload");
 /** @type {import('next').NextConfig} */
 
 const securityHeaders = [
@@ -189,7 +190,7 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withPayload(nextConfig);
 
 // Injected content via Sentry wizard below
 

@@ -3,7 +3,7 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { MailCheck, MailWarning } from "lucide-react";
 
-import { sendContactFormEmail } from "@/app/actions";
+import { sendContactFormEmail } from "@/app/(website)/actions";
 import { closeModal } from "@/lib/utils/helpers";
 
 const initialFormState = {

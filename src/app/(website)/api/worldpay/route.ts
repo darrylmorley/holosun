@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { config } from "../../../../config/config";
+import { config } from "../../../../../config/config";
 
 export async function POST(request: NextRequest) {
   const WORLDPAY_URL = config.worldPayURL;
@@ -72,6 +72,7 @@ export async function POST(request: NextRequest) {
     // Handle response
     if (!response.ok) {
       const errorText = await response.text();
+      console.error("Worldpay error raw response:", errorText);
       console.error("WorldPay API error:", {
         status: response.status,
         response: errorText,
@@ -91,7 +92,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Add these handlers to handle other HTTP methods
 export async function GET() {
   return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
 }
