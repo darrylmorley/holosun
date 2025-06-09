@@ -1,4 +1,5 @@
-const { withPayload } = require("@payloadcms/next/withPayload");
+import { withPayload } from "@payloadcms/next/withPayload";
+import { withSentryConfig } from "@sentry/nextjs";
 /** @type {import('next').NextConfig} */
 
 const securityHeaders = [
@@ -190,13 +191,9 @@ const nextConfig = {
   },
 };
 
-module.exports = withPayload(nextConfig);
+const payloadConfig = withPayload(nextConfig);
 
-// Injected content via Sentry wizard below
-
-const { withSentryConfig } = require("@sentry/nextjs");
-
-module.exports = withSentryConfig(module.exports, {
+const sentryConfig = {
   org: "shooting-supplies",
   project: "holosun-optics",
   sentryUrl: "https://glitch.shootingsuppliesltd.co.uk/",
@@ -208,4 +205,8 @@ module.exports = withSentryConfig(module.exports, {
   sourcemaps: {
     deleteSourcemapsAfterUpload: true,
   },
-});
+};
+
+const finalConfig = withSentryConfig(payloadConfig, sentryConfig);
+
+export default finalConfig;
