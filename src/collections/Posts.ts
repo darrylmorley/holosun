@@ -64,6 +64,15 @@ export const Posts: CollectionConfig = {
       },
     },
     {
+      name: "updatedDate",
+      type: "date",
+      required: true,
+      admin: {
+        position: "sidebar",
+        description: "Select the date when the post was last updated.",
+      },
+    },
+    {
       name: "status",
       type: "select",
       options: [
