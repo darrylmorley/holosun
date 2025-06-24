@@ -66,7 +66,6 @@ export const Posts: CollectionConfig = {
     {
       name: "updatedDate",
       type: "date",
-      required: true,
       admin: {
         position: "sidebar",
         description: "Select the date when the post was last updated.",
@@ -170,6 +169,31 @@ export const Posts: CollectionConfig = {
         if (!data.author && req.user) {
           data.author = req.user.id;
         }
+      },
+      async ({ data, req, operation }) => {
+        // Set author to current user if not provided
+        if (!data.author && req.user) {
+          data.author = req.user.id;
+        }
+
+        // Generate slug from title if creating a new document or if slug is empty
+        if (operation === "create" || !data.slug) {
+          if (data.title) {
+            // Convert title to slug format:
+            // 1. Convert to lowercase
+            // 2. Replace spaces and special chars with hyphens
+            // 3. Remove consecutive hyphens
+            // 4. Remove leading/trailing hyphens
+            data.slug = data.title
+              .toLowerCase()
+              .replace(/[^\w\s-]/g, "") // Remove special characters
+              .replace(/\s+/g, "-") // Replace spaces with hyphens
+              .replace(/-+/g, "-") // Replace multiple hyphens with single hyphen
+              .replace(/^-+|-+$/g, ""); // Remove leading/trailing hyphens
+          }
+        }
+
+        return data;
       },
     ],
   },

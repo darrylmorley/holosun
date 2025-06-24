@@ -160,7 +160,7 @@ export interface Post {
   /**
    * Select the date when the post was last updated.
    */
-  updatedDate: string;
+  updatedDate?: string | null;
   /**
    * Select the status of the post.
    */
