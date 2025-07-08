@@ -16,7 +16,6 @@ function SubmitButton() {
     <button
       type="submit"
       className="btn btn-md join-item btn-secondary hover:btn-accent hover:text-white text-white"
-      // aria-disabled={pending}
       data-umami-event="email-signup"
       title="Send"
     >
@@ -30,15 +29,8 @@ export default function NewsletterForm() {
 
   return (
     <form action={formAction}>
-      <h6 className="footer-title">Newsletter</h6>
-      <fieldset className="form-control w-80">
-        <label
-          className="label"
-          htmlFor="email"
-        >
-          <span className="label-text">Enter your email address</span>
-        </label>
-        <div className="join">
+      <fieldset className="form-control w-full max-w-md">
+        <div className="join w-full">
           <input
             id="email"
             name="email"
@@ -46,7 +38,7 @@ export default function NewsletterForm() {
             placeholder="username@site.com"
             autoComplete="email"
             required
-            className="input input-bordered input-md join-item"
+            className="input input-bordered input-md join-item flex-1"
           />
           {!state.status && <SubmitButton />}
           {state.status === 200 && (
