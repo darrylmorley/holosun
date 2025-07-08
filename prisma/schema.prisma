@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch"]
+  previewFeatures = ["fullTextSearchPostgres"]
 }
 
 datasource db {
@@ -19,13 +19,17 @@ model Category {
   description   String?
   image         String?
   slug          String
+  hash          String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @default(now())
+  archived      Boolean         @default(false)
   Product       Product[]
   matrixProduct matrixProduct[]
 }
 
 model Gun {
-  id              String  @id
-  itemID          String
+  id              String   @id
+  itemID          String   @unique
   archived        Boolean
   description     String?
   customSku       String
@@ -40,15 +44,20 @@ model Gun {
   Images          Json?
   ItemECommerce   Json?
   Prices          Json
+  hash            String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now())
 }
 
 model Image {
-  id          Int     @id @unique
+  id          Int      @id @unique
   itemID      Int
   description String?
   url         String
-  isDefault   Boolean @default(false)
+  isDefault   Boolean  @default(false)
   sortOrder   Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 }
 
 model Manufacturer {
@@ -57,60 +66,72 @@ model Manufacturer {
   description   String?
   image         String?
   slug          String          @unique
+  hash          String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @default(now())
+  archived      Boolean         @default(false)
   Product       Product[]
   matrixProduct matrixProduct[]
 }
 
 model Product {
-  id                Int           @id @unique
-  matrixID          Int
-  sku               String
-  manufacturerSku   String
-  gtin              String?
-  name              String
-  qoh               Int
-  price             Float
-  salePrice         Float
-  onSale            Boolean?      @default(false)
-  reorderLevel      Int?
-  reorderPoint      Int?
-  isOnBackorder     Boolean?      @default(false)
-  backorderQty      Int?
-  shortDescription  String?
-  longDescription   String?
-  categoryID        Int?
-  Category          Json?
-  manufacturerID    Int?
-  Manufacturer      Json?
-  colour            String?
-  size              String?
-  width             String?
-  height            String?
-  length            String?
-  weight            String?
-  listOnWebsite     Boolean?      @default(true)
-  metaTitle         String?
-  metaDescription   String?
-  isPreorder        Boolean?      @default(false)
-  preOrderQty       Int?
-  slug              String        @unique
-  Images            Json?
-  ItemAttributes    Json?
-  CustomFieldValues Json?
-  ItemECommerce     Json?
-  ItemShops         Json?
-  category          Category?     @relation(fields: [categoryID], references: [id])
-  manufacturer      Manufacturer? @relation(fields: [manufacturerID], references: [id])
-  Review            Review[]
+  id                   Int                    @id @unique
+  matrixID             Int
+  sku                  String
+  manufacturerSku      String
+  gtin                 String?
+  name                 String
+  qoh                  Int
+  price                Float
+  salePrice            Float
+  onSale               Boolean?               @default(false)
+  reorderLevel         Int?
+  reorderPoint         Int?
+  isOnBackorder        Boolean?               @default(false)
+  backorderQty         Int?
+  shortDescription     String?
+  longDescription      String?
+  categoryID           Int?
+  Category             Json?
+  manufacturerID       Int?
+  Manufacturer         Json?
+  colour               String?
+  size                 String?
+  width                String?
+  height               String?
+  length               String?
+  weight               String?
+  listOnWebsite        Boolean?               @default(true)
+  metaTitle            String?
+  metaDescription      String?
+  isPreorder           Boolean?               @default(false)
+  preOrderQty          Int?
+  slug                 String                 @unique
+  Images               Json?
+  ItemAttributes       Json?
+  CustomFieldValues    Json?
+  ItemECommerce        Json?
+  ItemShops            Json?
+  hash                 String?
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @default(now())
+  isFeatured           Boolean?               @default(false)
+  archived             Boolean                @default(false)
+  category             Category?              @relation(fields: [categoryID], references: [id])
+  manufacturer         Manufacturer?          @relation(fields: [manufacturerID], references: [id])
+  RestockNotifications RestockNotifications[]
+  Review               Review[]
 }
 
 model Review {
-  id        String  @id
+  id        String   @id
   itemID    Int
   user      String
   userEmail String
   rating    Int
-  Product   Product @relation(fields: [itemID], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  Product   Product  @relation(fields: [itemID], references: [id])
 }
 
 model matrixProduct {
@@ -128,6 +149,10 @@ model matrixProduct {
   shortDescription String?
   longDescription  String?
   slug             String        @unique
+  hash             String?
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @default(now())
+  archived         Boolean       @default(false)
   category         Category?     @relation(fields: [categoryID], references: [id])
   manufacturer     Manufacturer? @relation(fields: [manufacturerID], references: [id])
 }
@@ -166,4 +191,33 @@ model product_sku_change_log {
   old_value        String?
   new_value        String?
   change_timestamp DateTime? @default(now()) @db.Timestamptz(6)
+}
+
+model Customer {
+  id                   String                 @id
+  lightspeedID         Int
+  googleID             String
+  firstName            String
+  lastName             String
+  email                String
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @default(now())
+  RestockNotifications RestockNotifications[]
+}
+
+model RestockNotifications {
+  id         String            @id
+  itemID     Int?
+  customerID String?
+  status     NotifcationStatus
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @default(now())
+  Customer   Customer?         @relation(fields: [customerID], references: [id])
+  Product    Product?          @relation(fields: [itemID], references: [id])
+}
+
+enum NotifcationStatus {
+  PENDING
+  NOTIFIED
+  FAILED
 }
