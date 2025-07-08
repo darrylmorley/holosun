@@ -1,7 +1,7 @@
 {
   /* eslint-disable @next/next/no-img-element */
 }
-import { MenuIcon, Search, ShoppingBag } from "lucide-react";
+import { MenuIcon, Search } from "lucide-react";
 import Link from "next/link";
 import MenuDrawer from "./menu-drawer";
 import SearchDrawer from "./search-drawer";

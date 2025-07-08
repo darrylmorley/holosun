@@ -1,5 +1,6 @@
 "use client";
 import { useCart } from "react-use-cart";
+import { ShoppingBag } from "lucide-react";
 
 import { formatCartItem, toggleDrawer } from "@/lib/utils/helpers";
 
@@ -14,7 +15,21 @@ export default function AddToCartButton({ item }) {
 
   const Button = (text, disabled) => (
     <button
-      className={`btn w-full ${disabled ? "btn-disabled !bg-secondary !text-white" : "bg-secondary hover:bg-accent hover:text-white text-white"}`}
+      className={`
+      w-full
+      py-2
+      text-lg
+      font-bold
+      rounded
+      shadow-lg
+      transition-all
+      duration-200
+      flex items-center justify-center gap-4
+      ${disabled
+          ? "bg-gray-400 text-white cursor-not-allowed"
+          : "bg-black text-white hover:bg-gray-800 border-b-4 border-transparent hover:border-red-600 focus:ring-2 focus:ring-red-600"
+        }
+    `}
       onClick={handleAddToCartClick}
       disabled={disabled}
       data-umami-event="add-to-cart"
@@ -22,6 +37,7 @@ export default function AddToCartButton({ item }) {
       type="button"
     >
       {text}
+      <ShoppingBag />
     </button>
   );
 
