@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import logo from "../../public/holosun-logo.webp";
 import NewsletterForm from "./newsletter-form";
+import { FaFacebookSquare, FaInstagramSquare, FaTwitterSquare } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -110,7 +111,20 @@ export default function Footer() {
         </Link>
         <a href="https://highland-defence.co.uk/" rel="nofollow, noopener" target="_blank">Military Enquiries</a>
       </nav>
-      <NewsletterForm />
+      <div>
+        <NewsletterForm />
+        <div className="flex gap-4 mt-4">
+          <a href="https://www.facebook.com/holosunuk" target="_blank" rel="noopener" aria-label="Facebook">
+            <FaFacebookSquare className="w-6 h-6 hover:text-accent" />
+          </a>
+          <a href="https://www.instagram.com/holosun_optics" target="_blank" rel="noopener" aria-label="Instagram">
+            <FaInstagramSquare className="w-6 h-6 hover:text-accent" />
+          </a>
+          <a href="https://x.com/holosunopticsuk" target="_blank" rel="noopener" aria-label="Twitter">
+            <FaTwitterSquare className="w-6 h-6 hover:text-accent" />
+          </a>
+        </div>
+      </div>
     </footer>
   );
 }
