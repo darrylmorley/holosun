@@ -25,15 +25,18 @@ export async function generateMetadata(props: PageProps) {
 
   if (!item) notFound();
 
-  const images = Array.isArray(item.Images.Image)
-    ? // @ts-expect-error - Images is not defined in the Prisma schema
-    item.Images.Image.map((image) => {
-      return `${image.baseImageURL}/w_1500/${image.publicID}.webp`;
-    })
-    : // @ts-expect-error - Images is not defined in the Prisma schema
-    [`${item.Images.Image.baseImageURL}/w_1500/${item.Images.Image.publicID}.webp`];
+  const images =
+    // @ts-expect-error - TypeScript does not recognize the Images property
+    item.Images?.Image
+      // @ts-expect-error - TypeScript does not recognize the Images property
+      ? Array.isArray(item.Images.Image)
+        // @ts-expect-error - TypeScript does not recognize the Images property
+        ? item.Images.Image.map((image) => `${image.baseImageURL}/w_1500/${image.publicID}.webp`)
+        // @ts-expect-error - TypeScript does not recognize the Images property
+        : [`${item.Images.Image.baseImageURL}/w_1500/${item.Images.Image.publicID}.webp`]
+      : [];
 
-  const description = stripHtml(item.shortDescription);
+  const description = stripHtml(item.shortDescription || "");
 
   return {
     title: `${capitalise(item.name)}`,
@@ -46,13 +49,13 @@ export async function generateMetadata(props: PageProps) {
       description:
         "Holosun Optics UK for advanced red dot sights, reflex sights, and tactical red dot sights. Shop now for innovative technology, rugged designs, and unparalleled performance!",
       url: `https://www.holosun-optics.co.uk/shop/${item.slug}`,
-      images: [
+      images: images.length > 0 ? [
         {
           url: images[0],
           width: 1500,
           height: 1500,
         },
-      ],
+      ] : [],
       locale: "en_GB",
       type: "website",
       price: item.price,
@@ -82,19 +85,24 @@ export default async function Page(props: PageProps) {
   const url = `https://www.holosun-optics.co.uk/${slug}`;
   const item = await getItem(slug);
 
-  // @ts-expect-error - Images is not defined in the Prisma schema
-  const images = Array.isArray(item.Images.Image)
-    ? // @ts-expect-error - Images is not defined in the Prisma schema
-    item.Images.Image.map((image) => {
-      return `${image.baseImageURL}/w_1500/${image.publicID}.webp`;
-    })
-    : // @ts-expect-error - Images is not defined in the Prisma schema
-    [`${item.Images.Image.baseImageURL}/w_1500/${item.Images.Image.publicID}.webp`];
+  if (!item) notFound();
 
-  const description = stripHtml(item.shortDescription);
+  const images =
+    // @ts-expect-error - TypeScript does not recognize the Images property
+    item.Images?.Image
+      // @ts-expect-error - TypeScript does not recognize the Images property
+      ? Array.isArray(item.Images.Image)
+        // @ts-expect-error - TypeScript does not recognize the Images property
+        ? item.Images.Image.map((image) => `${image.baseImageURL}/w_1500/${image.publicID}.webp`)
+        // @ts-expect-error - TypeScript does not recognize the Images property
+        : [`${item.Images.Image.baseImageURL}/w_1500/${item.Images.Image.publicID}.webp`]
+      : [];
+
+  const description = stripHtml(item.shortDescription || "");
 
   const isSaleItem =
-    item.CustomFieldValues.CustomFieldValue.some(
+    // @ts-expect-error - TypeScript does not recognize the CustomField property
+    item.CustomFieldValues?.CustomFieldValue?.some(
       (field) => field.customFieldID === "12" && field.value === "true"
     ) || item.onSale === true;
 
@@ -103,10 +111,10 @@ export default async function Page(props: PageProps) {
     "@type": "Product",
     name: item.name,
     url: `https://www.holosun-optics.co.uk/shop/${slug}`,
-    sku: item.sku.replaceAll(" ", ""),
-    image: images[0],
+    sku: item.sku?.replaceAll(" ", "") || "",
+    image: images[0] || "",
     description: description,
-    mpn: item.manufacturerSku.replaceAll(" ", ""),
+    mpn: item.manufacturerSku?.replaceAll(" ", "") || "",
     brand: {
       "@type": "Brand",
       name: "Holosun",
@@ -217,7 +225,7 @@ export default async function Page(props: PageProps) {
                 <span className="ml-2">
                   {" "}
                   {new Intl.NumberFormat("en-GB", { style: "currency", currency: "gbp" }).format(
-                    item.salePrice
+                    item.salePrice || 0
                   )}
                 </span>
               </p>
@@ -227,7 +235,7 @@ export default async function Page(props: PageProps) {
               )
             )}
             <div
-              dangerouslySetInnerHTML={{ __html: item.shortDescription }}
+              dangerouslySetInnerHTML={{ __html: item.shortDescription || "" }}
               className="prose text-base leading-relaxed flex flex-grow"
             />
             <AddToCartButton item={item} />
