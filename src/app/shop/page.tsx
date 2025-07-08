@@ -91,7 +91,9 @@ export default async function Page({ searchParams }: PageProps) {
           <div className="px-4 mb-12 grid grid-cols-2 gap-4 xl:grid-cols-4 xl:gap-8">
             {items
               .filter(item => item.Images && (
+                // @ts-expect-error - TypeScript does not recognize the Images property
                 (Array.isArray(item.Images.Image) && item.Images.Image.length > 0) ||
+                // @ts-expect-error - TypeScript does not recognize the Images property
                 (!Array.isArray(item.Images.Image) && item.Images.Image)
               ))
               .sort((a, b) => {
