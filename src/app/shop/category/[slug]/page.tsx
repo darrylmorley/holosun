@@ -124,10 +124,11 @@ export default async function Page(props: PageProps) {
                 if (sort === "name") return a.name > b.name ? 1 : -1;
                 return 0;
               })
-              .map((item) => (
+              .map((item, index) => (
                 <ProductCard
                   key={item.id}
                   item={item}
+                  index={index}
                 />
               ))}
           </div>
