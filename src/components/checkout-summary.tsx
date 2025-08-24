@@ -21,70 +21,70 @@ export default function CheckoutSummary({ deliveryItem }) {
     <>
       {items
         ? items.map((item) => {
-          if (Number(item.id) === 7476 || Number(item.id) === 8403) return null;
-          return (
-            <section key={item.id}>
-              <li className="flex">
-                <picture className="p-2 relative flex items-center justify-center mr-2 bg-stone-300">
-                  <Image
-                    src={item.image}
-                    width={80}
-                    height={80}
-                    alt={item.name}
-                  />
-                </picture>
-                <div className="flex flex-col gap-2 items-start text-sm">
-                  <p>{item.name}</p>
-                  <p>
-                    {new Intl.NumberFormat("en-GB", {
-                      style: "currency",
-                      currency: "gbp",
-                    }).format(item.price)}
-                  </p>
-
-                  <div className="flex items-center gap-12">
-                    <form className="join">
-                      <button
-                        className="w-6 h-6 bg-stone-300 join-item"
-                        onClick={(e) => handleRemoveItem(e, item)}
-                        disabled={item.quantity <= 1}
-                        title="Decrease Quantity"
-                        type="button"
-                      >
-                        -
-                      </button>
-                      <input
-                        id="quantity"
-                        type="number"
-                        className="text-xs flex w-12 text-left h-6 items-center border-stone-100 bg-white text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none"
-                        value={item.quantity}
-                        max={item.qoh}
-                        disabled
-                        title="Display Quantity"
-                      />
-                      <button
-                        className="w-6 h-6 bg-stone-300 join-item"
-                        onClick={(e) => handleAddItem(e, item)}
-                        disabled={item.quantity >= item.qoh}
-                        title="Increase Quantity"
-                        type="button"
-                      >
-                        +
-                      </button>
-                    </form>
-                    <p
-                      onClick={() => removeItem(item.id)}
-                      className="text-xs font-bold hover:text-accent cursor-pointer self-end"
-                    >
-                      Remove
+            if (Number(item.id) === 7476 || Number(item.id) === 8403) return null;
+            return (
+              <section key={item.id}>
+                <li className="flex">
+                  <picture className="p-2 relative flex items-center justify-center mr-2 bg-stone-300">
+                    <Image
+                      src={item.image}
+                      width={80}
+                      height={80}
+                      alt={item.name}
+                    />
+                  </picture>
+                  <div className="flex flex-col gap-2 items-start text-sm">
+                    <p>{item.name}</p>
+                    <p>
+                      {new Intl.NumberFormat("en-GB", {
+                        style: "currency",
+                        currency: "gbp",
+                      }).format(item.price)}
                     </p>
+
+                    <div className="flex items-center gap-12">
+                      <form className="join">
+                        <button
+                          className="w-6 h-6 bg-stone-300 join-item"
+                          onClick={(e) => handleRemoveItem(e, item)}
+                          disabled={item.quantity <= 1}
+                          title="Decrease Quantity"
+                          type="button"
+                        >
+                          -
+                        </button>
+                        <input
+                          id="quantity"
+                          type="number"
+                          className="text-xs flex w-12 text-left h-6 items-center border-stone-100 bg-white text-gray-700 outline-none hover:text-black focus:text-black focus:outline-none"
+                          value={item.quantity}
+                          max={item.qoh}
+                          disabled
+                          title="Display Quantity"
+                        />
+                        <button
+                          className="w-6 h-6 bg-stone-300 join-item"
+                          onClick={(e) => handleAddItem(e, item)}
+                          disabled={item.quantity >= item.qoh}
+                          title="Increase Quantity"
+                          type="button"
+                        >
+                          +
+                        </button>
+                      </form>
+                      <p
+                        onClick={() => removeItem(item.id)}
+                        className="text-xs font-bold hover:text-accent cursor-pointer self-end"
+                      >
+                        Remove
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </li>
-              <div className="divider" />
-            </section>
-          );
-        })
+                </li>
+                <div className="divider" />
+              </section>
+            );
+          })
         : null}
       <section className="flex flex-col w-full justify-between space-y-3">
         <div className="flex items-center justify-between ">
@@ -113,7 +113,10 @@ export default function CheckoutSummary({ deliveryItem }) {
             xmlns="http://www.w3.org/2000/svg"
           >
             <g clipPath="url(#clip0_6278_125833)">
-              <path d="M780 0H0V500H780V0Z" fill="#1434CB" />
+              <path
+                d="M780 0H0V500H780V0Z"
+                fill="#1434CB"
+              />
               <path
                 d="M489.823 143.111C442.988 143.111 401.134 167.393 401.134 212.256C401.134 263.706 475.364 267.259 475.364 293.106C475.364 303.989 462.895 313.731 441.6 313.731C411.377 313.731 388.789 300.119 388.789 300.119L379.123 345.391C379.123 345.391 405.145 356.889 439.692 356.889C490.898 356.889 531.19 331.415 531.19 285.784C531.19 231.419 456.652 227.971 456.652 203.981C456.652 195.455 466.887 186.114 488.122 186.114C512.081 186.114 531.628 196.014 531.628 196.014L541.087 152.289C541.087 152.289 519.818 143.111 489.823 143.111ZM61.3294 146.411L60.1953 153.011C60.1953 153.011 79.8988 156.618 97.645 163.814C120.495 172.064 122.122 176.868 125.971 191.786L167.905 353.486H224.118L310.719 146.411H254.635L198.989 287.202L176.282 167.861C174.199 154.203 163.651 146.411 150.74 146.411H61.3294ZM333.271 146.411L289.275 353.486H342.756L386.598 146.411H333.271ZM631.554 146.411C618.658 146.411 611.825 153.318 606.811 165.386L528.458 353.486H584.542L595.393 322.136H663.72L670.318 353.486H719.805L676.633 146.411H631.554ZM638.848 202.356L655.473 280.061H610.935L638.848 202.356Z"
                 fill="white"
@@ -121,7 +124,11 @@ export default function CheckoutSummary({ deliveryItem }) {
             </g>
             <defs>
               <clipPath id="clip0_6278_125833">
-                <rect width="780" height="500" fill="white" />
+                <rect
+                  width="780"
+                  height="500"
+                  fill="white"
+                />
               </clipPath>
             </defs>
           </svg>
@@ -156,7 +163,11 @@ export default function CheckoutSummary({ deliveryItem }) {
             </g>
             <defs>
               <clipPath id="clip0_6278_125843">
-                <rect width="780" height="500" fill="white" />
+                <rect
+                  width="780"
+                  height="500"
+                  fill="white"
+                />
               </clipPath>
             </defs>
           </svg>
@@ -191,31 +202,15 @@ export default function CheckoutSummary({ deliveryItem }) {
             </g>
             <defs>
               <clipPath id="clip0_6278_125837">
-                <rect width="780" height="500" fill="white" />
+                <rect
+                  width="780"
+                  height="500"
+                  fill="white"
+                />
               </clipPath>
             </defs>
           </svg>
-          {/* American Express */}
-          <svg
-            width="48"
-            viewBox="0 0 120 80"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="120" height="80" rx="4" fill="#0690FF" />
-            <g clipPath="url(#clip0_703_18)">
-              <rect x="40" width="80" height="80" rx="4" fill="white" />
-              <path
-                d="M120 80V67.3237H110.349L105.38 61.8293L100.386 67.3237H68.5643V41.7163H58.2938L71.0333 12.8854H83.3194L87.7051 22.7624V12.8854H102.913L105.553 20.3283L108.211 12.8854H120V0H40V80H120ZM111.974 64.1176H120L109.384 52.8594L120 41.7291H112.102L105.546 48.8936L99.0525 41.7291H91.025L101.579 52.9234L91.025 64.1176H98.8291L105.418 56.8893L111.974 64.1176ZM113.852 52.8688L120 59.4094V46.3827L113.852 52.8688ZM78.0717 58.9363V55.4499H90.7048V50.3965H78.0717V46.9106H91.0245L91.025 41.7291H71.9626V64.1176H91.025L91.0245 58.9363H78.0717ZM113.955 38.4802H120V16.0917H110.597L105.575 30.0362L100.586 16.0917H91.0229V38.4802H97.0675V22.8083L102.825 38.4802H108.198L113.955 22.776V38.4802ZM84.1464 38.4802H91.0229L81.1405 16.0917H73.2723L63.389 38.4802H70.1056L71.961 34.0026H82.2594L84.1464 38.4802ZM80.1488 28.981H74.0715L77.1102 21.6568L80.1488 28.981Z"
-                fill="#0690FF"
-              />
-            </g>
-            <defs>
-              <clipPath id="clip0_703_18">
-                <rect x="40" width="80" height="80" rx="4" fill="white" />
-              </clipPath>
-            </defs>
-          </svg>
+
           {/* Google Pay */}
           <svg
             width="48"
@@ -223,7 +218,12 @@ export default function CheckoutSummary({ deliveryItem }) {
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <rect width="120" height="80" rx="4" fill="white" />
+            <rect
+              width="120"
+              height="80"
+              rx="4"
+              fill="white"
+            />
             <path
               d="M57.5437 26.997V35.9796H63.0833C64.4033 35.9796 65.4945 35.5352 66.3569 34.6486C67.2435 33.7642 67.6879 32.7082 67.6879 31.4872C67.6879 30.2904 67.2435 29.2476 66.3569 28.3588C65.4945 27.4502 64.4033 26.9948 63.0833 26.9948H57.5437V26.997ZM57.5437 39.141V49.5602H54.2349V23.8356H63.0129C65.2415 23.8356 67.1335 24.577 68.6933 26.062C70.2773 27.547 71.0693 29.3554 71.0693 31.4872C71.0693 33.6674 70.2773 35.489 68.6933 36.9476C67.1599 38.4106 65.2635 39.1388 63.0107 39.1388H57.5437V39.141ZM74.4133 44.1724C74.4133 45.0348 74.7785 45.752 75.5111 46.3284C76.2415 46.9004 77.0995 47.1886 78.0807 47.1886C79.4733 47.1886 80.7119 46.6738 81.8031 45.6464C82.8965 44.6146 83.4399 43.4046 83.4399 42.0164C82.4081 41.2024 80.9693 40.7954 79.1235 40.7954C77.7815 40.7954 76.6595 41.121 75.7619 41.7678C74.8621 42.4146 74.4133 43.2132 74.4133 44.1724ZM78.6945 31.3794C81.1409 31.3794 83.0703 32.0328 84.4871 33.3374C85.8995 34.6442 86.6079 36.435 86.6079 38.7098V49.5602H83.4421V47.1182H83.2991C81.9307 49.129 80.1091 50.1366 77.8299 50.1366C75.8895 50.1366 74.2637 49.5602 72.9569 48.4118C71.6501 47.2612 70.9967 45.8246 70.9967 44.0998C70.9967 42.2782 71.6853 40.8306 73.0647 39.7526C74.4441 38.6746 76.2833 38.1356 78.5867 38.1356C80.5491 38.1356 82.1705 38.4942 83.4399 39.2136V38.4568C83.4399 37.3084 82.9845 36.3316 82.0737 35.5308C81.1961 34.7411 80.0531 34.3114 78.8727 34.3274C77.0247 34.3274 75.5639 35.104 74.4837 36.6638L71.5709 34.829C73.1769 32.53 75.5529 31.3794 78.6945 31.3794ZM104.771 31.9558L93.7271 57.3218H90.3105L94.4113 48.447L87.1469 31.9558H90.7439L95.9953 44.6036H96.0657L101.174 31.9536L104.771 31.9558Z"
               fill="#3C4043"
@@ -293,7 +293,12 @@ export default function CheckoutSummary({ deliveryItem }) {
             </g>
             <defs>
               <clipPath id="clip0_823_247">
-                <rect width="120" height="80" rx="4" fill="white" />
+                <rect
+                  width="120"
+                  height="80"
+                  rx="4"
+                  fill="white"
+                />
               </clipPath>
             </defs>
           </svg>
