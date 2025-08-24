@@ -12,7 +12,7 @@ async function getFeaturedItems() {
   return await prisma.product.findMany({
     where: {
       id: {
-        in: [8359, 8346, 8350, 8349],
+        in: [9063, 9061, 9053, 9050],
       },
     },
   });
