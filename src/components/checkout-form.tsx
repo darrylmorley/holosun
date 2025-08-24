@@ -17,21 +17,20 @@ const formSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
   email: z.string().email(),
-  tel: z.string().regex(/^\+?[0-9\s\-().]{7,20}$/, {
-    message: 'Invalid phone number',
-  }),
+  tel: z
+    .string()
+    .min(10, "Phone number is required")
+    .regex(/^\+?[0-9\s\-().]{7,20}$/, {
+      message: "Invalid phone number",
+    }),
   billingAddress1: z.string().min(1, "Billing address is required"),
   billingAddreess2: z.string().optional(),
-  billingCity: z
-    .string()
-    .min(1, "Billing city is required"),
+  billingCity: z.string().min(1, "Billing city is required"),
   billingCounty: z.string().optional(),
   billingPostcode: z.string().regex(/^[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}$/, "Invalid postcode"),
   deliveryAddress1: z.string().optional(),
   deliveryAddress2: z.string().optional(),
-  deliveryCity: z
-    .string()
-    .optional(),
+  deliveryCity: z.string().optional(),
   deliveryCounty: z.string().optional(),
   deliveryPostcode: z.string().optional(),
   deliverySameAsBilling: z.boolean(),
@@ -42,7 +41,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
   const { addItem, items, cartTotal, removeItem, totalUniqueItems, emptyCart } = useCart();
 
   const [submitDisabled, setSubmitDisabled] = useState(false);
-  const [billingAddress, setBillingAddress] = useState("")
+  const [billingAddress, setBillingAddress] = useState("");
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [paymentURL, setPaymentURL] = useState(null);
 
@@ -257,19 +256,19 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
     // Extract delivery address if different from billing
     const deliveryData = formData.deliverySameAsBilling
       ? {
-        deliveryAddress1: formData.billingAddress1,
-        deliveryAddress2: formData.billingAddress2,
-        deliveryCity: formData.billingCity,
-        deliveryCounty: formData.billingCounty,
-        deliveryPostcode: formData.billingPostcode,
-      }
+          deliveryAddress1: formData.billingAddress1,
+          deliveryAddress2: formData.billingAddress2,
+          deliveryCity: formData.billingCity,
+          deliveryCounty: formData.billingCounty,
+          deliveryPostcode: formData.billingPostcode,
+        }
       : {
-        deliveryAddress1: formData.deliveryAddress1,
-        deliveryAddress2: formData.deliveryAddress2,
-        deliveryCity: formData.deliveryCity,
-        deliveryCounty: formData.deliveryCounty,
-        deliveryPostcode: formData.deliveryPostcode,
-      };
+          deliveryAddress1: formData.deliveryAddress1,
+          deliveryAddress2: formData.deliveryAddress2,
+          deliveryCity: formData.deliveryCity,
+          deliveryCounty: formData.deliveryCounty,
+          deliveryPostcode: formData.deliveryPostcode,
+        };
 
     // Combine data for validation
     const dataToValidate = { ...formData, ...deliveryData };
@@ -297,7 +296,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
       const worldPayPaymentURL = await getPaymentURL({
         amount: Math.round(cartTotal * 100),
         orderNumber: lsSale,
-        formData
+        formData,
       });
 
       if (worldPayPaymentURL.url) {
@@ -306,9 +305,7 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
         setSubmitDisabled(false);
       } else {
         console.error("Failed to get payment URL");
-        alert(
-          "Something went wrong while processing your order. Please try again.",
-        );
+        alert("Something went wrong while processing your order. Please try again.");
         setSubmitDisabled(false);
       }
     } catch (error) {
@@ -391,7 +388,10 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
         <section className="w-full">
           <h2 className="self-start text-2xl mb-4">Billing Details</h2>
           <fieldset className="mt-6">
-            <AddressFinder selected={billingAddress} setSelected={setBillingAddress} />
+            <AddressFinder
+              selected={billingAddress}
+              setSelected={setBillingAddress}
+            />
           </fieldset>
         </section>
         <section className="w-full">
@@ -450,7 +450,9 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
                 onChange={handleCheckboxChange}
                 className="checkbox text-black mr-2"
               />
-              <p className="text-sm">My delivery address is the same as the billing address above.</p>
+              <p className="text-sm">
+                My delivery address is the same as the billing address above.
+              </p>
             </label>
           </div>
           {formData.delivery === "delivery" ? (
@@ -458,7 +460,10 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
               <>
                 <fieldset className="mt-3 w-full">
                   <h2 className="my-3 text-base">Delivery Details</h2>
-                  <AddressFinder selected={deliveryAddress} setSelected={setDeliveryAddress} />
+                  <AddressFinder
+                    selected={deliveryAddress}
+                    setSelected={setDeliveryAddress}
+                  />
                 </fieldset>
               </>
             )
