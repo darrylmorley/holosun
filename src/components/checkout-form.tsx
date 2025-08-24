@@ -286,6 +286,10 @@ export default function CheckoutForm({ stdDelivery, NIDelivery, setDeliveryItem 
         lsSale = await createLightspeedSale(items);
       }
 
+      if (!lsSale) {
+        throw new Error("Failed to create order. Please try again.");
+      }
+
       Cookies.set("orderID", lsSale);
       Cookies.set("formData", JSON.stringify(formData));
 

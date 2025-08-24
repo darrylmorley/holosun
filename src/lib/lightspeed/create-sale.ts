@@ -39,5 +39,6 @@ export const createLightspeedSale = async (cartItems) => {
     return sale;
   } catch (error) {
     console.error(error);
+    throw new Error("Failed to create order. Please try again.");
   }
 };
