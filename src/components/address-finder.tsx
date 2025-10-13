@@ -10,10 +10,8 @@ const AddressFinder = ({ selected, setSelected }) => {
     e.preventDefault();
     setLoading(true);
 
-    if (!postcode.match(/^([A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2})$/i)) {
-      setError(
-        "We only deliver to UK addresses. Please enter a valid UK postcode.",
-      );
+    if (!postcode.trim().match(/^([A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2})$/i)) {
+      setError("We only deliver to UK addresses. Please enter a valid UK postcode.");
       return;
     }
 
@@ -102,16 +100,14 @@ const AddressFinder = ({ selected, setSelected }) => {
         >
           <option value="">Select your address</option>
           {addresses.map((addr, idx) => {
-            const label = [
-              addr.line_1,
-              addr.line_2,
-              addr.post_town,
-              addr.postcode,
-            ]
+            const label = [addr.line_1, addr.line_2, addr.post_town, addr.postcode]
               .filter(Boolean)
               .join(", ");
             return (
-              <option key={idx} value={idx}>
+              <option
+                key={idx}
+                value={idx}
+              >
                 {label}
               </option>
             );
@@ -127,12 +123,7 @@ const AddressFinder = ({ selected, setSelected }) => {
         <div className="rounded-md border bg-gray-50 p-3 text-sm text-gray-700">
           <p className="mb-1 font-medium">Selected Address:</p>
           <p>
-            {[
-              selected.line_1,
-              selected.line_2,
-              selected.post_town,
-              selected.postcode,
-            ]
+            {[selected.line_1, selected.line_2, selected.post_town, selected.postcode]
               .filter(Boolean)
               .join(", ")}
           </p>
