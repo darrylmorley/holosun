@@ -119,15 +119,20 @@ export default async function Page(props: PageProps) {
         <div className="flex justify-center xl:px-8">
           <div className="px-4 mb-12 grid grid-cols-2 gap-4 xl:grid-cols-4 xl:gap-8 w-full">
             {items
+              .filter(item => item.Images && (
+                (Array.isArray((item.Images as any).Image) && (item.Images as any).Image.length > 0) ||
+                (!Array.isArray((item.Images as any).Image) && (item.Images as any).Image)
+              ))
               .sort((a, b) => {
                 if (sort === "price") return a.price > b.price ? 1 : -1;
                 if (sort === "name") return a.name > b.name ? 1 : -1;
                 return 0;
               })
-              .map((item) => (
+              .map((item, index) => (
                 <ProductCard
                   key={item.id}
                   item={item}
+                  index={index}
                 />
               ))}
           </div>
