@@ -14,10 +14,7 @@ type PageProps = {
 async function getItems() {
   return await prisma.product.findMany({
     where: {
-      Manufacturer: {
-        path: ["name"],
-        equals: "HOLOSUN",
-      },
+      manufacturerID: 272, // Holosun
     },
   });
 }
@@ -90,10 +87,12 @@ export default async function Page({ searchParams }: PageProps) {
         <div className="flex justify-center xl:px-8">
           <div className="px-4 mb-12 grid grid-cols-2 gap-4 xl:grid-cols-4 xl:gap-8">
             {items
-              .filter(item => item.Images && (
-                (Array.isArray(item.Images.Image) && item.Images.Image.length > 0) ||
-                (!Array.isArray(item.Images.Image) && item.Images.Image)
-              ))
+              .filter(
+                (item) =>
+                  item.Images &&
+                  ((Array.isArray(item.Images.Image) && item.Images.Image.length > 0) ||
+                    (!Array.isArray(item.Images.Image) && item.Images.Image))
+              )
               .sort((a, b) => {
                 if (sort === "price") return a.price > b.price ? 1 : -1;
                 if (sort === "name") return a.name > b.name ? 1 : -1;
